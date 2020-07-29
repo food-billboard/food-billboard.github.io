@@ -29,8 +29,9 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/26/images/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/1595859783955_DE771404-5E95-4876-BA63-44D01118D2EF.png">
 <meta property="og:image" content="http://yoursite.com/2020/07/26/images/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/1595859830441_DBC34DF0-2308-4DBB-90F7-A70B70795B82.png">
 <meta property="og:image" content="http://yoursite.com/2020/07/26/images/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/1595860081764_790B7081-F485-487D-9B74-5E88C13FD5FF.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/26/images/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/15938957-5F8F-4A7A-9F91-544D239677EC.png">
 <meta property="article:published_time" content="2020-07-26T11:19:12.000Z">
-<meta property="article:modified_time" content="2020-07-27T14:38:27.303Z">
+<meta property="article:modified_time" content="2020-07-29T14:44:43.228Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="React">
 <meta property="article:tag" content="Component">
@@ -166,16 +167,23 @@
 <h3 id="Calendar"><a href="#Calendar" class="headerlink" title="Calendar"></a>Calendar</h3><p>具体样式查看下图  </p>
 </li>
 <li><p>单日着重  </p>
-<img src="../images/React日历组件/1595859653524_95CA67F7-E00E-4AA0-A51C-85895C099433.png" width="200" height="100" /></li>
+<img src="../images/React日历组件/1595859653524_95CA67F7-E00E-4AA0-A51C-85895C099433.png" width="200" height="100" />
+</li>
 <li><p>周着重  </p>
-<img src="../images/React日历组件/1595859783955_DE771404-5E95-4876-BA63-44D01118D2EF.png" width="200" height="100" /></li>
+<img src="../images/React日历组件/1595859783955_DE771404-5E95-4876-BA63-44D01118D2EF.png" width="200" height="100" />
+</li>
 <li><p>色调更改  </p>
-<img src="../images/React日历组件/1595859830441_DBC34DF0-2308-4DBB-90F7-A70B70795B82.png" width="200" height="100" /></li>
+<img src="../images/React日历组件/1595859830441_DBC34DF0-2308-4DBB-90F7-A70B70795B82.png" width="200" height="100" />
+</li>
 <li><p>显示单周  </p>
 <img src="../images/React日历组件/1595860081764_790B7081-F485-487D-9B74-5E88C13FD5FF.png" width="200" height="100" />
+</li>
+<li><p>设置额外内容  </p>
+<img src="../images/React日历组件/15938957-5F8F-4A7A-9F91-544D239677EC.png" width="200" height="100" />
 
 </li>
 </ol>
+<p>因为每一个单元格外层设置了相对定位<code>relative</code>，所以如果不希望额外内容导致个别单元格位置不统一，可以将内容设置为<code>position: absolute;</code>  </p>
 <p>具体的其他功能可查看下方API  </p>
 <p><strong>API</strong></p>
 <table>
@@ -266,6 +274,77 @@
 <td align="center">false</td>
 </tr>
 </tbody></table>
+<p>还有一些方法供调用，可利用<code>ref</code>来获取相关方法  </p>
+<table>
+<thead>
+<tr>
+<th align="center">name</th>
+<th align="center">说明</th>
+<th align="center">使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">getMonthStart</td>
+<td align="center">当月第一天</td>
+<td align="center">getMonthStart(month?, year?) =&gt; Date</td>
+</tr>
+<tr>
+<td align="center">getMonthEnd</td>
+<td align="center">当月最后一天</td>
+<td align="center">getMonthEnd(month?, year?) =&gt; Date</td>
+</tr>
+<tr>
+<td align="center">getMonthDays</td>
+<td align="center">获取当月天数</td>
+<td align="center">getMonthDays(month?, year?) =&gt; number</td>
+</tr>
+<tr>
+<td align="center">getThisWeek</td>
+<td align="center">本周开始和结束</td>
+<td align="center">getThisWeek(date) =&gt; [start:Date, end:Date]</td>
+</tr>
+<tr>
+<td align="center">lastYear</td>
+<td align="center">去年</td>
+<td align="center">lastYear(date?) =&gt; Date</td>
+</tr>
+<tr>
+<td align="center">lastMonth</td>
+<td align="center">上个月</td>
+<td align="center">lastMonth(date?) =&gt; Date</td>
+</tr>
+<tr>
+<td align="center">lastWeek</td>
+<td align="center">上周</td>
+<td align="center">lastWeek(date?) =&gt; Date</td>
+</tr>
+<tr>
+<td align="center">lastDay</td>
+<td align="center">昨天</td>
+<td align="center">lastDay(date?) =&gt; Date</td>
+</tr>
+<tr>
+<td align="center">nextYear</td>
+<td align="center">明年</td>
+<td align="center">nextYear(date) =&gt; Date</td>
+</tr>
+<tr>
+<td align="center">nextMonth</td>
+<td align="center">下个月</td>
+<td align="center">nextMonth(date?) =&gt; Date</td>
+</tr>
+<tr>
+<td align="center">nextWeek</td>
+<td align="center">下周</td>
+<td align="center">nextWeek(date?) =&gt; Date</td>
+</tr>
+<tr>
+<td align="center">nextDay</td>
+<td align="center">明天</td>
+<td align="center">nextDay(date?) =&gt; Date</td>
+</tr>
+</tbody></table>
+<p>从<code>lastYear</code>开始的后面几个方法，在传入Date参数时只会返回结果，若未传参数则组件状态由外部控制或由内部控制会触发<code>onChange</code>回调。</p>
 <h2 id="3-结束"><a href="#3-结束" class="headerlink" title="3 结束"></a>3 结束</h2><p>这就是此次所要说的所有，如有任何问题可直接联系我。如果觉得东西很烂可以直接指出。如果对此组件感兴趣可以去github上给一个star✨，如果觉得文章内容对你有用，可以给一个赞👍或一个评论📚。</p>
 
       
