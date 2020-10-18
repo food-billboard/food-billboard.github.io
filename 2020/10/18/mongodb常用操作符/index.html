@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>mongodb常用操作符 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MongoDB操作符MongoDB介绍MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。在高负载的情况下，添加更多的节点，可以保证服务器性能。MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。MongoDB 将数据存储为一个文档，数据结构由键值(key&#x3D;&gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mongodb常用操作符">
+<meta property="og:url" content="http://yoursite.com/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MongoDB操作符MongoDB介绍MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。在高负载的情况下，添加更多的节点，可以保证服务器性能。MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。MongoDB 将数据存储为一个文档，数据结构由键值(key&#x3D;&gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/mongodb-cover-page.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/find-common.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/findOne.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/deleteOne.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/insertOne.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/updateOne.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$inc.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$set.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$unset.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$push.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$addToSet.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$pop.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$pull.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$pullAll.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$rename.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$all.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$gt.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$gte.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$lt.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$lte.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$in.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$nin.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$ne.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$and.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$nor.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$not.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$or.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$exists.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$mod.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$type.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$regex.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$where.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/$elemMatch.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E5%B5%8C%E5%A5%97%E6%9F%A5%E8%AF%A2.png">
+<meta property="article:published_time" content="2020-10-18T08:13:52.000Z">
+<meta property="article:modified_time" content="2020-10-18T09:08:13.858Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="database">
+<meta property="article:tag" content="mongodb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/10/18/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/mongodb-cover-page.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mongodb常用操作符" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/" class="article-date">
+  <time datetime="2020-10-18T08:13:52.000Z" itemprop="datePublished">2020-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mongodb常用操作符
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MongoDB操作符"><a href="#MongoDB操作符" class="headerlink" title="MongoDB操作符"></a>MongoDB操作符</h2><h3 id="MongoDB介绍"><a href="#MongoDB介绍" class="headerlink" title="MongoDB介绍"></a>MongoDB介绍</h3><p><code>MongoDB</code> 是由<code>C++</code>语言编写的，是一个基于分布式文件存储的开源数据库系统。<br>在高负载的情况下，添加更多的节点，可以保证服务器性能。<br><code>MongoDB</code> 旨在为WEB应用提供可扩展的高性能数据存储解决方案。<br><code>MongoDB</code> 将数据存储为一个文档，数据结构由键值(<code>key=&gt;value</code>)<code>对组成。MongoDB</code> 文档类似于 <code>JSON</code> 对象。字段值可以包含其他文档，数组及文档数组。<br>如下这种结构<br><img src="../images/mongodb常用操作符/mongodb-cover-page.png" /></p>
+<h3 id="MongoDB命令行简单操作"><a href="#MongoDB命令行简单操作" class="headerlink" title="MongoDB命令行简单操作"></a>MongoDB命令行简单操作</h3><p>假设存在数据库名称为<code>database</code><br>并且存在一个集合为<code>collection</code><br>集中<code>collection</code>中有如下数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"Daniel"</span>,</span><br><span class="line">    <span class="string">"age"</span>: <span class="number">24</span>,</span><br><span class="line">    <span class="string">"job"</span>: <span class="string">"it"</span>,</span><br><span class="line">    <span class="string">"hobby"</span>: <span class="string">"travel"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"Mike"</span>,</span><br><span class="line">    <span class="string">"age"</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="string">"job"</span>: <span class="string">"student"</span>,</span><br><span class="line">    <span class="string">"hobby"</span>: <span class="string">"travel"</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>创建数据库或使用数据库<br><code>use database</code></p>
+</li>
+<li><p>删除数据库<br><code>db.dropDatabase()</code></p>
+</li>
+<li><p>查看数据库列表<br><code>show dbs</code></p>
+</li>
+<li><p>创建集合<br>执行<code>use</code>操作后<br><code>db.collection.opertion</code><br>没有创建集合的语法，直接对指定集合进行操作就会创建该集合  </p>
+</li>
+<li><p>查看当前数据库的集合列表<br><code>show collections</code></p>
+</li>
+<li><p>删除集合<br><code>db.collection.drop()</code></p>
+</li>
+<li><p>查找</p>
+</li>
+</ul>
+<ol>
+<li>执行<code>find</code>命令<br><code>db.collection.find({ hobby: &quot;travel&quot; })</code><br>得到以下结果<img src="../images/mongodb常用操作符/find-common.png"  />
+
+</li>
+</ol>
+<p><code>find</code>命令会找到符合查询条件的所有结果<br>可以在后面跟上<code>.pretty()</code>来让数据展示更美观。<br>后面跟<code>.count()</code>返回查找到的数量<br>后面跟<code>.sort()</code>返回排序后的数据<br>比如这样<code>db.collection.find({ hobby: &quot;travel&quot; }).sort({ age: 1 })</code>，<code>1</code>表示升序，<code>2</code>降序</p>
+<ol start="2">
+<li>执行<code>findOne</code>命令<br><code>db.collection.findOne({ hobby: &quot;travel&quot; })</code>  <img src="../images/mongodb常用操作符/findOne.png"  />
+`findOne`只会找到符合条件的第一条  
+</li>
+</ol>
+<ul>
+<li>删除</li>
+</ul>
+<ol>
+<li><p>执行<code>deleteOne</code>命令<br><code>db.collection.deleteOne({ hobby: &quot;travel&quot; })</code><br>得到以下结果</p>
+<img src="../images/mongodb常用操作符/deleteOne.png"  />
+`deleteOne`命令会删除符合查询条件的第一条数据
+</li>
+<li><p>执行<code>deleteMany</code>命令<br><code>db.collection.deleteMany({ hobby: &quot;travel&quot; })</code><br><code>deleteMany</code>命令会删除符合查询条件的所有数据</p>
+</li>
+</ol>
+<ul>
+<li>插入</li>
+</ul>
+<ol>
+<li><p>执行<code>insertOne</code>命令<br><code>db.collection.insertOne({ &quot;name&quot;: &quot;Rick&quot;, &quot;age&quot;: 32, &quot;job&quot;: &quot;teacher&quot;, &quot;hobby&quot;: &quot;sport&quot; })</code><br><code>insertOne</code>命令可以添加一条数据到集合中<br>他有一个可选参数<code>{ writeConcern }</code>，写入策略，默认为 1，即要求确认写操作，0 是不要求。  </p>
+<img src="../images/mongodb常用操作符/insertOne.png"  />
+</li>
+<li><p>执行<code>insertMany</code>命令  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">db.collection.insertMany([</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"Jack"</span>,</span><br><span class="line">    <span class="string">"age"</span>: <span class="number">12</span>,</span><br><span class="line">    <span class="string">"job"</span>: <span class="string">"student"</span>,</span><br><span class="line">    <span class="string">"hobby"</span>: <span class="string">"watch tv"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"Mary"</span>,</span><br><span class="line">    <span class="string">"age"</span>: <span class="number">8</span>,</span><br><span class="line">    <span class="string">"job"</span>: <span class="string">"student"</span>,</span><br><span class="line">    <span class="string">"hobby"</span>: <span class="string">"book"</span></span><br><span class="line">  &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<p><code>insertMany</code>允许同时插入多条数据到集合中<br>他有一个可选参数<code>{ writeConcern, ordered }</code>，writeConcern意义同上，orderd表示是否按顺序写入，默认 true，按顺序写入。  </p>
+</li>
+</ol>
+<ul>
+<li>更新</li>
+</ul>
+<ol>
+<li><p>执行<code>updateOne</code>命令<br><code>db.collection.updateOne({ &quot;name&quot;: &quot;Mike&quot; }, { $set: { &quot;age&quot;: 20 } })</code><br><code>updateOne</code>命令可以更新匹配条件的第一条数据</p>
+<img src="../images/mongodb常用操作符/updateOne.png"  />
+</li>
+<li><p>执行<code>updateMany</code>命令<br><code>db.collection.updateMany({ &quot;hobby&quot;: &quot;travel&quot; }, { &quot;hobby&quot;: &quot;watch tv&quot; })</code><br><code>updateMany</code>命令可以更新匹配条件的所有数据</p>
+</li>
+</ol>
+<p>还有几个可选参数，可自行百度</p>
+<h3 id="MongoDB操作符-1"><a href="#MongoDB操作符-1" class="headerlink" title="MongoDB操作符"></a>MongoDB操作符</h3><p>接下来介绍的是<code>MongoDB</code>中一些常用的操作符，暂时将操作符分为更新和查找两类。</p>
+<ul>
+<li><p>更新操作符  </p>
+<ol>
+<li><p>$inc<br>对一个字段增加指定数量，且字段的值类型为数字  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.updateOne(&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="string">"$inc"</span>: &#123; <span class="attr">age</span>: <span class="number">100</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>当然可以通过指定数字值为<code>负数</code>实现递减操作。  </p>
+<img src="../images/mongodb常用操作符/$inc.png"  />
+</li>
+<li><p>$set<br>这是相当常见的操作符，表示设置指定的<code>key</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.updateOne(&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="string">"$set"</span>: &#123; <span class="attr">age</span>: <span class="number">1000</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述将<code>name</code>为<code>Mike</code>的字段的<code>age</code>字段设置为<code>1000</code><br>如果<code>key</code>不存在的话则创建<br>当然也可以同时设置多个值，但是需要注意的是如果修改的值之前是一个对象或一个数组的话会整个覆盖掉该值。具体的修改方法可以参照下方的具体实例。  </p>
+<img src="../images/mongodb常用操作符/$set.png"  />
+</li>
+<li><p>$unset<br>将某一个字段删除  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.updateOne(&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="string">"$unset"</span>: &#123; <span class="string">"hobby"</span>: <span class="string">""</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述将<code>name</code>为<code>Mike</code>的字段的<code>hobby</code>字段删除，如果不存在该字段则不进行操作  </p>
+<img src="../images/mongodb常用操作符/$unset.png"  />
+</li>
+<li><p>$push<br>对某一字段进行内容追加，只能对数组字段进行操作(否则会报错)，不存在则直接设置为<code>空数组</code>并添加  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.updateOne(&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="string">"$push"</span>: &#123; <span class="string">"like"</span>: <span class="string">"book"</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述将<code>name</code>为<code>Mike</code>的字段的<code>like</code>字段设置为<code>[ &quot;book&quot; ]</code></p>
+<img src="../images/mongodb常用操作符/$push.png"  />
+</li>
+<li><p>$pushAll<br>类似上面的<code>$push</code>操作符，但是接收的值时一个<code>数组</code>，表示可同时追加多个值，同样是对数组字段进行操作  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.updateOne(&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Jack"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="string">"$pushAll"</span>: &#123; <span class="string">"like"</span>: [ <span class="string">"tv"</span>, <span class="string">"sport"</span> ] &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述紧接前面的操作，向<code>like</code>字段中继续追加了<code>tv</code>和<code>sport</code><br>不过似乎在高版本<code>mongodb</code>已经取消了这个操作符，有待考证。</p>
+</li>
+<li><p>$addToSet<br>类似上面的<code>$pushAll</code>操作符，不同的是，当且仅当该值在字段中<code>不存在</code>时添加，相当于是自动做了去重。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.updateOne(&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="string">"$addToSet"</span>: &#123; <span class="string">"like"</span>: [ <span class="string">"tv"</span>, <span class="string">"hamberger"</span> ] &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>继续上面的<code>like</code>添加数据，因为上面添加过<code>tv</code>字段，所以再次添加被忽略<br>当然此操作符添加的值不一定是数组，也可以这样<br><code>$addToSet: { &quot;like&quot;: &quot;hamberger&quot; }</code>  </p>
+<img src="../images/mongodb常用操作符/$addToSet.png"  />
+</li>
+<li><p>$pop<br>与<code>$pop</code>操作符相反，表示删除指定字段的第一个或最后一个值，同样只能是数组  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.updateOne(&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="string">"$pop"</span>: &#123; <span class="string">"like"</span>: <span class="number">1</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述表示删除<code>like</code>字段的最后一个值。<br><code>1</code>表示最后一个值，<code>-1</code>表示第一个值  </p>
+<img src="../images/mongodb常用操作符/$pop.png"  />
+</li>
+<li><p>$pull<br>表示从某一字段中删除指定的值，针对数组  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.updateOne(&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="string">"$pull"</span>: &#123; <span class="string">"like"</span>: <span class="string">"hamberger"</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述将<code>name</code>为<code>Mike</code>的字段的<code>like</code>数组中的<code>hamberger</code>字段删除  </p>
+<img src="../images/mongodb常用操作符/$pull.png"  />
+</li>
+<li><p>$pullAll<br>类似<code>$pull</code>操作符，不同的是可以同时删除多个值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.updateOne(&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="string">"$pullAll"</span>: &#123; <span class="string">"like"</span>: [ <span class="string">"hamberger"</span>, <span class="string">"book"</span> ] &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述删除了<code>name</code>为<code>Mike</code>字段的<code>like</code>中的<code>hamberger</code>和<code>book</code>  </p>
+<img src="../images/mongodb常用操作符/$pullAll.png"  />
+</li>
+<li><p>$rename<br>这个操作符表示对之前设置过的字段进行重命名，设置的是<code>key</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.updateOne(&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  $rename: &#123; <span class="string">"like"</span>: <span class="string">"dislike"</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述将<code>like</code>字段修改为了<code>dislike</code>名称。  </p>
+<img src="../images/mongodb常用操作符/$rename.png"  />
+</li>
+</ol>
+</li>
+<li><p>查找操作符  </p>
+<p>下面介绍的，是常用的查询操作符🌰  </p>
+<ol>
+<li><p>$all<br>查找字段中包含指定内容的值，且需要包含全部指定的值，针对数组型字段  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"like"</span>: &#123; <span class="string">"$all"</span>: [ <span class="string">"hamberger"</span>, <span class="string">"book"</span> ] &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述能查找到<code>name</code>为<code>Mike</code>字段，但是无法查找到其他字段，因为他们无法完全满足查询条件。  </p>
+<img src="../images/mongodb常用操作符/$all.png"  />
+</li>
+<li><p>$gt<br>查找大于(great then)指定值的字段</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"age"</span>: &#123; <span class="string">"$gt"</span>: <span class="number">18</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>age</code>大于<code>18</code>的字段，不包含<code>18</code><br><code>日期</code>也可直接那这个进行比较  </p>
+<img src="../images/mongodb常用操作符/$gt.png"  />
+</li>
+<li><p>$gte<br>表示不小于指定值，也就是大于等于  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"age"</span>: &#123; <span class="string">"$gte"</span>: <span class="number">20</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>age</code>不小于<code>20</code>的字段，所以包括等于<code>20</code>的字段  </p>
+<img src="../images/mongodb常用操作符/$gte.png"  />
+</li>
+<li><p>$lt<br>与上面的<code>$gt</code>操作符相反，表示小于(less then)指定值  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"age"</span>: &#123; <span class="string">"$lt"</span>: <span class="number">20</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>age</code>小于<code>20</code>的字段，且不包含<code>20</code>  </p>
+<img src="../images/mongodb常用操作符/$lt.png"  />
+</li>
+<li><p>$lte<br>表示不大于指定值，也就是小于等于  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"name"</span>: &#123; <span class="string">"$lte"</span>: <span class="number">18</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>age</code>小于<code>18</code>的字段，且包含<code>18</code>  </p>
+<img src="../images/mongodb常用操作符/$lte.png"  />
+</li>
+<li><p>$in<br>查找存在指定数组中值得项，与<code>$all</code>不同的是，字段只需要满足其中任意一项即可  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"age"</span>: &#123; <span class="string">"$in"</span>: [ <span class="number">18</span>, <span class="number">20</span> ] &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述可以找到所有在<code>age</code>字段等于<code>18</code>或<code>20</code>的数据  </p>
+<img src="../images/mongodb常用操作符/$in.png"  />
+</li>
+<li><p>$nin<br>与上面的<code>$in</code>操作符相反，表示查找不存在指定数组中的值的项</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"like"</span>: &#123; <span class="string">"$nin"</span>: [ <span class="string">"tv"</span> ] &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>like</code>字段中不存在<code>tv</code>的项  </p>
+<img src="../images/mongodb常用操作符/$nin.png"  />
+</li>
+<li><p>$ne<br>有相等就会有不相等，这个操作符就是查找不等于指定值得项，相当于只有一项的<code>$nin</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"like"</span>: &#123; <span class="string">"$ne"</span>: <span class="string">"book"</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>like</code>字段中不存在<code>book</code>的项  </p>
+<img src="../images/mongodb常用操作符/$ne.png"  />
+</li>
+<li><p>$and<br>查找同时满足所有指定条件的项，并且至少需要包含<strong>两个</strong>条件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"$and"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"age"</span>: <span class="number">18</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>name</code>为<code>Mike</code>并且<code>age</code>为<code>20</code>的字段  </p>
+<img src="../images/mongodb常用操作符/$and.png"  />
+</li>
+<li><p>$nor<br>与上面的<code>$and</code>相反，表示查找同时不满足所有指定条件的项，同样至少需要包含<strong>两个</strong>条件  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"$nor"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"age"</span>: <span class="number">18</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>name</code>不为<code>Mike</code>并且<code>age</code>不等于<code>18</code>的数据  </p>
+<img src="../images/mongodb常用操作符/$nor.png"  />
+</li>
+<li><p>$not<br>指定不能满足指定条件的数据项，此操作符只能包含<strong>一个</strong>条件，而且它无法单独完成查询，需要与其他操作符配合一起使用。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"age"</span>: &#123;</span><br><span class="line">    <span class="string">"$not"</span>: &#123; <span class="string">"$gt"</span>: <span class="number">18</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>age</code>字段小于等于<code>18</code>的数据项，当然像例子这样的情况也可以直接使用<code>$lte</code>操作符完成。  </p>
+<img src="../images/mongodb常用操作符/$not.png"  />
+</li>
+<li><p>$or<br>表示查找能至少满足<strong>一个</strong>条件的项，并且需要至少包含<strong>两个</strong>筛选条件  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"$or"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"name"</span>: <span class="string">"Mike"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"age"</span>: <span class="number">20</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述表示查找<code>name</code>为<code>Mike</code>或者<code>age</code>为<code>20</code>的数据项  </p>
+<img src="../images/mongodb常用操作符/$or.png"  />
+</li>
+<li><p>$exists<br>此操作符用于字段的<code>key</code>的判断，表示查找是否存在否字段<code>key</code>的数据项，可选值为<code>true</code>和<code>false</code>，选择<strong>true</strong>表示存在，<strong>false</strong>则不存在指定字段的项  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"name"</span>: &#123; <span class="string">"$exists"</span>: <span class="literal">true</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找存在<code>name</code>字段的数据项  </p>
+<img src="../images/mongodb常用操作符/$exists.png"  />
+</li>
+<li><p>$mod<br>表示查找满足计算结果的数据项，此操作符为取模  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"age"</span>: &#123; <span class="string">"$mod"</span>: [ <span class="number">3</span>, <span class="number">0</span> ] &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述表示<code>age</code>字段的值对3取模等于0的值。  </p>
+<img src="../images/mongodb常用操作符/$mod.png"  />
+</li>
+<li><p>$type<br>表示选择指定数据类型的数据项  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"name"</span>: &#123; <span class="string">"$type"</span>: <span class="string">"string"</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>name</code>字段值类型为<code>string</code>的数据项<br>此操作符表示能查找对应的数据类型的数据项，它也有对应的代码，如下所示</p>
+<blockquote>
+<p>Double: 1<br>String<br>Object    3<br>Array    4<br>Binary data    5<br>Undefined    6    已废弃。<br>Object id    7<br>Boolean    8<br>Date    9<br>Null    10<br>Regular Expression    11<br>JavaScript    13<br>Symbol    14<br>JavaScript (with scope)    15<br>32-bit integer    16<br>Timestamp    17<br>64-bit integer    18<br>Min key    255    Query with -1.<br>Max key    127     </p>
+<img src="../images/mongodb常用操作符/$type.png"  />
+</blockquote>
+</li>
+<li><p>$regex<br>就是字面意思，使用正则表达式来匹配字段</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"name"</span>: &#123; <span class="string">"$regex"</span>: <span class="regexp">/mike/</span>, <span class="string">"$options"</span>: <span class="string">"i"</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述匹配<code>name</code>字段值包含<code>mike</code>（不区分大小写是因为配置了<code>$options</code>）的数据项<br><code>$options</code>表示正则表达式的修饰符，其他的还有<code>i</code>(不区分大小写),<code>g</code>(全局匹配),<code>m</code>(多行匹配),<code>s</code>(.包含换行符<code>\n</code>)<br>当然直接使用正则表达式也是可以的。  </p>
+<img src="../images/mongodb常用操作符/$regex.png"  />
+</li>
+<li><p>$where<br>有些情况下普通方法很难做出筛选，可以使用此操作符用<code>javascript</code>语法来进行筛选  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(&#123;</span><br><span class="line">  <span class="string">"$where"</span>: <span class="string">"this.name='Jack'&amp;&amp;this.like.some(key =&gt; key == 'hamberger')"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述查找<code>name</code>为<code>Jack</code>且<code>like</code>字段包含<code>hamberger</code>值得数据项<br>它甚至可以直接写一个函数<code>{ function() { return this.name == &#39;Jack&#39; &amp;&amp; this.like.some(key =&gt; key == &#39;hamberger&#39;) } }</code>  </p>
+</li>
+</ol>
+<p><strong>注意</strong><br>虽然这种方法可以有效的解决一些问题，但是还是尽量不要使用这个操作符，因为它会将MongoDB里面保存的BSON数据变为JavaScript的语法结构，这样的方式不方便使用数据库的索引机制。  </p>
+<img src="../images/mongodb常用操作符/$where.png"  />
+
+<ol start="17">
+<li>$elemMatch<br>此操作符用于对类似一个嵌套数组对象来进行多条件的查询  <img src="../images/mongodb常用操作符/$elemMatch.png"  />
+上述查找了`like`字段数组中`type`为`eat`并且`target`为`hamberger`的数据项  
+</li>
+</ol>
+</li>
+<li><p>相关实例</p>
+</li>
+</ul>
+<p>讲完了操作符，这里简单讲几个之前在实践当中碰到的一些问题，以及解决方法，欢迎各位参考。  </p>
+<ol>
+<li>查找或修改数组中嵌套的对象的属性<br>假设<code>database</code>的<code>collection</code>中存在以下数据  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"Mike"</span>,</span><br><span class="line">    <span class="string">"age"</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="string">"job"</span>: <span class="string">"student"</span>,</span><br><span class="line">    <span class="string">"like"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"eat"</span>,</span><br><span class="line">        <span class="string">"target"</span>: <span class="string">"hamberger"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"sport"</span>,</span><br><span class="line">        <span class="string">"target"</span>: <span class="string">"running"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"Jack"</span>,</span><br><span class="line">    <span class="string">"age"</span>: <span class="number">50</span>,</span><br><span class="line">    <span class="string">"job"</span>: <span class="string">"teacher"</span>,</span><br><span class="line">    <span class="string">"like"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"eat"</span>,</span><br><span class="line">        <span class="string">"target"</span>: <span class="string">"vegetable"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"sport"</span>,</span><br><span class="line">        <span class="string">"target"</span>: <span class="string">"baseball"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+普通情况下无法直接选中对应数组对象的属性，但是<code>mongodb</code>中支持<code>.</code>来选择数组对象中的属性  </li>
+</ol>
+<ul>
+<li><code>parent_field.child_field</code><br>比如像上面的<code>like</code>字段选择<code>target=vegetable</code><br><code>db.collection.find({ &quot;like.target&quot;: &quot;vegetable&quot; })</code><img src="../images/mongodb常用操作符/数组对象嵌套查询.png"  />
+</li>
+</ul>
+<ol start="2">
+<li>修改多层嵌套的数组对象<br>有时候不止会有一层嵌套，多层嵌套上面的方法不适用，虽然这种存储方式不太常见，但是也可以解决<br>假设有如下的数据<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"Jack"</span>,</span><br><span class="line">    <span class="string">"like"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        type: <span class="string">"eat"</span>,</span><br><span class="line">        target: [</span><br><span class="line">          &#123;</span><br><span class="line">            name: <span class="string">"hamberger"</span>,</span><br><span class="line">            price: <span class="number">100</span></span><br><span class="line">          &#125;,</span><br><span class="line">          &#123; </span><br><span class="line">            name: <span class="string">"salad"</span>,</span><br><span class="line">            price: <span class="number">200</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行更新操作</span></span><br><span class="line">db.collection.updateOne(&#123; <span class="attr">name</span>: <span class="string">"Jack"</span> &#125;, &#123; <span class="attr">$set</span>: &#123; <span class="string">"like.$[stepone].target.$[steptwo].price"</span> : <span class="number">200</span> &#125; &#125;, &#123;</span><br><span class="line"> arrayFilters: [</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="string">"stepone"</span>: &#123;</span><br><span class="line">    <span class="string">"$type"</span>: <span class="string">"object"</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="string">"stepone.type"</span>: <span class="string">"eat"</span> </span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="string">"steptwo"</span>: &#123;</span><br><span class="line">    <span class="string">"$type"</span>: <span class="string">"object"</span></span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+上述操作是选择上面数据中<code>like</code>字段的<code>type</code>为<code>eat</code>并且<code>target</code>数组中的<code>name</code>为<code>hamberger</code>的价格<code>price</code>改成了200<br><code>updateOne</code>的第三个参数用户定义第二参数中用到的嵌套名称的筛选条件，并且它的名称定义为<strong>以小写字母开头的字母数字字符串</strong>  </li>
+</ol>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><p><code>MongoDB</code>的操作符以及命令远不止这些，有兴趣的可以自行去MongoDB官网查找学习，本人也会在后续的实践学习中继续更新。😸</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/" data-id="ckgeu73so0000ly8j5su843yc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/28/Chai/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Chai</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BDD/" rel="tag">BDD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Calendar/" rel="tag">Calendar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chai/" rel="tag">Chai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Component/" rel="tag">Component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/content/" rel="tag">content</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BDD/" style="font-size: 10px;">BDD</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Calendar/" style="font-size: 10px;">Calendar</a> <a href="/tags/Chai/" style="font-size: 10px;">Chai</a> <a href="/tags/Component/" style="font-size: 10px;">Component</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/content/" style="font-size: 10px;">content</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/test/" style="font-size: 10px;">test</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/">mongodb常用操作符</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/28/Chai/">Chai</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/">有趣的css属性content</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/26/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/">React日历组件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
