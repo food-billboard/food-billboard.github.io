@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>基于Tus协议的文件上传流程 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍最近一直都在弄关于文件上传方面的问题，如果只是小文件的话，基本直接post上传就可以解决，但是当面对大文件时，如果还是只用简单的请求可能无法完成文件的上传.  假设当前用户要上传一个2G的视频文件. 可能就会遇到许多问题:   首先最大的问题就是，服务端不可能接受前端在一次请求中上传如此大的body.   所以不得不选择将大文件分成多个小文件分多次上传，基本可以解决问题. 但是如果出现一些不可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Tus协议的文件上传流程">
+<meta property="og:url" content="http://yoursite.com/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="介绍最近一直都在弄关于文件上传方面的问题，如果只是小文件的话，基本直接post上传就可以解决，但是当面对大文件时，如果还是只用简单的请求可能无法完成文件的上传.  假设当前用户要上传一个2G的视频文件. 可能就会遇到许多问题:   首先最大的问题就是，服务端不可能接受前端在一次请求中上传如此大的body.   所以不得不选择将大文件分成多个小文件分多次上传，基本可以解决问题. 但是如果出现一些不可">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/filepond%E6%95%88%E6%9E%9C.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/tus.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/creation-post-req.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/creation-post-response.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/creation-with-upload-req.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/creation-with-upload-res.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/expiration-req.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/expiration-res.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/checksum-options-req.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/checksum-options=req.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/checksum-patch-req.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/checksum-patch-res.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/termination-req.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/termination-res.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-post-req-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-post-res-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-post-req-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-post-res-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-patch-req-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-patch-res-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-patch-req-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-patch-res-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-post-req-4.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-post-res-4.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-head-req.png">
+<meta property="og:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/Concatenation-head-res.png">
+<meta property="article:published_time" content="2020-12-28T12:18:00.000Z">
+<meta property="article:modified_time" content="2020-12-28T12:55:17.702Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/12/28/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/filepond%E6%95%88%E6%9E%9C.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-基于Tus协议的文件上传流程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/" class="article-date">
+  <time datetime="2020-12-28T12:18:00.000Z" itemprop="datePublished">2020-12-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于Tus协议的文件上传流程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>最近一直都在弄关于文件上传方面的问题，如果只是小文件的话，基本直接<code>post</code>上传就可以解决，但是当面对大文件时，如果还是只用简单的请求可能无法完成文件的上传. </p>
+<p>假设当前用户要上传一个<code>2G</code>的视频文件. 可能就会遇到许多问题: </p>
+<ol>
+<li>首先最大的问题就是，服务端不可能接受前端在一次请求中上传如此大的<code>body</code>.  </li>
+<li>所以不得不选择将大文件分成多个小文件分多次上传，基本可以解决问题. 但是如果出现一些不可控的原因导致文件上传中断，用户只能选择重新上传，而重新上传意味着之前上传的内容又得再一次上传，如果用户在一个网络环境很差的情况下，这个文件就根本无法完成上传。</li>
+</ol>
+<p>基于以上的情况，通过<code>Tus</code>协议来实现分片上传以及断点续传的功能便能达到相当好的用户体验。下面就来讲讲这个实现过程。</p>
+<h2 id="Tus"><a href="#Tus" class="headerlink" title="Tus"></a>Tus</h2><p>什么是<code>Tus</code>，<code>Tus</code>是基于<code>HTTP</code>的可恢复文件上传协议。可恢复意味着可以随时中断上载，并且可以继续上载而无需再次重新上载先前的数据。  </p>
+<p><code>Tus</code>官网上有许多实现的库可供使用。而作为一个前端选手，必然用的<code>tus-js-client</code>，而我一开始接触的时候用的是文件上传工具<code>filepond</code>(其实之前还用过<code>uppy</code>，因为它<code>github</code>✨多，而且它原生就支持<code>Tus</code>协议，你问我为什么不用那个，因为我看不懂😬)。<br>幸好在<code>filepond</code>的issues中看到貌似它也可以和<code>Tus</code>结合使用🙂。  </p>
+<p>其实<code>filepond</code>使用来说还算是不错的体验，但是它似乎没有针对<strong>断点续传</strong>方面做过处理，可能也有可能是因为我太菜了吧。  下面是<code>filepond</code>的样子，挺好看。<br><img src="../images/基于Tus协议的文件上传流程/filepond效果.png" /></p>
+<h2 id="前后端基本交互流程"><a href="#前后端基本交互流程" class="headerlink" title="前后端基本交互流程"></a>前后端基本交互流程</h2><img src="../images/基于Tus协议的文件上传流程/tus.jpg" />
+
+<p>基于上面的流程图这里简单描述一下并讲讲其中一些注意的地方。  </p>
+<ol>
+<li>客户端首先向服务端发送<code>options</code>请求。获取服务端的配置，<br>比如服务端支持的<code>tus</code>版本，或者支持的<code>tus</code>扩展。  </li>
+<li>如果服务端支持，客户端可以选择:  <ul>
+<li>向服务端发起<code>post</code>请求创建文件副本  </li>
+<li>发送<code>post</code>请求的同时发送部分文件分片  </li>
+<li>直接发送<code>head</code>请求尝试恢复上传，如果失败则回退到<code>post</code>创建文件。  </li>
+</ul>
+</li>
+<li>服务端返回文件的相关信息用于后续文件上传请求。  <ul>
+<li>恢复上传: 根据服务端返回的响应头<code>Upload-Offset</code>从指定文件位置开始恢复上传  </li>
+<li>首次上传: 从文件开始位置上传。也就是<code>0</code>。  </li>
+</ul>
+</li>
+<li>重复发起<code>patch</code>请求发送文件分片，根据服务端响应的<code>Upload-Offset</code>来确定下一分片位置。<br>如果它的值等于文件的大小，说明文件上传已经完成。  </li>
+<li>至此整个文件上传流程完成。  </li>
+</ol>
+<h2 id="Tus-扩展"><a href="#Tus-扩展" class="headerlink" title="Tus 扩展"></a>Tus 扩展</h2><p><code>Tus</code>还有许多扩展用于帮助开发者实现更多的功能。在上面的流程中已经用到了一些。<br>以下所有的扩展都需要服务端支持。<br>官方的方法是在<code>options</code>请求当中的响应中根据<code>Tus-Extension</code>响应头来分析具体服务端所接受的扩展。<br>下面的扩展会影响到上面请求流程中的很多地方，也会在下面介绍。(很多地方其实还是对官网的翻译，如果有兴趣的可以去官网继续学习更多的内容😊)  </p>
+<ol>
+<li>Creation<br>在文件上传前在服务端创建文件信息<br>可以将文件的相关信息预先在存储在服务端，这样可以为后续文件分片上传做参照。<br>比如可以将文件唯一标识符<code>md5</code>先进行上传，服务端存储数据库，保存每一上传的分片。  </li>
+</ol>
+<p>前端可以把一些文件信息放在<code>Upload-Metadata</code>请求头中  </p>
+<img src="../images/基于Tus协议的文件上传流程/creation-post-req.png" />
+<img src="../images/基于Tus协议的文件上传流程/creation-post-response.png" />
+
+<p>服务端会返回<code>Location</code>告知前端文件的上传地址。  </p>
+<ol start="2">
+<li>Creation-With-Upload<br>在服务端创建请求中添加文件分片内容<br>为了节省流量，在服务端允许的情况下，可以在向服务端创建请求的同时也将某一分片一同上传。  </li>
+</ol>
+<p>和<code>Creation</code>类似，也会返回<code>Location</code>头，同时会返回<code>Upload-Offset</code>设置下一分片的索引。<br><img src="../images/基于Tus协议的文件上传流程/creation-with-upload-req.png" /><br><img src="../images/基于Tus协议的文件上传流程/creation-with-upload-res.png" /></p>
+<ol start="3">
+<li>Expiration<br>临时文件的过期时间<br>服务端的存储空间毕竟有限，不可能无时限的将文件的分片保存在服务端的数据库中。<br>所以服务端可以设置分片的存储时间，并通过响应头<code>Upload-Expires</code>告知前端它的过期时间。<br>当超过服务端规定的时间之后，用户需要重新在服务端创建文件副本，重新上传。  <img src="../images/基于Tus协议的文件上传流程/expiration-req.png" />
+<img src="../images/基于Tus协议的文件上传流程/expiration-res.png" /> 
+
+</li>
+</ol>
+<p>当前端发送文件分片响应时，服务端会添加响应头<code>Upload-Expires</code>告知前端该分片过期时间，如果超过时间，服务端将会返回<code>404</code>，前端需要重新上传。  </p>
+<ol start="4">
+<li>Checksum<br>分片大小检查<br>服务端可以对前端发送的文件分片进行校验。<br>在上传前获取服务端上传配置支持度信息时，前端可以根据<code>Tus-Checksum-Algorithm</code>字段知道服务端支持的加密算法。  </li>
+</ol>
+<p>有时无法一开始就做出相应的计算，并且在服务端支持的情况下，可以使用<code>Trailer</code>请求头在完成上传后再进行校验。<br>服务端可以在一开始<code>options</code>的<code>Tus-Extension</code>中添加<code>Checksum-Trailer</code>字段表示支持该功能。<br>比如对文件进行<code>md5</code>加密，需要对文件分片一一进行处理。  </p>
+<p>当上传校验失败时，服务端便会丢弃此分片，索引也不会发生改变。<br><img src="../images/基于Tus协议的文件上传流程/checksum-options-req.png" /><br><img src="../images/基于Tus协议的文件上传流程/checksum-options=req.png" /><br><img src="../images/基于Tus协议的文件上传流程/checksum-patch-req.png" /><br><img src="../images/基于Tus协议的文件上传流程/checksum-patch-res.png" /> </p>
+<p>上述例子中  </p>
+<ul>
+<li>服务端<code>options</code>响应中<code>Tus-Checksum-Algorithm: md5,sha1,crc32</code>展示了其支持的校验算法  </li>
+<li>前端<code>patch</code>请求<code>Upload-Checksum: sha1 Kq5sNclPz7QV2+lfQIuc6R7oRu0=</code>使用<code>sha1</code>算法。  </li>
+<li>服务端校验通过返回<code>204</code></li>
+<li>若失败，则返回以下状态码(<code>400</code>: 算法不支持，<code>460</code>: 校验和不匹配)<br>官网上介绍<code>The Upload-Checksum request header contains information about the checksum of the current body payload. The header MUST consist of the name of the used checksum algorithm and the Base64 encoded checksum separated by a space.</code><br>大概说上面的<code>Upload-Checksum</code>头由<code>sha1</code>算法和由<code>base64</code>编码的校验和组成，但是我不是太能理解这个，不管是使用base64解码或者用sha1解码似乎都无法解码出<code>Kq5sNclPz7QV2+lfQIuc6R7oRu0=</code>，如果有懂的大佬的话可以给解释解释😃。  </li>
+</ul>
+<ol start="5">
+<li><p>Termination<br>文件删除<br>这个应该没什么好说的，就是向服务端请求删除文件信息。  </p>
+<img src="../images/基于Tus协议的文件上传流程/termination-req.png" />
+<img src="../images/基于Tus协议的文件上传流程/termination-res.png" />
+</li>
+<li><p>Concatenation<br>并行上传<br>对于一个大文件，如果是一个个分片串行上传，可能还是有点慢。<br><code>tus</code>支持可以实行并行上传，可以针对同一个文件资源在服务端生成多个上传地址，这样就可以同时上传文件的不同分片。<br>当然这也需要服务端支持。  </p>
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-req-1.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-res-1.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-req-2.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-res-2.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-req-1.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-res-1.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-req-2.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-res-2.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-req-4.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-res-4.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-head-req.png" />
+<img src="../images/基于Tus协议的文件上传流程/Concatenation-head-res.png" />
+
+</li>
+</ol>
+<p>上述例子中</p>
+<ul>
+<li>先是在开始时发送两个<code>post</code>请求并携带<code>Upload-Concat: partial</code>请求头，在服务端生成了两个上传地址<code>https://tus.example.org/files/a</code>和<code>https://tus.example.org/files/b</code>  </li>
+<li>接着就可以同时在两个地址上传同一个文件，以此来提高效率。  </li>
+<li>当上传完所有分片后，发送<code>post</code>请求并携带<code>Upload-Concat: final;/files/a /files/b</code>，格式为<code>final;</code>加上上一步中生成的上传地址，以空格分隔。服务端响应合成路径<code>Location: https://tus.example.org/files/ab</code>告知前端文件的地址。  该顺序需要和<code>post</code>中返回的地址顺序一致，否则可能会导致服务端文件分片合并出错。  </li>
+<li>前端发送<code>head</code>请求，服务端接收到请求完成这个文件分片的合并。  </li>
+</ul>
+<p>就我个人看法，<code>Tus</code>协议提供的是一种思想，让我们在文件上传任务中出现的任何情况都能得到相应的应对方法，完美完成整个上传流程。<br>所在上面所介绍的扩展，不严谨的讲，我们可以用自己的方法来实现，它的作用就是能让两端能更好的理解当前的文件的上传情况。<br>我们不必太过于拘泥于相应的api，只需要能让两端更好，更容易的协作就好。  </p>
+<p>还有，在我使用前端<code>tus</code>的<code>tus-js-client</code>工具时，检查<code>api</code>介绍以及粗略查找了下源码，看到它似乎对于<code>tus</code>扩展只实现了<code>Creation</code>、<code>Creation-With-Upload</code>、<code>Concatenation</code>这几个扩展，如果想使用其他扩展可能需要自行实现。<br>不过其他几个扩展的重点在后端，这也可能是它没有实现的原因。(也可能是我没看懂😝)  </p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>文件上传其中还有需要的知识，包括文件的分片，前端的文件处理方式以及关于文件的加密等。包括这里的<code>Tus</code>，也还有很多地方不是很理解，如果有哪里错了，先道个歉，欢迎各位给指正。–好好学习🐱。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/" data-id="ckj8kgjmp0003dx8jdz1qhpbf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mongodb常用操作符</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BDD/" rel="tag">BDD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Calendar/" rel="tag">Calendar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chai/" rel="tag">Chai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Component/" rel="tag">Component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/content/" rel="tag">content</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BDD/" style="font-size: 10px;">BDD</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Calendar/" style="font-size: 10px;">Calendar</a> <a href="/tags/Chai/" style="font-size: 10px;">Chai</a> <a href="/tags/Component/" style="font-size: 10px;">Component</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/content/" style="font-size: 10px;">content</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/test/" style="font-size: 10px;">test</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/">基于Tus协议的文件上传流程</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/">mongodb常用操作符</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/28/Chai/">Chai</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/">有趣的css属性content</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/26/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/">React日历组件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
