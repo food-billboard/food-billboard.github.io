@@ -101,7 +101,8 @@ theme: fluid
 deploy:
   type: git
   repo: 
-    github: https://github.com/food-billboard/food-billboard.github.io.git
+    # github: https://github.com/food-billboard/food-billboard.github.io.git
+    github: git@github.com:food-billboard/food-billboard.github.io.git
   branch: master
 
 # fluid 配置  
