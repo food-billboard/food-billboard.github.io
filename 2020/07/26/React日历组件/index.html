@@ -1,19 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
 
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>React日历组件 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
   <meta name="description" content="这是本人写的第一篇文章，欢迎各位观看的朋友👭。先介绍一下自己，本人是一个刚刚进入社会的前端菜鸟，目前服务于一家小公司🏭。 1 故事背景事情是这样的，最近在公司的h5项目中碰到一个需求，页面中需要有一个用于显示最近订单的日历样式，你没有看错，一个日历，这给我难到了，本来想着不就是是一个日历吗，这有什么难的，后来我发现好像似乎是高估了自己。  先介绍下关于这个日历的样式，大家可以自行脑补一下苹果中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React日历组件">
 <meta property="og:url" content="http://yoursite.com/2020/07/26/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Food-Billboard">
 <meta property="og:description" content="这是本人写的第一篇文章，欢迎各位观看的朋友👭。先介绍一下自己，本人是一个刚刚进入社会的前端菜鸟，目前服务于一家小公司🏭。 1 故事背景事情是这样的，最近在公司的h5项目中碰到一个需求，页面中需要有一个用于显示最近订单的日历样式，你没有看错，一个日历，这给我难到了，本来想着不就是是一个日历吗，这有什么难的，后来我发现好像似乎是高估了自己。  先介绍下关于这个日历的样式，大家可以自行脑补一下苹果中">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2020/07/26/images/React日历组件/2de9716fa4db0bdb643f6a0e87ad6819.JPG">
 <meta property="og:image" content="http://yoursite.com/2020/07/26/images/React日历组件/IMG_0144.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/07/26/images/React日历组件/IMG_0145.PNG">
@@ -31,86 +40,225 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/26/images/React日历组件/1595860081764_790B7081-F485-487D-9B74-5E88C13FD5FF.png">
 <meta property="og:image" content="http://yoursite.com/2020/07/26/images/React日历组件/15938957-5F8F-4A7A-9F91-544D239677EC.png">
 <meta property="article:published_time" content="2020-07-26T11:19:12.000Z">
-<meta property="article:modified_time" content="2021-10-25T01:11:28.000Z">
+<meta property="article:modified_time" content="2021-10-25T06:37:56.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="React">
 <meta property="article:tag" content="Component">
 <meta property="article:tag" content="Calendar">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://yoursite.com/2020/07/26/images/React日历组件/2de9716fa4db0bdb643f6a0e87ad6819.JPG">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+  <title>React日历组件 - Food-Billboard</title>
 
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
-      </nav>
-      <nav id="sub-nav">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-React日历组件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/07/26/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/" class="article-date">
-  <time datetime="2020-07-26T11:19:12.000Z" itemprop="datePublished">2020-07-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/15938957-5F8F-4A7A-9F91-544D239677EC.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="React日历组件">
+              
+            </span>
+
+            
+              <div class="mt-3">
   
-    <h1 class="article-title" itemprop="name">
-      React日历组件
-    </h1>
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-26 19:19" pubdate>
+        2020年7月26日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.6k 字
+    </span>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <p>这是本人写的第一篇文章，欢迎各位观看的朋友👭。<br><img src="../images/React日历组件/2de9716fa4db0bdb643f6a0e87ad6819.JPG" width=100 height=100 /><br>先介绍一下自己，本人是一个刚刚进入社会的前端菜鸟，目前服务于一家小公司🏭。</p>
+      
+      14 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">React日历组件</h1>
+            
+            <div class="markdown-body">
+              <p>这是本人写的第一篇文章，欢迎各位观看的朋友👭。<br><img src="../images/React日历组件/2de9716fa4db0bdb643f6a0e87ad6819.JPG" srcset="/img/loading.gif" lazyload width=100 height=100 /><br>先介绍一下自己，本人是一个刚刚进入社会的前端菜鸟，目前服务于一家小公司🏭。</p>
 <h2 id="1-故事背景"><a href="#1-故事背景" class="headerlink" title="1 故事背景"></a>1 故事背景</h2><p>事情是这样的，最近在公司的h5项目中碰到一个需求，页面中需要有一个用于显示最近订单的日历样式，你没有看错，一个日历，这给我难到了，本来想着不就是是一个日历吗，这有什么难的，后来我发现好像似乎是高估了自己。 </p>
-<p>先介绍下关于这个日历的样式，大家可以自行脑补一下苹果中自带的日历或看下图，基本和它差不多。多了一点需求是，在点击某一个日期或者是手指滑动过程中，日历下方的订单列表会根据日期的变动自动跳转到当前日期的订单。<br><img src="../images/React日历组件/IMG_0144.PNG" width=188 height=334 /><br><img src="../images/React日历组件/IMG_0145.PNG" width=188 height=334 /> </p>
+<p>先介绍下关于这个日历的样式，大家可以自行脑补一下苹果中自带的日历或看下图，基本和它差不多。多了一点需求是，在点击某一个日期或者是手指滑动过程中，日历下方的订单列表会根据日期的变动自动跳转到当前日期的订单。<br><img src="../images/React日历组件/IMG_0144.PNG" srcset="/img/loading.gif" lazyload width=188 height=334 /><br><img src="../images/React日历组件/IMG_0145.PNG" srcset="/img/loading.gif" lazyload width=188 height=334 /> </p>
 <p>因为项目用的技术栈是React，似乎理所应当该用 Ant Design 来完成，就pc端而言，Ant Design 的<a target="_blank" rel="noopener" href="https://ant.design/components/calendar-cn/">日历组件</a>相对于来说算是非常不错且还算契合的，奈何h5使用的是Ant Design Mobile，相对于来说的话，以个人之见，确实还有许多可以改进的地方，mobile中的<a target="_blank" rel="noopener" href="https://mobile.ant.design/components/calendar-cn/">日历组件</a>很多地方表现的还是不够灵活，有些地方还是过于定制化，还可以进一步完善。</p>
 <p>所以，经过自己再三的对mobile的Calendar组件的修改（瞎78乱搞）以及思想斗争（不想搞了）之后。终于，选择自己做封装，在封装的过程中，也让本人学习到了一些之前还没有注意的东西。今天也一并作介绍，这也是对新知识的再一次复习。</p>
 <h2 id="2-正片开始"><a href="#2-正片开始" class="headerlink" title="2 正片开始"></a>2 正片开始</h2><p>这里先不介绍具体业务上关于列表跳转方面的内容。只对日历相关作介绍🙂。</p>
@@ -133,7 +281,7 @@
 <p>相关用到API有如下（后面的图基本都来自己<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/home.html">阮一峰老师</a>的博客）</p>
 <p><strong>容器样式</strong></p>
 <ol>
-<li><p>display<br>可以是块级栅格 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032504.png" alt="grid"><br>也可以是行内栅格 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032505.png" alt="inline-grid"><br>和普通的行内块级意思一样，行内能有多个栅格布局并排<br>另一个需要注意的地方是在gird布局下，有一些样式的设置无法产生效果，比如:  </p>
+<li><p>display<br>可以是块级栅格 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032504.png" srcset="/img/loading.gif" lazyload alt="grid"><br>也可以是行内栅格 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032505.png" srcset="/img/loading.gif" lazyload alt="inline-grid"><br>和普通的行内块级意思一样，行内能有多个栅格布局并排<br>另一个需要注意的地方是在gird布局下，有一些样式的设置无法产生效果，比如:  </p>
 <blockquote>
 <p>float、display: inline-block、display: table-cell、vertical-align和column-*  </p>
 </blockquote>
@@ -142,14 +290,14 @@
 </li>
 </ol>
 <ul>
-<li>长度单位<br><code>grid-template-columns: 100px 100px 100px;</code><br><code>grid-template-rows: 100px 100px 100px;</code><br>这样就形成了一个 3行三列的布局<br><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032506.png" alt=""></li>
-<li>fr<br>意思大概就是一个片段，比如<br><code>grid-template-columns: 1fr 1fr;</code><br>意思是将整体布局分割成相等的两列<br><img src="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032509.png" alt=""><br><code>grid-template-columns: 150px 1fr 2fr;</code><br>意思是第二个片段是第一个的两倍<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032510.png" alt="">  </li>
+<li>长度单位<br><code>grid-template-columns: 100px 100px 100px;</code><br><code>grid-template-rows: 100px 100px 100px;</code><br>这样就形成了一个 3行三列的布局<br><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032506.png" srcset="/img/loading.gif" lazyload alt=""></li>
+<li>fr<br>意思大概就是一个片段，比如<br><code>grid-template-columns: 1fr 1fr;</code><br>意思是将整体布局分割成相等的两列<br><img src="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032509.png" srcset="/img/loading.gif" lazyload alt=""><br><code>grid-template-columns: 150px 1fr 2fr;</code><br>意思是第二个片段是第一个的两倍<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032510.png" srcset="/img/loading.gif" lazyload alt="">  </li>
 <li>repeat函数<br>有时候你会觉得一个个设置块的宽度很麻烦，repeat函数可以将你设定的块数据进行指定的重复<br><code>grid-template-columns: repeat(3, 100px);</code><br>等同于<br><code>grid-template-columns: 100px 100px 100px;</code><br>还可以使用关键字 <code>auto-fill</code><br><code>grid-template-columns: repeat(auto-fill, 100px);</code><br>它会持续平铺100px宽的块直到当前行宽度不足时，换行  </li>
 <li>minmax函数<br><code>grid-template-columns: 100px minmax(100px, 200px) 100px;</code><br>表示中间列的宽度范围在100px 和 200px之间<br>参数也支持 fr 关键字  </li>
 <li>auto<br>当你指定了3列，并设置了两列的宽度，且希望另一列宽度自适应时，可以使用此关键字。如<br><code>grid-template-columns: 100px auto 100px;</code>中间列会自动自适应</li>
 </ul>
 <ol start="3">
-<li><p>grid-row-gap &amp; grid-columns-gap &amp; grid-gap<br>设置各个单元格之间的间距<br><code>grid-row-gap: 20px;</code><br><code>grid-column-gap: 20px;</code><br><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032511.png" alt=""><br>grid-gap则是前两个的混合写法  </p>
+<li><p>grid-row-gap &amp; grid-columns-gap &amp; grid-gap<br>设置各个单元格之间的间距<br><code>grid-row-gap: 20px;</code><br><code>grid-column-gap: 20px;</code><br><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032511.png" srcset="/img/loading.gif" lazyload alt=""><br>grid-gap则是前两个的混合写法  </p>
 </li>
 <li><p>justify-items &amp; align-items &amp; place-items<br>值：<code>start | end | center | stretch</code><br>设置单元格的水平垂直对齐方式，参数和flex差不多就不说了（懒）  </p>
 </li>
@@ -158,7 +306,7 @@
 </ol>
 <p><strong>项目样式</strong></p>
 <ol>
-<li>grid-column-start &amp; grid-column-end &amp; grid-row-start &amp; grid-row-end<br>就和名字差不多的意思，他可以让单元格的放置位置发生偏移，有了这个属性，可以让本项目中日历的月开头发生偏移而不必做其他的js操作。<br>按照阮老师上面说的可能更容易理解，容器分成了指定的行和列，也会随即生成类似表格的边框线，但是不会显示。所以偏移的按照网格线的索引进行偏移。<br><img src="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032503.png" alt=""><br>比如<br><code>grid-column-start: 2;</code> 表示某一单元格的起始位置是容器的列网格线的第二根。<br><code>grid-column-end: 4;</code> 表示某一但云哥的结束位置是容器的列网格线的第四根。<br><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032526.png" alt=""></li>
+<li>grid-column-start &amp; grid-column-end &amp; grid-row-start &amp; grid-row-end<br>就和名字差不多的意思，他可以让单元格的放置位置发生偏移，有了这个属性，可以让本项目中日历的月开头发生偏移而不必做其他的js操作。<br>按照阮老师上面说的可能更容易理解，容器分成了指定的行和列，也会随即生成类似表格的边框线，但是不会显示。所以偏移的按照网格线的索引进行偏移。<br><img src="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032503.png" srcset="/img/loading.gif" lazyload alt=""><br>比如<br><code>grid-column-start: 2;</code> 表示某一单元格的起始位置是容器的列网格线的第二根。<br><code>grid-column-end: 4;</code> 表示某一但云哥的结束位置是容器的列网格线的第四根。<br><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032526.png" srcset="/img/loading.gif" lazyload alt=""></li>
 </ol>
 <p><strong>其他属性</strong></p>
 <p><code>grid-column-end</code> 单元格的列结束位置<br><code>grid-row-start</code> 单元格的行起始位置<br><code>grid-row-end</code> 单元格的行结束位置  </p>
@@ -167,19 +315,19 @@
 <h3 id="Calendar"><a href="#Calendar" class="headerlink" title="Calendar"></a>Calendar</h3><p>具体样式查看下图  </p>
 </li>
 <li><p>单日着重  </p>
-<img src="../images/React日历组件/1595859653524_95CA67F7-E00E-4AA0-A51C-85895C099433.png" width="200" height="100" />
+<img src="../images/React日历组件/1595859653524_95CA67F7-E00E-4AA0-A51C-85895C099433.png" srcset="/img/loading.gif" lazyload width="200" height="100" />
 </li>
 <li><p>周着重  </p>
-<img src="../images/React日历组件/1595859783955_DE771404-5E95-4876-BA63-44D01118D2EF.png" width="200" height="100" />
+<img src="../images/React日历组件/1595859783955_DE771404-5E95-4876-BA63-44D01118D2EF.png" srcset="/img/loading.gif" lazyload width="200" height="100" />
 </li>
 <li><p>色调更改  </p>
-<img src="../images/React日历组件/1595859830441_DBC34DF0-2308-4DBB-90F7-A70B70795B82.png" width="200" height="100" />
+<img src="../images/React日历组件/1595859830441_DBC34DF0-2308-4DBB-90F7-A70B70795B82.png" srcset="/img/loading.gif" lazyload width="200" height="100" />
 </li>
 <li><p>显示单周  </p>
-<img src="../images/React日历组件/1595860081764_790B7081-F485-487D-9B74-5E88C13FD5FF.png" width="200" height="100" />
+<img src="../images/React日历组件/1595860081764_790B7081-F485-487D-9B74-5E88C13FD5FF.png" srcset="/img/loading.gif" lazyload width="200" height="100" />
 </li>
 <li><p>设置额外内容  </p>
-<img src="../images/React日历组件/15938957-5F8F-4A7A-9F91-544D239677EC.png" width="200" height="100" />
+<img src="../images/React日历组件/15938957-5F8F-4A7A-9F91-544D239677EC.png" srcset="/img/loading.gif" lazyload width="200" height="100" />
 
 </li>
 </ol>
@@ -347,141 +495,239 @@
 <p>从<code>lastYear</code>开始的后面几个方法，在传入Date参数时只会返回结果，若未传参数则组件状态由外部控制或由内部控制会触发<code>onChange</code>回调。</p>
 <h2 id="3-结束"><a href="#3-结束" class="headerlink" title="3 结束"></a>3 结束</h2><p>这就是此次所要说的所有，如有任何问题可直接联系我。如果觉得东西很烂可以直接指出。如果对此组件感兴趣可以去<a target="_blank" rel="noopener" href="https://github.com/food-billboard/React-Component-Calendar">github</a>上给一个star✨，如果觉得文章内容对你有用，可以给一个赞👍或一个评论📚。</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/26/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/" data-id="ckv62zzvp00001wl2f54k7f00" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Calendar/" rel="tag">Calendar</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Component/" rel="tag">Component</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/React/">React</a>
+                    
+                      <a class="hover-with-bg" href="/categories/React/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                      <a class="hover-with-bg" href="/categories/React/%E5%89%8D%E7%AB%AF/CSS/">CSS</a>
+                    
+                      <a class="hover-with-bg" href="/categories/React/%E5%89%8D%E7%AB%AF/CSS/%E7%BB%84%E4%BB%B6/">组件</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/React/">React</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Component/">Component</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Calendar/">Calendar</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">有趣的css属性content</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          有趣的css属性content
-        
+            
+          </article>
+        </div>
       </div>
-    </a>
-  
-  
-</nav>
-
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BDD/" rel="tag">BDD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Calendar/" rel="tag">Calendar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chai/" rel="tag">Chai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Component/" rel="tag">Component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/content/" rel="tag">content</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-actions/" rel="tag">github actions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
     </div>
-  </div>
-
-
-  
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/BDD/" style="font-size: 10px;">BDD</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Calendar/" style="font-size: 10px;">Calendar</a> <a href="/tags/Chai/" style="font-size: 10px;">Chai</a> <a href="/tags/Component/" style="font-size: 10px;">Component</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/content/" style="font-size: 10px;">content</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/github-actions/" style="font-size: 10px;">github actions</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/test/" style="font-size: 10px;">test</a>
-    </div>
-  </div>
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/10/25/deploy/">Github Actions 部署node项目</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/">基于Tus协议的文件上传流程</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/">mongodb常用操作符</a>
-          </li>
-        
-          <li>
-            <a href="/2020/08/28/Chai/">Chai</a>
-          </li>
-        
-          <li>
-            <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/">有趣的css属性content</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2021 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
   </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
 </footer>
-    </div>
-    <nav id="mobile-nav">
+
+
+  <!-- SCRIPTS -->
   
-    <a href="/" class="mobile-nav-link">Home</a>
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    <script  src="/js/img-lazyload.js" ></script>
   
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
 
   
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
 
-<script src="/js/script.js"></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
 
 
-  </div>
-</body>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
 </html>

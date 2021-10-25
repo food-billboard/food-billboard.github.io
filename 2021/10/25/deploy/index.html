@@ -1,96 +1,244 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
 
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Github Actions 部署node项目 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
   <meta name="description" content="开头作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。讲一个最简单的例子🌰：你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。这样重复做功绝对不是我们想要的，所以此时就需要git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Github Actions 部署node项目">
 <meta property="og:url" content="http://yoursite.com/2021/10/25/deploy/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Food-Billboard">
 <meta property="og:description" content="开头作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。讲一个最简单的例子🌰：你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。这样重复做功绝对不是我们想要的，所以此时就需要git">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-25T02:39:00.000Z">
-<meta property="article:modified_time" content="2021-10-25T03:04:46.000Z">
+<meta property="article:modified_time" content="2021-10-25T06:37:09.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="node">
 <meta property="article:tag" content="github actions">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+  <title>Github Actions 部署node项目 - Food-Billboard</title>
 
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
-      </nav>
-      <nav id="sub-nav">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-deploy" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/25/deploy/" class="article-date">
-  <time datetime="2021-10-25T02:39:00.000Z" itemprop="datePublished">2021-10-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/deploy/background.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Github Actions 部署node项目">
+              
+            </span>
+
+            
+              <div class="mt-3">
   
-    <h1 class="article-title" itemprop="name">
-      Github Actions 部署node项目
-    </h1>
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-25 10:39" pubdate>
+        2021年10月25日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <h2 id="开头"><a href="#开头" class="headerlink" title="开头"></a>开头</h2><p>作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。<br>讲一个最简单的例子🌰：<br>你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。<br>这样重复做功绝对不是我们想要的，所以此时就需要<code>github actions</code>登场了。它帮助我们完成了中间这些复杂又重复的工作，让我们能有更多的时间摸🐟。😁</p>
+      
+      10 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Github Actions 部署node项目</h1>
+            
+            <div class="markdown-body">
+              <h2 id="开头"><a href="#开头" class="headerlink" title="开头"></a>开头</h2><p>作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。<br>讲一个最简单的例子🌰：<br>你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。<br>这样重复做功绝对不是我们想要的，所以此时就需要<code>github actions</code>登场了。它帮助我们完成了中间这些复杂又重复的工作，让我们能有更多的时间摸🐟。😁</p>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>关于<code>github actions</code>的介绍，这里不多说，大家可以参看<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">阮一峰老师的文章</a>  </p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>首先是具体的流程  </p>
 <ul>
@@ -151,7 +299,7 @@
 </ul>
 <p>完成以上步骤后，即可开始项目的部署文件配置  </p>
 <p>完整的代码在下方，当中的一些细节用注释标出  </p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">server</span> <span class="string">to</span> <span class="string">aliyun</span> </span><br><span class="line"><span class="attr">on:</span> </span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span> </span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">deploy-and-start:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span> <span class="comment"># 运行环境</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="comment"># 切换分支</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span>  </span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@master</span></span><br><span class="line"></span><br><span class="line">      <span class="comment"># 设置ssh文件</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Setup</span> <span class="string">ssh</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="comment"># 这里用到了刚刚的环境变量，本机的 ssh 私钥  </span></span><br><span class="line">          <span class="attr">LOCAL_SSH_PRIVATE_KEY:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.LOCAL_SSH_PRIVATE_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="comment"># 在虚拟机中生成对应的 ssh 文件</span></span><br><span class="line">        <span class="comment"># 否则的话在下面的 pm2 操作中 将无法验证通过  </span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|  </span></span><br><span class="line"><span class="string">          mkdir -p ~/.ssh/</span></span><br><span class="line"><span class="string">          echo &quot;$LOCAL_SSH_PRIVATE_KEY&quot; &gt; ~/.ssh/id_rsa </span></span><br><span class="line"><span class="string">          chmod 600 ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="comment"># 设置node </span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">setup</span> <span class="string">node</span> </span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="number">12.16</span><span class="number">.1</span></span><br><span class="line">      <span class="comment"># 安装对应的模块  </span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm install yarn pm2 -g</span></span><br><span class="line"><span class="string"></span>      <span class="comment"># 代码更新至服务器  </span></span><br><span class="line">      <span class="comment"># 如果是第一次的话则执行 pm2 deploy pm2.config.js production setup</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          pm2 deploy pm2.config.js production update</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="comment"># 登录服务器并启动docker服务   </span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">start</span> <span class="string">the</span> <span class="string">remote</span> <span class="string">server</span> </span><br><span class="line">        <span class="attr">uses:</span> <span class="string">appleboy/ssh-action@master</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">username:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.SSH_USERNAME</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">password:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.SSH_PASSWORD</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">host:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.SSH_IP</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="comment"># 进入到服务器的项目路径下  </span></span><br><span class="line">          <span class="comment"># 安装全局依赖  </span></span><br><span class="line">          <span class="comment"># 安装项目依赖  </span></span><br><span class="line">          <span class="comment"># 启动/重启 docker服务  </span></span><br><span class="line">          <span class="comment"># 启动项目  </span></span><br><span class="line">          <span class="attr">script:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            cd $&#123;&#123; secrets.REMOTE_PATH &#125;&#125;</span></span><br><span class="line"><span class="string">            npm install pm2 yarn -g </span></span><br><span class="line"><span class="string">            yarn </span></span><br><span class="line"><span class="string">            docker-compose -f docker-compose.yml pull</span></span><br><span class="line"><span class="string">            docker-compose -f docker-compose.yml up -d</span></span><br><span class="line"><span class="string">            pm2 startOrRestart pm2.config.js</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">server</span> <span class="hljs-string">to</span> <span class="hljs-string">aliyun</span> <br><span class="hljs-attr">on:</span> <br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">master</span> <br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">deploy-and-start:</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-comment"># 运行环境</span><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-comment"># 切换分支</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span>  <br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@master</span><br><br>      <span class="hljs-comment"># 设置ssh文件</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">ssh</span><br>        <span class="hljs-attr">env:</span><br>          <span class="hljs-comment"># 这里用到了刚刚的环境变量，本机的 ssh 私钥  </span><br>          <span class="hljs-attr">LOCAL_SSH_PRIVATE_KEY:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.LOCAL_SSH_PRIVATE_KEY</span> <span class="hljs-string">&#125;&#125;</span><br>        <span class="hljs-comment"># 在虚拟机中生成对应的 ssh 文件</span><br>        <span class="hljs-comment"># 否则的话在下面的 pm2 操作中 将无法验证通过  </span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">|  </span><br><span class="hljs-string">          mkdir -p ~/.ssh/</span><br><span class="hljs-string">          echo &quot;$LOCAL_SSH_PRIVATE_KEY&quot; &gt; ~/.ssh/id_rsa </span><br><span class="hljs-string">          chmod 600 ~/.ssh/id_rsa</span><br><span class="hljs-string"></span><br>      <span class="hljs-comment"># 设置node </span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">setup</span> <span class="hljs-string">node</span> <br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v1</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">node-version:</span> <span class="hljs-number">12.16</span><span class="hljs-number">.1</span><br>      <span class="hljs-comment"># 安装对应的模块  </span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">          npm install yarn pm2 -g</span><br><span class="hljs-string"></span>      <span class="hljs-comment"># 代码更新至服务器  </span><br>      <span class="hljs-comment"># 如果是第一次的话则执行 pm2 deploy pm2.config.js production setup</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">          pm2 deploy pm2.config.js production update</span><br><span class="hljs-string"></span><br>      <span class="hljs-comment"># 登录服务器并启动docker服务   </span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">start</span> <span class="hljs-string">the</span> <span class="hljs-string">remote</span> <span class="hljs-string">server</span> <br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">appleboy/ssh-action@master</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">username:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.SSH_USERNAME</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-attr">password:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.SSH_PASSWORD</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-attr">host:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.SSH_IP</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-comment"># 进入到服务器的项目路径下  </span><br>          <span class="hljs-comment"># 安装全局依赖  </span><br>          <span class="hljs-comment"># 安装项目依赖  </span><br>          <span class="hljs-comment"># 启动/重启 docker服务  </span><br>          <span class="hljs-comment"># 启动项目  </span><br>          <span class="hljs-attr">script:</span> <span class="hljs-string">|</span><br><span class="hljs-string">            cd $&#123;&#123; secrets.REMOTE_PATH &#125;&#125;</span><br><span class="hljs-string">            npm install pm2 yarn -g </span><br><span class="hljs-string">            yarn </span><br><span class="hljs-string">            docker-compose -f docker-compose.yml pull</span><br><span class="hljs-string">            docker-compose -f docker-compose.yml up -d</span><br><span class="hljs-string">            pm2 startOrRestart pm2.config.js</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="当中的问题"><a href="#当中的问题" class="headerlink" title="当中的问题"></a>当中的问题</h3><ol>
 <li>为什么使用<code>pm2</code><br><code>node</code>作为一个后台服务应用，不像前端应用一样存在周期短，它被要求需要长期保持稳定的启动状态，当中的许多细节如果单靠开发者来控制的话，会显得相当的麻烦，此时依靠与<code>pm2</code>来进行管理会变得非常的容易。<br><code>pm2</code>内置了负载均衡，出错重启，后台运行等的特点，帮助开发者在运维当中给到了相当大的便利，并且它还能帮你自动部署项目到远程服务器。具体的细节可自行前往<a target="_blank" rel="noopener" href="https://github.com/Unitech/pm2">github</a>查看  </li>
@@ -161,139 +309,241 @@
 </li>
 </ol>
 <p>想象一下当你辛苦的在服务器上部署完成了<code>nginx</code>、<code>mongodb</code>、<code>redis</code>等服务之后，某一天突然要求你更换另一台服务器部署，你是否需要重新将刚刚的服务重新安装启用部署，这样就显得非常麻烦了。<br>而<code>docker</code>这种封闭的，可移植的特性，可以极大的简化我们的部署流程，我们只需配置一次，即可，后续的所有操作全部都在<code>docker</code>容器当中进行。具体的细节不在本次讨论范围。  </p>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>这是本人在自己的摸索中踩坑的一些内容，当中可能还不乏一些错误，欢迎指正🙏🏻<br>最后，这是本人的后台服务项目，其中有上面的配置文件等，欢迎大家参考点评😁。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>这是本人在自己的摸索中踩坑的一些内容，当中可能还不乏一些错误，欢迎指正🙏🏻<br>最后，这是本人的<a target="_blank" rel="noopener" href="https://github.com/food-billboard/node-server">后台服务项目</a>，其中有上面的配置文件等，欢迎大家参考点评😁。</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/10/25/deploy/" data-id="ckv62zzvv00011wl2gohl7i08" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github-actions/" rel="tag">github actions</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%83%A8%E7%BD%B2/">部署</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%83%A8%E7%BD%B2/node/">node</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%83%A8%E7%BD%B2/node/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%83%A8%E7%BD%B2/node/%E5%90%8E%E7%AB%AF/ssh/">ssh</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%83%A8%E7%BD%B2/node/%E5%90%8E%E7%AB%AF/ssh/pm2/">pm2</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/node/">node</a>
+                    
+                      <a class="hover-with-bg" href="/tags/github-actions/">github actions</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/">
+                        <span class="hidden-mobile">基于Tus协议的文件上传流程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">基于Tus协议的文件上传流程</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BDD/" rel="tag">BDD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Calendar/" rel="tag">Calendar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chai/" rel="tag">Chai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Component/" rel="tag">Component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/content/" rel="tag">content</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-actions/" rel="tag">github actions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/BDD/" style="font-size: 10px;">BDD</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Calendar/" style="font-size: 10px;">Calendar</a> <a href="/tags/Chai/" style="font-size: 10px;">Chai</a> <a href="/tags/Component/" style="font-size: 10px;">Component</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/content/" style="font-size: 10px;">content</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/github-actions/" style="font-size: 10px;">github actions</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/test/" style="font-size: 10px;">test</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/10/25/deploy/">Github Actions 部署node项目</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/">基于Tus协议的文件上传流程</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/">mongodb常用操作符</a>
-          </li>
-        
-          <li>
-            <a href="/2020/08/28/Chai/">Chai</a>
-          </li>
-        
-          <li>
-            <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/">有趣的css属性content</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
+            
+          </article>
+        </div>
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2021 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
   </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+<!-- Custom -->
+
+
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
-</body>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
 </html>
