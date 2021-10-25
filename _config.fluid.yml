@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Food-Billboard
 subtitle: ''
 description: ''
 keywords:
 author: John Doe
-language: en
+language: zh-CN
 timezone: ''
 
 # URL
@@ -94,7 +94,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -103,3 +103,61 @@ deploy:
   repo: 
     github: https://github.com/food-billboard/food-billboard.github.io.git
   branch: master
+
+# fluid 配置  
+
+footer:
+  statistics:
+    enable: true
+    source: "busuanzi"  # 可选 leancloud | busuanzi  根据自己需求选择
+    pv_format: "总访问量 {} 次"  # 显示的文本，{}是数字的占位符（必须包含)，下同
+    uv_format: "总访客数 {} 人"
+
+# 首页
+index:
+  slogan:
+    enable: true
+    text: This is Food Billboard's Blog
+  banner_img: /images/首页/background.jpg
+
+# 归档
+archive:
+  banner_img: /images/首页/background.jpg
+
+# 分类 
+category:
+  enable: true
+  banner_img: /images/首页/background.jpg
+
+# 关于
+about:
+  slogan: 
+    enable: true 
+    text: hello world
+  avatar: /images/about/avatar.jpeg
+  name: "Food Billboard"
+  intro: "Welcome to my blog!!😺"
+  banner_img: /images/首页/background.jpg
+  icons:
+    - { class: 'iconfont icon-github-fill', link: 'https://github.com/food-billboard', tip: 'GitHub' }
+
+# 标签 
+tag:
+  banner_img: /images/首页/background.jpg
+
+live2d:
+  enable: true
+  scriptFrom: local 
+  pluginRootPath: live2dw/
+  pluginJsPath: lib/
+  pluginModelPath: assets/
+  tagMode: false 
+  debug: false 
+  model: 
+    use: live2d-widget-model-shizuku
+  display:
+    position: right 
+    width: 150 
+    height: 300
+    mobile:
+      show: true 

@@ -5,6 +5,13 @@ tags:
  - React
  - Component
  - Calendar
+banner_img: /images/React日历组件/15938957-5F8F-4A7A-9F91-544D239677EC.png
+index_img: /images/React日历组件/15938957-5F8F-4A7A-9F91-544D239677EC.png
+categories:
+  - React 
+  - 前端  
+  - CSS  
+  - 组件  
 ---
 这是本人写的第一篇文章，欢迎各位观看的朋友👭。
 <img src="../images/React日历组件/2de9716fa4db0bdb643f6a0e87ad6819.JPG" width=100 height=100 />

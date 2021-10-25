@@ -6,6 +6,12 @@ tags:
  - BDD
  - expect
  - test
+banner_img: /images/Chai/background.png
+index_img: /images/Chai/background.png
+categories:
+  - 测试 
+  - node 
+  - 后端 
 ---
 ## Chai介绍
 Chai 是一个针对 Node.js 和浏览器的行为驱动测试和测试驱动测试的诊断库，可与任何 JavaScript 测试框架集成。

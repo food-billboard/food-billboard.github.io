@@ -6,7 +6,8 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "build-and-deploy": "npm run build && npm run deploy"
   },
   "hexo": {
     "version": "5.4.0"
@@ -18,9 +19,12 @@
     "hexo-generator-category": "^1.0.0",
     "hexo-generator-index": "^1.0.0",
     "hexo-generator-tag": "^1.0.0",
+    "hexo-helper-live2d": "^3.1.1",
     "hexo-renderer-ejs": "^1.0.0",
     "hexo-renderer-marked": "^2.0.0",
     "hexo-renderer-stylus": "^1.1.0",
-    "hexo-server": "^1.0.0"
+    "hexo-server": "^1.0.0",
+    "hexo-theme-fluid": "^1.8.12",
+    "live2d-widget-model-shizuku": "^1.0.5"
   }
 }
