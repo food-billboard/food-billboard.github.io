@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Chai | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Chai介绍Chai 是一个针对 Node.js 和浏览器的行为驱动测试和测试驱动测试的诊断库，可与任何 JavaScript 测试框架集成。本文介绍的Chai下的expect&#x2F;should风格属于BDD(行为驱动开发)因为本身语法相对简单，所以本文是类似于api的中文文档，其中有许多不足，见谅。 正片开始 to be been is that which and has have with at">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chai">
+<meta property="og:url" content="http://yoursite.com/2020/08/28/Chai/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Chai介绍Chai 是一个针对 Node.js 和浏览器的行为驱动测试和测试驱动测试的诊断库，可与任何 JavaScript 测试框架集成。本文介绍的Chai下的expect&#x2F;should风格属于BDD(行为驱动开发)因为本身语法相对简单，所以本文是类似于api的中文文档，其中有许多不足，见谅。 正片开始 to be been is that which and has have with at">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-28T14:16:08.000Z">
+<meta property="article:modified_time" content="2021-10-25T01:11:28.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Chai">
+<meta property="article:tag" content="BDD">
+<meta property="article:tag" content="expect">
+<meta property="article:tag" content="test">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Chai" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/28/Chai/" class="article-date">
+  <time datetime="2020-08-28T14:16:08.000Z" itemprop="datePublished">2020-08-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chai
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Chai介绍"><a href="#Chai介绍" class="headerlink" title="Chai介绍"></a>Chai介绍</h2><p>Chai 是一个针对 Node.js 和浏览器的行为驱动测试和测试驱动测试的诊断库，可与任何 JavaScript 测试框架集成。<br>本文介绍的Chai下的expect/should风格属于BDD(行为驱动开发)<br>因为本身语法相对简单，所以本文是类似于api的中文文档，其中有许多不足，见谅。</p>
+<h2 id="正片开始"><a href="#正片开始" class="headerlink" title="正片开始"></a>正片开始</h2><ul>
+<li><code>to</code></li>
+<li><code>be</code></li>
+<li><code>been</code></li>
+<li><code>is</code></li>
+<li><code>that</code></li>
+<li><code>which</code></li>
+<li><code>and</code></li>
+<li><code>has</code></li>
+<li><code>have</code></li>
+<li><code>with</code></li>
+<li><code>at</code></li>
+<li><code>of</code></li>
+<li><code>same</code><br>以上仅做语义化用，无实际作用</li>
+</ul>
+<h3 id="具体api介绍"><a href="#具体api介绍" class="headerlink" title="具体api介绍"></a>具体api介绍</h3><p><span id="top"></span></p>
+<ul>
+<li><a href="#not">not</a><br>对之后的断言取反</li>
+<li><a href="#deep">deep</a><br>针对对象、数组等进行深层次的键值对判断</li>
+<li><a href="#any">any</a><br>与<code>keys</code>一同使用时表示至少满足一项</li>
+<li><a href="#all">all</a><br>与keys一同使用时表示至少全部满足</li>
+<li><a href="#a">a | an</a><br>既可做链式调用也可做断言</li>
+<li><a href="#include">include | contains</a><br>是否包含指定的值 既可做链式调用也可做断言</li>
+<li><a href="#nested">nested</a><br>用于在<code>property</code>、<code>include</code>等用<code>.</code>语法获取深层次属性</li>
+<li><a href="#ok">ok</a><br>真值</li>
+<li><a href="#true">true</a><br>true</li>
+<li><a href="#false">false</a><br>false</li>
+<li><a href="#null">null</a><br>null</li>
+<li><a href="#undefined">undefined</a><br>undefined</li>
+<li><a href="#NaN">NaN</a><br>NaN</li>
+<li><a href="#exist">exist</a><br>非null 非undefined</li>
+<li><a href="#finite">finite</a><br>非<code>NaN</code> 非<code>Infinity</code></li>
+<li><a href="#empty">empty</a><br>判断值长度为<code>0 [] &#39;&#39; &#123;&#125;</code></li>
+<li><a href="#arguments">arguments</a><br>是否为arguments对象</li>
+<li><a href="#equal">equal</a><br><code>===</code></li>
+<li><a href="#eql">eql</a><br>相当于<code>deep</code>和<code>equal</code>的简写</li>
+<li><a href="#above">above</a><br>大于</li>
+<li><a href="#least">least</a><br>大于等于</li>
+<li><a href="#below">below</a><br>小于</li>
+<li><a href="#most">most</a><br>小于等于</li>
+<li><a href="#within">within</a><br>区间内(数字)</li>
+<li><a href="#instanceof">instanceof</a><br>是否为该实例</li>
+<li><a href="#property">property</a><br>是否拥有指定属性</li>
+<li><a href="#ownProperty">ownProperty</a><br>是否拥有自身的属性</li>
+<li><a href="#ownPropertyDescriptor">ownPropertyDescriptor</a><br>属性描述对象</li>
+<li><a href="#lengthOf">length</a><br>length属性</li>
+<li><a href="#lengthOf">lengthOf</a><br>是否为指定长度值</li>
+<li><a href="#match">match</a><br>是否匹配指定正则</li>
+<li><a href="#string">string</a><br>是否包含指定字符串</li>
+<li><a href="#keys">keys</a><br>配合其他字段使用，是否包含或不包含指定的key</li>
+<li><a href="#throw">throw</a><br>是否抛出指定错误或字符串或匹配指定错误信息</li>
+<li><a href="#respondTo">respondTo</a><br>断言是否会响应一个方法</li>
+<li><a href="#itself">itself</a><br>配合<code>respondTo</code>用来判断是否为自身的方法</li>
+<li><a href="#satisfy">satisfy</a><br>返回一个函数且参数为目标值且返回值为<code>boolean</code>，用来指定是否通过检测</li>
+<li><a href="#closeTo">closeTo</a><br>判断值是否在期望值接收范围内</li>
+<li><a href="#members">members</a><br>类似于<code>contains</code>、<code>include</code>，但是能接收数组，主语只能是数组</li>
+<li><a href="#oneOf">oneOf</a><br>判断值是否出现在指定数组中 </li>
+<li><a href="#change">change</a><br>判断方法是否会改变指定对象的指定属性的值 </li>
+<li><a href="#increase">increase</a><br>判断方法是否会增加指定对象的属性的值</li>
+<li><a href="#decrease">decrease</a><br>判断方法是否会减少指定对象的属性的值</li>
+<li><a href="#extensible">extensible</a><br>判断指定值是否可扩展(可以添加新属性)</li>
+<li><a href="#sealed">sealed</a><br>判断指定值是否封闭(不可添加新属性、不可删除旧属性、可修改旧属性)</li>
+<li><a href="#frozen">frozen</a><br>判断值是否冻结(不可添加新属性、不可删除旧属性、不可修改旧属性)</li>
+<li><a href="#own">own</a><br>判断值是否拥有指定的属性，不包含上层属性</li>
+<li><a href="#by">by</a><br>配合<code>descrease</code> 或 <code>increase</code>、 <code>change</code>等来判断断言值是否发生变化在指定范围内</li>
+<li><a href="#fail">fail</a><br>判断是否会失败</li>
+<li><a href="#ordered">ordered</a><br>配合<code>members</code>用于指定<code>members</code>参数数组的顺序与主语数组的顺序一致</li>
+</ul>
+<p><span id="not"></span></p>
+<p><strong>.not</strong><br>对之后的断言取反</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">expect(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;).to.not.equal(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.not.have.a.keys(<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">expect([<span class="number">100</span>, <span class="number">200</span>]).to.be.not.lengthOf(<span class="number">3</span>)</span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>]).to.be.length.not.within(-<span class="number">1</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="deep"></span></p>
+<p><strong>.deep</strong><br>普通的对象或数组比较是比较它们的整体是否相等。<br>比如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.not.equal(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;)</span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>]).to.be.not.equal([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.deep.equal(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;)</span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>]).to.be.deep.equal([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: &#123; <span class="attr">c</span>: <span class="number">3</span> &#125; &#125; &#125;).to.be.deep.equal(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: &#123; <span class="attr">c</span>: <span class="number">3</span> &#125; &#125; &#125;)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">2</span> &#125; &#125;).to.have.nested.deep.property(<span class="string">&#x27;a.b&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>相当于是严格相等 <code>===</code><br><a href="#top">顶</a></p>
+<p><span id="any"></span></p>
+<p><strong>.any</strong><br>与<code>keys</code>使用时至少满足一项</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">expect([<span class="number">100</span>, <span class="number">200</span>]).to.have.any.keys(<span class="number">0</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">100</span>, <span class="attr">b</span>: <span class="number">200</span> &#125;).to.have.any.keys(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="all"></span></p>
+<p><strong>.all</strong><br>与<code>any</code>类似，但是至少满足所有项</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">expect([<span class="number">100</span>, <span class="number">200</span>]).to.has.all.keys(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">expect([<span class="number">100</span>, <span class="number">200</span>]).to.not.has.all.keys(<span class="number">0</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">100</span>, <span class="attr">b</span>: <span class="number">200</span> &#125;).to.has.all.keys(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: <span class="number">3</span> &#125;).to.not.has.all.keys(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，如上最后一条断言所示，当<code>all</code>和<code>keys</code>一同使用时，断言对象的<code>key</code>必须和<code>keys</code>完全一样才能通过<br><a href="#top">顶</a></p>
+<p><span id="a"></span></p>
+<p><strong>.a .an</strong><br>既可以用做链式判断也可用于断言<br>用作判断时无实际作用，仅用于语义化<br>用做断言时用于判断值是否为某一类型<br>方法<code>type a = (type: &#39;string&#39; | &#39;object&#39; | &#39;null&#39; | &#39;undefined&#39; | &#39;array&#39; | &#39;number&#39; | &#39;symbol&#39; | &#39;error&#39; | &#39;promise&#39;/*还有别的类型...*/, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="number">100</span>).to.be.a(<span class="string">&#x27;number&#x27;</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">100</span> &#125;).to.has.a.property(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">expect(<span class="built_in">Symbol</span>()).to.be.a(<span class="string">&#x27;symbol&#x27;</span>)</span><br><span class="line">expect(<span class="keyword">new</span> <span class="built_in">Error</span>()).to.be.a(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line"><span class="comment">//自定义类型</span></span><br><span class="line"><span class="keyword">const</span> object = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.toStringTag]: <span class="string">&#x27;diyObj&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">expect(object).to.be.a(<span class="string">&#x27;diyObj&#x27;</span>)</span><br><span class="line"><span class="comment">//继续断言</span></span><br><span class="line">expect(<span class="number">100</span>).to.be.a(<span class="string">&#x27;number&#x27;</span>).and.to.equal(<span class="number">100</span>)</span><br><span class="line"><span class="comment">//自定义错误信息</span></span><br><span class="line">expect(<span class="number">100</span>).to.be.a(<span class="string">&#x27;number&#x27;</span>, <span class="string">&#x27;it is not impossible&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可用于自定义类型进行判断，如上使用<code>Symbol.toStringTag</code>进行自定义类型定义</li>
+<li>由<code>a</code>和<code>an</code>断言会返回断言的值，可以继续做链式调用继续做其他判断</li>
+<li><code>a</code>和<code>an</code> 有可选的第二参数可以指定出错时的错误信息<br><a href="#top">顶</a></li>
+</ul>
+<p><span id="include"></span></p>
+<p><strong>.include .contains</strong><br>用于判断断言值是否包含某个指定的值，但是只能指定一个值<br><code>includes</code> 、 <code>contains</code> <code>contain</code> 同义<br>既可以用做链式判断也可用于断言<br>方法 <code>type include = (value: any, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//字符串包含</span></span><br><span class="line">expect(<span class="string">&#x27;Daniel&#x27;</span>).to.be.include(<span class="string">&#x27;iel&#x27;</span>)</span><br><span class="line"><span class="comment">//数组</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>]).to.be.a(<span class="string">&#x27;array&#x27;</span>).and.include(<span class="number">1</span>)</span><br><span class="line"><span class="comment">//严格相等</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="string">&#x27;2&#x27;</span>]).to.not.be.include(<span class="number">2</span>)</span><br><span class="line"><span class="comment">//对象</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125;).to.be.include(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;)</span><br><span class="line"><span class="comment">//map值包含</span></span><br><span class="line">expect(<span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]])).to.be.include(<span class="number">2</span>)</span><br><span class="line"><span class="comment">//set值包含</span></span><br><span class="line">expect(<span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])).to.be.include(<span class="number">3</span>)</span><br><span class="line"><span class="comment">//深层次严格相等</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">2</span> &#125; &#125;).to.be.not.include(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">2</span> &#125; &#125;)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">2</span> &#125; &#125;).to.be.deep.include(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">2</span> &#125; &#125;)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">2</span> &#125; &#125;).to.be.nested.deep.include(&#123; <span class="string">&#x27;a.b&#x27;</span>: <span class="number">2</span> &#125;)</span><br><span class="line"><span class="comment">//自定义断言错误信息</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>]).to.be.not.include(<span class="number">3</span>, <span class="string">&#x27;it is not impossible&#x27;</span>)</span><br><span class="line"><span class="comment">//配合members链式调用</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.be.include.members([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="comment">//配合keys</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: <span class="number">3</span> &#125;).to.be.include.any.keys(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125;).to.be.include.all.keys(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"><span class="comment">//对象可以获取上层属性</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.say = <span class="string">&#x27;Daniel&#x27;</span></span><br><span class="line">expect(&#123;&#125;).to.be.include(&#123; <span class="attr">say</span>: <span class="string">&#x27;Daniel&#x27;</span> &#125;).but.not.own.include(&#123; <span class="attr">say</span>: <span class="string">&#x27;Daniel&#x27;</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="nested"></span></p>
+<p><strong>.nested</strong><br>用于在<code>property</code>、<code>include</code>等用<code>.</code>语法获取深层次属性<br>有时候对于深层次的对象或数组无法直接判断该内容，可以通过<code>nested</code>来实现深层次的值获取</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//深层次嵌套获取</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: &#123; <span class="attr">c</span>: <span class="number">1</span> &#125; &#125; &#125;).to.be.nested.have.a.property(<span class="string">&#x27;a.b.c&#x27;</span>)</span><br><span class="line"><span class="comment">//转义</span></span><br><span class="line">expect(&#123; <span class="string">&#x27;.a&#x27;</span>: &#123; <span class="string">&#x27;..b&#x27;</span>: &#123; <span class="string">&#x27;[c]&#x27;</span>: <span class="number">1</span> &#125; &#125; &#125;).to.be.nested.have.a.property(<span class="string">&#x27;\\.a.\\.\\.b.\\[c\\]&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="ok"></span></p>
+<p><strong>.ok</strong><br>表示真值，如<code>true</code> <code>[]</code> <code>&#123;&#125;</code>等</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">expect([]).to.be.ok</span><br><span class="line">expect(&#123;&#125;).to.be.ok</span><br><span class="line"><span class="comment">//自定义错误信息</span></span><br><span class="line">expect(<span class="literal">false</span>, <span class="string">&#x27;it is not impossible&#x27;</span>).to.be.not.ok</span><br></pre></td></tr></table></figure>
+<p>一般情况下不太需要使用此属性<br>关于其他象征性的值直接使用对应的属性就可以</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="number">0</span>).to.be.equal(<span class="number">0</span>)</span><br><span class="line">expect(<span class="literal">true</span>).to.be.true</span><br><span class="line">expect(<span class="literal">null</span>).to.be.null</span><br><span class="line">expect(<span class="literal">undefined</span>).to.be.undefined</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="true"></span></p>
+<p><strong>.true</strong><br>同上表示真值，但不进行类型转换，所以只有<code>true</code>能通过</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="literal">true</span>).to.be.true</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="false"></span></p>
+<p><strong>false</strong><br>与<code>true</code>相反，表示假值，不进行类型转换</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="literal">false</span>).to.be.false</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="null"></span></p>
+<p><strong>.null</strong><br>用于判断值是否为<code>null</code>值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="literal">false</span>).to.be.false</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="undefined"></span></p>
+<p><strong>.undefined</strong><br>用于判断值是否为<code>undefined</code>值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="literal">undefined</span>).to.be.undefined</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="NaN"></span></p>
+<p><strong>.NaN</strong><br>用于判断值是否为<code>NaN</code>值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不推荐使用这个方法比较字符串等，可以直接使用equal</span></span><br><span class="line"><span class="comment">//expect(&#x27;Daniel&#x27;).to.be.NaN</span></span><br><span class="line">expect(<span class="number">100</span>).to.be.not.NaN</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="exist"></span></p>
+<p><strong>.exist</strong><br>用于判断值是否存在，即非<code>null</code> 且 非<code>undefined</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="number">100</span>).to.be.exist</span><br><span class="line">expect(<span class="literal">null</span>).to.be.not.exist</span><br><span class="line">expect([]).to.be.exist</span><br><span class="line">expect(<span class="literal">undefined</span>).to.be.not.exist</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="finite"></span></p>
+<p><strong>.finite</strong><br>表示有限数组，即非<code>NaN</code> 且 非<code>Infinity</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="number">200</span>).to.be.finite</span><br><span class="line">expect(<span class="literal">Infinity</span>).to.be.not.finite</span><br><span class="line">expect(<span class="string">&#x27;Daniel&#x27;</span>).to.be.not.finite</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="empty"></span></p>
+<p><strong>.empty</strong><br>判断值得长度是否为<code>0</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//字符串的长度</span></span><br><span class="line">expect(<span class="string">&#x27;&#x27;</span>).to.be.empty</span><br><span class="line"><span class="comment">//数组长度</span></span><br><span class="line">expect([]).to.be.empty</span><br><span class="line"><span class="comment">//对象则是判断可枚举的属性的数量(Object.keys(obj).length)</span></span><br><span class="line">expect(&#123;&#125;).to.be.empty</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="arguments"></span></p>
+<p><strong>.arguments</strong><br>判断值是否为<code>arguments</code>对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="built_in">arguments</span>).to.be.arguments</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="equal"></span></p>
+<p><strong>.equal</strong><br>判断值是否严格相等，相当于<code>===</code><br><code>type equal = (value: any, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//比较值的相等</span></span><br><span class="line">expect(<span class="number">1</span>).to.be.equal(<span class="number">1</span>)</span><br><span class="line"><span class="comment">//数组和对象则无法严格相等</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.be.not.equal([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="comment">//数组和对象比较可以用之前介绍的deep</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.be.deep.equal([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.deep.equal(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;)</span><br><span class="line"><span class="comment">//自定义错误提示信息</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>]).to.be.not.equal([<span class="number">1</span>, <span class="number">2</span>], <span class="string">&#x27;it is not impossible&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="eql"></span></p>
+<p><strong>.eql</strong><br>可以当做是<code>deep</code> 和 <code>equal</code>的组合<br><code>type eql = (value: any, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组对象等值内容相等</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.be.eql([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.eql(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;)</span><br><span class="line"><span class="comment">//继续断言</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.eql(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).and.not.be.empty</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如上所例🌰，eql返回值本身，可以继续向后做断言<br><a href="#top">顶</a></li>
+</ul>
+<p><span id="above"></span></p>
+<p><strong>.above</strong><br>判断值是否<code>大于</code>指定值<br><code>type above = (value: number, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="number">100</span>).to.be.above(<span class="number">10</span>)</span><br><span class="line">expect(<span class="number">100</span>).to.be.not.above(<span class="number">101</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对于字符串，数组等长度的比较建议直接使用<code>lengthOf</code><br><a href="#top">顶</a></li>
+</ul>
+<p><span id="least"></span></p>
+<p><strong>.least</strong><br>判断值是否<code>不小于（大于等于）</code>指定值<br><code>type least = (value: number, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="number">100</span>).to.be.least(<span class="number">100</span>)</span><br><span class="line">expect(<span class="number">100</span>).to.be.least(<span class="number">99</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><strong>.below</strong><br>判断值是否<code>小于</code>指定值<br><code>type below = (value: number, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="number">100</span>).to.be.below(<span class="number">101</span>)</span><br><span class="line">expect(<span class="number">100</span>).to.be.not.below(<span class="number">99</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="most"></span></p>
+<p><strong>.most</strong><br>判断值是否<code>不大于（小于等于）</code>指定值<br><code>type most = (value: number, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="number">100</span>).to.be.most(<span class="number">100</span>)</span><br><span class="line">expect(<span class="number">100</span>).to.be.most(<span class="number">101</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="within"></span></p>
+<p><strong>.within</strong><br>判断值是否在指定区间内<br><code>type within = (start: number, end: number, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//包含开始和结束</span></span><br><span class="line">expect(<span class="number">100</span>).to.be.within(<span class="number">0</span>, <span class="number">100</span>)</span><br><span class="line">expect(<span class="string">&#x27;Daniel&#x27;</span>).to.have.a.lengthOf.within(<span class="number">0</span>, <span class="number">100</span>)</span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.have.a.lengthOf.within(<span class="number">0</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不推荐使用该方法，因为它能够实现的测试基本都可以通过<code>equal</code>或是<code>lengthOf</code>来实现<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用equal和lengthOf实现测试</span></span><br><span class="line">expect(<span class="number">100</span>).to.be.equal(<span class="number">100</span>)</span><br><span class="line">expect(<span class="string">&#x27;Daniel&#x27;</span>).to.have.a.lengthOf(<span class="number">6</span>)</span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.have.a.lengthOf(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<a href="#top">顶</a></li>
+</ul>
+<p><span id="instanceof"></span></p>
+<p><strong>.instanceof</strong><br>判断值是否为指定值的实例<br><code>type instanceof = (constructor: object, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> father = <span class="keyword">new</span> Father()</span><br><span class="line">expect(father).to.be.instanceof(Father)</span><br><span class="line">expect([]).to.be.instanceof(<span class="built_in">Array</span>)</span><br><span class="line">expect(<span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">100</span>)).to.be.instanceof(<span class="built_in">Number</span>)</span><br><span class="line">expect(<span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&#x27;Daniel&#x27;</span>)).to.be.instanceof(<span class="built_in">String</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="property"></span></p>
+<p><strong>.property</strong><br>判断值是否包含指定属性<br><code>type property = (key: string, value?: any, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//简单判断是否拥有该属性</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.have.a.property(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"><span class="comment">//并且判断是否为该值</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.have.a.property(<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>)</span><br><span class="line"><span class="comment">//针对深层次的值比较需要 deep 参与</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">1</span> &#125; &#125;).to.be.not.have.a.property(<span class="string">&#x27;a&#x27;</span>, &#123; <span class="attr">b</span>: <span class="number">1</span> &#125;)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">1</span> &#125; &#125;).to.be.have.a.deep.property(<span class="string">&#x27;a&#x27;</span>, &#123; <span class="attr">b</span>: <span class="number">1</span> &#125;)</span><br><span class="line"><span class="comment">//配合 own 用于判断是否为当前所有的实例实行</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.have.a.property(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.have.a.property(<span class="string">&#x27;toString&#x27;</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.have.a.own.property(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.not.have.a.own.property(<span class="string">&#x27;toString&#x27;</span>)</span><br><span class="line"><span class="comment">//配合 nested 进行深层次的比较</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">2</span> &#125; &#125;).to.be.have.nested.deep.property(<span class="string">&#x27;a.b&#x27;</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="own"></span></p>
+<p><strong>.own</strong><br>判断值是否拥有指定的属性，不包含上层属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//结合property使用</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.have.own.property(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.not.have.own.property(<span class="string">&#x27;toString&#x27;</span>)</span><br><span class="line"><span class="comment">//配合 deep 和 property进行深层次的比较</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: <span class="number">2</span> &#125; &#125;).to.be.have.own.deep.property(<span class="string">&#x27;a&#x27;</span>, &#123; <span class="attr">b</span>: <span class="number">2</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="ownProperty"></span></p>
+<p><strong>.ownProperty</strong><br>判断是否为本身属性，相当于是 <code>.own.property</code>的结合<br><code>type ownProperty = (key: string, value?: any, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.have.own.property(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.have.ownProperty(<span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="ownPropertyDescriptor"></span></p>
+<p><strong>.ownPropertyDescriptor</strong><br>类似于上面的方法，用于判断是否为本身的属性<br>但是它可以传递第二参数，表示该属性的描述对象，不知道什么是描述对象的自行百度<br><code>type ownPropertyDescriptor = (key: string, value?: &#123; get?: (undifiend || () =&gt; any)=undefined, set?: (undefined || () =&gt; any)=undefined, configurable?: boolean=false, enumerable?: boolean=false, value?: any=undefined, writable?: boolean=false &#125;, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> object = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Daniel&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> descriper = &#123;</span><br><span class="line">  <span class="comment">//是否可枚举</span></span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">//值</span></span><br><span class="line">  <span class="comment">//value: &#x27;hello world&#x27;,</span></span><br><span class="line">  <span class="comment">//是否可写</span></span><br><span class="line">  <span class="comment">//writable: false,</span></span><br><span class="line">  <span class="comment">//是否可修改描述符对象</span></span><br><span class="line">  <span class="comment">//注意如果设置为false，后续将无法再修改其描述对象</span></span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">//获取值拦截</span></span><br><span class="line">  <span class="comment">//设置了拦截就不能设置writable和value</span></span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;I love China&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//设置值拦截</span></span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(object, <span class="string">&#x27;name&#x27;</span>, descriper)</span><br><span class="line"></span><br><span class="line">expect(object).to.be.ownPropertyDescriptor(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">expect(object).to.be.ownPropertyDescriptor(<span class="string">&#x27;name&#x27;</span>, descriper)</span><br><span class="line"><span class="comment">//自定义错误</span></span><br><span class="line">expect(object).to.be.ownPropertyDescriptor(<span class="string">&#x27;name&#x27;</span>, descriper, <span class="string">&#x27;it is impossible&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="lengthOf"></span></p>
+<p><strong>.lengthOf .length</strong><br>判断值是否存在<code>length</code>属性且为指定值<br>方法 <code>type lengthOf = (value: number, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.be.lengthOf(<span class="number">3</span>)</span><br><span class="line"><span class="comment">//用于链式调用，但是不推荐</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.have.a.lengthOf.below(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="match"></span></p>
+<p><strong>.match</strong><br>判断值是否与指定<code>正则</code>匹配<br>和普通<code>match</code>方法一样，所以主语就是<code>string</code><br><code>matches</code>效果与<code>match</code>相同<br><code>type match = (reg: Regexp, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="string">&#x27;Daniel&#x27;</span>).to.be.match(<span class="regexp">/^D.+l$/</span>)</span><br><span class="line">expect(<span class="string">&#x27;2020-08-10&#x27;</span>).to.be.match(<span class="regexp">/^\d&#123;4&#125;-\d&#123;2&#125;-\d&#123;2&#125;$/</span>)</span><br><span class="line">expect(<span class="string">&#x27;13456787654&#x27;</span>).to.be.match(<span class="regexp">/^1[^12]\d&#123;9&#125;$/</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="string"></span></p>
+<p><strong>.string</strong><br>判断值是否包含指定的字符串<br><code>type string = (value: string, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">expect(<span class="string">&#x27;Daniel&#x27;</span>).to.be.have.a.string(<span class="string">&#x27;iel&#x27;</span>)</span><br><span class="line">expect(<span class="string">&#x27;hello&#x27;</span>).to.be.not.have.a.string(<span class="string">&#x27;world&#x27;</span>)</span><br><span class="line"><span class="comment">//必须是连续子串</span></span><br><span class="line">expect(<span class="string">&#x27;world&#x27;</span>).to.be.not.have.a.string(<span class="string">&#x27;rd&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="keys"></span></p>
+<p><strong>.keys</strong><br>用于判断<code>数组</code>、<code>对象</code>、<code>Set</code>、<code>Map</code>等是否包含相应的<code>key</code><br><code>type keys = (...args: Array&lt;string | number&gt;) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通使用需要将所有key全部传入</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span> &#125;).to.be.have.keys(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>]).to.be.have.keys(<span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">expect(<span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>])).to.be.have.keys(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">expect(<span class="keyword">new</span> <span class="built_in">Map</span>([[ <span class="string">&#x27;a&#x27;</span>, <span class="number">1</span> ]])).to.be.have.keys(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"><span class="comment">//配合all 和 any 使用</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125;).to.be.have.any.keys(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125;).to.be.be.have.all.keys(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"><span class="comment">//包含</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: <span class="number">3</span> &#125;).to.be.include.keys(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"><span class="comment">//深层次比较</span></span><br><span class="line">expect(&#123; <span class="attr">a</span>: &#123; <span class="attr">b</span>: &#123; <span class="attr">c</span>: <span class="number">3</span> &#125; &#125; &#125;).to.be.have.deep.keys(<span class="string">&#x27;a.b&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="throw"></span></p>
+<p><strong>.throw</strong><br>判断值是否抛出指定的错误、错误信息等。<br>.throw(errConstructor | string | reg) 是否抛出指定错误或字符串或匹配指定错误信息<br><code>type throw = (errorLike?: Error | Construcotr, errMsgMatcher?: string | Regexp, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> errors = <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">&#x27;oops&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">error</span>(<span class="params"></span>) </span>&#123; <span class="keyword">throw</span> errors &#125;</span><br><span class="line"><span class="comment">//当不确定会抛出哪一种错误时，直接不传参数</span></span><br><span class="line">expect(error).to.be.throw()</span><br><span class="line"><span class="comment">//传递具体的错误类型</span></span><br><span class="line">expect(error).to.be.throw(<span class="built_in">TypeError</span>)</span><br><span class="line"><span class="comment">//传递错误实例</span></span><br><span class="line">expect(error).to.be.throw(errors, <span class="string">&#x27;oops&#x27;</span>)</span><br><span class="line"><span class="comment">//第二参数可为字符串，且表示为子串</span></span><br><span class="line">expect(error).to.be.throw(errors, <span class="string">&#x27;oop&#x27;</span>)</span><br><span class="line"><span class="comment">//也支持正则</span></span><br><span class="line">expect(error).to.be.throw(<span class="built_in">TypeError</span>, <span class="regexp">/.+/</span>)</span><br><span class="line"><span class="comment">//可直接传递字符串表示抛出的错误内容</span></span><br><span class="line">expect(error).to.be.throw(<span class="string">&#x27;oop&#x27;</span>)</span><br><span class="line"><span class="comment">//同样支持正则</span></span><br><span class="line">expect(error).to.be.throw(<span class="regexp">/^o.+s$/</span>)</span><br><span class="line"><span class="comment">//断言后的主语更改为错误对象</span></span><br><span class="line">errors.code = <span class="number">404</span></span><br><span class="line">expect(error).to.be.throw(errors).and.that.have.a.property(<span class="string">&#x27;code&#x27;</span>, <span class="number">404</span>)</span><br></pre></td></tr></table></figure>
+<p><code>throws</code> 和 <code>Throw</code>同义🙆<br><a href="#top">顶</a></p>
+<p><span id="respondTo"></span></p>
+<p><strong>.respondTo</strong><br>用于判断一个对象或构造函数是否有相关的方法<br><code>type respondTo = (methodName: string ,errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Father.prototype.sayFather = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Father.saySon = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">//正常响应所有方法</span></span><br><span class="line">expect(<span class="keyword">new</span> Father()).to.be.respondTo(<span class="string">&#x27;sayFather&#x27;</span>)</span><br><span class="line"><span class="comment">//实例无法获取超集静态属性</span></span><br><span class="line">expect(<span class="keyword">new</span> Father()).to.be.not.respondTo(<span class="string">&#x27;saySon&#x27;</span>)</span><br><span class="line">expect(&#123;&#125;).to.be.respondTo(<span class="string">&#x27;toString&#x27;</span>)</span><br><span class="line"><span class="comment">//添加itself只能响应自身的方法</span></span><br><span class="line">expect(Father).to.be.itself.respondTo(<span class="string">&#x27;saySon&#x27;</span>).but.not.respondTo(<span class="string">&#x27;sayFather&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>respondsTo</code>与此方法同义<br><a href="#top">顶</a></p>
+<p><span id="itself"></span></p>
+<p><strong>.itself</strong><br>配合上述的<code>respondTo</code>方法判断值是否响应指定的方法，但是为自身的方法，不包含<code>prototype</code>上的方法<br>具体事例可以看上面的<code>respondTo</code><br><a href="#top">顶</a></p>
+<p><span id="satisfy"></span></p>
+<p><strong>.satisfy</strong><br>接收一个函数作为参数，函数参数为断言目标值，返回值为boolean，判断是否通过断言  </p>
+<ul>
+<li><code>type satisfy = (method: (target: any) =&gt; boolean, errmsg?: string) =&gt; any</code>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//目标值在[0, 100]内</span></span><br><span class="line">expect(<span class="number">100</span>).to.be.satisfy(<span class="function"><span class="keyword">function</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> target &gt;= <span class="number">0</span> &amp;&amp; target &lt;= <span class="number">100</span></span><br><span class="line">&#125;)</span><br><span class="line">expect(<span class="number">100</span>).to.be.satisfies(<span class="function"><span class="keyword">function</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> target &gt;= <span class="number">0</span> &amp;&amp; target &lt;= <span class="number">100</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<code>satisfies</code>与此方法同义<br><a href="#top">顶</a></li>
+</ul>
+<p><span id="closeTo"></span></p>
+<p><strong>.closeTo</strong><br>指定值（仅<code>数字</code>）是否在期望值的接收范围内<br>此方法与<code>within</code>的区别就是within接收的两个参数是上限和下限<br><code>closeTo</code>的参数，第一参数为期望的中间值，第二参数为上下限（第一参数加减第二参数）</p>
+<ul>
+<li><code>type closeTo = (expected: number, delta: number, errmsg?: string) =&gt; any</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指定值在[-90, 110]之间</span></span><br><span class="line">expect(<span class="number">100</span>).to.be.closeTo(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line"><span class="comment">//包含临界值</span></span><br><span class="line">expect(<span class="number">110</span>).to.be.closeTo(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">expect(-<span class="number">90</span>).to.be.closeTo(<span class="number">10</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+虽然此方法可以用于判断值是否在一个区间内，但是直接使用<code>equal</code>进行相等判断一样可以<br><a href="#top">顶</a></li>
+</ul>
+<p><span id="members"></span></p>
+<p><strong>.members</strong><br>类似于contains、include，但是接收参数为数组，主语只能是数组<br><code>type members = (target: Array&lt;any&gt;, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//主语必须为数组</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.be.have.members([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="comment">//非简单类型数组需配合deep</span></span><br><span class="line">expect([ &#123; <span class="attr">a</span>: <span class="number">1</span> &#125; ]).to.be.have.deep.members([ &#123; <span class="attr">a</span>: <span class="number">1</span> &#125; ])</span><br><span class="line"><span class="comment">//配合orderd来强制数组顺序与主语一致</span></span><br><span class="line">expect([ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> ]).to.be.have.ordered.members([ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> ])</span><br><span class="line"><span class="comment">//配合include链式调用可以对不必要的数组项不进行验证</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.be.include.members([ <span class="number">1</span>, <span class="number">2</span> ])</span><br><span class="line"><span class="comment">//相对于验证不存在的数组项推荐使用include</span></span><br><span class="line">expect([<span class="number">1</span>]).to.be.not.include(<span class="number">2</span>).and.not.include(<span class="number">3</span>)</span><br><span class="line"><span class="comment">//复合使用</span></span><br><span class="line">expect([ &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;, &#123; <span class="attr">b</span>: <span class="number">2</span> &#125;, &#123; <span class="attr">c</span>: <span class="number">3</span> &#125; ]).to.be.include.deep.ordered.members([ &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;, &#123; <span class="attr">b</span>: <span class="number">2</span> &#125; ])</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="oneOf"></span></p>
+<p><strong>.oneOf</strong><br>判断值是否出现在指定数组中<br><code>type oneOf = (list: Array&lt;any&gt;, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//断言值在指定数组中</span></span><br><span class="line">expect(<span class="number">100</span>).to.be.oneOf([<span class="number">1</span>, <span class="number">2</span>, <span class="number">100</span>])</span><br><span class="line"><span class="comment">//推荐直接使用equal</span></span><br><span class="line">expect(<span class="number">100</span>).to.be.equal(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="change"></span></p>
+<p><strong>.change</strong><br>判断方法是否会改变指定的值，主语接收的是一个改变判定对象的值的方法<br>可以把它当做是<code>increase</code>和<code>decrease</code>的结合<br>但是推荐直接使用上述两个方法<br><code>type change = (value: ((value: any) =&gt; any) | any, prop?: string, errmsg?: string) =&gt; any</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通值</span></span><br><span class="line"><span class="keyword">let</span> number = <span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> string = <span class="string">&#x27;0&#x27;</span></span><br><span class="line"><span class="keyword">let</span> array = [ <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">let</span> object = &#123; <span class="number">0</span>: <span class="number">0</span> &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeNumber</span>(<span class="params"></span>) </span>&#123; number ++ &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeString</span>(<span class="params"></span>) </span>&#123; string += <span class="number">1</span> &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeArray</span>(<span class="params"></span>) </span>&#123; array[<span class="number">0</span>] = <span class="number">1</span> &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeObject</span>(<span class="params"></span>) </span>&#123; object[<span class="number">0</span>] += <span class="number">1</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNumber</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> number &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getString</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> string &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//普通值需要借助函数</span></span><br><span class="line"><span class="comment">//数字</span></span><br><span class="line">expect(changeNumber).to.be.change(getNumber)</span><br><span class="line"><span class="comment">//字符串</span></span><br><span class="line">expect(changeString).to.be.change(getString)</span><br><span class="line"><span class="comment">//复合值则需添加第二参数，改变的属性名</span></span><br><span class="line"><span class="comment">//数组</span></span><br><span class="line">expect(changeArray).to.be.change(array, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line"><span class="comment">//对象</span></span><br><span class="line">expect(changeObject).to.be.change(object, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//结合by具体断言改变的范围</span></span><br><span class="line">expect(changeNumber).to.be.change(getNumber).by(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="increase"></span><br><span id="decrease"></span></p>
+<p><strong>.increase | .decrease</strong><br><code>increase</code> 判断方法是否会增加指定对象的属性或者普通值的值<br><code>decrease</code> 判断方法是否会减少指定对象的属性或者普通值的值<br><code>const increase = (value: any, prop?: string, errmsg?: string)</code><br><code>const decrease = (value: any, prop?: string, errmsg?: string)</code><br>并且只能是数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通值</span></span><br><span class="line"><span class="keyword">let</span> number = <span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">increase</span>(<span class="params"></span>) </span>&#123; number ++ &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">decrease</span>(<span class="params"></span>) </span>&#123; number -- &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> number &#125;</span><br><span class="line">expect(increase).to.be.increase(get)</span><br><span class="line">expect(decrease).to.be.decrease(get)</span><br><span class="line"></span><br><span class="line"><span class="comment">//对象</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">objIncrease</span>(<span class="params"></span>) </span>&#123; obj.a ++ &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">objDecrease</span>(<span class="params"></span>) </span>&#123; obj.a -- &#125;</span><br><span class="line">expect(objIncrease).to.be.increase(obj, <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">expect(objDecrease).to.be.decrease(obj, <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//数组</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayIncrease</span>(<span class="params"></span>) </span>&#123; arr[<span class="number">0</span>] += <span class="number">2</span> &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayDecrease</span>(<span class="params"></span>) </span>&#123; arr[<span class="number">0</span>] -= <span class="number">2</span> &#125;</span><br><span class="line">expect(arrayIncrease).to.be.increase(arr, <span class="string">&#x27;0&#x27;</span>).by(<span class="number">2</span>)</span><br><span class="line">expect(arrayDecrease).to.be.decrease(arr, <span class="string">&#x27;0&#x27;</span>).by(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过by判断增加的幅度</span></span><br><span class="line">expect(objIncrease).to.be.increase(obj, <span class="string">&#x27;a&#x27;</span>).by(<span class="number">1</span>)</span><br><span class="line">expect(objDecrease).to.be.decrease(obj, <span class="string">&#x27;a&#x27;</span>).by(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="extensible"></span></p>
+<p><strong>.extensible</strong><br>判断指定值是否可扩展(不可以添加新属性)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> object = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Daniel&#x27;</span>,</span><br><span class="line">  <span class="attr">sayName</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//设置对象为不可扩展</span></span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(object)</span><br><span class="line"><span class="comment">//可修改</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line">object.name = <span class="string">&#x27;Mike&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"><span class="comment">//可删除</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"><span class="keyword">delete</span> object.name</span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"><span class="comment">//不可新增</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line">object.age = <span class="number">18</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">expect(object).to.be.extensible</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="sealed"></span></p>
+<p><strong>.sealed</strong><br>判断指定值是否封闭(不可添加新属性、不可删除旧属性、可修改旧属性)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> object = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Daniel&#x27;</span>,</span><br><span class="line">  <span class="attr">sayName</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//设置对象为封闭</span></span><br><span class="line"><span class="built_in">Object</span>.seal(object)</span><br><span class="line"></span><br><span class="line"><span class="comment">//不可新增</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line">object.age = <span class="number">18</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"></span><br><span class="line"><span class="comment">//可修改</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line">object.name = <span class="string">&#x27;Mike&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"></span><br><span class="line"><span class="comment">//不可删除</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"><span class="keyword">delete</span> object.name</span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">expect(object).to.be.sealed</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="frozen"></span></p>
+<p><strong>.frozen</strong><br>判断值是否冻结(不可添加新属性、不可删除旧属性、不可修改旧属性)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> object = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Daniel&#x27;</span>,</span><br><span class="line">  <span class="attr">sayName</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置对象为冻结</span></span><br><span class="line"><span class="built_in">Object</span>.freeze(object)</span><br><span class="line"></span><br><span class="line"><span class="comment">//不可新增</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line">object.age = <span class="number">18</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"></span><br><span class="line"><span class="comment">//不可修改</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line">object.name = <span class="string">&#x27;Mike&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"></span><br><span class="line"><span class="comment">//不可删除</span></span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"><span class="keyword">delete</span> object.name</span><br><span class="line"><span class="built_in">console</span>.log(object)</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">expect(object).to.be.frozen</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<p><span id="by"></span></p>
+<p><strong>.by</strong><br>配合<code>descrease</code> 或 <code>increase</code>、 <code>change</code>等来判断断言值是否发生变化在指定范围内<br>具体事例🌰可以直接查看上述三个方法的例子👆<br><a href="#top">顶</a></p>
+<p><span id="fail"></span></p>
+<p><strong>.fail</strong><br>判断是否会失败<br>有两种参数传递方式</p>
+<ol>
+<li><code>type fail = (message?: string) =&gt; any</code></li>
+<li><code>type fail = (actual: any, expected: any, message?: string, operator: string) =&gt; any</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下均会出错</span></span><br><span class="line"><span class="comment">//直接使用</span></span><br><span class="line">expect.fail()</span><br><span class="line">expect.fail(<span class="string">&#x27;it is error&#x27;</span>)</span><br><span class="line"><span class="comment">//值判断</span></span><br><span class="line">expect.fail(<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;it is impossible&#x27;</span>)</span><br><span class="line">expect.fail(<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;it is impossible&#x27;</span>, <span class="string">&#x27;&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<a href="#top">顶</a></li>
+</ol>
+<p><span id="ordered"></span></p>
+<p><strong>.ordered</strong><br>配合<code>members</code>用于指定<code>members</code>参数数组的顺序与主语数组的顺序一致</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//members参数必须按顺序</span></span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.be.ordered.members([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">expect([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).to.be.not.ordered.members([<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<p><a href="#top">顶</a></p>
+<h2 id="完结"><a href="#完结" class="headerlink" title="完结"></a>完结</h2><p>😊<br>如果有什么不对的地方，请指出。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/28/Chai/" data-id="ckv62zzwf000i1wl20yuqb5kj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BDD/" rel="tag">BDD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Chai/" rel="tag">Chai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/expect/" rel="tag">expect</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          mongodb常用操作符
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">有趣的css属性content</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BDD/" rel="tag">BDD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Calendar/" rel="tag">Calendar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chai/" rel="tag">Chai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Component/" rel="tag">Component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/content/" rel="tag">content</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/" rel="tag">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-actions/" rel="tag">github actions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BDD/" style="font-size: 10px;">BDD</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Calendar/" style="font-size: 10px;">Calendar</a> <a href="/tags/Chai/" style="font-size: 10px;">Chai</a> <a href="/tags/Component/" style="font-size: 10px;">Component</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/content/" style="font-size: 10px;">content</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/expect/" style="font-size: 10px;">expect</a> <a href="/tags/github-actions/" style="font-size: 10px;">github actions</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/test/" style="font-size: 10px;">test</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/25/deploy/">Github Actions 部署node项目</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/">基于Tus协议的文件上传流程</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/">mongodb常用操作符</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/28/Chai/">Chai</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/">有趣的css属性content</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
