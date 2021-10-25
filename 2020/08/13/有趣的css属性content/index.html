@@ -335,10 +335,10 @@
 <p>关于前面说的<code>word</code>文档标题的级联效果，用到的就是<code>counters()</code>这个方法  </p>
 <p>下面是简单的效果。  </p>
 <pre><code class="html"><span class="tag">&lt;<span class="name">style</span>&gt;</span>
-  .reset&#123;
+<span class="css">  <span class="selector-class">.reset</span>&#123;</span>
     counter-reset: counter;
   &#125;
-  .counter::after&#123;
+<span class="css">  <span class="selector-class">.counter</span><span class="selector-pseudo">::after</span>&#123;</span>
     counter-increament: counter;
     content: couters(counter, '-') '.';
   &#125;
