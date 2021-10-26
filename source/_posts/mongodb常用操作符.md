@@ -21,7 +21,7 @@ categories:
 `MongoDB` 旨在为WEB应用提供可扩展的高性能数据存储解决方案。  
 `MongoDB` 将数据存储为一个文档，数据结构由键值(`key=>value`)`对组成。MongoDB` 文档类似于 `JSON` 对象。字段值可以包含其他文档，数组及文档数组。 
 如下这种结构
-<img src="../images/mongodb常用操作符/mongodb-cover-page.png" />
+<img src="/images/mongodb常用操作符/mongodb-cover-page.png" />
 
 ### MongoDB命令行简单操作
 
@@ -69,7 +69,7 @@ categories:
 1. 执行`find`命令
 `db.collection.find({ hobby: "travel" })`
 得到以下结果
-<img src="../images/mongodb常用操作符/find-common.png"  />
+<img src="/images/mongodb常用操作符/find-common.png"  />
 
 `find`命令会找到符合查询条件的所有结果  
 可以在后面跟上`.pretty()`来让数据展示更美观。 
@@ -79,14 +79,14 @@ categories:
 
 2. 执行`findOne`命令  
 `db.collection.findOne({ hobby: "travel" })`  
-<img src="../images/mongodb常用操作符/findOne.png"  />
+<img src="/images/mongodb常用操作符/findOne.png"  />
 `findOne`只会找到符合条件的第一条  
 
 - 删除
 1. 执行`deleteOne`命令  
 `db.collection.deleteOne({ hobby: "travel" })`  
 得到以下结果
-<img src="../images/mongodb常用操作符/deleteOne.png"  />
+<img src="/images/mongodb常用操作符/deleteOne.png"  />
 `deleteOne`命令会删除符合查询条件的第一条数据
 
 2. 执行`deleteMany`命令  
@@ -98,7 +98,7 @@ categories:
 `db.collection.insertOne({ "name": "Rick", "age": 32, "job": "teacher", "hobby": "sport" })`  
 `insertOne`命令可以添加一条数据到集合中  
 他有一个可选参数`{ writeConcern }`，写入策略，默认为 1，即要求确认写操作，0 是不要求。  
-<img src="../images/mongodb常用操作符/insertOne.png"  />
+<img src="/images/mongodb常用操作符/insertOne.png"  />
 
 2. 执行`insertMany`命令  
 ```javascript
@@ -124,7 +124,7 @@ db.collection.insertMany([
 1. 执行`updateOne`命令
 `db.collection.updateOne({ "name": "Mike" }, { $set: { "age": 20 } })`
 `updateOne`命令可以更新匹配条件的第一条数据
-<img src="../images/mongodb常用操作符/updateOne.png"  />
+<img src="/images/mongodb常用操作符/updateOne.png"  />
 
 2. 执行`updateMany`命令
 `db.collection.updateMany({ "hobby": "travel" }, { "hobby": "watch tv" })`
@@ -147,7 +147,7 @@ db.collection.insertMany([
     })
   ```
   当然可以通过指定数字值为`负数`实现递减操作。  
-  <img src="../images/mongodb常用操作符/$inc.png"  />
+  <img src="/images/mongodb常用操作符/$inc.png"  />
 
  2. $set  
   这是相当常见的操作符，表示设置指定的`key`
@@ -161,7 +161,7 @@ db.collection.insertMany([
   上述将`name`为`Mike`的字段的`age`字段设置为`1000`  
   如果`key`不存在的话则创建  
   当然也可以同时设置多个值，但是需要注意的是如果修改的值之前是一个对象或一个数组的话会整个覆盖掉该值。具体的修改方法可以参照下方的具体实例。  
-  <img src="../images/mongodb常用操作符/$set.png"  />
+  <img src="/images/mongodb常用操作符/$set.png"  />
 
   3. $unset  
   将某一个字段删除  
@@ -173,7 +173,7 @@ db.collection.insertMany([
     })
   ```
   上述将`name`为`Mike`的字段的`hobby`字段删除，如果不存在该字段则不进行操作  
-  <img src="../images/mongodb常用操作符/$unset.png"  />
+  <img src="/images/mongodb常用操作符/$unset.png"  />
 
   4. $push  
   对某一字段进行内容追加，只能对数组字段进行操作(否则会报错)，不存在则直接设置为`空数组`并添加  
@@ -185,7 +185,7 @@ db.collection.insertMany([
     })
   ```
   上述将`name`为`Mike`的字段的`like`字段设置为`[ "book" ]`
-  <img src="../images/mongodb常用操作符/$push.png"  />
+  <img src="/images/mongodb常用操作符/$push.png"  />
 
   5. $pushAll  
   类似上面的`$push`操作符，但是接收的值时一个`数组`，表示可同时追加多个值，同样是对数组字段进行操作  
@@ -211,7 +211,7 @@ db.collection.insertMany([
   继续上面的`like`添加数据，因为上面添加过`tv`字段，所以再次添加被忽略  
   当然此操作符添加的值不一定是数组，也可以这样  
   `$addToSet: { "like": "hamberger" }`  
-  <img src="../images/mongodb常用操作符/$addToSet.png"  />
+  <img src="/images/mongodb常用操作符/$addToSet.png"  />
 
   7. $pop  
   与`$pop`操作符相反，表示删除指定字段的第一个或最后一个值，同样只能是数组  
@@ -224,7 +224,7 @@ db.collection.insertMany([
   ```
   上述表示删除`like`字段的最后一个值。  
   `1`表示最后一个值，`-1`表示第一个值  
-  <img src="../images/mongodb常用操作符/$pop.png"  />
+  <img src="/images/mongodb常用操作符/$pop.png"  />
 
   8. $pull  
   表示从某一字段中删除指定的值，针对数组  
@@ -236,7 +236,7 @@ db.collection.insertMany([
     })
   ```
   上述将`name`为`Mike`的字段的`like`数组中的`hamberger`字段删除  
-  <img src="../images/mongodb常用操作符/$pull.png"  />
+  <img src="/images/mongodb常用操作符/$pull.png"  />
 
   9. $pullAll  
   类似`$pull`操作符，不同的是可以同时删除多个值
@@ -248,7 +248,7 @@ db.collection.insertMany([
     })
   ```
   上述删除了`name`为`Mike`字段的`like`中的`hamberger`和`book`  
-  <img src="../images/mongodb常用操作符/$pullAll.png"  />
+  <img src="/images/mongodb常用操作符/$pullAll.png"  />
 
   10. $rename  
   这个操作符表示对之前设置过的字段进行重命名，设置的是`key`
@@ -260,7 +260,7 @@ db.collection.insertMany([
     })
   ```
   上述将`like`字段修改为了`dislike`名称。  
-  <img src="../images/mongodb常用操作符/$rename.png"  />
+  <img src="/images/mongodb常用操作符/$rename.png"  />
 
 - 查找操作符  
 
@@ -274,7 +274,7 @@ db.collection.insertMany([
     })
   ```
   上述能查找到`name`为`Mike`字段，但是无法查找到其他字段，因为他们无法完全满足查询条件。  
-  <img src="../images/mongodb常用操作符/$all.png"  />
+  <img src="/images/mongodb常用操作符/$all.png"  />
 
   2. $gt  
   查找大于(great then)指定值的字段
@@ -285,7 +285,7 @@ db.collection.insertMany([
   ```
   上述查找`age`大于`18`的字段，不包含`18`  
   `日期`也可直接那这个进行比较  
-  <img src="../images/mongodb常用操作符/$gt.png"  />
+  <img src="/images/mongodb常用操作符/$gt.png"  />
 
   3. $gte  
   表示不小于指定值，也就是大于等于  
@@ -295,7 +295,7 @@ db.collection.insertMany([
     })
   ```
   上述查找`age`不小于`20`的字段，所以包括等于`20`的字段  
-  <img src="../images/mongodb常用操作符/$gte.png"  />
+  <img src="/images/mongodb常用操作符/$gte.png"  />
 
   4. $lt  
   与上面的`$gt`操作符相反，表示小于(less then)指定值  
@@ -305,7 +305,7 @@ db.collection.insertMany([
     })
   ```
   上述查找`age`小于`20`的字段，且不包含`20`  
-  <img src="../images/mongodb常用操作符/$lt.png"  />
+  <img src="/images/mongodb常用操作符/$lt.png"  />
 
   5. $lte  
   表示不大于指定值，也就是小于等于  
@@ -315,7 +315,7 @@ db.collection.insertMany([
     })
   ```
   上述查找`age`小于`18`的字段，且包含`18`  
-  <img src="../images/mongodb常用操作符/$lte.png"  />
+  <img src="/images/mongodb常用操作符/$lte.png"  />
 
   6. $in  
   查找存在指定数组中值得项，与`$all`不同的是，字段只需要满足其中任意一项即可  
@@ -325,7 +325,7 @@ db.collection.insertMany([
     })
   ```
   上述可以找到所有在`age`字段等于`18`或`20`的数据  
-  <img src="../images/mongodb常用操作符/$in.png"  />
+  <img src="/images/mongodb常用操作符/$in.png"  />
 
   6. $nin  
   与上面的`$in`操作符相反，表示查找不存在指定数组中的值的项
@@ -335,7 +335,7 @@ db.collection.insertMany([
     })
   ```
   上述查找`like`字段中不存在`tv`的项  
-  <img src="../images/mongodb常用操作符/$nin.png"  />
+  <img src="/images/mongodb常用操作符/$nin.png"  />
 
   7. $ne  
   有相等就会有不相等，这个操作符就是查找不等于指定值得项，相当于只有一项的`$nin`
@@ -345,7 +345,7 @@ db.collection.insertMany([
     })
   ```
   上述查找`like`字段中不存在`book`的项  
-  <img src="../images/mongodb常用操作符/$ne.png"  />
+  <img src="/images/mongodb常用操作符/$ne.png"  />
 
   8. $and  
   查找同时满足所有指定条件的项，并且至少需要包含**两个**条件
@@ -362,7 +362,7 @@ db.collection.insertMany([
     })
   ```
   上述查找`name`为`Mike`并且`age`为`20`的字段  
-  <img src="../images/mongodb常用操作符/$and.png"  />
+  <img src="/images/mongodb常用操作符/$and.png"  />
 
   9. $nor  
   与上面的`$and`相反，表示查找同时不满足所有指定条件的项，同样至少需要包含**两个**条件  
@@ -379,7 +379,7 @@ db.collection.insertMany([
     })
   ```
   上述查找`name`不为`Mike`并且`age`不等于`18`的数据  
-  <img src="../images/mongodb常用操作符/$nor.png"  />
+  <img src="/images/mongodb常用操作符/$nor.png"  />
 
   10. $not  
   指定不能满足指定条件的数据项，此操作符只能包含**一个**条件，而且它无法单独完成查询，需要与其他操作符配合一起使用。  
@@ -391,7 +391,7 @@ db.collection.insertMany([
     })
   ```
   上述查找`age`字段小于等于`18`的数据项，当然像例子这样的情况也可以直接使用`$lte`操作符完成。  
-  <img src="../images/mongodb常用操作符/$not.png"  />
+  <img src="/images/mongodb常用操作符/$not.png"  />
 
   11. $or  
   表示查找能至少满足**一个**条件的项，并且需要至少包含**两个**筛选条件  
@@ -408,7 +408,7 @@ db.collection.insertMany([
     })
   ```
   上述表示查找`name`为`Mike`或者`age`为`20`的数据项  
-  <img src="../images/mongodb常用操作符/$or.png"  />
+  <img src="/images/mongodb常用操作符/$or.png"  />
 
   12. $exists  
   此操作符用于字段的`key`的判断，表示查找是否存在否字段`key`的数据项，可选值为`true`和`false`，选择**true**表示存在，**false**则不存在指定字段的项  
@@ -418,7 +418,7 @@ db.collection.insertMany([
     })
   ```
   上述查找存在`name`字段的数据项  
-  <img src="../images/mongodb常用操作符/$exists.png"  />
+  <img src="/images/mongodb常用操作符/$exists.png"  />
 
   13. $mod  
   表示查找满足计算结果的数据项，此操作符为取模  
@@ -428,7 +428,7 @@ db.collection.insertMany([
     })
   ```
   上述表示`age`字段的值对3取模等于0的值。  
-  <img src="../images/mongodb常用操作符/$mod.png"  />
+  <img src="/images/mongodb常用操作符/$mod.png"  />
 
   14. $type  
   表示选择指定数据类型的数据项  
@@ -458,7 +458,7 @@ db.collection.insertMany([
   64-bit integer	18	 
   Min key	255	Query with -1.
   Max key	127	 
-  <img src="../images/mongodb常用操作符/$type.png"  />
+  <img src="/images/mongodb常用操作符/$type.png"  />
 
   15. $regex  
   就是字面意思，使用正则表达式来匹配字段
@@ -470,7 +470,7 @@ db.collection.insertMany([
   上述匹配`name`字段值包含`mike`（不区分大小写是因为配置了`$options`）的数据项  
   `$options`表示正则表达式的修饰符，其他的还有`i`(不区分大小写),`g`(全局匹配),`m`(多行匹配),`s`(.包含换行符`\n`)  
   当然直接使用正则表达式也是可以的。  
-  <img src="../images/mongodb常用操作符/$regex.png"  />
+  <img src="/images/mongodb常用操作符/$regex.png"  />
 
   16. $where  
   有些情况下普通方法很难做出筛选，可以使用此操作符用`javascript`语法来进行筛选  
@@ -483,11 +483,11 @@ db.collection.insertMany([
   它甚至可以直接写一个函数`{ function() { return this.name == 'Jack' && this.like.some(key => key == 'hamberger') } }`  
   **注意**  
   虽然这种方法可以有效的解决一些问题，但是还是尽量不要使用这个操作符，因为它会将MongoDB里面保存的BSON数据变为JavaScript的语法结构，这样的方式不方便使用数据库的索引机制。  
-  <img src="../images/mongodb常用操作符/$where.png"  />
+  <img src="/images/mongodb常用操作符/$where.png"  />
 
   17. $elemMatch  
   此操作符用于对类似一个嵌套数组对象来进行多条件的查询  
-  <img src="../images/mongodb常用操作符/$elemMatch.png"  />
+  <img src="/images/mongodb常用操作符/$elemMatch.png"  />
   上述查找了`like`字段数组中`type`为`eat`并且`target`为`hamberger`的数据项  
 
 - 相关实例
@@ -534,7 +534,7 @@ db.collection.insertMany([
 - `parent_field.child_field` 
 比如像上面的`like`字段选择`target=vegetable`  
 `db.collection.find({ "like.target": "vegetable" })`
- <img src="../images/mongodb常用操作符/数组对象嵌套查询.png"  />
+ <img src="/images/mongodb常用操作符/数组对象嵌套查询.png"  />
 
 2. 修改多层嵌套的数组对象  
 有时候不止会有一层嵌套，多层嵌套上面的方法不适用，虽然这种存储方式不太常见，但是也可以解决  

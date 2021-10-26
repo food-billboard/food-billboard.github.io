@@ -27,10 +27,10 @@ categories:
 幸好在`filepond`的issues中看到貌似它也可以和`Tus`结合使用🙂。  
 
 其实`filepond`使用来说还算是不错的体验，但是它似乎没有针对**断点续传**方面做过处理，可能也有可能是因为我太菜了吧。  下面是`filepond`的样子，挺好看。  
-<img src="../images/基于Tus协议的文件上传流程/filepond效果.png" />
+<img src="/images/基于Tus协议的文件上传流程/filepond效果.png" />
 
 ## 前后端基本交互流程 
-<img src="../images/基于Tus协议的文件上传流程/tus.jpg" />
+<img src="/images/基于Tus协议的文件上传流程/tus.jpg" />
 
 基于上面的流程图这里简单描述一下并讲讲其中一些注意的地方。  
 1. 客户端首先向服务端发送`options`请求。获取服务端的配置，  
@@ -59,8 +59,8 @@ categories:
 
 前端可以把一些文件信息放在`Upload-Metadata`请求头中  
 
-<img src="../images/基于Tus协议的文件上传流程/creation-post-req.png" />
-<img src="../images/基于Tus协议的文件上传流程/creation-post-response.png" />
+<img src="/images/基于Tus协议的文件上传流程/creation-post-req.png" />
+<img src="/images/基于Tus协议的文件上传流程/creation-post-response.png" />
 
 服务端会返回`Location`告知前端文件的上传地址。  
 
@@ -69,16 +69,16 @@ categories:
 为了节省流量，在服务端允许的情况下，可以在向服务端创建请求的同时也将某一分片一同上传。  
 
 和`Creation`类似，也会返回`Location`头，同时会返回`Upload-Offset`设置下一分片的索引。  
-<img src="../images/基于Tus协议的文件上传流程/creation-with-upload-req.png" />
-<img src="../images/基于Tus协议的文件上传流程/creation-with-upload-res.png" />
+<img src="/images/基于Tus协议的文件上传流程/creation-with-upload-req.png" />
+<img src="/images/基于Tus协议的文件上传流程/creation-with-upload-res.png" />
 
 3. Expiration  
 临时文件的过期时间  
 服务端的存储空间毕竟有限，不可能无时限的将文件的分片保存在服务端的数据库中。  
 所以服务端可以设置分片的存储时间，并通过响应头`Upload-Expires`告知前端它的过期时间。  
 当超过服务端规定的时间之后，用户需要重新在服务端创建文件副本，重新上传。  
-<img src="../images/基于Tus协议的文件上传流程/expiration-req.png" />
-<img src="../images/基于Tus协议的文件上传流程/expiration-res.png" /> 
+<img src="/images/基于Tus协议的文件上传流程/expiration-req.png" />
+<img src="/images/基于Tus协议的文件上传流程/expiration-res.png" /> 
 
 当前端发送文件分片响应时，服务端会添加响应头`Upload-Expires`告知前端该分片过期时间，如果超过时间，服务端将会返回`404`，前端需要重新上传。  
 
@@ -92,10 +92,10 @@ categories:
 比如对文件进行`md5`加密，需要对文件分片一一进行处理。  
 
 当上传校验失败时，服务端便会丢弃此分片，索引也不会发生改变。  
-<img src="../images/基于Tus协议的文件上传流程/checksum-options-req.png" />
-<img src="../images/基于Tus协议的文件上传流程/checksum-options-req.png" />
-<img src="../images/基于Tus协议的文件上传流程/checksum-patch-req.png" />
-<img src="../images/基于Tus协议的文件上传流程/checksum-patch-res.png" /> 
+<img src="/images/基于Tus协议的文件上传流程/checksum-options-req.png" />
+<img src="/images/基于Tus协议的文件上传流程/checksum-options-req.png" />
+<img src="/images/基于Tus协议的文件上传流程/checksum-patch-req.png" />
+<img src="/images/基于Tus协议的文件上传流程/checksum-patch-res.png" /> 
 
 上述例子中  
 - 服务端`options`响应中`Tus-Checksum-Algorithm: md5,sha1,crc32`展示了其支持的校验算法  
@@ -108,26 +108,26 @@ categories:
 5. Termination  
 文件删除  
 这个应该没什么好说的，就是向服务端请求删除文件信息。  
-<img src="../images/基于Tus协议的文件上传流程/termination-req.png" />
-<img src="../images/基于Tus协议的文件上传流程/termination-res.png" />
+<img src="/images/基于Tus协议的文件上传流程/termination-req.png" />
+<img src="/images/基于Tus协议的文件上传流程/termination-res.png" />
 
 6. Concatenation  
 并行上传  
 对于一个大文件，如果是一个个分片串行上传，可能还是有点慢。  
 `tus`支持可以实行并行上传，可以针对同一个文件资源在服务端生成多个上传地址，这样就可以同时上传文件的不同分片。  
 当然这也需要服务端支持。  
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-req-1.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-res-1.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-req-2.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-res-2.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-req-1.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-res-1.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-req-2.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-res-2.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-req-4.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-res-4.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-head-req.png" />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-head-res.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-req-1.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-res-1.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-req-2.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-res-2.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-patch-req-1.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-patch-res-1.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-patch-req-2.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-patch-res-2.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-req-4.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-res-4.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-head-req.png" />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-head-res.png" />
 
 上述例子中
 - 先是在开始时发送两个`post`请求并携带`Upload-Concat: partial`请求头，在服务端生成了两个上传地址`https://tus.example.org/files/a`和`https://tus.example.org/files/b`  

@@ -14,14 +14,14 @@ categories:
   - 组件  
 ---
 这是本人写的第一篇文章，欢迎各位观看的朋友👭。
-<img src="../images/React日历组件/2de9716fa4db0bdb643f6a0e87ad6819.JPG" width=100 height=100 />
+<img src="/images/React日历组件/2de9716fa4db0bdb643f6a0e87ad6819.JPG" width=100 height=100 />
 先介绍一下自己，本人是一个刚刚进入社会的前端菜鸟，目前服务于一家小公司🏭。
 ## 1 故事背景
 事情是这样的，最近在公司的h5项目中碰到一个需求，页面中需要有一个用于显示最近订单的日历样式，你没有看错，一个日历，这给我难到了，本来想着不就是是一个日历吗，这有什么难的，后来我发现好像似乎是高估了自己。 
 
 先介绍下关于这个日历的样式，大家可以自行脑补一下苹果中自带的日历或看下图，基本和它差不多。多了一点需求是，在点击某一个日期或者是手指滑动过程中，日历下方的订单列表会根据日期的变动自动跳转到当前日期的订单。
-<img src="../images/React日历组件/IMG_0144.PNG" width=188 height=334 /> 
-<img src="../images/React日历组件/IMG_0145.PNG" width=188 height=334 /> 
+<img src="/images/React日历组件/IMG_0144.PNG" width=188 height=334 /> 
+<img src="/images/React日历组件/IMG_0145.PNG" width=188 height=334 /> 
 
 因为项目用的技术栈是React，似乎理所应当该用 Ant Design 来完成，就pc端而言，Ant Design 的[日历组件](https://ant.design/components/calendar-cn/)相对于来说算是非常不错且还算契合的，奈何h5使用的是Ant Design Mobile，相对于来说的话，以个人之见，确实还有许多可以改进的地方，mobile中的[日历组件](https://mobile.ant.design/components/calendar-cn/)很多地方表现的还是不够灵活，有些地方还是过于定制化，还可以进一步完善。
 
@@ -138,19 +138,19 @@ categories:
 具体样式查看下图  
 
 1. 单日着重  
-<img src="../images/React日历组件/1595859653524_95CA67F7-E00E-4AA0-A51C-85895C099433.png" width="200" height="100" />
+<img src="/images/React日历组件/1595859653524_95CA67F7-E00E-4AA0-A51C-85895C099433.png" width="200" height="100" />
 
 2. 周着重  
-<img src="../images/React日历组件/1595859783955_DE771404-5E95-4876-BA63-44D01118D2EF.png" width="200" height="100" />
+<img src="/images/React日历组件/1595859783955_DE771404-5E95-4876-BA63-44D01118D2EF.png" width="200" height="100" />
 
 3. 色调更改  
-<img src="../images/React日历组件/1595859830441_DBC34DF0-2308-4DBB-90F7-A70B70795B82.png" width="200" height="100" />
+<img src="/images/React日历组件/1595859830441_DBC34DF0-2308-4DBB-90F7-A70B70795B82.png" width="200" height="100" />
 
 4. 显示单周  
-<img src="../images/React日历组件/1595860081764_790B7081-F485-487D-9B74-5E88C13FD5FF.png" width="200" height="100" />
+<img src="/images/React日历组件/1595860081764_790B7081-F485-487D-9B74-5E88C13FD5FF.png" width="200" height="100" />
 
 5. 设置额外内容  
-<img src="../images/React日历组件/15938957-5F8F-4A7A-9F91-544D239677EC.png" width="200" height="100" />
+<img src="/images/React日历组件/15938957-5F8F-4A7A-9F91-544D239677EC.png" width="200" height="100" />
 
 因为每一个单元格外层设置了相对定位`relative`，所以如果不希望额外内容导致个别单元格位置不统一，可以将内容设置为`position: absolute;`  
 

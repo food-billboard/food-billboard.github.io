@@ -35,7 +35,7 @@ categories:
     text-align: center;
   }
   div::after{
-    content: url('../images/有趣的css属性content/css世界.jpg');
+    content: url('/images/有趣的css属性content/css世界.jpg');
     display: block;
   }
 </style>
@@ -43,7 +43,7 @@ categories:
 ```
 效果如下图
 
-<img src="../images/有趣的css属性content/url-show.png" width="188" height="334" />
+<img src="/images/有趣的css属性content/url-show.png" width="188" height="334" />
 
 `url`的参数有很多种，最常用的就是路径  
 然后就是`icon`、`svg`、`base64`编码的图片，但是不支持`css3渐变`背景图。  
@@ -72,7 +72,7 @@ img::after{
 </style>
 <img src="" width="100" alt="图片" />
 ```
-<img src="../images/有趣的css属性content/attr-show.png" width="188" height="334" />
+<img src="/images/有趣的css属性content/attr-show.png" width="188" height="334" />
 
 这样可以显示到`img`元素的`width`属性的值。    
 并且，它还能够获取到自定义属性的值，比如`attr(data-name)`
@@ -113,7 +113,7 @@ img::after{
 
 下面是效果，可能图片看起来有些不流畅，但是实际效果是流畅的。   
 
-<img src="../images/有趣的css属性content/loading.GIF" width="376" height="668" />
+<img src="/images/有趣的css属性content/loading.GIF" width="376" height="668" />
 
 这一方法的好处就是相当好的兼容性，它利用上述特性和`css3`的动画效果来实现。 
 
@@ -142,7 +142,7 @@ img::after{
     <p class="answ">天生的！</p>
   </div>
 ```
-<img src="../images/有趣的css属性content/quotes-show.png" width="188" height="334" />
+<img src="/images/有趣的css属性content/quotes-show.png" width="188" height="334" />
 
 还有`no-open-quote` `no-close-quote`，和名字一下，就是在开始和结束不需要该内容。
 
@@ -172,7 +172,7 @@ img::after{
 <div>这是counter计数器的初始值: </div>
 ```
 上面定义了一个计数器，名称叫`counter-name` 并且起始为2
-<img src="../images/有趣的css属性content/counter-init-show.png" width="188" height="334" />
+<img src="/images/有趣的css属性content/counter-init-show.png" width="188" height="334" />
 
 关于后面`起始数字`的问题，也可以是`负数`，也可以写成`小数`。  
 不过对于`ie`和`firefox`是直接无视的，默认为`0`，而对于`chrome`来说则是处理成向下取整。  
@@ -203,7 +203,7 @@ img::after{
 ```
 如下图所示  
 
-<img src="../images/有趣的css属性content/counter-increment-show.png" width="188" height="334" />  
+<img src="/images/有趣的css属性content/counter-increment-show.png" width="188" height="334" />  
 
 上面指定了`counter`计数器增加了`2`，后面的数字也可以是`负值`，这样就实现了递减的效果。  
 
@@ -242,7 +242,7 @@ counters(name, string, style)
 ```
 
 效果如下图
-<img src="../images/有趣的css属性content/quotes-show.png" width="188" height="334" />  
+<img src="/images/有趣的css属性content/quotes-show.png" width="188" height="334" />  
 
 关于前面说的`word`文档标题的级联效果，用到的就是`counters()`这个方法  
 
@@ -287,7 +287,7 @@ counters(name, string, style)
 
 效果如下图  
 
-<img src="../images/有趣的css属性content/counters.png" width="188" height="334" />  
+<img src="/images/有趣的css属性content/counters.png" width="188" height="334" />  
 
 ## 完结
 合理的使用css属性可以让你在实际开发过程中减少很多的工作，使用css完成的效果总比用css完成性能要好的多。
