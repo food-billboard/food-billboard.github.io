@@ -136,8 +136,8 @@ db.collection.insertMany([
 
 接下来介绍的是`MongoDB`中一些常用的操作符，暂时将操作符分为更新和查找两类。
 
-- 更新操作符  
- 1. $inc  
+#### 更新操作符  
+ ##### $inc  
   对一个字段增加指定数量，且字段的值类型为数字  
   ```javascript
     db.collection.updateOne({
@@ -149,7 +149,7 @@ db.collection.insertMany([
   当然可以通过指定数字值为`负数`实现递减操作。  
   <img src="/images/mongodb常用操作符/$inc.png"  />
 
- 2. $set  
+ ##### $set  
   这是相当常见的操作符，表示设置指定的`key`
   ```javascript
     db.collection.updateOne({
@@ -163,7 +163,7 @@ db.collection.insertMany([
   当然也可以同时设置多个值，但是需要注意的是如果修改的值之前是一个对象或一个数组的话会整个覆盖掉该值。具体的修改方法可以参照下方的具体实例。  
   <img src="/images/mongodb常用操作符/$set.png"  />
 
-  3. $unset  
+  ##### $unset  
   将某一个字段删除  
   ```javascript
     db.collection.updateOne({
@@ -175,7 +175,7 @@ db.collection.insertMany([
   上述将`name`为`Mike`的字段的`hobby`字段删除，如果不存在该字段则不进行操作  
   <img src="/images/mongodb常用操作符/$unset.png"  />
 
-  4. $push  
+  ##### $push  
   对某一字段进行内容追加，只能对数组字段进行操作(否则会报错)，不存在则直接设置为`空数组`并添加  
   ```javascript
     db.collection.updateOne({
@@ -187,7 +187,7 @@ db.collection.insertMany([
   上述将`name`为`Mike`的字段的`like`字段设置为`[ "book" ]`
   <img src="/images/mongodb常用操作符/$push.png"  />
 
-  5. $pushAll  
+  ##### $pushAll  
   类似上面的`$push`操作符，但是接收的值时一个`数组`，表示可同时追加多个值，同样是对数组字段进行操作  
   ```javascript
     db.collection.updateOne({
@@ -199,7 +199,7 @@ db.collection.insertMany([
   上述紧接前面的操作，向`like`字段中继续追加了`tv`和`sport`  
   不过似乎在高版本`mongodb`已经取消了这个操作符，有待考证。
 
-  6. $addToSet  
+  ##### $addToSet  
   类似上面的`$pushAll`操作符，不同的是，当且仅当该值在字段中`不存在`时添加，相当于是自动做了去重。  
   ```javascript
     db.collection.updateOne({
@@ -213,7 +213,7 @@ db.collection.insertMany([
   `$addToSet: { "like": "hamberger" }`  
   <img src="/images/mongodb常用操作符/$addToSet.png"  />
 
-  7. $pop  
+  ##### $pop  
   与`$pop`操作符相反，表示删除指定字段的第一个或最后一个值，同样只能是数组  
   ```javascript
     db.collection.updateOne({
@@ -226,7 +226,7 @@ db.collection.insertMany([
   `1`表示最后一个值，`-1`表示第一个值  
   <img src="/images/mongodb常用操作符/$pop.png"  />
 
-  8. $pull  
+  ##### $pull  
   表示从某一字段中删除指定的值，针对数组  
   ```javascript
     db.collection.updateOne({
@@ -238,7 +238,7 @@ db.collection.insertMany([
   上述将`name`为`Mike`的字段的`like`数组中的`hamberger`字段删除  
   <img src="/images/mongodb常用操作符/$pull.png"  />
 
-  9. $pullAll  
+  ##### $pullAll  
   类似`$pull`操作符，不同的是可以同时删除多个值
   ```javascript
     db.collection.updateOne({
@@ -250,7 +250,7 @@ db.collection.insertMany([
   上述删除了`name`为`Mike`字段的`like`中的`hamberger`和`book`  
   <img src="/images/mongodb常用操作符/$pullAll.png"  />
 
-  10. $rename  
+  ##### $rename  
   这个操作符表示对之前设置过的字段进行重命名，设置的是`key`
   ```javascript
     db.collection.updateOne({
@@ -262,11 +262,11 @@ db.collection.insertMany([
   上述将`like`字段修改为了`dislike`名称。  
   <img src="/images/mongodb常用操作符/$rename.png"  />
 
-- 查找操作符  
+#### 查找操作符  
 
   下面介绍的，是常用的查询操作符🌰  
 
-  1. $all  
+  ##### $all  
   查找字段中包含指定内容的值，且需要包含全部指定的值，针对数组型字段  
   ```javascript
     db.collection.find({
@@ -276,7 +276,7 @@ db.collection.insertMany([
   上述能查找到`name`为`Mike`字段，但是无法查找到其他字段，因为他们无法完全满足查询条件。  
   <img src="/images/mongodb常用操作符/$all.png"  />
 
-  2. $gt  
+  ##### $gt  
   查找大于(great then)指定值的字段
   ```javascript
     db.collection.find({
@@ -287,7 +287,7 @@ db.collection.insertMany([
   `日期`也可直接那这个进行比较  
   <img src="/images/mongodb常用操作符/$gt.png"  />
 
-  3. $gte  
+  ##### $gte  
   表示不小于指定值，也就是大于等于  
   ```javascript
     db.collection.find({
@@ -297,7 +297,7 @@ db.collection.insertMany([
   上述查找`age`不小于`20`的字段，所以包括等于`20`的字段  
   <img src="/images/mongodb常用操作符/$gte.png"  />
 
-  4. $lt  
+  ##### $lt  
   与上面的`$gt`操作符相反，表示小于(less then)指定值  
   ```javascript
     db.collection.find({
@@ -307,7 +307,7 @@ db.collection.insertMany([
   上述查找`age`小于`20`的字段，且不包含`20`  
   <img src="/images/mongodb常用操作符/$lt.png"  />
 
-  5. $lte  
+  ##### $lte  
   表示不大于指定值，也就是小于等于  
   ```javascript
     db.collection.find({
@@ -317,7 +317,7 @@ db.collection.insertMany([
   上述查找`age`小于`18`的字段，且包含`18`  
   <img src="/images/mongodb常用操作符/$lte.png"  />
 
-  6. $in  
+  ##### $in  
   查找存在指定数组中值得项，与`$all`不同的是，字段只需要满足其中任意一项即可  
   ```javascript
     db.collection.find({
@@ -327,7 +327,7 @@ db.collection.insertMany([
   上述可以找到所有在`age`字段等于`18`或`20`的数据  
   <img src="/images/mongodb常用操作符/$in.png"  />
 
-  6. $nin  
+  ##### $nin  
   与上面的`$in`操作符相反，表示查找不存在指定数组中的值的项
   ```javascript
     db.collection.find({
@@ -337,7 +337,7 @@ db.collection.insertMany([
   上述查找`like`字段中不存在`tv`的项  
   <img src="/images/mongodb常用操作符/$nin.png"  />
 
-  7. $ne  
+  ##### $ne  
   有相等就会有不相等，这个操作符就是查找不等于指定值得项，相当于只有一项的`$nin`
   ```javascript
     db.collection.find({
@@ -347,7 +347,7 @@ db.collection.insertMany([
   上述查找`like`字段中不存在`book`的项  
   <img src="/images/mongodb常用操作符/$ne.png"  />
 
-  8. $and  
+  ##### $and  
   查找同时满足所有指定条件的项，并且至少需要包含**两个**条件
   ```javascript
     db.collection.find({
@@ -364,7 +364,7 @@ db.collection.insertMany([
   上述查找`name`为`Mike`并且`age`为`20`的字段  
   <img src="/images/mongodb常用操作符/$and.png"  />
 
-  9. $nor  
+  ##### $nor  
   与上面的`$and`相反，表示查找同时不满足所有指定条件的项，同样至少需要包含**两个**条件  
   ```javascript
     db.collection.find({
@@ -381,7 +381,7 @@ db.collection.insertMany([
   上述查找`name`不为`Mike`并且`age`不等于`18`的数据  
   <img src="/images/mongodb常用操作符/$nor.png"  />
 
-  10. $not  
+  ##### $not  
   指定不能满足指定条件的数据项，此操作符只能包含**一个**条件，而且它无法单独完成查询，需要与其他操作符配合一起使用。  
   ```javascript
     db.collection.find({
@@ -393,7 +393,7 @@ db.collection.insertMany([
   上述查找`age`字段小于等于`18`的数据项，当然像例子这样的情况也可以直接使用`$lte`操作符完成。  
   <img src="/images/mongodb常用操作符/$not.png"  />
 
-  11. $or  
+  ##### $or  
   表示查找能至少满足**一个**条件的项，并且需要至少包含**两个**筛选条件  
   ```javascript
     db.collection.find({
@@ -410,7 +410,7 @@ db.collection.insertMany([
   上述表示查找`name`为`Mike`或者`age`为`20`的数据项  
   <img src="/images/mongodb常用操作符/$or.png"  />
 
-  12. $exists  
+  ##### $exists  
   此操作符用于字段的`key`的判断，表示查找是否存在否字段`key`的数据项，可选值为`true`和`false`，选择**true**表示存在，**false**则不存在指定字段的项  
   ```javascript
     db.collection.find({
@@ -420,7 +420,7 @@ db.collection.insertMany([
   上述查找存在`name`字段的数据项  
   <img src="/images/mongodb常用操作符/$exists.png"  />
 
-  13. $mod  
+  ##### $mod  
   表示查找满足计算结果的数据项，此操作符为取模  
   ```javascript
     db.collection.find({
@@ -430,7 +430,7 @@ db.collection.insertMany([
   上述表示`age`字段的值对3取模等于0的值。  
   <img src="/images/mongodb常用操作符/$mod.png"  />
 
-  14. $type  
+  ##### $type  
   表示选择指定数据类型的数据项  
   ```javascript
     db.collection.find({
@@ -460,7 +460,7 @@ db.collection.insertMany([
   Max key	127	 
   <img src="/images/mongodb常用操作符/$type.png"  />
 
-  15. $regex  
+  ##### $regex  
   就是字面意思，使用正则表达式来匹配字段
   ```javascript
     db.collection.find({
@@ -472,7 +472,7 @@ db.collection.insertMany([
   当然直接使用正则表达式也是可以的。  
   <img src="/images/mongodb常用操作符/$regex.png"  />
 
-  16. $where  
+  ##### $where  
   有些情况下普通方法很难做出筛选，可以使用此操作符用`javascript`语法来进行筛选  
   ```javascript
     db.collection.find({
@@ -485,16 +485,16 @@ db.collection.insertMany([
   虽然这种方法可以有效的解决一些问题，但是还是尽量不要使用这个操作符，因为它会将MongoDB里面保存的BSON数据变为JavaScript的语法结构，这样的方式不方便使用数据库的索引机制。  
   <img src="/images/mongodb常用操作符/$where.png"  />
 
-  17. $elemMatch  
+  ##### $elemMatch  
   此操作符用于对类似一个嵌套数组对象来进行多条件的查询  
   <img src="/images/mongodb常用操作符/$elemMatch.png"  />
   上述查找了`like`字段数组中`type`为`eat`并且`target`为`hamberger`的数据项  
 
-- 相关实例
+### 相关实例
 
 讲完了操作符，这里简单讲几个之前在实践当中碰到的一些问题，以及解决方法，欢迎各位参考。  
 
-1. 查找或修改数组中嵌套的对象的属性  
+  ##### 查找或修改数组中嵌套的对象的属性  
 假设`database`的`collection`中存在以下数据  
 ```javascript
 [
@@ -536,7 +536,7 @@ db.collection.insertMany([
 `db.collection.find({ "like.target": "vegetable" })`
  <img src="/images/mongodb常用操作符/数组对象嵌套查询.png"  />
 
-2. 修改多层嵌套的数组对象  
+  ##### 修改多层嵌套的数组对象  
 有时候不止会有一层嵌套，多层嵌套上面的方法不适用，虽然这种存储方式不太常见，但是也可以解决  
 假设有如下的数据
 ```javascript
