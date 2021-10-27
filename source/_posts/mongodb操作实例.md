@@ -1,11 +1,11 @@
 ---
-title: mongodb聚合操作实例
+title: mongodb操作实例
 date: 2021-10-26 15:22:52
 tags: 
  - database
  - mongodb
-banner_img: /images/mongodb聚合操作实例/mongodb-cover-page.png
-index_img: /images/mongodb聚合操作实例/mongodb-cover-page.png  
+banner_img: /images/mongodb操作实例/background.jpg  
+index_img: /images/mongodb操作实例/background.jpg   
 categories:
   - 数据库  
   - mongodb
@@ -14,7 +14,7 @@ categories:
 ---
 
 ## 介绍  
-`MongoDB` 中聚合(aggregate)主要用于处理数据(诸如统计平均值，求和等)，并返回计算后的数据结果。本文将针对自己在使用过程当中遇到的一些问题进行一些总结，当中并不包含所有的属性方法，只是自己在平常中用到的一些，希望对各位有帮助😺 。  
+这是`mongodb`的第二篇文章，本文包含了一些在平时自己开发过程当中使用的一些操作符以及特殊情况，希望对各位有帮助😺 。  
 
 ## 正文  
 
@@ -47,7 +47,7 @@ categories:
   db.users.aggregate([
     {
       $project: {
-        new_students: {
+        student_gt_18: {
           $filter: {
             input: "$students",
             as: "student",
@@ -179,7 +179,7 @@ categories:
       age: 40
     }
   ]
-```  
+```
 
 - 查询`students`集合并同时查询出其中的`teacher`数据  
 
@@ -204,12 +204,12 @@ categories:
   ])
 ```
 
-- 你将会得到
+- 你将会得到  
 
 ```js
   [
     {
-      _id: "custom_student_id_001",
+      id: "custom_student_id_001",
       name: "Join",
       age: 18,
       // 注意这里
@@ -271,7 +271,7 @@ categories:
       name: "high school",
     }
   ]
-```  
+```
 
 - 查询`students`集合并同时查询出其中的`teacher`数据以及`school`数据  
 此时通过简单得查询已经无法满足要求  
@@ -326,11 +326,12 @@ categories:
   ])
 ```
 
-- 你将会得到
+- 你将会得到  
+
 ```js
   [
     {
-      _id: "custom_student_id_001",
+      id: "custom_student_id_001",
       name: "Join",
       age: 18,
       teacher_data: [
@@ -340,7 +341,7 @@ categories:
           age: 40,
           school_data: [
             {
-              _id: "custom_school_id_001",
+              id: "custom_school_id_001",
               name: "high school",
             }
           ]
@@ -395,47 +396,245 @@ categories:
 ```
 
 ### $unwind  
- - 避免`null`情况出现导致字段丢失  
-```javascript
-  //比如 unwind country 但是他为空
-  {
-    $unwind: {
-      path: "$country",
-      preserveNullAndEmptyArrays: true 
+
+根据指定的数组字段进行拆分成多项  
+它也有两种形式  
+
+#### 简单形式  
+
+- 假设有如下集合名称为`users`的数据: 
+
+```js
+  // users 
+  [
+    {
+      id: "custom_student_id_001",
+      name: "Join",
+      age: 18,
+      teacher: [
+        "custom_teacher_id_001",
+        "custom_teacher_id_002"
+      ]
     }
-  }
+  ]
 ```
 
-### $addToSet  
-- 向数据库中批量添加数据  
-```javascript 
-{
-  $addToSet: {
-    fields: {
-      $each: [ item1, item2 ]
-    }
-  }
-}
+- 查询`users`数据并将`teacher`字段进行拆分    
 
+```js
+  db.users.aggregate([
+    {
+      $unwind: "$teacher"
+    }
+  ])
 ```
+
+- 你将会得到  
+
+```js
+  [
+    {
+      _id: "custom_student_id_001",
+      name: "Join",
+      age: 18,
+      teacher: "custom_teacher_id_001"
+    },
+    {
+      _id: "custom_student_id_001",
+      name: "Join",
+      age: 18,
+      teacher: "custom_teacher_id_002"
+    }
+  ]
+```
+
+`teacher`为拆分的字段，需要添加`$`前缀  
+这种简单的写法适合那种字段规整的情况，当需要做异常处理时，这种情况就不适用了。  
+
+#### 复杂形式  
+- 假设有如下集合名称为`users`的数据: 
+
+```js
+  // users 
+  [
+    {
+      id: "custom_student_id_001",
+      name: "Join",
+      age: 18,
+      teacher: [
+        "custom_teacher_id_001",
+        "custom_teacher_id_002"
+      ]
+    },
+    {
+      id: "custom_student_id_002",
+      name: "Lisa",
+      age: 20,
+    }
+  ]
+```
+
+- 查询`users`数据并将`teacher`字段进行拆分，并设置当`teacher`不存在时继续保留    
+
+```js
+  db.users.aggregate([
+    {
+      $unwind: {
+        path: "$teacher",
+        preserveNullAndEmptyArrays: true 
+      }
+    }
+  ])
+```
+
+- 你将会得到
+
+```js
+  [
+    {
+      _id: "custom_student_id_001",
+      name: "Join",
+      age: 18,
+      teacher: "custom_teacher_id_001"
+    },
+    {
+      _id: "custom_student_id_001",
+      name: "Join",
+      age: 18,
+      teacher: "custom_teacher_id_002"
+    },
+    {
+      _id: "custom_student_id_002",
+      name: "Lisa",
+      age: 20,
+    }
+  ]
+```
+
+如上可以看到，当`teacher`不存在时，保留了对应的字段，如果设置`preserveNullAndEmptyArrays`时，第三条数据将不被查询到。  
+
+复杂形式有三个参数：
+1. `path`  
+同简单形式  
+2. `preserveNullAndEmptyArrays`  
+是否保留空数组  
+3. `includeArrayIndex`  
+暂时没有用到过，再说。  
+
+### $addToSet   
+这个方法在前面的[mongodb常用操作符文章中介绍过](https://food-billboard.github.io/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/)介绍过，但是那是添加一项，有时候我们需要同时添加多个项。  
+
+- 假设有如下集合名称为`users`的数据: 
+
+```js
+  // users 
+  [
+    {
+      id: "custom_student_id_001",
+      name: "Join",
+      age: 18,
+      teacher: [
+        "custom_teacher_id_001",
+      ]
+    },
+  ]
+```
+
+- 向`name`为`Join`的数据字段添加两个`teacher`项    
+
+```js
+  db.users.updateOne({
+    name: "Join"
+  }, {
+    $addToSet: {
+      teacher: {
+        $each: [
+          "custom_teacher_id_002",
+          "custom_teacher_id_003"
+        ]
+      }
+    }
+  })
+```
+
+- 该字段会变成  
+
+```js
+  [
+    {
+      _id: "custom_student_id_001",
+      name: "Join",
+      age: 18,
+      teacher: [
+        "custom_teacher_id_001",
+        "custom_teacher_id_002",
+        "custom_teacher_id_003"
+      ]
+    },
+  ]
+```
+
+配合`$each`添加多项，这个没啥好说的  
 
 ### $addFields  
 - 向输出结果中新增字段  
-```javascript 
-  {
-    $addFields: {
-      new_fields: "$old_fields"
-    }
-  }
+这种的一般使用情况是对原始的一些数据字段做特殊处理，比如统计等。  
 
+- 假设有如下集合名称为`users`的数据:  
+
+```javascript  
+  // users 
+  [
+    {
+      id: "custom_student_id_001",
+      name: "Join",
+      age: 18,
+      homework: [
+        30,
+        40
+      ]
+    }
+  ]
+```
+    
+- 查询`users`数据并添加新字段`total_homework`    
+    
+
+```javascript  
+  db.users.aggregate([
+    {
+      $addFields: {
+        total_homework: { 
+          $sum: "$homework" 
+        }
+      }
+    },
+  ])
+```
+
+- 你将会得到
+
+```js
+  [
+    {
+      _id: "custom_student_id_001",
+      name: "Join",
+      age: 18,
+      homework: [
+        30,
+        40
+      ],
+      total_homework: 70 
+    },
+  ]
 ```
 
 ### $push  
-- 因为`pushAll`添加多项会报错，所以选择`$push`代替  
-```javascript
-  {
-    fields: {
-      $each: [ value1, value2 ]
-    }
-  }
-```
+这个也是在[前一篇文章](https://food-billboard.github.io/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/)有介绍  
+
+但是当需要同时添加多项时，可能会需要用到`$pushAll`操作符，但是在实际使用过程中，`$pushAll`会报错，所以这里还是使用`$push`  
+至于使用方法，可以参考前面的`$addToSet`操作符。
+
+
+## 结束  
+以上就是本人在实际使用过程中碰到的一部分问题，以后如果有新的问题还会补充。如果有哪里错了欢迎指正😊 。
