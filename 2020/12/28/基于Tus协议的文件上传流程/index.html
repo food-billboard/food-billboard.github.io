@@ -23,38 +23,38 @@
 <meta property="og:site_name" content="Food-Billboard">
 <meta property="og:description" content="介绍最近一直都在弄关于文件上传方面的问题，如果只是小文件的话，基本直接post上传就可以解决，但是当面对大文件时，如果还是只用简单的请求可能无法完成文件的上传.  假设当前用户要上传一个2G的视频文件. 可能就会遇到许多问题:   首先最大的问题就是，服务端不可能接受前端在一次请求中上传如此大的body.   所以不得不选择将大文件分成多个小文件分多次上传，基本可以解决问题. 但是如果出现一些不可">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/filepond效果.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/tus.jpg">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/creation-post-req.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/creation-post-response.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/creation-with-upload-req.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/creation-with-upload-res.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/expiration-req.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/expiration-res.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/checksum-options-req.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/checksum-options-req.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/checksum-patch-req.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/checksum-patch-res.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/termination-req.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/termination-res.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-post-req-1.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-post-res-1.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-post-req-2.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-post-res-2.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-patch-req-1.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-patch-res-1.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-patch-req-2.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-patch-res-2.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-post-req-4.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-post-res-4.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-head-req.png">
-<meta property="og:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/Concatenation-head-res.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/filepond效果.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/tus.jpg">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/creation-post-req.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/creation-post-response.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/creation-with-upload-req.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/creation-with-upload-res.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/expiration-req.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/expiration-res.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/checksum-options-req.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/checksum-options-req.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/checksum-patch-req.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/checksum-patch-res.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/termination-req.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/termination-res.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-post-req-1.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-post-res-1.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-post-req-2.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-post-res-2.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-patch-req-1.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-patch-res-1.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-patch-req-2.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-patch-res-2.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-post-req-4.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-post-res-4.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-head-req.png">
+<meta property="og:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/Concatenation-head-res.png">
 <meta property="article:published_time" content="2020-12-28T12:18:00.000Z">
-<meta property="article:modified_time" content="2021-10-25T06:36:17.000Z">
+<meta property="article:modified_time" content="2021-10-26T11:38:18.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="tus upload file">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://yoursite.com/2020/12/28/images/基于Tus协议的文件上传流程/filepond效果.png">
+<meta name="twitter:image" content="http://yoursite.com/images/基于Tus协议的文件上传流程/filepond效果.png">
   
   <title>基于Tus协议的文件上传流程 - Food-Billboard</title>
 
@@ -273,8 +273,8 @@
 <p>基于以上的情况，通过<code>Tus</code>协议来实现分片上传以及断点续传的功能便能达到相当好的用户体验。下面就来讲讲这个实现过程。</p>
 <h2 id="Tus"><a href="#Tus" class="headerlink" title="Tus"></a>Tus</h2><p>什么是<code>Tus</code>，<code>Tus</code>是基于<code>HTTP</code>的可恢复文件上传协议。可恢复意味着可以随时中断上载，并且可以继续上载而无需再次重新上载先前的数据。  </p>
 <p><code>Tus</code>官网上有许多实现的库可供使用。而作为一个前端选手，必然用的<code>tus-js-client</code>，而我一开始接触的时候用的是文件上传工具<code>filepond</code>(其实之前还用过<code>uppy</code>，因为它<code>github</code>✨多，而且它原生就支持<code>Tus</code>协议，你问我为什么不用那个，因为我看不懂😬)。<br>幸好在<code>filepond</code>的issues中看到貌似它也可以和<code>Tus</code>结合使用🙂。  </p>
-<p>其实<code>filepond</code>使用来说还算是不错的体验，但是它似乎没有针对<strong>断点续传</strong>方面做过处理，可能也有可能是因为我太菜了吧。  下面是<code>filepond</code>的样子，挺好看。<br><img src="../images/基于Tus协议的文件上传流程/filepond效果.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="前后端基本交互流程"><a href="#前后端基本交互流程" class="headerlink" title="前后端基本交互流程"></a>前后端基本交互流程</h2><img src="../images/基于Tus协议的文件上传流程/tus.jpg" srcset="/img/loading.gif" lazyload />
+<p>其实<code>filepond</code>使用来说还算是不错的体验，但是它似乎没有针对<strong>断点续传</strong>方面做过处理，可能也有可能是因为我太菜了吧。  下面是<code>filepond</code>的样子，挺好看。<br><img src="/images/基于Tus协议的文件上传流程/filepond效果.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="前后端基本交互流程"><a href="#前后端基本交互流程" class="headerlink" title="前后端基本交互流程"></a>前后端基本交互流程</h2><img src="/images/基于Tus协议的文件上传流程/tus.jpg" srcset="/img/loading.gif" lazyload />
 
 <p>基于上面的流程图这里简单描述一下并讲讲其中一些注意的地方。  </p>
 <ol>
@@ -298,17 +298,17 @@
 <li>Creation<br>在文件上传前在服务端创建文件信息<br>可以将文件的相关信息预先在存储在服务端，这样可以为后续文件分片上传做参照。<br>比如可以将文件唯一标识符<code>md5</code>先进行上传，服务端存储数据库，保存每一上传的分片。  </li>
 </ol>
 <p>前端可以把一些文件信息放在<code>Upload-Metadata</code>请求头中  </p>
-<img src="../images/基于Tus协议的文件上传流程/creation-post-req.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/creation-post-response.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/creation-post-req.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/creation-post-response.png" srcset="/img/loading.gif" lazyload />
 
 <p>服务端会返回<code>Location</code>告知前端文件的上传地址。  </p>
 <ol start="2">
 <li>Creation-With-Upload<br>在服务端创建请求中添加文件分片内容<br>为了节省流量，在服务端允许的情况下，可以在向服务端创建请求的同时也将某一分片一同上传。  </li>
 </ol>
-<p>和<code>Creation</code>类似，也会返回<code>Location</code>头，同时会返回<code>Upload-Offset</code>设置下一分片的索引。<br><img src="../images/基于Tus协议的文件上传流程/creation-with-upload-req.png" srcset="/img/loading.gif" lazyload /><br><img src="../images/基于Tus协议的文件上传流程/creation-with-upload-res.png" srcset="/img/loading.gif" lazyload /></p>
+<p>和<code>Creation</code>类似，也会返回<code>Location</code>头，同时会返回<code>Upload-Offset</code>设置下一分片的索引。<br><img src="/images/基于Tus协议的文件上传流程/creation-with-upload-req.png" srcset="/img/loading.gif" lazyload /><br><img src="/images/基于Tus协议的文件上传流程/creation-with-upload-res.png" srcset="/img/loading.gif" lazyload /></p>
 <ol start="3">
-<li>Expiration<br>临时文件的过期时间<br>服务端的存储空间毕竟有限，不可能无时限的将文件的分片保存在服务端的数据库中。<br>所以服务端可以设置分片的存储时间，并通过响应头<code>Upload-Expires</code>告知前端它的过期时间。<br>当超过服务端规定的时间之后，用户需要重新在服务端创建文件副本，重新上传。  <img src="../images/基于Tus协议的文件上传流程/expiration-req.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/expiration-res.png" srcset="/img/loading.gif" lazyload /> 
+<li>Expiration<br>临时文件的过期时间<br>服务端的存储空间毕竟有限，不可能无时限的将文件的分片保存在服务端的数据库中。<br>所以服务端可以设置分片的存储时间，并通过响应头<code>Upload-Expires</code>告知前端它的过期时间。<br>当超过服务端规定的时间之后，用户需要重新在服务端创建文件副本，重新上传。  <img src="/images/基于Tus协议的文件上传流程/expiration-req.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/expiration-res.png" srcset="/img/loading.gif" lazyload /> 
 
 </li>
 </ol>
@@ -317,7 +317,7 @@
 <li>Checksum<br>分片大小检查<br>服务端可以对前端发送的文件分片进行校验。<br>在上传前获取服务端上传配置支持度信息时，前端可以根据<code>Tus-Checksum-Algorithm</code>字段知道服务端支持的加密算法。  </li>
 </ol>
 <p>有时无法一开始就做出相应的计算，并且在服务端支持的情况下，可以使用<code>Trailer</code>请求头在完成上传后再进行校验。<br>服务端可以在一开始<code>options</code>的<code>Tus-Extension</code>中添加<code>Checksum-Trailer</code>字段表示支持该功能。<br>比如对文件进行<code>md5</code>加密，需要对文件分片一一进行处理。  </p>
-<p>当上传校验失败时，服务端便会丢弃此分片，索引也不会发生改变。<br><img src="../images/基于Tus协议的文件上传流程/checksum-options-req.png" srcset="/img/loading.gif" lazyload /><br><img src="../images/基于Tus协议的文件上传流程/checksum-options-req.png" srcset="/img/loading.gif" lazyload /><br><img src="../images/基于Tus协议的文件上传流程/checksum-patch-req.png" srcset="/img/loading.gif" lazyload /><br><img src="../images/基于Tus协议的文件上传流程/checksum-patch-res.png" srcset="/img/loading.gif" lazyload /> </p>
+<p>当上传校验失败时，服务端便会丢弃此分片，索引也不会发生改变。<br><img src="/images/基于Tus协议的文件上传流程/checksum-options-req.png" srcset="/img/loading.gif" lazyload /><br><img src="/images/基于Tus协议的文件上传流程/checksum-options-req.png" srcset="/img/loading.gif" lazyload /><br><img src="/images/基于Tus协议的文件上传流程/checksum-patch-req.png" srcset="/img/loading.gif" lazyload /><br><img src="/images/基于Tus协议的文件上传流程/checksum-patch-res.png" srcset="/img/loading.gif" lazyload /> </p>
 <p>上述例子中  </p>
 <ul>
 <li>服务端<code>options</code>响应中<code>Tus-Checksum-Algorithm: md5,sha1,crc32</code>展示了其支持的校验算法  </li>
@@ -327,22 +327,22 @@
 </ul>
 <ol start="5">
 <li><p>Termination<br>文件删除<br>这个应该没什么好说的，就是向服务端请求删除文件信息。  </p>
-<img src="../images/基于Tus协议的文件上传流程/termination-req.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/termination-res.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/termination-req.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/termination-res.png" srcset="/img/loading.gif" lazyload />
 </li>
 <li><p>Concatenation<br>并行上传<br>对于一个大文件，如果是一个个分片串行上传，可能还是有点慢。<br><code>tus</code>支持可以实行并行上传，可以针对同一个文件资源在服务端生成多个上传地址，这样就可以同时上传文件的不同分片。<br>当然这也需要服务端支持。  </p>
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-req-1.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-res-1.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-req-2.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-res-2.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-req-1.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-res-1.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-req-2.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-patch-res-2.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-req-4.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-post-res-4.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-head-req.png" srcset="/img/loading.gif" lazyload />
-<img src="../images/基于Tus协议的文件上传流程/Concatenation-head-res.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-req-1.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-res-1.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-req-2.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-res-2.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-patch-req-1.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-patch-res-1.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-patch-req-2.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-patch-res-2.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-req-4.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-post-res-4.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-head-req.png" srcset="/img/loading.gif" lazyload />
+<img src="/images/基于Tus协议的文件上传流程/Concatenation-head-res.png" srcset="/img/loading.gif" lazyload />
 
 </li>
 </ol>
