@@ -490,6 +490,32 @@ db.collection.insertMany([
   <img src="/images/mongodb常用操作符/$elemMatch.png"  />
   上述查找了`like`字段数组中`type`为`eat`并且`target`为`hamberger`的数据项  
 
+  ##### $slice  
+  将数据中的数组字段做切割，选出一段选区  
+  ```javascript 
+    // 基本查询
+    db.collection.find({}, {
+      like: {
+        $slice: [1, 1]
+      }
+    })
+    //聚合查询
+    db.collection.aggregate([
+      {
+        $project: {
+          like: {
+            $slice: [ "$like", 1, 1 ]
+          }
+        }
+      }
+    ])
+  ```
+  以上两种方法都能取出对应的数组项的第一条，两个数字分别代表：起始的索引、切割的数量  
+  - 基本查询
+  <img src="/images/mongodb常用操作符/$slice-normal.jpg"  />  
+  - 聚合查询  
+  <img src="/images/mongodb常用操作符/$slice-aggregate.jpg" />
+
 ### 相关实例
 
 讲完了操作符，这里简单讲几个之前在实践当中碰到的一些问题，以及解决方法，欢迎各位参考。  
