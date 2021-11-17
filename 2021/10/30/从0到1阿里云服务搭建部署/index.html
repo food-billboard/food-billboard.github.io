@@ -24,7 +24,7 @@
 <meta property="og:description" content="从0到1完成阿里云node服务搭建部署介绍前段时间自己根据网上的教程捣鼓了一下自己的服务器，终于把自己的node服务部署到了阿里云。所以在这里把自己的一些经验分享给各位，希望能对大家有帮助ღ( ´･ᴗ･&#96; )比心。    先介绍一下这次部署用到的一些东西，免得浪费各位的时间✅ 。    首先本人是一个前端，所以这次的服务端语言用的是node框架koa    node生产环境自然离不开pm2，本次远">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-30T12:18:00.000Z">
-<meta property="article:modified_time" content="2021-11-13T09:12:38.000Z">
+<meta property="article:modified_time" content="2021-11-17T09:25:42.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="deploy node">
 <meta name="twitter:card" content="summary_large_image">
@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.5k 字
+      3.7k 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11 分钟
+      12 分钟
     </span>
   
 
@@ -337,6 +337,12 @@
 <p>下面是它的配置，当中有注释进行解释。  </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">module</span>.exports = &#123;<br>  <span class="hljs-comment">// 应用名称</span><br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;app&quot;</span>,<br>  <span class="hljs-comment">// 需要启动的服务  </span><br>  <span class="hljs-attr">apps</span> : [<br>    &#123;<br>      <span class="hljs-comment">// 进程名称</span><br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;app&#x27;</span>,<br>      <span class="hljs-comment">// 进程的入口文件  </span><br>      <span class="hljs-attr">script</span>: <span class="hljs-string">&#x27;app.js&#x27;</span>,<br>      <span class="hljs-comment">// 环境变量</span><br>      <span class="hljs-attr">env</span>: &#123;<br>        <span class="hljs-attr">NODE_ENV</span>: <span class="hljs-string">&quot;production&quot;</span><br>      &#125;,<br>      <span class="hljs-comment">// 负载均衡</span><br>      <span class="hljs-attr">exec_mode</span>: <span class="hljs-string">&quot;cluster_mode&quot;</span>,<br>      <span class="hljs-comment">// 错误日志路径</span><br>      <span class="hljs-attr">error_file</span>: <span class="hljs-string">&#x27;./src/logs/pm2/error.log&#x27;</span>,<br>      <span class="hljs-comment">// 输出路径  </span><br>      <span class="hljs-attr">out_file</span>: <span class="hljs-string">&#x27;./src/logs/pm2/output.log&#x27;</span><br>    &#125;, <br>    <span class="hljs-comment">// 另一个进程  </span><br>    &#123;<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;socket&quot;</span>,<br>      <span class="hljs-attr">script</span>: <span class="hljs-string">&quot;./src/chat/index.js&quot;</span>,<br>      <span class="hljs-attr">exec_mode</span>: <span class="hljs-string">&quot;cluster_mode&quot;</span>,<br>    &#125;<br>  ],<br><br>  <span class="hljs-comment">// 部署的配置 </span><br>  <span class="hljs-attr">deploy</span> : &#123;<br>    <span class="hljs-attr">production</span> : &#123;<br>      <span class="hljs-attr">user</span>: <span class="hljs-string">&quot;这里是服务器的用户名&quot;</span>,<br>      <span class="hljs-attr">host</span>: <span class="hljs-string">&quot;服务器的ip地址(xx.xx.xx.xx或者可以使用数组设置多个)&quot;</span>,<br>      <span class="hljs-attr">ssh_options</span>: <span class="hljs-string">&quot;ssh连接的参数&quot;</span>,<br>      <span class="hljs-attr">ref</span>: <span class="hljs-string">&quot;github分支&quot;</span>,<br>      <span class="hljs-attr">repo</span>: <span class="hljs-string">&quot;github仓库&quot;</span>,<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;部署的服务器中的文件目录&quot;</span>,<br>      <span class="hljs-comment">// 代码被clone后执行的命令</span><br>      <span class="hljs-string">&quot;post-deploy&quot;</span>:<br>        <span class="hljs-string">&quot;git pull origin master &amp;&amp; source ~/.nvm/nvm.sh &amp;&amp; yarn install&quot;</span>, <br>      <span class="hljs-comment">// 环境变量</span><br>      <span class="hljs-attr">env</span>: &#123;<br>        <span class="hljs-string">&quot;NODE_ENV&quot;</span>: <span class="hljs-string">&quot;production&quot;</span><br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ol>
+<li>可能存在拉取<code>docker</code>镜像出现<code>net/http: TLS handshake timeout</code>问题<br>使用国内镜像加速  <blockquote>
+<p>Ubuntu16.04+、Debian8+、CentOS7<br>对于使用 systemd 的系统，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）：<br><code>&#123;&quot;registry-mirrors&quot;:[&quot;https://reg-mirror.qiniu.com/&quot;]&#125;</code><br>这个是七牛云的镜像加速地址  </p>
+</blockquote>
+</li>
+</ol>
 <h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>这就是本次我在搭建部署阿里云服务器中总结的一些经验和教训，如有错误的话请指正，希望对各位有帮助。<br>完整的项目配置可以到<a target="_blank" rel="noopener" href="https://github.com/food-billboard/node-server">这里</a>查看。</p>
 
             </div>
