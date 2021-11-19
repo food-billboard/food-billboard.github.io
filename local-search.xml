@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>gitmoji 优雅提交代码</title>
+    <link href="/2021/11/19/gitmoji/"/>
+    <url>/2021/11/19/gitmoji/</url>
+    
+    <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>相信平时应该大家都用过<code>github</code>当做代码仓库，作为一个优质的仓库，对于代码的提交也有对应的规范，为了让提交看得更浅显易懂，可以使用不同的图标来表示不一样的意思，这里就介绍一个提交工具<a href="https://gitmoji.dev/">gitmoji</a>。</p><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>关于这个库的使用相信官网已经描述的非常详细了，这里就简单做下翻译来供自己查看。  </p><p>常用的几个  </p><table><thead><tr><th>图标</th><th>代码</th><th>描述</th></tr></thead><tbody><tr><td>🎨</td><td>:art:</td><td>改进代码的结构/格式。</td></tr><tr><td>🔥</td><td>:fire:</td><td>删除代码或文件。</td></tr><tr><td>🐛</td><td>:bug:</td><td>修复一个错误。</td></tr><tr><td>✨</td><td>:sparkles:</td><td>介绍新功能。</td></tr><tr><td>✅</td><td>:white_check_mark:</td><td>添加、更新或通过测试。</td></tr><tr><td>🚀</td><td>:rocket:</td><td>代码部署。</td></tr><tr><td>💄</td><td>:lipstick:</td><td>添加或更新 UI 和样式文件。</td></tr><tr><td>🔒️</td><td>:lock:</td><td>修复安全问题。</td></tr><tr><td>🔖</td><td>:bookmark:</td><td>发布/版本标签。</td></tr><tr><td>🔧</td><td>:wrench:</td><td>添加或更新配置文件。</td></tr><tr><td>⏪️</td><td>:rewind:</td><td>还原更改。</td></tr><tr><td>🤡</td><td>:clown_face:</td><td>mock 代码</td></tr><tr><td>🙈</td><td>:see_no_evil:</td><td>添加或更新 .gitignore 文件。</td></tr><tr><td>🗑️</td><td>:wastebasket:</td><td>弃用需要清理的代码。</td></tr><tr><td>⚰️</td><td>:coffin:</td><td>删除死代码。</td></tr><tr><td>🧪</td><td>:test_tube:</td><td>添加失败的测试。</td></tr><tr><td>👔</td><td>:necktie:</td><td>添加或更新业务逻辑</td></tr></tbody></table><p>索引  </p><table><thead><tr><th>图标</th><th>代码</th><th>描述</th></tr></thead><tbody><tr><td>🎨</td><td>:art:</td><td>改进代码的结构/格式。</td></tr><tr><td>⚡️</td><td>:zap:</td><td>提高性能。</td></tr><tr><td>🔥</td><td>:fire:</td><td>删除代码或文件。</td></tr><tr><td>🐛</td><td>:bug:</td><td>修复一个错误。</td></tr><tr><td>🚑️</td><td>:ambulance:</td><td>关键修补程序。</td></tr><tr><td>✨</td><td>:sparkles:</td><td>介绍新功能。</td></tr><tr><td>📝</td><td>:memo:</td><td>添加或更新文档。</td></tr><tr><td>🚀</td><td>:rocket:</td><td>代码部署。</td></tr><tr><td>💄</td><td>:lipstick:</td><td>添加或更新 UI 和样式文件。</td></tr><tr><td>🎉</td><td>:tada:</td><td>项目创建</td></tr><tr><td>✅</td><td>:white_check_mark:</td><td>添加、更新或通过测试。</td></tr><tr><td>🔒️</td><td>:lock:</td><td>修复安全问题。</td></tr><tr><td>🔖</td><td>:bookmark:</td><td>发布/版本标签。</td></tr><tr><td>🚨</td><td>:rotating_light:</td><td>修复编译器/linter 警告。</td></tr><tr><td>🚧</td><td>:construction:</td><td>工作正在进行中。</td></tr><tr><td>💚</td><td>:green_heart:</td><td>修复 CI 构建。</td></tr><tr><td>⬇️</td><td>:arrow_down:</td><td>降级依赖项。</td></tr><tr><td>⬆️</td><td>:arrow_up:</td><td>升级依赖项。</td></tr><tr><td>📌</td><td>:pushpin:</td><td>将依赖项固定到特定版本。</td></tr><tr><td>👷</td><td>:construction_worker:</td><td>添加或更新 CI 构建系统。</td></tr><tr><td>📈</td><td>:chart_with_upwards_trend:</td><td>添加或更新分析或跟踪代码。</td></tr><tr><td>♻️</td><td>:recycle:</td><td>重构代码。</td></tr><tr><td>➕</td><td>:heavy_plus_sign:</td><td>添加依赖项。</td></tr><tr><td>➖</td><td>:heavy_minus_sign:</td><td>删除依赖项。</td></tr><tr><td>🔧</td><td>:wrench:</td><td>添加或更新配置文件。</td></tr><tr><td>🔨</td><td>:hammer:</td><td>添加或更新开发脚本。</td></tr><tr><td>🌐</td><td>:globe_with_meridians:</td><td>国际化和本地化。</td></tr><tr><td>✏️</td><td>:pencil2:</td><td>修正错别字。</td></tr><tr><td>💩</td><td>:poop:</td><td>编写需要改进的糟糕代码。</td></tr><tr><td>⏪️</td><td>:rewind:</td><td>还原更改。</td></tr><tr><td>🔀</td><td>:twisted_rightwards_arrows:</td><td>合并分支。</td></tr><tr><td>📦️</td><td>:package:</td><td>添加或更新已编译的文件或包。</td></tr><tr><td>👽️</td><td>:alien:</td><td>由于外部 API 更改而更新代码。</td></tr><tr><td>🚚</td><td>:truck:</td><td>移动或重命名资源（例如：文件、路径、路由）。</td></tr><tr><td>📄</td><td>:page_facing_up:</td><td>添加或更新许可证。</td></tr><tr><td>💥</td><td>:boom:</td><td>引入重大更改。</td></tr><tr><td>🍱</td><td>:bento:</td><td>添加或更新静态资源</td></tr><tr><td>♿️</td><td>:wheelchair:</td><td>提高可访问性。</td></tr><tr><td>💡</td><td>:bulb:</td><td>在源代码中添加或更新注释。</td></tr><tr><td>🍻</td><td>:beers:</td><td>醉酒写代码。(没懂啥意思)</td></tr><tr><td>💬</td><td>:speech_balloon:</td><td>添加或更新文本和文字。</td></tr><tr><td>🗃️</td><td>:card_file_box:</td><td>执行与数据库相关的更改。</td></tr><tr><td>🔊</td><td>:loud_sound:</td><td>添加或更新日志。</td></tr><tr><td>🔇</td><td>:mute:</td><td>删除日志。</td></tr><tr><td>👥</td><td>:busts_in_silhouette:</td><td>添加或更新贡献者。</td></tr><tr><td>🚸</td><td>:children_crossing:</td><td>改善用户体验/可用性</td></tr><tr><td>🏗️</td><td>:building_construction:</td><td>进行架构更改。</td></tr><tr><td>📱</td><td>:iphone:</td><td>从事响应式设计。</td></tr><tr><td>🤡</td><td>:clown_face:</td><td>mock 代码</td></tr><tr><td>🥚</td><td>:egg:</td><td>添加或更新复活节彩蛋。</td></tr><tr><td>🙈</td><td>:see_no_evil:</td><td>添加或更新 .gitignore 文件。</td></tr><tr><td>📸</td><td>:camera_flash:</td><td>添加或更新快照。</td></tr><tr><td>⚗️</td><td>:alembic:</td><td>进行实验。</td></tr><tr><td>🔍️</td><td>:mag:</td><td>改进搜索引擎优化。</td></tr><tr><td>🏷️</td><td>:label:</td><td>添加或更新类型。</td></tr><tr><td>🌱</td><td>:seedling:</td><td>添加或更新种子文件。</td></tr><tr><td>🚩</td><td>:triangular_flag_on_post:</td><td>添加、更新或删除功能标志。</td></tr><tr><td>🥅</td><td>:goal_net:</td><td>捕捉错误。</td></tr><tr><td>💫</td><td>:dizzy:</td><td>添加或更新动画和过渡。</td></tr><tr><td>🗑️</td><td>:wastebasket:</td><td>弃用需要清理的代码。</td></tr><tr><td>🛂</td><td>:passport_control:</td><td>处理与授权、角色和权限相关的代码。</td></tr><tr><td>🩹</td><td>:adhesive_bandage:</td><td>对非关键问题的简单修复。</td></tr><tr><td>🧐</td><td>:monocle_face:</td><td>数据探索/检查。</td></tr><tr><td>⚰️</td><td>:coffin:</td><td>删除死代码。</td></tr><tr><td>🧪</td><td>:test_tube:</td><td>添加失败的测试。</td></tr><tr><td>👔</td><td>:necktie:</td><td>添加或更新业务逻辑</td></tr><tr><td>🩺</td><td>:stethoscope:</td><td>添加或更新健康检查。</td></tr></tbody></table><h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>简单水💧一下。  </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>代码提交</category>
+      
+      <category>规范</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>从0到1完成阿里云node服务搭建部署</title>
     <link href="/2021/10/30/%E4%BB%8E0%E5%88%B01%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/"/>
     <url>/2021/10/30/%E4%BB%8E0%E5%88%B01%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/</url>
