@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>字号与像素的对应值</title>
+    <link href="/2022/03/02/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/"/>
+    <url>/2022/03/02/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/</url>
+    
+    <content type="html"><![CDATA[<p>平常偶尔可能会碰到<code>px</code>和<code>word</code>的字号的相互转换的情况，这里从网上抄了下简单做下记录。</p><h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><h3 id="pt-point，磅"><a href="#pt-point，磅" class="headerlink" title="pt (point，磅)"></a>pt (point，磅)</h3><p>是一个物理长度单位，指的是 72 分之一英寸。</p><h3 id="px-pixel，像素"><a href="#px-pixel，像素" class="headerlink" title="px (pixel，像素)"></a>px (pixel，像素)</h3><p>是一个虚拟长度单位，是计算机系统的数字化图像长度单位，如果 px 要换算成物理长度，需要指定精度 DPI(Dots Per Inch，每英寸像素数)，在扫描打印时一般都有 DPI 可选。Windows 系统默认是 96dpi，Apple 系统默认是 72dpi。</p><h3 id="em-相对长度单位，相对于当前对象内文本的字体尺寸"><a href="#em-相对长度单位，相对于当前对象内文本的字体尺寸" class="headerlink" title="em(相对长度单位，相对于当前对象内文本的字体尺寸)"></a>em(相对长度单位，相对于当前对象内文本的字体尺寸)</h3><p>是一个相对长度单位，最初是指字母 M 的宽度，故名 em。现指的是字符宽度的倍数，用法类似百分比，如：0.8em, 1.2em,2em 等。通常 1em=16px。</p><h2 id="换算"><a href="#换算" class="headerlink" title="换算"></a>换算</h2><ul><li>字号：是中文字库中特有的一种单位，以中文代号表示特定的磅值 pt，便于记忆、表述。<br>pt 和 px 的换算公式可以根据 pt 的定义得出:<br><code>px = 1/dpi(英寸)</code><br><code>pt = 1/72(英寸)</code><br><code>pt = px * dpi / 72</code><br>以 Windows 下的 <code>96dpi</code> 来计算，<code>1pt = px * 96/72 = px * 4/3</code></li></ul><h2 id="常用到的"><a href="#常用到的" class="headerlink" title="常用到的"></a>常用到的</h2><p>直接<a href="https://www.runoob.com/w3cnote/px-pt-em-convert-table.html">百度</a></p><h2 id="引申"><a href="#引申" class="headerlink" title="引申"></a>引申</h2><h3 id="dpi-计算"><a href="#dpi-计算" class="headerlink" title="dpi 计算"></a>dpi 计算</h3><p>来自百度😺</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDPI</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> deviceXDPI = <span class="hljs-number">0</span> <br>  <span class="hljs-keyword">let</span> deviceYDPI = <span class="hljs-number">0</span>  <br>  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.screen.deviceXDPI != <span class="hljs-literal">undefined</span>) &#123;<br>    deviceXDPI = <span class="hljs-built_in">window</span>.screen.deviceXDPI;<br>    deviceYDPI = <span class="hljs-built_in">window</span>.screen.deviceYDPI;<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">const</span> tmpNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;div&#x27;</span>);<br>    tmpNode.style.cssText = <span class="hljs-string">`</span><br><span class="hljs-string">      width:1in;</span><br><span class="hljs-string">      height:1in;</span><br><span class="hljs-string">      position:absolute;</span><br><span class="hljs-string">      left:0px;</span><br><span class="hljs-string">      top:0px;</span><br><span class="hljs-string">      z-index:99;</span><br><span class="hljs-string">      visibility:hidden;</span><br><span class="hljs-string">    `</span><br>    <span class="hljs-built_in">document</span>.body.appendChild(tmpNode);<br>    deviceXDPI = <span class="hljs-built_in">parseInt</span>(tmpNode.offsetWidth);<br>    deviceYDPI = <span class="hljs-built_in">parseInt</span>(tmpNode.offsetHeight);<br>    tmpNode.parentNode.removeChild(tmpNode);<br>  &#125;<br>  <span class="hljs-keyword">return</span> [<br>    deviceXDPI,<br>    deviceYDPI<br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>CSS</category>
+      
+      <category>前端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CSS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>平时用到的一些代码片段</title>
     <link href="/2022/02/09/%E5%B9%B3%E6%97%B6%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/"/>
     <url>/2022/02/09/%E5%B9%B3%E6%97%B6%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/</url>
