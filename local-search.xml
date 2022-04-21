@@ -143,6 +143,35 @@
   
   
   <entry>
+    <title>服务器上用到的一些命令</title>
+    <link href="/2021/10/30/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/"/>
+    <url>/2021/10/30/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/</url>
+    
+    <content type="html"><![CDATA[<h2 id="服务器上用到的一些命令"><a href="#服务器上用到的一些命令" class="headerlink" title="服务器上用到的一些命令"></a>服务器上用到的一些命令</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>记录一些平常用到的一些命令，给自己提个醒。  </p><h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><h4 id="端口占用"><a href="#端口占用" class="headerlink" title="端口占用"></a>端口占用</h4><p>平常碰到有占用端口的情况，需要杀死该进程。<br><code>sudo lsof -i -P -n</code> // 查看所有占用端口<br><code>kill -9 pid</code>  杀死进程，<code>pid</code>是对应端口的id  </p><h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><p>结束但是没有完全结束  </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>部署</category>
+      
+      <category>服务器</category>
+      
+      <category>后端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>deploy node</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>mongodb操作实例</title>
     <link href="/2021/10/26/mongodb%E6%93%8D%E4%BD%9C%E5%AE%9E%E4%BE%8B/"/>
     <url>/2021/10/26/mongodb%E6%93%8D%E4%BD%9C%E5%AE%9E%E4%BE%8B/</url>
