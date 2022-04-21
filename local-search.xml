@@ -4,6 +4,64 @@
   
   
   <entry>
+    <title>服务端puppeteer的使用</title>
+    <link href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E7%AB%AFpuppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <url>/2022/04/21/%E6%9C%8D%E5%8A%A1%E7%AB%AFpuppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="服务端puppeteer的使用"><a href="#服务端puppeteer的使用" class="headerlink" title="服务端puppeteer的使用"></a>服务端puppeteer的使用</h2><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>最近突然使用到了<a href="https://github.com/puppeteer/puppeteer">puppeteer</a>，原本在本地都是好好的，但是当部署到服务器上之后就不行了。  </p><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>虽然具体原因不确定，但是根据百度的做法最后不再报错。  </p><h3 id="安装chrome"><a href="#安装chrome" class="headerlink" title="安装chrome"></a>安装chrome</h3><ol><li>创建文件<br><code>touch /etc/yum.repos.d/google.repo</code>  </li><li>配置内容  </li></ol><p><code>vi /etc/yum.repos.d/google.repo</code></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">[google]<br>name=Google-x86_64<br>baseurl=http://dl.google.com/linux/rpm/stable/x86_64<br>enabled=1<br>gpgcheck=0<br>gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub<br></code></pre></td></tr></table></figure><ol start="3"><li><code>yum update</code>  </li><li><code>yum install google-chrome-stable</code>  </li></ol><h4 id="插个题外话"><a href="#插个题外话" class="headerlink" title="插个题外话"></a>插个题外话</h4><p>在弄这个东西的时候突然碰到了阿里云服务器的<code>centos 8</code>服务器源发生变化，<code>yum</code>无法下载新东西了<br>所以这里也随便记录一下，<a href="https://blog.51cto.com/gagarin/5011005">来源</a></p><h3 id="修改puppeteer调用方式"><a href="#修改puppeteer调用方式" class="headerlink" title="修改puppeteer调用方式"></a>修改<code>puppeteer</code>调用方式</h3><p><code>puppeteer.launch(&#123; args: [&#39;--no-sandbox&#39;, &#39;--disable-dev-shm-usage&#39;], headless: true &#125;)</code></p><h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>做个简单记录😊<br><a href="https://blog.csdn.net/Zeng__Yi/article/details/105661354">参考</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>服务器</category>
+      
+      <category>前端</category>
+      
+      <category>后端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>backend node puppeteer</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>服务器上用到的一些命令</title>
+    <link href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/"/>
+    <url>/2022/04/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/</url>
+    
+    <content type="html"><![CDATA[<h2 id="服务器上用到的一些命令"><a href="#服务器上用到的一些命令" class="headerlink" title="服务器上用到的一些命令"></a>服务器上用到的一些命令</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>记录一些平常用到的一些命令，给自己提个醒。  </p><h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><h4 id="端口占用"><a href="#端口占用" class="headerlink" title="端口占用"></a>端口占用</h4><p>平常碰到有占用端口的情况，需要杀死该进程。<br><code>sudo lsof -i -P -n</code> // 查看所有占用端口<br><code>kill -9 pid</code>  杀死进程，<code>pid</code>是对应端口的id  </p><h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><p>结束但是没有完全结束  </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>部署</category>
+      
+      <category>服务器</category>
+      
+      <category>后端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>deploy node backend</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>字号与像素的对应值</title>
     <link href="/2022/03/02/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/"/>
     <url>/2022/03/02/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/</url>
@@ -126,35 +184,6 @@
       <category>服务器</category>
       
       <category>前端</category>
-      
-      <category>后端</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>deploy node</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>服务器上用到的一些命令</title>
-    <link href="/2021/10/30/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/"/>
-    <url>/2021/10/30/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/</url>
-    
-    <content type="html"><![CDATA[<h2 id="服务器上用到的一些命令"><a href="#服务器上用到的一些命令" class="headerlink" title="服务器上用到的一些命令"></a>服务器上用到的一些命令</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>记录一些平常用到的一些命令，给自己提个醒。  </p><h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><h4 id="端口占用"><a href="#端口占用" class="headerlink" title="端口占用"></a>端口占用</h4><p>平常碰到有占用端口的情况，需要杀死该进程。<br><code>sudo lsof -i -P -n</code> // 查看所有占用端口<br><code>kill -9 pid</code>  杀死进程，<code>pid</code>是对应端口的id  </p><h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><p>结束但是没有完全结束  </p>]]></content>
-    
-    
-    <categories>
-      
-      <category>部署</category>
-      
-      <category>服务器</category>
       
       <category>后端</category>
       
