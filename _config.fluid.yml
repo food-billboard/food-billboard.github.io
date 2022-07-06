@@ -156,6 +156,15 @@ about:
 tag:
   banner_img: /images/首页/background.jpg
 
+navbar:
+  menu:
+    - { key: 'home', link: '/', icon: 'iconfont icon-home-fill' }
+    - { key: 'project', link: '/project', icon: 'iconfont icon-books', name: "项目" }
+    - { key: 'archive', link: '/archives/', icon: 'iconfont icon-archive-fill' }
+    - { key: 'category', link: '/categories/', icon: 'iconfont icon-category-fill' }
+    - { key: 'tag', link: '/tags/', icon: 'iconfont icon-tags-fill' }
+    - { key: 'about', link: '/about/', icon: 'iconfont icon-user-fill' }
+
 live2d:
   enable: true
   scriptFrom: local 
