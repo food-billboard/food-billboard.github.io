@@ -90,6 +90,54 @@ SVG 与诸如 DOM 和 XSL 之类的 W3C 标准是一个整体
 
 描边线条的透明度  
 
+#### stroke-linecap  
+
+描边的末端形状
+
+<svg width="100" height="100">
+  <g fill="none" stroke="black" stroke-width="6">
+    <path stroke-linecap="butt" d="M5 20 l65 0" />
+    <path stroke-linecap="round" d="M5 40 l65 0" />
+    <path stroke-linecap="square" d="M5 60 l65 0" />
+  </g>
+</svg>
+
+```svg 
+<svg width="100" height="100">
+  <g fill="none" stroke="black" stroke-width="6">
+    <path stroke-linecap="butt" d="M5 20 l65 0" />
+    <path stroke-linecap="round" d="M5 40 l65 0" />
+    <path stroke-linecap="square" d="M5 60 l65 0" />
+  </g>
+</svg>
+```
+
+#### stroke-dasharray  
+
+绘制虚线  
+
+格式为`length margin, length margin, ...`  
+- length 虚线长度  
+- margin 虚线间距  
+
+<svg width="100" height="100">
+  <g fill="none" stroke="black" stroke-width="4">
+    <path stroke-dasharray="5,5" d="M5 20 l215 0" />
+    <path stroke-dasharray="10,10" d="M5 40 l215 0" />
+    <path stroke-dasharray="20,10,5,5,5,10" d="M5 60 l215 0" />
+  </g>
+</svg>
+
+```svg 
+<svg width="100" height="100">
+  <g fill="none" stroke="black" stroke-width="4">
+    <path stroke-dasharray="5,5" d="M5 20 l215 0" />
+    <path stroke-dasharray="10,10" d="M5 40 l215 0" />
+    <path stroke-dasharray="20,10,5,5,5,10" d="M5 60 l215 0" />
+  </g>
+</svg>
+```
+
 #### rx & ry
 
 **矩形**的圆角   
@@ -145,25 +193,163 @@ SVG 与诸如 DOM 和 XSL 之类的 W3C 标准是一个整体
 
 #### line（直线）
 
-#### polygon（多边形）
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100">
+  <line x1='0' y1='0' x2='100' y2='100' stroke-width="1" stroke="rgb(0,0,0)"/>
+</svg>
+
+```svg 
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100">
+  <line x1='0' y1='0' x2='100' y2='100' stroke-width="1" stroke="rgb(0,0,0)"/>
+</svg>
+```
 
 #### polyline（多线段）  
+
+`points`为点的集合，格式为`x1 y1, x2 y2, ...`  
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100">
+  <polyline points="0 0, 100 0, 0 100, 0 0" stroke-width="1" stroke="rgb(0,0,0)" fill="none" />
+</svg>
+
+```svg 
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100">
+  <polyline points="0 0, 100 0, 0 100, 0 0" stroke-width="1" stroke="rgb(0,0,0)" fill="none" />
+</svg>
+```
+#### polygon（多边形）
+
+和`polyline`相同，使用`points`设置点  
+
+<svg height="210" width="500">
+  <polygon points="100 10, 40 198, 190 78, 10 78, 160 198" fill="lime" stroke="purple" stroke-width="5" fill-rule="nonzero" />
+</svg>
+
+```svg 
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100">
+  <polygon points="100 10, 40 198, 190 78, 10 78, 160 198" fill="lime" stroke="purple" stroke-width="5" fill-rule="nonzero" />
+</svg>
+```
 
 #### path（路径）
 
 #### text（文本）  
 
+<svg height="210" width="500">
+  <text x="50" y="50" fill="lime">I am Daniel</text>
+</svg>
+
+```svg 
+<svg height="210" width="500">
+  <text x="50" y="50" fill="lime">I am Daniel</text>
+</svg>
+```
+
 ### 其他  
 
-#### 滤镜 
+#### defs  
 
-#### stroke 
+将一些特殊的配置放在`defs`标签中，比如**滤镜**、**渐变**、**阴影**等。  
 
-#### 模糊 
+<svg width="100" height="100">
+  <defs>
+    <filter id="f1">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" />
+    </filter>
+  </defs>
+  <rect width="90" height="90" stroke="green" stroke-width="3" fill="yellow" filter="url(#f1)" />
+</svg>
 
-#### 阴影  
+```svg 
+  <svg width="100" height="100">
+    <defs>
+      <filter id="f1">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="15" />
+      </filter>
+    </defs>
+    <rect width="90" height="90" stroke="green" stroke-width="3" fill="yellow" filter="url(#f1)" />
+  </svg>
+```
 
-#### 渐变  
+##### filter（滤镜）  
+
+有如下滤镜：
+> feBlend - 与图像相结合的滤镜
+feColorMatrix - 用于彩色滤光片转换
+feComponentTransfer
+feComposite
+feConvolveMatrix
+feDiffuseLighting
+feDisplacementMap
+feFlood
+feGaussianBlur
+feImage
+feMerge
+feMorphology
+feOffset - 过滤阴影
+feSpecularLighting
+feTile
+feTurbulence
+feDistantLight - 用于照明过滤
+fePointLight - 用于照明过滤
+feSpotLight - 用于照明过滤
+
+等等。  
+
+##### 渐变  
+
+- 线性渐变  
+
+<svg width="100" height="100">
+  <defs>
+    <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="red" stop-opacity="1"></stop>
+      <stop offset="100%" stop-color="yellow" stop-opacity="1"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="50" height="50" fill="url(#linear)"></rect>
+</svg>
+
+```svg 
+<svg width="100" height="100">
+  <defs>
+    <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="red" stop-opacity="1"></stop>
+      <stop offset="100%" stop-color="yellow" stop-opacity="1"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="50" height="50" fill="url(#linear)"></rect>
+</svg>
+```
+
+  - x1、y1、x2、y2表示线性渐变的方向  
+  - id 表示渐变的名称  
+  - stop 表示内部颜色的变化步骤  
+    - offset 表示线性的位置  
+    - stop-color 表示颜色  
+    - stop-opacity 表示透明度  
+
+- 径向渐变
+
+<svg width="100" height="100">
+  <defs>
+    <radialGradient id="radial" r="100%" cx="100%" cy="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="red" stop-opacity="1"></stop>
+      <stop offset="100%" stop-color="yellow" stop-opacity="1"></stop>
+    </radialGradient>
+  </defs>
+  <circle r="50" cx="50" cy="50" fill="url(#radial)"></rect>
+</svg>
+
+  与线性渐变类似  
+  - r 表示渐变的圆形大小  
+  - fx、fy 表示渐变的焦点，也可以说是一个灯光效果，或者说渐变`圆心`在图形上的位置。    
+  - fr 表示焦点的大小  
+  - cx、cy 表示渐变结束的圆心位置  
 
 
 ## 结束  
+
+以上就是本人相关的笔记。  
+下面给到一些链接：  
+[编辑器](https://c.runoob.com/more/svgeditor/)  
+[API参考](https://www.runoob.com/svg/svg-reference.html)  
