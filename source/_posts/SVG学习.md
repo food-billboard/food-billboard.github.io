@@ -232,6 +232,30 @@ SVG 与诸如 DOM 和 XSL 之类的 W3C 标准是一个整体
 
 #### path（路径）
 
+重点来了，这个应该是平常用到的最多的一个东西。  
+
+关键的属性在`d`上，描述了元素的整体路径的形状。  
+以下是相关的语法。  
+> M = moveto 移动到某个位置  
+L = lineto 从当前点连线到指定点  
+H = horizontal lineto 从当前点水平连接指定点  
+V = vertical lineto 从当前点垂直连接指定点  
+C = curveto 三次贝塞尔曲线  
+S = smooth curveto 三次平滑贝塞尔曲线   
+Q = quadratic Bézier curve 二次贝塞尔曲线  
+T = smooth quadratic Bézier curveto 平滑二次贝塞尔曲线  
+A = elliptical Arc 圆弧（x轴半径，y轴半径，旋转角度，是否选择弧长较长的一段0短边|1长边，顺时针绘制，终点x轴坐标，终点y轴坐标）
+Z = closepath  闭合路径  
+
+以上的字母，大小表示绝对位置，小写表示相对位置。  
+
+`d`以`M`开头，  
+
+<svg width="200" height="200">
+  <path d="M10 10 L120 20 H140 V50 A140 50 0 0 140 50" fill="none" stroke="red" stroke-width="2"></path>
+</svg>
+  
+
 #### text（文本）  
 
 <svg height="210" width="500">
