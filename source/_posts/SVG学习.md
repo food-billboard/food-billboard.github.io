@@ -2,8 +2,8 @@
 title: SVG学习
 date: 2022-09-19 17:16:00
 tags: css svg 
-banner_img: /images/SVG学习/background.jpeg
-index_img: /images/SVG学习/background.jpeg
+banner_img: /images/SVG学习/background.webp
+index_img: /images/SVG学习/background.webp
 categories: 
   - svg
   - css
@@ -86,6 +86,39 @@ SVG 与诸如 DOM 和 XSL 之类的 W3C 标准是一个整体
 </svg>
 ```
 
+#### stroke-dashoffset  
+
+设置虚线的偏移量
+
+<svg width="200" height="100">
+  <polyline points="20 20 150 20" stroke-dasharray="50 10" stroke="red" stroke-width="5"></polyline>
+  <polyline points="20 50 150 50" stroke-dasharray="50 10" stroke="blue" stroke-width="5" stroke-dashoffset="20"></polyline>
+</svg>
+
+```svg 
+<svg width="200" height="100">
+  <polyline points="20 20 150 20" stroke-dasharray="50 10" stroke="red" stroke-width="5"></polyline>
+  <polyline points="20 50 150 50" stroke-dasharray="50 10" stroke="blue" stroke-width="5" stroke-dashoffset="20"></polyline>
+</svg>
+```
+
+#### stroke-linejoin 
+
+转折点的样式
+
+<svg width="200" height="200">
+  <polyline stroke-linejoin="miter" points="0 0 0 50 50 50" stroke="red" stroke-width="20" fill="none"></polyline>
+  <polyline stroke-linejoin="round" points="50 50 50 100 100 100" stroke="blue" stroke-width="20" fill="none"></polyline>
+  <polyline stroke-linejoin="bevel" points="100 100 100 150 150 150" stroke="blue" stroke-width="20" fill="none"></polyline>
+</svg>
+
+```svg 
+<svg width="200" height="100">
+  <polyline stroke-linejoin="miter" points="20 20 40 50 60 70" stroke="red" stroke-width="5"></polyline>
+  <polyline stroke-linejoin="round" points="20 20 40 50 60 70" stroke="blue" stroke-width="5"></polyline>
+  <polyline stroke-linejoin="bevel" points="20 20 40 50 60 70" stroke="blue" stroke-width="5"></polyline>
+</svg>
+```
 #### stroke-opacity  
 
 描边线条的透明度  
@@ -244,7 +277,7 @@ C = curveto 三次贝塞尔曲线
 S = smooth curveto 三次平滑贝塞尔曲线   
 Q = quadratic Bézier curve 二次贝塞尔曲线  
 T = smooth quadratic Bézier curveto 平滑二次贝塞尔曲线  
-A = elliptical Arc 圆弧（x轴半径，y轴半径，旋转角度，是否选择弧长较长的一段0短边|1长边，顺时针绘制，终点x轴坐标，终点y轴坐标）
+A = elliptical Arc 圆弧（x轴半径，y轴半径，旋转角度，是否选择弧长较长的一段0短边|1长边，顺时针绘制1|逆时针0，终点x轴坐标，终点y轴坐标）
 Z = closepath  闭合路径  
 
 以上的字母，大小表示绝对位置，小写表示相对位置。  
@@ -252,9 +285,29 @@ Z = closepath  闭合路径
 `d`以`M`开头，  
 
 <svg width="200" height="200">
-  <path d="M10 10 L120 20 H140 V50 A140 50 0 0 140 50" fill="none" stroke="red" stroke-width="2"></path>
+  <path d="M10 10 L120 50 H140 V100" fill="none" stroke="red" stroke-width="2"></path>
 </svg>
+
+```svg 
+<svg width="200" height="200">
+  <path d="M10 10 L120 50 H140 V100" fill="none" stroke="red" stroke-width="2"></path>
+</svg>
+```
   
+##### A 
+
+从点(10, 10)开始，绘制x轴半径为50，y轴半径是20，旋转100度，以小弧度，逆时针到点（100， 100）处。  
+
+<svg width="200" height="200">
+  <path d="M10 10 A50 20 100 0 0 100 100" fill="none" stroke="red" stroke-width="2"></path>
+</svg>
+
+```
+<svg width="200" height="200">
+  <path d="M10 10 A50 20 180 1 0 100 100" fill="none" stroke="red" stroke-width="2"></path>
+</svg>
+```
+
 
 #### text（文本）  
 
@@ -377,3 +430,7 @@ feSpotLight - 用于照明过滤
 下面给到一些链接：  
 [编辑器](https://c.runoob.com/more/svgeditor/)  
 [API参考](https://www.runoob.com/svg/svg-reference.html)  
+
+## 附增  
+
+这里保存一些平常看到的有意思的`svg`效果👍。    
