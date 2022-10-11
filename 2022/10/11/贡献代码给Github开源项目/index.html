@@ -16,18 +16,42 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://yoursite.com/archives/2022/06/index.html">
+  <meta name="description" content="贡献代码给Github开源项目介绍之前就一直想给开源项目贡献自己的一份力，奈何都没有找到合适的机会，前几天尝试给开源项目ahooks贡献一下代码，虽然没有被采纳，但是也在这里做一下记录吧📝。全文的贡献流程均参考文章《如何贡献代码到Github开源项目》。   正文 找到目标项目。    首先是找一个适合的开源目标项目，并且有自己发现的bug或者优化等地方。本人找到的是ahooks，因为相对来说，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="贡献代码给Github开源项目">
+<meta property="og:url" content="http://yoursite.com/2022/10/11/%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81%E7%BB%99Github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/index.html">
 <meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="贡献代码给Github开源项目介绍之前就一直想给开源项目贡献自己的一份力，奈何都没有找到合适的机会，前几天尝试给开源项目ahooks贡献一下代码，虽然没有被采纳，但是也在这里做一下记录吧📝。全文的贡献流程均参考文章《如何贡献代码到Github开源项目》。   正文 找到目标项目。    首先是找一个适合的开源目标项目，并且有自己发现的bug或者优化等地方。本人找到的是ahooks，因为相对来说，">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/贡献代码给Github开源项目/fork.jpg">
+<meta property="og:image" content="http://yoursite.com/images/贡献代码给Github开源项目/fork-self.jpg">
+<meta property="og:image" content="http://yoursite.com/images/贡献代码给Github开源项目/pull-request.jpg">
+<meta property="article:published_time" content="2022-10-11T05:53:00.000Z">
+<meta property="article:modified_time" content="2022-10-11T06:17:34.000Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="github">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/images/贡献代码给Github开源项目/fork.jpg">
   
-  <title>归档 - Food-Billboard</title>
+  <title>贡献代码给Github开源项目 - Food-Billboard</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -57,7 +81,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -165,14 +189,48 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/images/%E9%A6%96%E9%A1%B5/background.jpg') no-repeat center center;
+         style="background: url('/images/%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81%E7%BB%99Github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/background.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="贡献代码给Github开源项目">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-11 13:53" pubdate>
+        2022年10月11日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      805 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3 分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -185,40 +243,124 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 19 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2022</p>
-    
-    <a href="/2022/06/23/gsap%E5%8A%A8%E7%94%BB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">gsap动画的简单使用</span>
-      <time style="float: right;">06-23</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">贡献代码给Github开源项目</h1>
+            
+            <div class="markdown-body">
+              <h1 id="贡献代码给Github开源项目"><a href="#贡献代码给Github开源项目" class="headerlink" title="贡献代码给Github开源项目"></a>贡献代码给Github开源项目</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>之前就一直想给开源项目贡献自己的一份力，奈何都没有找到合适的机会，前几天尝试给开源项目<a target="_blank" rel="noopener" href="https://github.com/alibaba/hooks">ahooks</a>贡献一下代码，虽然没有被采纳，但是也在这里做一下记录吧📝。<br>全文的贡献流程均参考文章《<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903944418787341">如何贡献代码到Github开源项目</a>》。  </p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ol>
+<li>找到目标项目。  </li>
+</ol>
+<p>首先是找一个适合的开源目标项目，并且有自己发现的<code>bug</code>或者优化等地方。<br>本人找到的是<code>ahooks</code>，因为相对来说，各个<code>hook</code>相对独立，并且代码精简，阅读方便。<br>本人希望在其中新增一个<code>hook</code>，用于监听浏览器的<code>location hash</code>变化以及修改。  </p>
+<ol start="2">
+<li>fork项目  </li>
+</ol>
+<p>接着将目标项目<code>fork</code>到自己的账号下面。  </p>
+<img src="/images/贡献代码给Github开源项目/fork.jpg" srcset="/img/loading.gif" lazyload />
+<img src="/images/贡献代码给Github开源项目/fork-self.jpg" srcset="/img/loading.gif" lazyload />
 
+<ol start="3">
+<li>clone项目  </li>
+</ol>
+<p>将自己仓库下的项目<code>clone</code>到本地。<br><code>git clone git@github.com:food-billboard/自己仓库的项目.git</code>  </p>
+<ol start="4">
+<li>建立链接  </li>
+</ol>
+<p>如果要提交本地代码到开源项目，需要建立其链接。<br><code>git remote add upstream git@github.com:xxxx/开源仓库.git</code><br>验证以下命令会出现两个<code>upstream</code>地址。<br><code>git remote -v</code>  </p>
+<ol start="5">
+<li>新建分支&amp;修改代码&amp;提交    </li>
+</ol>
+<p>接着就是按照平常的简单的新分支编写代码并提交。    </p>
+<ul>
+<li>顺带一提<br>为了保证质量与安全，一般都应该在提交前，完成对应修改或新增模块的功能测试以及文档修改。  </li>
+</ul>
+<ol start="6">
+<li>compare&amp;pull request  </li>
+</ol>
+<p>提交代码后，会在自己仓库主页上方出现<code>compare&amp;pull request</code>按钮。<br>点击进入到提交界面。  </p>
+<img src="/images/贡献代码给Github开源项目/pull-request.jpg" srcset="/img/loading.gif" lazyload />
 
+<p>一般优秀的开源项目都会有对象的<code>pr</code>模板，我们应该按照他们的模板来进行对应的信息填写，方便作者核实相关信息。<br>完成填写后，点击提交，即完成了一次代码贡献👍。  </p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>需要注意的是，每次在提交代码前，都应该先将本地的代码与远程仓库进行同步，以免出现不必要的麻烦。  </p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>大致的流程就是这个样子，希望在之后还能找到合适的机会，主要还是想锻炼一下自己的代码技术。  </p>
 
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/github/">github</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/github/">github</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/19/SVG%E5%AD%A6%E4%B9%A0/">
+                        <span class="hidden-mobile">SVG学习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -325,6 +467,19 @@
   
 
 
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
 
 
