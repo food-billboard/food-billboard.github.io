@@ -96,6 +96,10 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: fluid
 
+markdown:
+  plugins:
+    - "@traptitech/markdown-it-katex"
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
@@ -155,6 +159,12 @@ about:
 # 标签 
 tag:
   banner_img: /images/首页/background.jpg
+
+post:
+  math:
+    enable: true
+    specific: false
+    engine: katex
 
 navbar:
   menu:
