@@ -62,6 +62,12 @@ categories:
 ### 注意  
 
 需要注意的是，每次在提交代码前，都应该先将本地的代码与远程仓库进行同步，以免出现不必要的麻烦。  
+这里补充下同步代码的命令。  
+如果是刚刚执行过上述命令的情况下，可跳过以下步骤。  
+1. 建立链接
+`git remote add upstream git@github.com:xxxx/开源仓库.git`  
+2. 拉取代码  
+`git fetch upstream`  
 
 ## 结束 
 
