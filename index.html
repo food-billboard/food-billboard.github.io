@@ -1,0 +1,988 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Food-Billboard">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/%E9%A6%96%E9%A1%B5/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="This is Food Billboard&#39;s Blog">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/11/11/docx%E5%BA%93Table%E8%B8%A9%E5%9D%91/" target="_self">
+          <img src="/images/docx%E5%BA%93Table%E8%B8%A9%E5%9D%91/background.svg" srcset="/img/loading.gif" lazyload alt="docx库Table踩坑">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/11/11/docx%E5%BA%93Table%E8%B8%A9%E5%9D%91/" target="_self">
+          docx库Table踩坑
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/11/11/docx%E5%BA%93Table%E8%B8%A9%E5%9D%91/" target="_self">
+          
+          
+            
+          
+          docx库Table踩坑介绍最近工作中遇到了需要导出word文档的需求，只是简单的将列表详情的数据导出成word中的表格。类似于下面的效果：
+
+
+
+标题
+内容
+
+
+
+标题
+内容
+
+
+标题
+内容
+
+
+之后找到了相关的工具库docx。功能强大，他封装了word中的相关模块的构造方法，只需要简单的创建一个对象就可以生成word文档。其中的一些构造方法有Document、Table、Paragraph、T
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-11-11 11:20" pubdate>
+              2022-11-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AF%BC%E5%87%BA/">导出</a>
+            
+              <a href="/categories/%E5%AF%BC%E5%87%BA/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/docx-word/">docx word</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/10/24/%E6%AF%8F%E6%97%A5%E8%BF%9B%E6%AD%A5%E5%B0%8F%E8%AE%B0-1/" target="_self">
+          <img src="/images/%E6%AF%8F%E6%97%A5%E8%BF%9B%E6%AD%A5%E5%B0%8F%E8%AE%B0/background.jpg" srcset="/img/loading.gif" lazyload alt="每日进步小记">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/10/24/%E6%AF%8F%E6%97%A5%E8%BF%9B%E6%AD%A5%E5%B0%8F%E8%AE%B0-1/" target="_self">
+          每日进步小记
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/10/24/%E6%AF%8F%E6%97%A5%E8%BF%9B%E6%AD%A5%E5%B0%8F%E8%AE%B0-1/" target="_self">
+          
+          
+            
+          
+          每日进步小记记录今天的小进步💪🏻。  
+正文早前几天的文章中提到，如何给github开源项目贡献代码，经历过一次拒绝之后，终于迎来了春天😊。在调试自己的可视化大屏项目的时候，发现了一个奇怪的问题：输入框表单设置的是在blur时触发保存，按照需求，使用的是antd的input输入框，并添加了prefix属性，但是却出现了奇怪的问题，点击输入框边框或者prefix都触发了保存，同时也说明其同时触
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-24 21:03" pubdate>
+              2022-10-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/fitting/">fitting</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/fitting/">fitting</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/10/11/%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81%E7%BB%99Github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" target="_self">
+          <img src="/images/%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81%E7%BB%99Github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/background.png" srcset="/img/loading.gif" lazyload alt="贡献代码给Github开源项目">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/10/11/%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81%E7%BB%99Github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" target="_self">
+          贡献代码给Github开源项目
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/10/11/%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81%E7%BB%99Github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" target="_self">
+          
+          
+            
+          
+          贡献代码给Github开源项目介绍之前就一直想给开源项目贡献自己的一份力，奈何都没有找到合适的机会，前几天尝试给开源项目ahooks贡献一下代码，虽然没有被采纳，但是也在这里做一下记录吧📝。全文的贡献流程均参考文章《如何贡献代码到Github开源项目》。  
+正文
+找到目标项目。  
+
+首先是找一个适合的开源目标项目，并且有自己发现的bug或者优化等地方。本人找到的是ahooks，因为相对来说，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-11 13:53" pubdate>
+              2022-10-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/github/">github</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/github/">github</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/09/19/SVG%E5%AD%A6%E4%B9%A0/" target="_self">
+          <img src="/images/SVG%E5%AD%A6%E4%B9%A0/background.webp" srcset="/img/loading.gif" lazyload alt="SVG学习">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/09/19/SVG%E5%AD%A6%E4%B9%A0/" target="_self">
+          SVG学习
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/09/19/SVG%E5%AD%A6%E4%B9%A0/" target="_self">
+          
+          
+            
+          
+          SVG学习介绍
+SVG 指可伸缩矢量图形 (Scalable Vector Graphics)SVG 用来定义用于网络的基于矢量的图形SVG 使用 XML 格式定义图形SVG 图像在放大或改变尺寸的情况下其图形质量不会有所损失SVG 是万维网联盟的标准SVG 与诸如 DOM 和 XSL 之类的 W3C 标准是一个整体
+
+学习svg的目的，是为了能在前端页面实现更多有意思的效果。以下就是本人的学习笔
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-09-19 17:16" pubdate>
+              2022-09-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/svg/">svg</a>
+            
+              <a href="/categories/svg/css/">css</a>
+            
+              <a href="/categories/svg/css/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/css-svg/">css svg</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/09/12/%E4%B8%80%E5%88%9B%E8%81%9A%E5%AE%BD%E5%AD%A6%E4%B9%A0/" target="_self">
+          <img src="/images/%E4%B8%80%E5%88%9B%E8%81%9A%E5%AE%BD%E5%AD%A6%E4%B9%A0/background.jpg" srcset="/img/loading.gif" lazyload alt="一创聚宽学习">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/09/12/%E4%B8%80%E5%88%9B%E8%81%9A%E5%AE%BD%E5%AD%A6%E4%B9%A0/" target="_self">
+          一创聚宽学习
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/09/12/%E4%B8%80%E5%88%9B%E8%81%9A%E5%AE%BD%E5%AD%A6%E4%B9%A0/" target="_self">
+          
+          
+            
+          
+          一创聚宽学习背景作为一个🌶🐔技术人，每天想的都是如何搞💰，每天盯着🐔💰涨涨跌跌，一夜回到解放前，受够了。是时候通过知识创造财富了。学习量化交易，如果通过自动化来进行交易，实现财富自由👍。  
+介绍一创聚宽是国内比较有名的股票量化交易平台，它帮助开发者封装了很多实用的函数，并提供了实盘数据，以及实盘接入帮助。大大简化了开发者的开发过程。本文就简单的记录一下自己的学习笔记📝。  
+总体结
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-09-12 17:50" pubdate>
+              2022-09-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93/">量化交易</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/trade/">trade</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/08/parallax%E4%BD%BF%E7%94%A8/" target="_self">
+          <img src="/images/parallax%E4%BD%BF%E7%94%A8/background.jpg" srcset="/img/loading.gif" lazyload alt="parallax使用">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/08/parallax%E4%BD%BF%E7%94%A8/" target="_self">
+          parallax使用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/08/parallax%E4%BD%BF%E7%94%A8/" target="_self">
+          
+          
+            
+          
+          介绍最近想给自己的项目设计一个比较炫酷的首页，发现了这个工具–parallax，故在这里做一个简单的介绍👍 。
+正文parallax顾名思义，视差。百度这样解释：
+
+视差就是从有一定距离的两个点上观察同一个目标所产生的方向差异。从目标看两个点之间的夹角，叫做这两个点的视差，两点之间的距离称作基线。只要知道视差角度和基线长度，就可以计算出目标和观测者之间的距离。  
+
+parallax帮助你完成了
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-08 17:10" pubdate>
+              2022-07-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CSS/">CSS</a>
+            
+              <a href="/categories/CSS/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+              <a href="/categories/CSS/%E5%89%8D%E7%AB%AF/%E5%8A%A8%E7%94%BB/">动画</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/animation/">animation</a>
+            
+              <a href="/tags/CSS/">CSS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/06/23/gsap%E5%8A%A8%E7%94%BB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" target="_self">
+          <img src="/images/gsap%E5%8A%A8%E7%94%BB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/background.png" srcset="/img/loading.gif" lazyload alt="gsap动画的简单使用">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/23/gsap%E5%8A%A8%E7%94%BB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" target="_self">
+          gsap动画的简单使用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/23/gsap%E5%8A%A8%E7%94%BB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" target="_self">
+          
+          
+            
+          
+          介绍最近突然需要写一些包含多种动画的首页，偶然找到了gsap，发现是真的好用，这里对其一些api做下简单介绍。  
+正文gsap是一个javascript动画库，可以让开发者通过简单的api完成非常复杂的动画，包含非常多种类型的动画的实现，比如css3动画，svg动画以及canvas、webgl等。  
+官网给出了大量的示例代码，可以前往查看  
+
+但是它的缺点就是有些功能是付费的🤷🏻‍♀️，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-23 09:43" pubdate>
+              2022-06-23
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/animation/">animation</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E7%AB%AFpuppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          <img src="/images/%E6%9C%8D%E5%8A%A1%E7%AB%AFpuppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/background.png" srcset="/img/loading.gif" lazyload alt="服务端puppeteer的使用">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E7%AB%AFpuppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          服务端puppeteer的使用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E7%AB%AFpuppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          
+          
+            
+          
+          服务端puppeteer的使用介绍最近突然使用到了puppeteer，原本在本地都是好好的，但是当部署到服务器上之后就不行了。  
+正文虽然具体原因不确定，但是根据百度的做法最后不再报错。  
+安装chrome
+创建文件touch /etc/yum.repos.d/google.repo  
+配置内容  
+
+vi /etc/yum.repos.d/google.repo
+123456[google
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-21 16:41" pubdate>
+              2022-04-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+            
+              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF/">后端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/backend-node-puppeteer/">backend node puppeteer</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/" target="_self">
+          <img src="/images/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/background.jpeg" srcset="/img/loading.gif" lazyload alt="服务器上用到的一些命令">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/" target="_self">
+          服务器上用到的一些命令
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/" target="_self">
+          
+          
+            
+          
+          服务器上用到的一些命令介绍记录一些平常用到的一些命令，给自己提个醒。  
+正文端口占用平常碰到有占用端口的情况，需要杀死该进程。sudo lsof -i -P -n // 查看所有占用端口kill -9 pid  杀死进程，pid是对应端口的id  
+结束结束但是没有完全结束  
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-21 16:12" pubdate>
+              2022-04-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%83%A8%E7%BD%B2/">部署</a>
+            
+              <a href="/categories/%E9%83%A8%E7%BD%B2/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+            
+              <a href="/categories/%E9%83%A8%E7%BD%B2/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E5%90%8E%E7%AB%AF/">后端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/deploy-node-backend/">deploy node backend</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/02/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/" target="_self">
+          <img src="/images/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/background.jpeg" srcset="/img/loading.gif" lazyload alt="字号与像素的对应值">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/02/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/" target="_self">
+          字号与像素的对应值
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/02/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/" target="_self">
+          
+          
+            
+          
+          平常偶尔可能会碰到px和word的字号的相互转换的情况，这里从网上抄了下简单做下记录。
+单位pt (point，磅)是一个物理长度单位，指的是 72 分之一英寸。
+px (pixel，像素)是一个虚拟长度单位，是计算机系统的数字化图像长度单位，如果 px 要换算成物理长度，需要指定精度 DPI(Dots Per Inch，每英寸像素数)，在扫描打印时一般都有 DPI 可选。Windows 系统默认
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-02 15:42" pubdate>
+              2022-03-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CSS/">CSS</a>
+            
+              <a href="/categories/CSS/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CSS/">CSS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>

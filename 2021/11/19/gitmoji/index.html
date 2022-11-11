@@ -1,0 +1,936 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="介绍相信平时应该大家都用过github当做代码仓库，作为一个优质的仓库，对于代码的提交也有对应的规范，为了让提交看得更浅显易懂，可以使用不同的图标来表示不一样的意思，这里就介绍一个提交工具gitmoji。 正文关于这个库的使用相信官网已经描述的非常详细了，这里就简单做下翻译来供自己查看。   常用的几个      图标 代码 描述    🎨 :art: 改进代码的结构&#x2F;格式。   🔥 :fir">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gitmoji 优雅提交代码">
+<meta property="og:url" content="http://yoursite.com/2021/11/19/gitmoji/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="介绍相信平时应该大家都用过github当做代码仓库，作为一个优质的仓库，对于代码的提交也有对应的规范，为了让提交看得更浅显易懂，可以使用不同的图标来表示不一样的意思，这里就介绍一个提交工具gitmoji。 正文关于这个库的使用相信官网已经描述的非常详细了，这里就简单做下翻译来供自己查看。   常用的几个      图标 代码 描述    🎨 :art: 改进代码的结构&#x2F;格式。   🔥 :fir">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-19T07:17:00.000Z">
+<meta property="article:modified_time" content="2021-11-24T05:55:45.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>gitmoji 优雅提交代码 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/gitmoji/gitmoji-background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="gitmoji 优雅提交代码">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-19 15:17" pubdate>
+        2021年11月19日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">gitmoji 优雅提交代码</h1>
+            
+            <div class="markdown-body">
+              <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>相信平时应该大家都用过<code>github</code>当做代码仓库，作为一个优质的仓库，对于代码的提交也有对应的规范，为了让提交看得更浅显易懂，可以使用不同的图标来表示不一样的意思，这里就介绍一个提交工具<a target="_blank" rel="noopener" href="https://gitmoji.dev/">gitmoji</a>。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>关于这个库的使用相信官网已经描述的非常详细了，这里就简单做下翻译来供自己查看。  </p>
+<p>常用的几个  </p>
+<table>
+<thead>
+<tr>
+<th>图标</th>
+<th>代码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🎨</td>
+<td>:art:</td>
+<td>改进代码的结构/格式。</td>
+</tr>
+<tr>
+<td>🔥</td>
+<td>:fire:</td>
+<td>删除代码或文件。</td>
+</tr>
+<tr>
+<td>🐛</td>
+<td>:bug:</td>
+<td>修复一个错误。</td>
+</tr>
+<tr>
+<td>✨</td>
+<td>:sparkles:</td>
+<td>介绍新功能。</td>
+</tr>
+<tr>
+<td>✅</td>
+<td>:white_check_mark:</td>
+<td>添加、更新或通过测试。</td>
+</tr>
+<tr>
+<td>🚀</td>
+<td>:rocket:</td>
+<td>代码部署。</td>
+</tr>
+<tr>
+<td>💄</td>
+<td>:lipstick:</td>
+<td>添加或更新 UI 和样式文件。</td>
+</tr>
+<tr>
+<td>🔒️</td>
+<td>:lock:</td>
+<td>修复安全问题。</td>
+</tr>
+<tr>
+<td>🔖</td>
+<td>:bookmark:</td>
+<td>发布/版本标签。</td>
+</tr>
+<tr>
+<td>🔧</td>
+<td>:wrench:</td>
+<td>添加或更新配置文件。</td>
+</tr>
+<tr>
+<td>⏪️</td>
+<td>:rewind:</td>
+<td>还原更改。</td>
+</tr>
+<tr>
+<td>🤡</td>
+<td>:clown_face:</td>
+<td>mock 代码</td>
+</tr>
+<tr>
+<td>🙈</td>
+<td>:see_no_evil:</td>
+<td>添加或更新 .gitignore 文件。</td>
+</tr>
+<tr>
+<td>🗑️</td>
+<td>:wastebasket:</td>
+<td>弃用需要清理的代码。</td>
+</tr>
+<tr>
+<td>⚰️</td>
+<td>:coffin:</td>
+<td>删除死代码。</td>
+</tr>
+<tr>
+<td>🧪</td>
+<td>:test_tube:</td>
+<td>添加失败的测试。</td>
+</tr>
+<tr>
+<td>👔</td>
+<td>:necktie:</td>
+<td>添加或更新业务逻辑</td>
+</tr>
+</tbody></table>
+<p>索引  </p>
+<table>
+<thead>
+<tr>
+<th>图标</th>
+<th>代码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🎨</td>
+<td>:art:</td>
+<td>改进代码的结构/格式。</td>
+</tr>
+<tr>
+<td>⚡️</td>
+<td>:zap:</td>
+<td>提高性能。</td>
+</tr>
+<tr>
+<td>🔥</td>
+<td>:fire:</td>
+<td>删除代码或文件。</td>
+</tr>
+<tr>
+<td>🐛</td>
+<td>:bug:</td>
+<td>修复一个错误。</td>
+</tr>
+<tr>
+<td>🚑️</td>
+<td>:ambulance:</td>
+<td>关键修补程序。</td>
+</tr>
+<tr>
+<td>✨</td>
+<td>:sparkles:</td>
+<td>介绍新功能。</td>
+</tr>
+<tr>
+<td>📝</td>
+<td>:memo:</td>
+<td>添加或更新文档。</td>
+</tr>
+<tr>
+<td>🚀</td>
+<td>:rocket:</td>
+<td>代码部署。</td>
+</tr>
+<tr>
+<td>💄</td>
+<td>:lipstick:</td>
+<td>添加或更新 UI 和样式文件。</td>
+</tr>
+<tr>
+<td>🎉</td>
+<td>:tada:</td>
+<td>项目创建</td>
+</tr>
+<tr>
+<td>✅</td>
+<td>:white_check_mark:</td>
+<td>添加、更新或通过测试。</td>
+</tr>
+<tr>
+<td>🔒️</td>
+<td>:lock:</td>
+<td>修复安全问题。</td>
+</tr>
+<tr>
+<td>🔖</td>
+<td>:bookmark:</td>
+<td>发布/版本标签。</td>
+</tr>
+<tr>
+<td>🚨</td>
+<td>:rotating_light:</td>
+<td>修复编译器/linter 警告。</td>
+</tr>
+<tr>
+<td>🚧</td>
+<td>:construction:</td>
+<td>工作正在进行中。</td>
+</tr>
+<tr>
+<td>💚</td>
+<td>:green_heart:</td>
+<td>修复 CI 构建。</td>
+</tr>
+<tr>
+<td>⬇️</td>
+<td>:arrow_down:</td>
+<td>降级依赖项。</td>
+</tr>
+<tr>
+<td>⬆️</td>
+<td>:arrow_up:</td>
+<td>升级依赖项。</td>
+</tr>
+<tr>
+<td>📌</td>
+<td>:pushpin:</td>
+<td>将依赖项固定到特定版本。</td>
+</tr>
+<tr>
+<td>👷</td>
+<td>:construction_worker:</td>
+<td>添加或更新 CI 构建系统。</td>
+</tr>
+<tr>
+<td>📈</td>
+<td>:chart_with_upwards_trend:</td>
+<td>添加或更新分析或跟踪代码。</td>
+</tr>
+<tr>
+<td>♻️</td>
+<td>:recycle:</td>
+<td>重构代码。</td>
+</tr>
+<tr>
+<td>➕</td>
+<td>:heavy_plus_sign:</td>
+<td>添加依赖项。</td>
+</tr>
+<tr>
+<td>➖</td>
+<td>:heavy_minus_sign:</td>
+<td>删除依赖项。</td>
+</tr>
+<tr>
+<td>🔧</td>
+<td>:wrench:</td>
+<td>添加或更新配置文件。</td>
+</tr>
+<tr>
+<td>🔨</td>
+<td>:hammer:</td>
+<td>添加或更新开发脚本。</td>
+</tr>
+<tr>
+<td>🌐</td>
+<td>:globe_with_meridians:</td>
+<td>国际化和本地化。</td>
+</tr>
+<tr>
+<td>✏️</td>
+<td>:pencil2:</td>
+<td>修正错别字。</td>
+</tr>
+<tr>
+<td>💩</td>
+<td>:poop:</td>
+<td>编写需要改进的糟糕代码。</td>
+</tr>
+<tr>
+<td>⏪️</td>
+<td>:rewind:</td>
+<td>还原更改。</td>
+</tr>
+<tr>
+<td>🔀</td>
+<td>:twisted_rightwards_arrows:</td>
+<td>合并分支。</td>
+</tr>
+<tr>
+<td>📦️</td>
+<td>:package:</td>
+<td>添加或更新已编译的文件或包。</td>
+</tr>
+<tr>
+<td>👽️</td>
+<td>:alien:</td>
+<td>由于外部 API 更改而更新代码。</td>
+</tr>
+<tr>
+<td>🚚</td>
+<td>:truck:</td>
+<td>移动或重命名资源（例如：文件、路径、路由）。</td>
+</tr>
+<tr>
+<td>📄</td>
+<td>:page_facing_up:</td>
+<td>添加或更新许可证。</td>
+</tr>
+<tr>
+<td>💥</td>
+<td>:boom:</td>
+<td>引入重大更改。</td>
+</tr>
+<tr>
+<td>🍱</td>
+<td>:bento:</td>
+<td>添加或更新静态资源</td>
+</tr>
+<tr>
+<td>♿️</td>
+<td>:wheelchair:</td>
+<td>提高可访问性。</td>
+</tr>
+<tr>
+<td>💡</td>
+<td>:bulb:</td>
+<td>在源代码中添加或更新注释。</td>
+</tr>
+<tr>
+<td>🍻</td>
+<td>:beers:</td>
+<td>醉酒写代码。(没懂啥意思)</td>
+</tr>
+<tr>
+<td>💬</td>
+<td>:speech_balloon:</td>
+<td>添加或更新文本和文字。</td>
+</tr>
+<tr>
+<td>🗃️</td>
+<td>:card_file_box:</td>
+<td>执行与数据库相关的更改。</td>
+</tr>
+<tr>
+<td>🔊</td>
+<td>:loud_sound:</td>
+<td>添加或更新日志。</td>
+</tr>
+<tr>
+<td>🔇</td>
+<td>:mute:</td>
+<td>删除日志。</td>
+</tr>
+<tr>
+<td>👥</td>
+<td>:busts_in_silhouette:</td>
+<td>添加或更新贡献者。</td>
+</tr>
+<tr>
+<td>🚸</td>
+<td>:children_crossing:</td>
+<td>改善用户体验/可用性</td>
+</tr>
+<tr>
+<td>🏗️</td>
+<td>:building_construction:</td>
+<td>进行架构更改。</td>
+</tr>
+<tr>
+<td>📱</td>
+<td>:iphone:</td>
+<td>从事响应式设计。</td>
+</tr>
+<tr>
+<td>🤡</td>
+<td>:clown_face:</td>
+<td>mock 代码</td>
+</tr>
+<tr>
+<td>🥚</td>
+<td>:egg:</td>
+<td>添加或更新复活节彩蛋。</td>
+</tr>
+<tr>
+<td>🙈</td>
+<td>:see_no_evil:</td>
+<td>添加或更新 .gitignore 文件。</td>
+</tr>
+<tr>
+<td>📸</td>
+<td>:camera_flash:</td>
+<td>添加或更新快照。</td>
+</tr>
+<tr>
+<td>⚗️</td>
+<td>:alembic:</td>
+<td>进行实验。</td>
+</tr>
+<tr>
+<td>🔍️</td>
+<td>:mag:</td>
+<td>改进搜索引擎优化。</td>
+</tr>
+<tr>
+<td>🏷️</td>
+<td>:label:</td>
+<td>添加或更新类型。</td>
+</tr>
+<tr>
+<td>🌱</td>
+<td>:seedling:</td>
+<td>添加或更新种子文件。</td>
+</tr>
+<tr>
+<td>🚩</td>
+<td>:triangular_flag_on_post:</td>
+<td>添加、更新或删除功能标志。</td>
+</tr>
+<tr>
+<td>🥅</td>
+<td>:goal_net:</td>
+<td>捕捉错误。</td>
+</tr>
+<tr>
+<td>💫</td>
+<td>:dizzy:</td>
+<td>添加或更新动画和过渡。</td>
+</tr>
+<tr>
+<td>🗑️</td>
+<td>:wastebasket:</td>
+<td>弃用需要清理的代码。</td>
+</tr>
+<tr>
+<td>🛂</td>
+<td>:passport_control:</td>
+<td>处理与授权、角色和权限相关的代码。</td>
+</tr>
+<tr>
+<td>🩹</td>
+<td>:adhesive_bandage:</td>
+<td>对非关键问题的简单修复。</td>
+</tr>
+<tr>
+<td>🧐</td>
+<td>:monocle_face:</td>
+<td>数据探索/检查。</td>
+</tr>
+<tr>
+<td>⚰️</td>
+<td>:coffin:</td>
+<td>删除死代码。</td>
+</tr>
+<tr>
+<td>🧪</td>
+<td>:test_tube:</td>
+<td>添加失败的测试。</td>
+</tr>
+<tr>
+<td>👔</td>
+<td>:necktie:</td>
+<td>添加或更新业务逻辑</td>
+</tr>
+<tr>
+<td>🩺</td>
+<td>:stethoscope:</td>
+<td>添加或更新健康检查。</td>
+</tr>
+</tbody></table>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>简单水💧一下。  </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4/">代码提交</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4/%E8%A7%84%E8%8C%83/">规范</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/24/%E6%96%87%E4%BB%B6%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文件分片上传</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/30/%E4%BB%8E0%E5%88%B01%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/">
+                        <span class="hidden-mobile">从0到1完成阿里云node服务搭建部署</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>
