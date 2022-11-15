@@ -205,86 +205,10 @@ new Table({
 
 最后附上完整的例子。  
 
-```js
-	export default (filename, value) => {
-	const table = new Table({
-		layout: TableLayoutType.FIXED,
-		columns: 2,
-		width: 0,
-		columnWidths: [3213, 6425],
-		rows: value.reduce((acc, item) => {
-			const { key, value } = item
-			if (Array.isArray(value)) {
-				acc.push(
-					...value.map((item, index) => {
-						return new TableRow({
-							children: [
-								...(index == 0
-									? [
-											new TableCell({
-												rowSpan: value.length,
-												children: [
-													new Paragraph({
-														text: key,
-													}),
-												],
-												verticalAlign: VerticalAlign.CENTER,
-											}),
-									  ]
-									: []),
-								new TableCell({
-									children: [
-										new Paragraph({
-											text: item,
-										}),
-									],
-									verticalAlign: VerticalAlign.CENTER,
-								}),
-							],
-						})
-					})
-				)
-			} else {
-				acc.push(
-					new TableRow({
-						children: [
-							new TableCell({
-								children: [
-									new Paragraph({
-										text: key,
-									}),
-								],
-								verticalAlign: VerticalAlign.CENTER,
-							}),
-							new TableCell({
-								children: [
-									new Paragraph({
-										text: value,
-									}),
-								],
-								verticalAlign: VerticalAlign.CENTER,
-							}),
-						],
-					})
-				)
-			}
-			return acc
-		}, []),
-	})
-
-	const doc = new Document({
-		sections: [
-			{
-				children: [table],
-			},
-		],
-	})
-
-	return docx.Packer.toBlob(doc).then((blob) => {
-		saveAs(blob, `${filename || "example"}.docx`)
-	})
-}
-```
+<div
+	src="https://stackblitz.com/edit/js-485wx8?file=index.js"
+	class="iframe-viewer-button"
+>点击查看代码</div>
 
 <img src="/images/docx库Table踩坑/docx-5.jpg" />
 
