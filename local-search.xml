@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>数据可视化大屏设计器开发</title>
+    <link href="/2022/11/16/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91/"/>
+    <url>/2022/11/16/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91/</url>
+    
+    <content type="html"><![CDATA[<h1 id="数据可视化大屏设计器开发"><a href="#数据可视化大屏设计器开发" class="headerlink" title="数据可视化大屏设计器开发"></a>数据可视化大屏设计器开发</h1><h2 id="开头"><a href="#开头" class="headerlink" title="开头"></a>开头</h2><p>低代码平台，算是一个已经热门很久了的话题，本人也是在看了很多的开源项目以及体验了相关的产品，决定自己搞一个出来玩玩。<br>最终定下的是<code>数据大屏</code>的可视化设计器，相对于页面低代码，大屏的低代码总体来说，相对更简单一些，但是考虑到当中的一些细节及效果，那也算是相当的复杂。  </p><p>研发工作其实已经开始了很久，最终还是决定写下一篇水文来记录一下。<br><a href="http://47.97.27.23/api/backend/screen/index.html">大屏的体验地址</a><br>体验账号放在了代码的<a href="https://github.com/food-billboard/create-chart/issues/2">issue</a>中，请自取。<br>当前版本维持在<code>1.14</code>版本，并且还在持续迭代中，虽然当中还有很多的<code>bug</code>，体验的伙伴轻喷🙏🏻。    </p><img src="/images/数据可视化大屏设计器开发/screenshoot-4.jpg" /><br/><br/><img src="/images/数据可视化大屏设计器开发/screenshoot-5.jpg" /><h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><p>大屏整体结构使用了<a href="https://github.com/umijs/umi">umi</a>、<a href="https://github.com/facebook/react">React</a>、<a href="https://github.com/apache/echarts">Echarts</a>。  </p><h3 id="功能相关"><a href="#功能相关" class="headerlink" title="功能相关"></a>功能相关</h3><h3 id="设计器"><a href="#设计器" class="headerlink" title="设计器"></a>设计器</h3><ul><li>组件复制、粘贴（支持跨屏）    </li><li>组件转换  </li><li>前进、后退  </li><li>成组  </li><li>多选  </li><li>对齐  </li><li>数据过滤  </li><li>全局常量  </li><li>滤镜  </li><li>主题色转换（支持图片上传）    </li><li>图层管理  </li><li>PC、H5两端支持（研发中）  </li><li>模板创建使用  </li><li>导入、导出  </li><li>跨屏复制粘贴  </li><li>组件边框内置支持  </li><li>条件控制  </li><li>组件交互联动支持  </li></ul><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>当前设计器支持三种数据格式：<code>静态数据</code>、<code>API</code>、<code>Mock</code>。     </p><p><code>MOCK</code>数据应用在一些只需简单演示的场景中，大屏基于<a href="https://github.com/nuysoft/Mock">MockJs</a>在管理后台内置了一个可表单配置<code>Mock数据</code>的功能，可在大屏中选择该数据类型进行快速的数据填充，加速大屏研发速度。  </p><h3 id="产出"><a href="#产出" class="headerlink" title="产出"></a>产出</h3><p>完成设计产出，可以进行简单预览。<br>最后交付则可选择进行发布分享，分享页面不需要进行登录认证，并且支持密码验证。  </p><h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>详情功能及操作可参看<a href="http://47.97.27.23/api/backend/create-chart-docs/index.html">大屏操作文档</a>  </p><p>可能当中页面很多地方与阿里的<code>datav</code>相似，不用怀疑，因为很多地方的<code>ui</code>均参照其进行修改的😕。    </p><p>下面是一些例子🌰<br><img src="/images/数据可视化大屏设计器开发/screenshoot-1.png" /><br><br/><br><br/><br><img src="/images/数据可视化大屏设计器开发/screenshoot-2.png" /></p><h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>这次的水文算是一个整体的介绍了，当中的细节实现可能会在后续的水文中介绍。<br>顺便在下面附上相关的链接。  </p><blockquote><p><a href="http://47.97.27.23/api/backend/screen/index.html">试用地址</a><br><a href="http://47.97.27.23/api/backend/create-chart-docs/index.html">操作文档</a><br><a href="https://github.com/food-billboard/create-chart">代码地址</a>   </p></blockquote><p>如果使用中有任何问题，可以在<a href="https://github.com/food-billboard/create-chart/issues">issue</a>中留言，或者直接在这里留言。  </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>前端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>lowcode react chart</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>docx库Table踩坑</title>
     <link href="/2022/11/11/docx%E5%BA%93Table%E8%B8%A9%E5%9D%91/"/>
     <url>/2022/11/11/docx%E5%BA%93Table%E8%B8%A9%E5%9D%91/</url>
