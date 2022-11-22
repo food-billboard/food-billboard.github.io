@@ -2,8 +2,8 @@
 title: dom-diff学习
 date: 2022-11-21 22:27:00
 tags: front 
-banner_img: /images/dom-diff学习/background.jpeg
-index_img: /images/dom-diff学习/background.jpeg
+banner_img: /images/dom-diff学习/diff-1.jpg
+index_img: /images/dom-diff学习/diff-1.jpg
 categories: 
   - 前端   
 ---
@@ -11,6 +11,8 @@ categories:
 # dom-diff学习
 
 ## 介绍
+
+本次介绍的是`dom-diff`的逻辑，他对于我们在使用相关框架时，能更好的书写逻辑，避免出现一些问题的出现。  
 
 ## 开始
 
@@ -400,13 +402,6 @@ function patchVnode(
 	每次循环只需执行通过上述一个条件即可。  
 	当新或者旧节点遍历完成则退出循环。  
 
-- 下面给出了这几个例子  
-
-|  旧开始节点索引   | 旧结束节点索引  | 新开始节点索引  | 新结束节点索引  |
-|  -------------  | -----------  | ------------  | ------------  |
-| 0               |      2       |       0       |       2       |
-| 1               |      2       |       1       |       2       |
-
 
 ```typescript
 function updateChildren(
@@ -477,11 +472,19 @@ function updateChildren(
 			newStartVnode = newCh[++newStartIdx]
 		} 
     // 情况五
+		// 将旧节点列表的指定区间内的节点信息转成对象map格式
+		// {
+		//		key: index, 组件的key，组件的index索引
+		// }
+		// 从newStartIndex开始从map中查找是否存在该节点
     else {
+			// 一开始初始化
 			if (oldKeyToIdx === undefined) {
 				oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)
 			}
 			idxInOld = oldKeyToIdx[newStartVnode.key as string]
+			// 如果新节点在旧节点中不存在
+			// 创建新节点插入到旧开始节点前面
 			if (isUndef(idxInOld)) {
 				// New element
 				api.insertBefore(
@@ -489,15 +492,22 @@ function updateChildren(
 					createElm(newStartVnode, insertedVnodeQueue),
 					oldStartVnode.elm!
 				)
-			} else {
+			} 
+			// 新节点在旧节点中存在
+			else {
 				elmToMove = oldCh[idxInOld]
+				// sel 不同则重新创建
+				// 将新节点插入到旧开始节点的前面
 				if (elmToMove.sel !== newStartVnode.sel) {
 					api.insertBefore(
 						parentElm,
 						createElm(newStartVnode, insertedVnodeQueue),
 						oldStartVnode.elm!
 					)
-				} else {
+				} 
+				// 如果是相同节点则进行下一层级的比较  
+				// 并将该节点插入到旧节点的前面
+				else {
 					patchVnode(elmToMove, newStartVnode, insertedVnodeQueue)
 					oldCh[idxInOld] = undefined as any
 					api.insertBefore(parentElm, elmToMove.elm!, oldStartVnode.elm!)
@@ -507,6 +517,12 @@ function updateChildren(
 		}
 	}
 
+	// 最后的收尾工作
+
+	// 新开始节点小于等于新结束节点
+	// 旧节点已经遍历完成
+	// before用于addVnodes中的insertBefore的参照dom
+	// 将新节点中未处理的节点全部添加到before的前面  
 	if (newStartIdx <= newEndIdx) {
 		before = newCh[newEndIdx + 1] == null ? null : newCh[newEndIdx + 1].elm
 		addVnodes(
@@ -518,29 +534,192 @@ function updateChildren(
 			insertedVnodeQueue
 		)
 	}
+	// 旧节点小于等于旧结束节点
+	// 新节点已经遍历完成
+	// 说明存在需要删除的节点
+	// 将索引区间内的所有节点全部删除
 	if (oldStartIdx <= oldEndIdx) {
 		removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)
 	}
 }
 ```
 
+- 下面是一个包含前四种情况的一个例子  
+
+<img src="/images/dom-diff学习/diff-1.jpg" />
+
+| step | new_start | new_end | old_start | old_end |
+| :--: | :-------: | :-----: | :-------: | :-----: |
+| 1    |     0     |    4    |    0      |    3    |
+
+<img src="/images/dom-diff学习/diff-2.jpg" />
+
+| step | new_start | new_end | old_start | old_end |
+| :--: | :-------: | :-----: | :-------: | :-----: |
+| 1    |     0     |    4    |    0      |    3    |
+| 2    |     1     |    4    |    1      |    3    |
+
+<img src="/images/dom-diff学习/diff-3.jpg" />
+
+| step | new_start | new_end | old_start | old_end |
+| :--: | :-------: | :-----: | :-------: | :-----: |
+| 1    |     0     |    4    |    0      |    3    |
+| 2    |     1     |    4    |    1      |    3    |
+| 3    |     1     |    3    |    1      |    2    |
+
+<img src="/images/dom-diff学习/diff-4.jpg" />
+
+| step | new_start | new_end | old_start | old_end |
+| :--: | :-------: | :-----: | :-------: | :-----: |
+| 1    |     0     |    4    |    0      |    3    |
+| 2    |     1     |    4    |    1      |    3    |
+| 3    |     1     |    3    |    1      |    2    |
+| 4    |     2     |    3    |    1      |    1    |
+
+<img src="/images/dom-diff学习/diff-5.jpg" />
+
+| step | new_start | new_end | old_start | old_end |
+| :--: | :-------: | :-----: | :-------: | :-----: |
+| 1    |     0     |    4    |    0      |    3    |
+| 2    |     1     |    4    |    1      |    3    |
+| 3    |     1     |    3    |    1      |    2    |
+| 4    |     2     |    3    |    1      |    1    |
+| 5    |     3     |    3    |    2      |    1    |  
+
+<img src="/images/dom-diff学习/diff-6.jpg" />
+
+`while`循环至此全部结束。  
+接着就是下面的收尾工作。  
+将剩下的节点插入到`newEndIndex`节点前。  
+
+- 接着是一个第五种情况的例子  
+
+<img src="/images/dom-diff学习/diff-7.jpg" />
+
+上面的例子，只说新节点的第一个子节点。  
+前面四种情况都无法满足。  
+```typescript 
+if(false) {
+	// ...
+}else {
+	if (oldKeyToIdx === undefined) {
+		oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx);
+	}
+	idxInOld = oldKeyToIdx[newStartVnode.key as string];
+	if (isUndef(idxInOld)) {
+		api.insertBefore(
+			parentElm,
+			createElm(newStartVnode, insertedVnodeQueue),
+			oldStartVnode.elm!
+		);
+	} else {
+		elmToMove = oldCh[idxInOld];
+		if (elmToMove.sel !== newStartVnode.sel) {
+			api.insertBefore(
+				parentElm,
+				createElm(newStartVnode, insertedVnodeQueue),
+				oldStartVnode.elm!
+			);
+		} else {
+			patchVnode(elmToMove, newStartVnode, insertedVnodeQueue);
+			oldCh[idxInOld] = undefined as any;
+			api.insertBefore(parentElm, elmToMove.elm!, oldStartVnode.elm!);
+		}
+	}
+	newStartVnode = newCh[++newStartIdx];
+}
+```
+因为是第一次进入，所以`oldKeyIndex`为`undefined`。  
+创建旧节点的`map`，结构如下：  
+```javascript
+	{
+		a: 0,
+		b: 1,
+		c: 2,
+		d: 3
+	}
+```
+`newStartVnode`当前为新节点下的第一个子节点，`key`为`a`。  
+所以`idxInOld`不为`undefined`。  
+接着拿到相关旧节点`elmToMove`，且`sel`相同。  
+最后比较两个节点的子节点。  
+将元素插入到旧开始节点的前面。  
+进入下一个循环。    
+
 ### React
 
-#### Fiber
+> 以下为个人理解，如有问题请指出。  
 
-在 16 之前，React 是直接递归渲染 vdom 的，setState 会触发重新渲染，对比渲染出的新旧 vdom，对差异部分进行 dom 操作。
-从 vdom 转成 fiber 的过程叫做 reconcile（调和），这个过程是可以打断的，由 scheduler 调度执行。
-链表
+react的`diff`和上面的库的逻辑基本大同小异，但是在**16**以后，就发生了一点变化。  
 
-diff 算法应对三种场景：**节点更新**、**节点增删**、**节点移动**。
+#### Fiber 
 
-节点更新  
- 只有在 key 和 sel 相同的情况下才算更新。
+上面的`diff`存在一个问题，就是在递归比较vnode的同时，也进行了dom操作，当产生大量的更新时，页面还是会出现卡顿的情况。  
+在**16**以后，引入了`fiber`的概念，其数据结构其实就是一个**链表**。   
+`fiber`中包含了很多相关信息，包括`sibling`、`child`、`return`这些层级关系，以及`effectTag`、`nextEffect`、`lastEffect`等等。  
+将整个更新过程分成了几个阶段：  
+- render   
+	将`vnode`转换为`fiber`结构。  
+	将需要更新节点打上`effectTag`标记。  
+	此过程可以被打断（存在一个scheduler进行调度），并且不同的更新时存在优先级的。  
+- commit  
+	真正的更新过程。  
+	无法被中断。  
+
+### 关于Key
+
+通过上面的介绍，可以看出，`key`属性在`diff`过程中非常重要。  
+- 他可以使过程变得更快  
+- 也可以避免出错  
+- 并且使用索引作为`key`也会发生未知的错误  
+
+参考[深入理解 React Diff 算法](https://juejin.cn/post/6919302952486174733)中的例子。  
+
+#### 不设置key的情况  
+
+<img src="/images/dom-diff学习/diff-8.jpg" />
+
+假设没有设置`key`，在第三次循环当中，因为被判断成了是相同节点，多了一次`patch`的过程。  
+
+<img src="/images/dom-diff学习/diff-9.jpg" />  
+
+当设置了`key`的情况，在第三次循环时，会走上面的情况三（new_end vs old_start）。  
+
+#### 设置索引为key的情况  
+
+<img src="/images/dom-diff学习/diff-10.jpg" />   
+
+根据上图显示，因为使用了索引作为`key`，在新增了一个**节点d**到开始位置时。  
+`diff`判断为情况一，所以**节点a**的颜色属性被赋值到了**节点d**上，引发了问题。  
+
+### 其他  
+
+	1. 推荐使用function-component  
+	2. class-component 不使用`componentWillMount`、`componentWillReceiveProps`、`componentWillUpdate`  
+	3. 不需要使用三目判断元素是否渲染。  
+	```js
+		function Component() {
+			return (
+				<div>
+					{/*没有必要*/}
+					{
+						a ? (<div></div>) : null 			
+					}
+					{/*直接这样*/}
+					{
+						!!a && (<div></div>)
+					}
+				</div>
+			)
+		}
+	```
+
 
 ## 结束
 
 > 参考  
-> [深入理解 React Diff 算法](https://segmentfault.com/a/1190000039021724)  
-> [DIff 算法看不懂就一起来砍我(带图)](https://juejin.cn/post/7000266544181674014)  
-> [图解 React 的 diff 算法：核心就两个字 —— 复用](https://juejin.cn/post/7131741751152214030)  
-> [react-source-code-debug](https://githu
+ [深入理解 React Diff 算法](https://juejin.cn/post/6919302952486174733)  
+ [DIff 算法看不懂就一起来砍我(带图)](https://juejin.cn/post/7000266544181674014)  
+ [图解 React 的 diff 算法：核心就两个字 —— 复用](https://juejin.cn/post/7131741751152214030)  
+ [react-source-code-debug](https://github.com/neroneroffy/react-source-code-debug)  
+ [React Fiber 源码解析](https://juejin.cn/post/6859528127010471949)  
