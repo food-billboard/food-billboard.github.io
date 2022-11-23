@@ -18,7 +18,7 @@ categories:
 
 ### snabbdom
 
-一个精简化、模块化、功能强大、性能卓越的虚拟 DOM 库。  
+[snabbdom](https://github.com/snabbdom/snabbdom)是一个精简化、模块化、功能强大、性能卓越的虚拟 DOM 库。  
  几乎包含了虚拟 Dom 相关模块的所有功能，并且也提供了跨端的支持。  
  通过查看他的源码可以更好的理解`diff`原理。
 
@@ -692,29 +692,6 @@ react的`diff`和上面的库的逻辑基本大同小异，但是在**16**以后
 根据上图显示，因为使用了索引作为`key`，在新增了一个**节点d**到开始位置时。  
 `diff`判断为情况一，所以**节点a**的颜色属性被赋值到了**节点d**上，引发了问题。  
 
-### 其他  
-
-	1. 推荐使用function-component  
-	2. class-component 不使用`componentWillMount`、`componentWillReceiveProps`、`componentWillUpdate`  
-	3. 不需要使用三目判断元素是否渲染。  
-	```js
-		function Component() {
-			return (
-				<div>
-					{/*没有必要*/}
-					{
-						a ? (<div></div>) : null 			
-					}
-					{/*直接这样*/}
-					{
-						!!a && (<div></div>)
-					}
-				</div>
-			)
-		}
-	```
-
-
 ## 结束
 
 > 参考  
@@ -723,3 +700,4 @@ react的`diff`和上面的库的逻辑基本大同小异，但是在**16**以后
  [图解 React 的 diff 算法：核心就两个字 —— 复用](https://juejin.cn/post/7131741751152214030)  
  [react-source-code-debug](https://github.com/neroneroffy/react-source-code-debug)  
  [React Fiber 源码解析](https://juejin.cn/post/6859528127010471949)  
+ [snabbdom](https://github.com/snabbdom/snabbdom)  
