@@ -16,12 +16,12 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta name="description" content="开头作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。讲一个最简单的例子🌰：你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。这样重复做功绝对不是我们想要的，所以此时就需要git">
+  <meta name="description" content="开头 作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。 讲一个最简单的例子🌰： 你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。 这样重复做功绝对不是我们想要的，所以此时就需">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Github Actions 部署node项目">
 <meta property="og:url" content="http://yoursite.com/2021/10/25/deploy/index.html">
 <meta property="og:site_name" content="Food-Billboard">
-<meta property="og:description" content="开头作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。讲一个最简单的例子🌰：你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。这样重复做功绝对不是我们想要的，所以此时就需要git">
+<meta property="og:description" content="开头 作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。 讲一个最简单的例子🌰： 你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。 这样重复做功绝对不是我们想要的，所以此时就需">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-25T02:39:00.000Z">
 <meta property="article:modified_time" content="2021-10-26T11:38:18.000Z">
@@ -253,78 +253,95 @@
             <h1 style="display: none">Github Actions 部署node项目</h1>
             
             <div class="markdown-body">
-              <h2 id="开头"><a href="#开头" class="headerlink" title="开头"></a>开头</h2><p>作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。<br>讲一个最简单的例子🌰：<br>你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。<br>这样重复做功绝对不是我们想要的，所以此时就需要<code>github actions</code>登场了。它帮助我们完成了中间这些复杂又重复的工作，让我们能有更多的时间摸🐟。😁</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>关于<code>github actions</code>的介绍，这里不多说，大家可以参看<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">阮一峰老师的文章</a>  </p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>首先是具体的流程  </p>
+              <h2 id="开头">开头</h2>
+<p>作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。<br>
+讲一个最简单的例子🌰：<br>
+你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。<br>
+这样重复做功绝对不是我们想要的，所以此时就需要<code>github actions</code>登场了。它帮助我们完成了中间这些复杂又重复的工作，让我们能有更多的时间摸🐟。😁</p>
+<h2 id="介绍">介绍</h2>
+<p>关于<code>github actions</code>的介绍，这里不多说，大家可以参看<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">阮一峰老师的文章</a></p>
+<h2 id="正文">正文</h2>
+<h3 id="流程">流程</h3>
+<p>首先是具体的流程</p>
 <ul>
-<li>本地完成代码修改，提交代码到<code>github</code>  </li>
+<li>本地完成代码修改，提交代码到<code>github</code></li>
 <li><code>github</code>检测到代码提交，自动执行项目目录下的<code>.github/workflows</code>的yml文件。</li>
-<li>虚拟机内:  </li>
+<li>虚拟机内:</li>
 </ul>
 <ol>
-<li>切换对应的分支，比如<code>master</code>  </li>
-<li>生成<code>ssh</code>秘钥文件  </li>
-<li>设置对应的<code>node</code>版本  </li>
-<li>安装<code>yarn</code>、<code>pm2</code>  </li>
-<li><code>pm2</code>部署代码至服务器  </li>
-<li><code>ssh</code>登录服务器，<code>pm2</code>更新并启动<code>node</code>服务，更新<code>docker</code>服务  </li>
+<li>切换对应的分支，比如<code>master</code></li>
+<li>生成<code>ssh</code>秘钥文件</li>
+<li>设置对应的<code>node</code>版本</li>
+<li>安装<code>yarn</code>、<code>pm2</code></li>
+<li><code>pm2</code>部署代码至服务器</li>
+<li><code>ssh</code>登录服务器，<code>pm2</code>更新并启动<code>node</code>服务，更新<code>docker</code>服务</li>
 </ol>
-<h3 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h3><p>以下文件路径基本源自<code>mac</code>  </p>
+<h3 id="具体流程">具体流程</h3>
+<p>以下文件路径基本源自<code>mac</code></p>
 <ol>
-<li>在本机的<code>.ssh</code>文件夹下生成秘钥、公钥，如果有的话请忽略  </li>
+<li>在本机的<code>.ssh</code>文件夹下生成秘钥、公钥，如果有的话请忽略</li>
 </ol>
 <ul>
-<li>使用命令生成<code>ssh-keygen -t rsa -C 你的github邮箱@.com</code>  </li>
-<li>将公钥文件<code>id_rsa.pub</code>内容添加到<code>github</code>配置中(github网站上的 -&gt; <code>settings</code> -&gt; <code>SSH and GPG keys</code>)  </li>
+<li>使用命令生成<code>ssh-keygen -t rsa -C 你的github邮箱@.com</code></li>
+<li>将公钥文件<code>id_rsa.pub</code>内容添加到<code>github</code>配置中(github网站上的 -&gt; <code>settings</code> -&gt; <code>SSH and GPG keys</code>)</li>
 </ul>
 <ol start="2">
-<li>在对应的服务器中的<code>.ssh</code>文件夹下生成私钥、公钥，有的话请忽略  </li>
+<li>在对应的服务器中的<code>.ssh</code>文件夹下生成私钥、公钥，有的话请忽略</li>
 </ol>
 <ul>
-<li>使用命令<code>ssh-keygen -o</code>  </li>
+<li>使用命令<code>ssh-keygen -o</code></li>
 </ul>
 <ol start="3">
-<li>添加本机的公钥至服务器  </li>
+<li>添加本机的公钥至服务器</li>
 </ol>
 <ul>
-<li>服务器<code>.ssh</code>文件夹下有一个<code>authorized_keys</code>文件，如果没有的话请创建<code>touch authorized_keys</code>  </li>
-<li>添加本机的公钥内容至<code>authorized_keys</code>中  </li>
+<li>服务器<code>.ssh</code>文件夹下有一个<code>authorized_keys</code>文件，如果没有的话请创建<code>touch authorized_keys</code></li>
+<li>添加本机的公钥内容至<code>authorized_keys</code>中</li>
 </ul>
 <ol start="4">
-<li>添加服务器公钥至<code>github</code>  </li>
+<li>添加服务器公钥至<code>github</code></li>
 </ol>
 <ul>
 <li>将服务器公钥内容添加到<code>github</code> (github网站 -&gt; <code>settings</code> -&gt; <code>SSH and GPG keys</code>) 或者 (github项目中 -&gt; <code>settings</code> -&gt; <code>deploy keys</code>)</li>
 </ul>
 <ol start="5">
-<li>添加流程中所需要的一些环境变量<br>其中有些变量并不是必须得，可自行选择添加<br>所有的自定义的环境变量都放在项目的<code>secrets</code>中(github项目中 -&gt; <code>settings</code> -&gt; <code>secrets</code>)<br><code>name</code>字段自定义  </li>
+<li>添加流程中所需要的一些环境变量<br>
+其中有些变量并不是必须得，可自行选择添加<br>
+所有的自定义的环境变量都放在项目的<code>secrets</code>中(github项目中 -&gt; <code>settings</code> -&gt; <code>secrets</code>)<br>
+<code>name</code>字段自定义</li>
 </ol>
 <ul>
-<li>将本机私钥文件<code>id_rsa</code>内容添加至环境变量，<code>name</code>设置为<code>LOCAL_SSH_PRIVATE_KEY</code>，<code>value</code>为<code>id_rsa</code>内容  </li>
-<li>添加服务器的<code>host</code>，<code>name</code>设置为<code>SSH_IP</code>  </li>
+<li>将本机私钥文件<code>id_rsa</code>内容添加至环境变量，<code>name</code>设置为<code>LOCAL_SSH_PRIVATE_KEY</code>，<code>value</code>为<code>id_rsa</code>内容</li>
+<li>添加服务器的<code>host</code>，<code>name</code>设置为<code>SSH_IP</code></li>
 <li>添加服务器<code>ssh</code>用户名，<code>name</code>设置为<code>SSH_USERNAME</code></li>
-<li>添加服务器<code>ssh</code>密码，<code>name</code>设置为<code>SSH_PASSWORD</code>  </li>
-<li>添加服务器项目文件目录地址，<code>name</code>设置为<code>REMOTE_PATH</code>  </li>
+<li>添加服务器<code>ssh</code>密码，<code>name</code>设置为<code>SSH_PASSWORD</code></li>
+<li>添加服务器项目文件目录地址，<code>name</code>设置为<code>REMOTE_PATH</code></li>
 </ul>
 <ol start="6">
-<li>添加<code>github</code>至服务器的<code>known_hosts</code>文件中  </li>
+<li>添加<code>github</code>至服务器的<code>known_hosts</code>文件中</li>
 </ol>
 <ul>
-<li>执行以下命令<code>ssh-keyscan -t rsa github.com &gt;&gt; ~/.ssh/known_hosts</code><br>若不执行此操作，<code>github</code>访问服务器可能会出错  </li>
+<li>执行以下命令<code>ssh-keyscan -t rsa github.com &gt;&gt; ~/.ssh/known_hosts</code><br>
+若不执行此操作，<code>github</code>访问服务器可能会出错</li>
 </ul>
-<p>完成以上步骤后，即可开始项目的部署文件配置  </p>
-<p>完整的代码在下方，当中的一些细节用注释标出  </p>
+<p>完成以上步骤后，即可开始项目的部署文件配置</p>
+<p>完整的代码在下方，当中的一些细节用注释标出</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">server</span> <span class="hljs-string">to</span> <span class="hljs-string">aliyun</span> <br><span class="hljs-attr">on:</span> <br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">master</span> <br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">deploy-and-start:</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-comment"># 运行环境</span><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-comment"># 切换分支</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span>  <br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@master</span><br><br>      <span class="hljs-comment"># 设置ssh文件</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">ssh</span><br>        <span class="hljs-attr">env:</span><br>          <span class="hljs-comment"># 这里用到了刚刚的环境变量，本机的 ssh 私钥  </span><br>          <span class="hljs-attr">LOCAL_SSH_PRIVATE_KEY:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.LOCAL_SSH_PRIVATE_KEY</span> <span class="hljs-string">&#125;&#125;</span><br>        <span class="hljs-comment"># 在虚拟机中生成对应的 ssh 文件</span><br>        <span class="hljs-comment"># 否则的话在下面的 pm2 操作中 将无法验证通过  </span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">|  </span><br><span class="hljs-string">          mkdir -p ~/.ssh/</span><br><span class="hljs-string">          echo &quot;$LOCAL_SSH_PRIVATE_KEY&quot; &gt; ~/.ssh/id_rsa </span><br><span class="hljs-string">          chmod 600 ~/.ssh/id_rsa</span><br><span class="hljs-string"></span><br>      <span class="hljs-comment"># 设置node </span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">setup</span> <span class="hljs-string">node</span> <br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v1</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">node-version:</span> <span class="hljs-number">12.16</span><span class="hljs-number">.1</span><br>      <span class="hljs-comment"># 安装对应的模块  </span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">          npm install yarn pm2 -g</span><br><span class="hljs-string"></span>      <span class="hljs-comment"># 代码更新至服务器  </span><br>      <span class="hljs-comment"># 如果是第一次的话则执行 pm2 deploy pm2.config.js production setup</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">          pm2 deploy pm2.config.js production update</span><br><span class="hljs-string"></span><br>      <span class="hljs-comment"># 登录服务器并启动docker服务   </span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">start</span> <span class="hljs-string">the</span> <span class="hljs-string">remote</span> <span class="hljs-string">server</span> <br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">appleboy/ssh-action@master</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">username:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.SSH_USERNAME</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-attr">password:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.SSH_PASSWORD</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-attr">host:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.SSH_IP</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-comment"># 进入到服务器的项目路径下  </span><br>          <span class="hljs-comment"># 安装全局依赖  </span><br>          <span class="hljs-comment"># 安装项目依赖  </span><br>          <span class="hljs-comment"># 启动/重启 docker服务  </span><br>          <span class="hljs-comment"># 启动项目  </span><br>          <span class="hljs-attr">script:</span> <span class="hljs-string">|</span><br><span class="hljs-string">            cd $&#123;&#123; secrets.REMOTE_PATH &#125;&#125;</span><br><span class="hljs-string">            npm install pm2 yarn -g </span><br><span class="hljs-string">            yarn </span><br><span class="hljs-string">            docker-compose -f docker-compose.yml pull</span><br><span class="hljs-string">            docker-compose -f docker-compose.yml up -d</span><br><span class="hljs-string">            pm2 startOrRestart pm2.config.js</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="当中的问题"><a href="#当中的问题" class="headerlink" title="当中的问题"></a>当中的问题</h3><ol>
-<li>为什么使用<code>pm2</code><br><code>node</code>作为一个后台服务应用，不像前端应用一样存在周期短，它被要求需要长期保持稳定的启动状态，当中的许多细节如果单靠开发者来控制的话，会显得相当的麻烦，此时依靠与<code>pm2</code>来进行管理会变得非常的容易。<br><code>pm2</code>内置了负载均衡，出错重启，后台运行等的特点，帮助开发者在运维当中给到了相当大的便利，并且它还能帮你自动部署项目到远程服务器。具体的细节可自行前往<a target="_blank" rel="noopener" href="https://github.com/Unitech/pm2">github</a>查看  </li>
-<li>为什么使用<code>docker</code>  <blockquote>
-<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows操作系统的机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。  </p>
-</blockquote>
-</li>
+<h3 id="当中的问题">当中的问题</h3>
+<ol>
+<li>为什么使用<code>pm2</code><br>
+<code>node</code>作为一个后台服务应用，不像前端应用一样存在周期短，它被要求需要长期保持稳定的启动状态，当中的许多细节如果单靠开发者来控制的话，会显得相当的麻烦，此时依靠与<code>pm2</code>来进行管理会变得非常的容易。<br>
+<code>pm2</code>内置了负载均衡，出错重启，后台运行等的特点，帮助开发者在运维当中给到了相当大的便利，并且它还能帮你自动部署项目到远程服务器。具体的细节可自行前往<a target="_blank" rel="noopener" href="https://github.com/Unitech/pm2">github</a>查看</li>
+<li>为什么使用<code>docker</code></li>
 </ol>
-<p>想象一下当你辛苦的在服务器上部署完成了<code>nginx</code>、<code>mongodb</code>、<code>redis</code>等服务之后，某一天突然要求你更换另一台服务器部署，你是否需要重新将刚刚的服务重新安装启用部署，这样就显得非常麻烦了。<br>而<code>docker</code>这种封闭的，可移植的特性，可以极大的简化我们的部署流程，我们只需配置一次，即可，后续的所有操作全部都在<code>docker</code>容器当中进行。具体的细节不在本次讨论范围。  </p>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>这是本人在自己的摸索中踩坑的一些内容，当中可能还不乏一些错误，欢迎指正🙏🏻<br>最后，这是本人的<a target="_blank" rel="noopener" href="https://github.com/food-billboard/node-server">后台服务项目</a>，其中有上面的配置文件等，欢迎大家参考点评😁。</p>
+<blockquote>
+<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows操作系统的机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
+</blockquote>
+<p>想象一下当你辛苦的在服务器上部署完成了<code>nginx</code>、<code>mongodb</code>、<code>redis</code>等服务之后，某一天突然要求你更换另一台服务器部署，你是否需要重新将刚刚的服务重新安装启用部署，这样就显得非常麻烦了。<br>
+而<code>docker</code>这种封闭的，可移植的特性，可以极大的简化我们的部署流程，我们只需配置一次，即可，后续的所有操作全部都在<code>docker</code>容器当中进行。具体的细节不在本次讨论范围。</p>
+<h2 id="结束">结束</h2>
+<p>这是本人在自己的摸索中踩坑的一些内容，当中可能还不乏一些错误，欢迎指正🙏🏻<br>
+最后，这是本人的<a target="_blank" rel="noopener" href="https://github.com/food-billboard/node-server">后台服务项目</a>，其中有上面的配置文件等，欢迎大家参考点评😁。</p>
 
             </div>
             <hr>
@@ -551,6 +568,13 @@
 
 
 
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
 
 
 

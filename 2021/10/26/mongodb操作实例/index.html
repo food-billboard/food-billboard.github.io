@@ -16,12 +16,12 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta name="description" content="介绍这是mongodb的第二篇文章，本文包含了一些在平时自己开发过程当中使用的一些操作符以及特殊情况，希望对各位有帮助😺 。   正文$filter 用于从已有数据对象中的数组中筛选出符合条件的数据项    假设有如下集合名称为users的数据:   123456789101112131415161718[  &amp;#123;    students: [      &amp;#123;        na">
+  <meta name="description" content="介绍 这是mongodb的第二篇文章，本文包含了一些在平时自己开发过程当中使用的一些操作符以及特殊情况，希望对各位有帮助😺 。 正文 $filter   用于从已有数据对象中的数组中筛选出符合条件的数据项   假设有如下集合名称为users的数据:   123456789101112131415161718[  &amp;#123;    students: [      &amp;#123;        n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mongodb操作实例">
 <meta property="og:url" content="http://yoursite.com/2021/10/26/mongodb%E6%93%8D%E4%BD%9C%E5%AE%9E%E4%BE%8B/index.html">
 <meta property="og:site_name" content="Food-Billboard">
-<meta property="og:description" content="介绍这是mongodb的第二篇文章，本文包含了一些在平时自己开发过程当中使用的一些操作符以及特殊情况，希望对各位有帮助😺 。   正文$filter 用于从已有数据对象中的数组中筛选出符合条件的数据项    假设有如下集合名称为users的数据:   123456789101112131415161718[  &amp;#123;    students: [      &amp;#123;        na">
+<meta property="og:description" content="介绍 这是mongodb的第二篇文章，本文包含了一些在平时自己开发过程当中使用的一些操作符以及特殊情况，希望对各位有帮助😺 。 正文 $filter   用于从已有数据对象中的数组中筛选出符合条件的数据项   假设有如下集合名称为users的数据:   123456789101112131415161718[  &amp;#123;    students: [      &amp;#123;        n">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-26T07:22:52.000Z">
 <meta property="article:modified_time" content="2021-10-27T01:30:04.000Z">
@@ -253,187 +253,236 @@
             <h1 style="display: none">mongodb操作实例</h1>
             
             <div class="markdown-body">
-              <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>这是<code>mongodb</code>的第二篇文章，本文包含了一些在平时自己开发过程当中使用的一些操作符以及特殊情况，希望对各位有帮助😺 。  </p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="filter"><a href="#filter" class="headerlink" title="$filter"></a>$filter</h3><ul>
-<li><p>用于从已有数据对象中的数组中筛选出符合条件的数据项  </p>
-</li>
-<li><p>假设有如下集合名称为<code>users</code>的数据:  </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">students</span>: [<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">10</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">19</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Jack&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">17</span><br>      &#125;<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure></li>
-<li><p>筛选出年龄大于<code>18</code>的学生  </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js">db.users.aggregate([<br>  &#123;<br>    <span class="hljs-attr">$project</span>: &#123;<br>      <span class="hljs-attr">student_gt_18</span>: &#123;<br>        <span class="hljs-attr">$filter</span>: &#123;<br>          <span class="hljs-attr">input</span>: <span class="hljs-string">&quot;$students&quot;</span>,<br>          <span class="hljs-attr">as</span>: <span class="hljs-string">&quot;student&quot;</span>,<br>          <span class="hljs-attr">cond</span>: &#123;<br>            <span class="hljs-attr">$gt</span>: [ <span class="hljs-string">&quot;$$student.age&quot;</span>, <span class="hljs-number">18</span> ]<br>          &#125;<br>        &#125;<br>      &#125;<br>    &#125;<br>  &#125;<br>])<br></code></pre></td></tr></table></figure></li>
-<li><p>你将会得到</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">student_gt_18</span>: [<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">19</span><br>      &#125;<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p><code>$filter</code>有三个参数:  </p>
-<ol>
-<li><code>input</code><br>元数据中的某一字段(如<code>students</code>)  </li>
-<li><code>as</code><br><code>students</code>的遍历项名称(如<code>student</code>)</li>
-<li><code>cond</code><br>筛选条件，可以在其中使用遍历项的值(如<code>$$student.age</code>，得到了当前项的<code>age</code>)   </li>
-</ol>
-<h3 id="map"><a href="#map" class="headerlink" title="$map"></a>$map</h3><ul>
-<li><p>用于遍历已有数据对象中的数组中并解析成新的数组<br>其实这个和上面的<code>$filter</code>在语义上与<code>javascript</code>的同名方法的功能是一致的，这样的话应该会很好理解了👍 。</p>
-</li>
-<li><p>假设有如下集合名称为<code>users</code>的数据:  </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">students</span>: [<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">10</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">19</span><br>      &#125;<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure></li>
-<li><p>将学生<code>name</code>和<code>age</code>字段拼接生成新的字段<code>description</code>   </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js">db.users.aggregate([<br>  &#123;<br>    <span class="hljs-attr">$project</span>: &#123;<br>      <span class="hljs-attr">new_students</span>: &#123;<br>        <span class="hljs-attr">$map</span>: &#123;<br>          <span class="hljs-attr">input</span>: <span class="hljs-string">&quot;$students&quot;</span>,<br>          <span class="hljs-attr">as</span>: <span class="hljs-string">&quot;student&quot;</span>,<br>          <span class="hljs-attr">in</span>: &#123;<br>            <span class="hljs-attr">description</span>: &#123;<br>              <span class="hljs-attr">$concat</span>: [ <span class="hljs-string">&quot;$$student.name&quot;</span>, <span class="hljs-string">&quot;-&quot;</span>, <span class="hljs-string">&quot;$$student.age&quot;</span> ]<br>            &#125;<br>          &#125;<br>        &#125;<br>      &#125;<br>    &#125;<br>  &#125;<br>])<br></code></pre></td></tr></table></figure></li>
-<li><p>你将会得到</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">new_students</span>: [<br>      &#123;<br>        <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Join-10&quot;</span>,<br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Lisa-19&quot;</span>,<br>      &#125;<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p><code>$map</code>有三个参数:  </p>
-<ol>
-<li><code>input</code><br>元数据中的某一字段(如<code>students</code>)  </li>
-<li><code>as</code><br><code>students</code>的遍历项名称(如<code>student</code>)</li>
-<li><code>in</code><br>将会生成的数据字段，<code>key</code>为字段名称，<code>value</code>为字段值，可以在其中使用遍历项的值(如<code>$$student.age</code>，得到了当前项的<code>age</code>)<br>甚至可以在其中对一些数组进行<code>$filter</code>操作，这是被允许的。   </li>
-</ol>
-<h3 id="lookup"><a href="#lookup" class="headerlink" title="$lookup"></a>$lookup</h3><ul>
-<li>复杂多表联查<br>这个应该在平常开发中用到的频率非常的高，用于将嵌套的集合进行查询<br>想象一下可能你的<code>users</code>集合中保存着<code>teacher</code>的字段，值为另一个<code>teachers</code>集合的<code>id</code>，此时就需要用到<code>$lookup</code>来进行查询  </li>
-</ul>
-<p><strong>$lookup有两种查询形式</strong>  </p>
-<h4 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h4><p>这种适合只查询一层的情况，比如上面说的<code>teachers</code>集合中不存在当前查询所需要再次联表查询的字段<br>听着有些别扭，看下面的例子  </p>
+              <h2 id="介绍">介绍</h2>
+<p>这是<code>mongodb</code>的第二篇文章，本文包含了一些在平时自己开发过程当中使用的一些操作符以及特殊情况，希望对各位有帮助😺 。</p>
+<h2 id="正文">正文</h2>
+<h3 id="filter">$filter</h3>
 <ul>
-<li>假设有如下集合名称为<code>users</code>和<code>teachers</code>的数据: </li>
+<li>
+<p>用于从已有数据对象中的数组中筛选出符合条件的数据项</p>
+</li>
+<li>
+<p>假设有如下集合名称为<code>users</code>的数据:</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">students</span>: [<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">10</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">19</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Jack&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">17</span><br>      &#125;<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
+<ul>
+<li>筛选出年龄大于<code>18</code>的学生</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js">db.users.aggregate([<br>  &#123;<br>    <span class="hljs-attr">$project</span>: &#123;<br>      <span class="hljs-attr">student_gt_18</span>: &#123;<br>        <span class="hljs-attr">$filter</span>: &#123;<br>          <span class="hljs-attr">input</span>: <span class="hljs-string">&quot;$students&quot;</span>,<br>          <span class="hljs-attr">as</span>: <span class="hljs-string">&quot;student&quot;</span>,<br>          <span class="hljs-attr">cond</span>: &#123;<br>            <span class="hljs-attr">$gt</span>: [ <span class="hljs-string">&quot;$$student.age&quot;</span>, <span class="hljs-number">18</span> ]<br>          &#125;<br>        &#125;<br>      &#125;<br>    &#125;<br>  &#125;<br>])<br></code></pre></td></tr></table></figure>
+<ul>
+<li>你将会得到</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">student_gt_18</span>: [<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">19</span><br>      &#125;<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
+<p><code>$filter</code>有三个参数:</p>
+<ol>
+<li><code>input</code><br>
+元数据中的某一字段(如<code>students</code>)</li>
+<li><code>as</code><br>
+<code>students</code>的遍历项名称(如<code>student</code>)</li>
+<li><code>cond</code><br>
+筛选条件，可以在其中使用遍历项的值(如<code>$$student.age</code>，得到了当前项的<code>age</code>)</li>
+</ol>
+<h3 id="map">$map</h3>
+<ul>
+<li>
+<p>用于遍历已有数据对象中的数组中并解析成新的数组<br>
+其实这个和上面的<code>$filter</code>在语义上与<code>javascript</code>的同名方法的功能是一致的，这样的话应该会很好理解了👍 。</p>
+</li>
+<li>
+<p>假设有如下集合名称为<code>users</code>的数据:</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">students</span>: [<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">10</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">19</span><br>      &#125;<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
+<ul>
+<li>将学生<code>name</code>和<code>age</code>字段拼接生成新的字段<code>description</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js">db.users.aggregate([<br>  &#123;<br>    <span class="hljs-attr">$project</span>: &#123;<br>      <span class="hljs-attr">new_students</span>: &#123;<br>        <span class="hljs-attr">$map</span>: &#123;<br>          <span class="hljs-attr">input</span>: <span class="hljs-string">&quot;$students&quot;</span>,<br>          <span class="hljs-attr">as</span>: <span class="hljs-string">&quot;student&quot;</span>,<br>          <span class="hljs-attr">in</span>: &#123;<br>            <span class="hljs-attr">description</span>: &#123;<br>              <span class="hljs-attr">$concat</span>: [ <span class="hljs-string">&quot;$$student.name&quot;</span>, <span class="hljs-string">&quot;-&quot;</span>, <span class="hljs-string">&quot;$$student.age&quot;</span> ]<br>            &#125;<br>          &#125;<br>        &#125;<br>      &#125;<br>    &#125;<br>  &#125;<br>])<br></code></pre></td></tr></table></figure>
+<ul>
+<li>你将会得到</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">new_students</span>: [<br>      &#123;<br>        <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Join-10&quot;</span>,<br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Lisa-19&quot;</span>,<br>      &#125;<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
+<p><code>$map</code>有三个参数:</p>
+<ol>
+<li><code>input</code><br>
+元数据中的某一字段(如<code>students</code>)</li>
+<li><code>as</code><br>
+<code>students</code>的遍历项名称(如<code>student</code>)</li>
+<li><code>in</code><br>
+将会生成的数据字段，<code>key</code>为字段名称，<code>value</code>为字段值，可以在其中使用遍历项的值(如<code>$$student.age</code>，得到了当前项的<code>age</code>)<br>
+甚至可以在其中对一些数组进行<code>$filter</code>操作，这是被允许的。</li>
+</ol>
+<h3 id="lookup">$lookup</h3>
+<ul>
+<li>复杂多表联查<br>
+这个应该在平常开发中用到的频率非常的高，用于将嵌套的集合进行查询<br>
+想象一下可能你的<code>users</code>集合中保存着<code>teacher</code>的字段，值为另一个<code>teachers</code>集合的<code>id</code>，此时就需要用到<code>$lookup</code>来进行查询</li>
+</ul>
+<p><strong>$lookup有两种查询形式</strong></p>
+<h4 id="简单查询">简单查询</h4>
+<p>这种适合只查询一层的情况，比如上面说的<code>teachers</code>集合中不存在当前查询所需要再次联表查询的字段<br>
+听着有些别扭，看下面的例子</p>
+<ul>
+<li>假设有如下集合名称为<code>users</code>和<code>teachers</code>的数据:</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// users </span><br>[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher</span>: <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span><br>  &#125;<br>]<br><br><span class="hljs-comment">// teachers </span><br>[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">40</span><br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>查询<code>students</code>集合并同时查询出其中的<code>teacher</code>数据  </li>
+<li>查询<code>students</code>集合并同时查询出其中的<code>teacher</code>数据</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js">db.users.aggregate([<br>  &#123;<br>    <span class="hljs-attr">$lookup</span>: &#123;<br>      <span class="hljs-attr">from</span>: <span class="hljs-string">&#x27;teachers&#x27;</span>,<br>      <span class="hljs-attr">localField</span>: <span class="hljs-string">&#x27;teacher&#x27;</span>,<br>      <span class="hljs-attr">foreignField</span>: <span class="hljs-string">&#x27;id&#x27;</span>,<br>      <span class="hljs-attr">as</span>: <span class="hljs-string">&#x27;teacher_data&#x27;</span><br>    &#125;<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">$project</span>: &#123;<br>      <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,<br>      <span class="hljs-attr">name</span>: <span class="hljs-number">1</span>,<br>      <span class="hljs-attr">age</span>: <span class="hljs-number">1</span>,<br>      <span class="hljs-attr">teacher_data</span>: <span class="hljs-number">1</span><br>    &#125;<br>  &#125;<br>])<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>你将会得到  </li>
+<li>你将会得到</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-comment">// 注意这里</span><br>    <span class="hljs-attr">teacher_data</span>: [<br>      &#123;<br>        <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span>,<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">40</span><br>      &#125;<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
-<p>注意看上面的查询出来的数据的<code>teacher_data</code>字段，它是一个数组。通过<code>$lookup</code>查询的结果都会变成一个数组。<br>如果不想是数组，可以通过<code>$unwind</code>来进行拆分，有关<code>$unwind</code>可在后文看到。  </p>
-<p>简单查询包含四个参数：  </p>
+<p>注意看上面的查询出来的数据的<code>teacher_data</code>字段，它是一个数组。通过<code>$lookup</code>查询的结果都会变成一个数组。<br>
+如果不想是数组，可以通过<code>$unwind</code>来进行拆分，有关<code>$unwind</code>可在后文看到。</p>
+<p>简单查询包含四个参数：</p>
 <ol>
-<li><code>from</code><br>要查询的目标集合名称  </li>
-<li><code>localField</code><br>当前集合中需要进行查询的字段名称  </li>
-<li><code>foreignField</code><br>两个集合所关联起来的字段名称，上面是<code>id</code>  </li>
-<li><code>as</code><br>查询结果保存的字段名称，你可以使用原始字段名称进行覆盖，也可以新增一个  </li>
+<li><code>from</code><br>
+要查询的目标集合名称</li>
+<li><code>localField</code><br>
+当前集合中需要进行查询的字段名称</li>
+<li><code>foreignField</code><br>
+两个集合所关联起来的字段名称，上面是<code>id</code></li>
+<li><code>as</code><br>
+查询结果保存的字段名称，你可以使用原始字段名称进行覆盖，也可以新增一个</li>
 </ol>
-<h4 id="复杂查询"><a href="#复杂查询" class="headerlink" title="复杂查询"></a>复杂查询</h4><p>通过上面的例子应该可以理解刚刚的那句话了吧，复杂查询可以把那些嵌套关联了多层的数据查询出来<br>还是看下面的例子🌰  </p>
+<h4 id="复杂查询">复杂查询</h4>
+<p>通过上面的例子应该可以理解刚刚的那句话了吧，复杂查询可以把那些嵌套关联了多层的数据查询出来<br>
+还是看下面的例子🌰</p>
 <ul>
-<li>假设有如下集合名称为<code>users</code>和<code>teachers</code>以及<code>schools</code>的数据: </li>
+<li>假设有如下集合名称为<code>users</code>和<code>teachers</code>以及<code>schools</code>的数据:</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// users </span><br>[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher</span>: <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span><br>  &#125;<br>]<br><br><span class="hljs-comment">// teachers </span><br>[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">40</span>,<br>    <span class="hljs-attr">school</span>: <span class="hljs-string">&quot;custom_school_id_001&quot;</span><br>  &#125;<br>]<br><br><span class="hljs-comment">// schools </span><br>[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_school_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;high school&quot;</span>,<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>查询<code>students</code>集合并同时查询出其中的<code>teacher</code>数据以及<code>school</code>数据<br>此时通过简单得查询已经无法满足要求  </li>
+<li>查询<code>students</code>集合并同时查询出其中的<code>teacher</code>数据以及<code>school</code>数据<br>
+此时通过简单得查询已经无法满足要求</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs js">db.users.aggregate([<br>  &#123;<br>    <span class="hljs-attr">$lookup</span>: &#123;<br>      <span class="hljs-attr">from</span>: <span class="hljs-string">&#x27;teachers&#x27;</span>, <br>      <span class="hljs-attr">let</span>: &#123;<br>        <span class="hljs-attr">teacher_id</span>: <span class="hljs-string">&quot;$teacher&quot;</span><br>      &#125;,<br>      <span class="hljs-attr">pipeline</span>: [<br>        &#123;<br>          <span class="hljs-attr">$match</span>: &#123;<br>            <span class="hljs-attr">$expr</span>: &#123;<br>              <span class="hljs-attr">$eq</span>: [<br>                <span class="hljs-string">&quot;$id&quot;</span>, <span class="hljs-string">&quot;$$teacher_id&quot;</span><br>              ]<br>            &#125;<br>          &#125;<br>        &#125;,<br>        &#123;<br>          <span class="hljs-attr">$lookup</span>: &#123;<br>            <span class="hljs-attr">from</span>: <span class="hljs-string">&#x27;schools&#x27;</span>,<br>            <span class="hljs-attr">as</span>: <span class="hljs-string">&#x27;school_data&#x27;</span>,<br>            <span class="hljs-attr">foreignField</span>: <span class="hljs-string">&quot;id&quot;</span>,<br>            <span class="hljs-attr">localField</span>: <span class="hljs-string">&quot;school&quot;</span><br>          &#125;<br>        &#125;,<br>        &#123;<br>          <span class="hljs-attr">$project</span>: &#123;<br>            <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,<br>            <span class="hljs-attr">name</span>: <span class="hljs-number">1</span>,<br>            <span class="hljs-attr">school</span>: <span class="hljs-number">1</span>,<br>            <span class="hljs-attr">age</span>: <span class="hljs-number">1</span>,<br>            <span class="hljs-attr">school_data</span>: <span class="hljs-string">&quot;$school_data&quot;</span><br>          &#125;<br>        &#125;<br>      ],<br>      <span class="hljs-attr">as</span>: <span class="hljs-string">&#x27;teacher_data&#x27;</span><br>    &#125;<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">$project</span>: &#123;<br>      <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,<br>      <span class="hljs-attr">name</span>: <span class="hljs-number">1</span>,<br>      <span class="hljs-attr">age</span>: <span class="hljs-number">1</span>,<br>      <span class="hljs-attr">teacher_data</span>: <span class="hljs-number">1</span><br>    &#125;<br>  &#125;<br>])<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>你将会得到  </li>
+<li>你将会得到</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher_data</span>: [<br>      &#123;<br>        <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span>,<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">40</span>,<br>        <span class="hljs-attr">school_data</span>: [<br>          &#123;<br>            <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_school_id_001&quot;</span>,<br>            <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;high school&quot;</span>,<br>          &#125;<br>        ]<br>      &#125;<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
-<p>复杂查询也是四个参数:  </p>
+<p>复杂查询也是四个参数:</p>
 <ol>
-<li><code>from</code><br>与简单查询相同  </li>
-<li><code>as</code><br>与简单查询相同  </li>
-<li><code>let</code><br>在当前查询层定义的变量可以在本次查询中使用，比如上面定义的<code>teacher_id</code>，用于在下层查询时做筛选条件判断  </li>
-<li><code>pipeline</code><br>下层查询操作，顾名思义，管道操作，值是一个数组，当中可以使用与外层相同的查询操作，可以访问到上层<code>let</code>中定义的变量，使用<code>$$</code>前缀  </li>
+<li><code>from</code><br>
+与简单查询相同</li>
+<li><code>as</code><br>
+与简单查询相同</li>
+<li><code>let</code><br>
+在当前查询层定义的变量可以在本次查询中使用，比如上面定义的<code>teacher_id</code>，用于在下层查询时做筛选条件判断</li>
+<li><code>pipeline</code><br>
+下层查询操作，顾名思义，管道操作，值是一个数组，当中可以使用与外层相同的查询操作，可以访问到上层<code>let</code>中定义的变量，使用<code>$$</code>前缀</li>
 </ol>
 <ul>
-<li><p>应该有注意到上面在<code>pipeline</code>第一项是<code>$match</code>，为什么要这样操作？<br>当使用复杂查询时，需要自己来定义筛选条件，否则它将会把集合当中的所有数据全部返回  </p>
+<li>
+<p>应该有注意到上面在<code>pipeline</code>第一项是<code>$match</code>，为什么要这样操作？<br>
+当使用复杂查询时，需要自己来定义筛选条件，否则它将会把集合当中的所有数据全部返回</p>
 </li>
-<li><p><code>$match</code> 表示的是筛选条件<br>以及其中若使用到<code>let</code>定义的变量时，需要使用<code>$expr</code>操作符，具体的我还没有了解过😊 。<br>还有一点需要注意的是，当要做比较的值得类型是<code>mongodb</code>自带的<code>ObjectId</code>类型时，相等判断条件需要使用<code>$eq</code>操作符，否则永远返回<code>false</code>    </p>
+<li>
+<p><code>$match</code> 表示的是筛选条件<br>
+以及其中若使用到<code>let</code>定义的变量时，需要使用<code>$expr</code>操作符，具体的我还没有了解过😊 。<br>
+还有一点需要注意的是，当要做比较的值得类型是<code>mongodb</code>自带的<code>ObjectId</code>类型时，相等判断条件需要使用<code>$eq</code>操作符，否则永远返回<code>false</code></p>
 </li>
-<li><p>注意:</p>
+<li>
+<p>注意:</p>
 </li>
-<li><p><code>pipeline</code> 中使用 <code>$match</code> 匹配 <code>let</code>中定义的字段时，需要在外面包一个 <code>$expr</code>, 否则无法匹配<br><code>$match: &#123; $expr: &#123; _id: &quot;$$customFields&quot; &#125; &#125;</code>  </p>
+<li>
+<p><code>pipeline</code> 中使用 <code>$match</code> 匹配 <code>let</code>中定义的字段时，需要在外面包一个 <code>$expr</code>, 否则无法匹配<br>
+<code>$match: &#123; $expr: &#123; _id: &quot;$$customFields&quot; &#125; &#125;</code></p>
 </li>
-<li><p>如果要在<code>$match</code>中匹配<code>ObjectId</code>, 需要使用<code>$eq</code>, 直接比较似乎无效,原因有待查证. <code>$expr: &#123; $eq: [ &quot;$_id&quot;, &quot;$$customFields&quot; ] &#125;</code>   </p>
+<li>
+<p>如果要在<code>$match</code>中匹配<code>ObjectId</code>, 需要使用<code>$eq</code>, 直接比较似乎无效,原因有待查证. <code>$expr: &#123; $eq: [ &quot;$_id&quot;, &quot;$$customFields&quot; ] &#125;</code></p>
 </li>
-<li><p>ps<br>这是我另外碰到的一个例子🌰<br>需要判断某个值是否在数组中存在，此时可以使用<code>$in</code>操作符进行判断<br>第一个参数是需要判断的值，第二个参数是查询的数组  </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 简单描述一下</span><br>&#123;<br>  <span class="hljs-attr">let</span>: &#123;<br>    <span class="hljs-attr">teacher_id</span>: <span class="hljs-string">&quot;$teacher&quot;</span><br>  &#125;,<br>  <span class="hljs-attr">pipeline</span>: [<br>    &#123;<br>      <span class="hljs-attr">$match</span>: &#123;<br>        <span class="hljs-attr">$expr</span>: &#123;<br>          <span class="hljs-string">&quot;$in&quot;</span>: [ <span class="hljs-string">&quot;$name&quot;</span>, [<span class="hljs-string">&quot;Lisa&quot;</span>] ]<br>        &#125;<br>      &#125;<br>    &#125;<br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>
-
+<li>
+<p>ps<br>
+这是我另外碰到的一个例子🌰<br>
+需要判断某个值是否在数组中存在，此时可以使用<code>$in</code>操作符进行判断<br>
+第一个参数是需要判断的值，第二个参数是查询的数组</p>
 </li>
 </ul>
-<h3 id="unwind"><a href="#unwind" class="headerlink" title="$unwind"></a>$unwind</h3><p>根据指定的数组字段进行拆分成多项<br>它也有两种形式  </p>
-<h4 id="简单形式"><a href="#简单形式" class="headerlink" title="简单形式"></a>简单形式</h4><ul>
-<li>假设有如下集合名称为<code>users</code>的数据: </li>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 简单描述一下</span><br>&#123;<br>  <span class="hljs-attr">let</span>: &#123;<br>    <span class="hljs-attr">teacher_id</span>: <span class="hljs-string">&quot;$teacher&quot;</span><br>  &#125;,<br>  <span class="hljs-attr">pipeline</span>: [<br>    &#123;<br>      <span class="hljs-attr">$match</span>: &#123;<br>        <span class="hljs-attr">$expr</span>: &#123;<br>          <span class="hljs-string">&quot;$in&quot;</span>: [ <span class="hljs-string">&quot;$name&quot;</span>, [<span class="hljs-string">&quot;Lisa&quot;</span>] ]<br>        &#125;<br>      &#125;<br>    &#125;<br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="unwind">$unwind</h3>
+<p>根据指定的数组字段进行拆分成多项<br>
+它也有两种形式</p>
+<h4 id="简单形式">简单形式</h4>
+<ul>
+<li>假设有如下集合名称为<code>users</code>的数据:</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// users </span><br>[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher</span>: [<br>      <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span>,<br>      <span class="hljs-string">&quot;custom_teacher_id_002&quot;</span><br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>查询<code>users</code>数据并将<code>teacher</code>字段进行拆分    </li>
+<li>查询<code>users</code>数据并将<code>teacher</code>字段进行拆分</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">db.users.aggregate([<br>  &#123;<br>    <span class="hljs-attr">$unwind</span>: <span class="hljs-string">&quot;$teacher&quot;</span><br>  &#125;<br>])<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>你将会得到  </li>
+<li>你将会得到</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">_id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher</span>: <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">_id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher</span>: <span class="hljs-string">&quot;custom_teacher_id_002&quot;</span><br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
-<p><code>teacher</code>为拆分的字段，需要添加<code>$</code>前缀<br>这种简单的写法适合那种字段规整的情况，当需要做异常处理时，这种情况就不适用了。  </p>
-<h4 id="复杂形式"><a href="#复杂形式" class="headerlink" title="复杂形式"></a>复杂形式</h4><ul>
-<li>假设有如下集合名称为<code>users</code>的数据: </li>
+<p><code>teacher</code>为拆分的字段，需要添加<code>$</code>前缀<br>
+这种简单的写法适合那种字段规整的情况，当需要做异常处理时，这种情况就不适用了。</p>
+<h4 id="复杂形式">复杂形式</h4>
+<ul>
+<li>假设有如下集合名称为<code>users</code>的数据:</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// users </span><br>[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher</span>: [<br>      <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span>,<br>      <span class="hljs-string">&quot;custom_teacher_id_002&quot;</span><br>    ]<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_student_id_002&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">20</span>,<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>查询<code>users</code>数据并将<code>teacher</code>字段进行拆分，并设置当<code>teacher</code>不存在时继续保留    </li>
+<li>查询<code>users</code>数据并将<code>teacher</code>字段进行拆分，并设置当<code>teacher</code>不存在时继续保留</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js">db.users.aggregate([<br>  &#123;<br>    <span class="hljs-attr">$unwind</span>: &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;$teacher&quot;</span>,<br>      <span class="hljs-attr">preserveNullAndEmptyArrays</span>: <span class="hljs-literal">true</span> <br>    &#125;<br>  &#125;<br>])<br></code></pre></td></tr></table></figure>
-
 <ul>
 <li>你将会得到</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">_id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher</span>: <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">_id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher</span>: <span class="hljs-string">&quot;custom_teacher_id_002&quot;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">_id</span>: <span class="hljs-string">&quot;custom_student_id_002&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lisa&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">20</span>,<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
-<p>如上可以看到，当<code>teacher</code>不存在时，保留了对应的字段，如果设置<code>preserveNullAndEmptyArrays</code>时，第三条数据将不被查询到。  </p>
+<p>如上可以看到，当<code>teacher</code>不存在时，保留了对应的字段，如果设置<code>preserveNullAndEmptyArrays</code>时，第三条数据将不被查询到。</p>
 <p>复杂形式有三个参数：</p>
 <ol>
-<li><code>path</code><br>同简单形式  </li>
-<li><code>preserveNullAndEmptyArrays</code><br>是否保留空数组  </li>
-<li><code>includeArrayIndex</code><br>暂时没有用到过，再说。  </li>
+<li><code>path</code><br>
+同简单形式</li>
+<li><code>preserveNullAndEmptyArrays</code><br>
+是否保留空数组</li>
+<li><code>includeArrayIndex</code><br>
+暂时没有用到过，再说。</li>
 </ol>
-<h3 id="addToSet"><a href="#addToSet" class="headerlink" title="$addToSet"></a>$addToSet</h3><p>这个方法在前面的<a target="_blank" rel="noopener" href="https://food-billboard.github.io/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/">mongodb常用操作符文章中介绍过</a>介绍过，但是那是添加一项，有时候我们需要同时添加多个项。  </p>
+<h3 id="addToSet">$addToSet</h3>
+<p>这个方法在前面的<a target="_blank" rel="noopener" href="https://food-billboard.github.io/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/">mongodb常用操作符文章中介绍过</a>介绍过，但是那是添加一项，有时候我们需要同时添加多个项。</p>
 <ul>
-<li>假设有如下集合名称为<code>users</code>的数据: </li>
+<li>假设有如下集合名称为<code>users</code>的数据:</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// users </span><br>[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher</span>: [<br>      <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span>,<br>    ]<br>  &#125;,<br>]<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>向<code>name</code>为<code>Join</code>的数据字段添加两个<code>teacher</code>项    </li>
+<li>向<code>name</code>为<code>Join</code>的数据字段添加两个<code>teacher</code>项</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">db.users.updateOne(&#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span><br>&#125;, &#123;<br>  <span class="hljs-attr">$addToSet</span>: &#123;<br>    <span class="hljs-attr">teacher</span>: &#123;<br>      <span class="hljs-attr">$each</span>: [<br>        <span class="hljs-string">&quot;custom_teacher_id_002&quot;</span>,<br>        <span class="hljs-string">&quot;custom_teacher_id_003&quot;</span><br>      ]<br>    &#125;<br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>该字段会变成  </li>
+<li>该字段会变成</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">_id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">teacher</span>: [<br>      <span class="hljs-string">&quot;custom_teacher_id_001&quot;</span>,<br>      <span class="hljs-string">&quot;custom_teacher_id_002&quot;</span>,<br>      <span class="hljs-string">&quot;custom_teacher_id_003&quot;</span><br>    ]<br>  &#125;,<br>]<br></code></pre></td></tr></table></figure>
-
-<p>配合<code>$each</code>添加多项，这个没啥好说的  </p>
-<h3 id="addFields"><a href="#addFields" class="headerlink" title="$addFields"></a>$addFields</h3><ul>
-<li><p>向输出结果中新增字段<br>这种的一般使用情况是对原始的一些数据字段做特殊处理，比如统计等。  </p>
+<p>配合<code>$each</code>添加多项，这个没啥好说的</p>
+<h3 id="addFields">$addFields</h3>
+<ul>
+<li>
+<p>向输出结果中新增字段<br>
+这种的一般使用情况是对原始的一些数据字段做特殊处理，比如统计等。</p>
 </li>
-<li><p>假设有如下集合名称为<code>users</code>的数据:  </p>
+<li>
+<p>假设有如下集合名称为<code>users</code>的数据:</p>
 </li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// users </span><br>[<br>  &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">homework</span>: [<br>      <span class="hljs-number">30</span>,<br>      <span class="hljs-number">40</span><br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>查询<code>users</code>数据并添加新字段<code>total_homework</code>    </li>
+<li>查询<code>users</code>数据并添加新字段<code>total_homework</code></li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">db.users.aggregate([<br>  &#123;<br>    <span class="hljs-attr">$addFields</span>: &#123;<br>      <span class="hljs-attr">total_homework</span>: &#123; <br>        <span class="hljs-attr">$sum</span>: <span class="hljs-string">&quot;$homework&quot;</span> <br>      &#125;<br>    &#125;<br>  &#125;,<br>])<br></code></pre></td></tr></table></figure>
-
 <ul>
 <li>你将会得到</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">[<br>  &#123;<br>    <span class="hljs-attr">_id</span>: <span class="hljs-string">&quot;custom_student_id_001&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Join&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">homework</span>: [<br>      <span class="hljs-number">30</span>,<br>      <span class="hljs-number">40</span><br>    ],<br>    <span class="hljs-attr">total_homework</span>: <span class="hljs-number">70</span> <br>  &#125;,<br>]<br></code></pre></td></tr></table></figure>
-
-<h3 id="push"><a href="#push" class="headerlink" title="$push"></a>$push</h3><p>这个也是在<a target="_blank" rel="noopener" href="https://food-billboard.github.io/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/">前一篇文章</a>有介绍  </p>
-<p>但是当需要同时添加多项时，可能会需要用到<code>$pushAll</code>操作符，但是在实际使用过程中，<code>$pushAll</code>会报错，所以这里还是使用<code>$push</code><br>至于使用方法，可以参考前面的<code>$addToSet</code>操作符。</p>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>以上就是本人在实际使用过程中碰到的一部分问题，以后如果有新的问题还会补充。如果有哪里错了欢迎指正😊 。</p>
+<h3 id="push">$push</h3>
+<p>这个也是在<a target="_blank" rel="noopener" href="https://food-billboard.github.io/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/">前一篇文章</a>有介绍</p>
+<p>但是当需要同时添加多项时，可能会需要用到<code>$pushAll</code>操作符，但是在实际使用过程中，<code>$pushAll</code>会报错，所以这里还是使用<code>$push</code><br>
+至于使用方法，可以参考前面的<code>$addToSet</code>操作符。</p>
+<h2 id="结束">结束</h2>
+<p>以上就是本人在实际使用过程中碰到的一部分问题，以后如果有新的问题还会补充。如果有哪里错了欢迎指正😊 。</p>
 
             </div>
             <hr>
@@ -658,6 +707,13 @@
 
 
 
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
 
 
 

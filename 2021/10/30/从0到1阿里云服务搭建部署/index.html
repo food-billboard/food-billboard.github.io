@@ -16,12 +16,12 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta name="description" content="从0到1完成阿里云node服务搭建部署介绍前段时间自己根据网上的教程捣鼓了一下自己的服务器，终于把自己的node服务部署到了阿里云。所以在这里把自己的一些经验分享给各位，希望能对大家有帮助ღ( ´･ᴗ･&#96; )比心。    先介绍一下这次部署用到的一些东西，免得浪费各位的时间✅ 。    首先本人是一个前端，所以这次的服务端语言用的是node框架koa    node生产环境自然离不开pm2，本次远">
+  <meta name="description" content="从0到1完成阿里云node服务搭建部署 介绍 前段时间自己根据网上的教程捣鼓了一下自己的服务器，终于把自己的node服务部署到了阿里云。所以在这里把自己的一些经验分享给各位，希望能对大家有帮助ღ( ´･ᴗ･&#96; )比心。  先介绍一下这次部署用到的一些东西，免得浪费各位的时间✅ 。   首先本人是一个前端，所以这次的服务端语言用的是node框架koa node生产环境自然离不开pm2，本次远程部署也">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从0到1完成阿里云node服务搭建部署">
 <meta property="og:url" content="http://yoursite.com/2021/10/30/%E4%BB%8E0%E5%88%B01%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="Food-Billboard">
-<meta property="og:description" content="从0到1完成阿里云node服务搭建部署介绍前段时间自己根据网上的教程捣鼓了一下自己的服务器，终于把自己的node服务部署到了阿里云。所以在这里把自己的一些经验分享给各位，希望能对大家有帮助ღ( ´･ᴗ･&#96; )比心。    先介绍一下这次部署用到的一些东西，免得浪费各位的时间✅ 。    首先本人是一个前端，所以这次的服务端语言用的是node框架koa    node生产环境自然离不开pm2，本次远">
+<meta property="og:description" content="从0到1完成阿里云node服务搭建部署 介绍 前段时间自己根据网上的教程捣鼓了一下自己的服务器，终于把自己的node服务部署到了阿里云。所以在这里把自己的一些经验分享给各位，希望能对大家有帮助ღ( ´･ᴗ･&#96; )比心。  先介绍一下这次部署用到的一些东西，免得浪费各位的时间✅ 。   首先本人是一个前端，所以这次的服务端语言用的是node框架koa node生产环境自然离不开pm2，本次远程部署也">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-30T12:18:00.000Z">
 <meta property="article:modified_time" content="2021-11-24T05:55:45.000Z">
@@ -252,113 +252,150 @@
             <h1 style="display: none">从0到1完成阿里云node服务搭建部署</h1>
             
             <div class="markdown-body">
-              <h2 id="从0到1完成阿里云node服务搭建部署"><a href="#从0到1完成阿里云node服务搭建部署" class="headerlink" title="从0到1完成阿里云node服务搭建部署"></a>从0到1完成阿里云node服务搭建部署</h2><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>前段时间自己根据网上的教程捣鼓了一下自己的服务器，终于把自己的<code>node</code>服务部署到了阿里云。所以在这里把自己的一些经验分享给各位，希望能对大家有帮助ღ( ´･ᴗ･` )比心。  </p>
+              <h2 id="从0到1完成阿里云node服务搭建部署">从0到1完成阿里云node服务搭建部署</h2>
+<h2 id="介绍">介绍</h2>
+<p>前段时间自己根据网上的教程捣鼓了一下自己的服务器，终于把自己的<code>node</code>服务部署到了阿里云。所以在这里把自己的一些经验分享给各位，希望能对大家有帮助ღ( ´･ᴗ･` )比心。</p>
 <ol>
-<li>先介绍一下这次部署用到的一些东西，免得浪费各位的时间✅ 。 </li>
+<li>先介绍一下这次部署用到的一些东西，免得浪费各位的时间✅ 。</li>
 </ol>
 <ul>
-<li>首先本人是一个前端，所以这次的服务端语言用的是<code>node</code>框架<a target="_blank" rel="noopener" href="https://koajs.com/">koa</a>   </li>
-<li><code>node</code>生产环境自然离不开<a target="_blank" rel="noopener" href="https://pm2.keymetrics.io/">pm2</a>，本次远程部署也用到了它  </li>
-<li>数据库用的<a target="_blank" rel="noopener" href="https://docs.mongodb.com/">mongodb</a>以及它的<code>orm</code><a target="_blank" rel="noopener" href="http://www.mongoosejs.net/">mongoose</a>  </li>
-<li>缓存用的<code>redis</code>，这个用到的地方不是很多。  </li>
-<li><code>nginx</code>做代理  </li>
-<li>将上面的数据库、缓存、<code>nginx</code>等做容器化使用<code>docker</code>，并使用<code>docker-compose</code>做统一管理。  </li>
-<li>ci/ci 用的<code>github actions</code>，两个字，香！！（之前用的<code>travis</code>，但是后来得知它居然开始收费了，那没事了，白嫖怪不可能多花一分钱的）  </li>
+<li>首先本人是一个前端，所以这次的服务端语言用的是<code>node</code>框架<a target="_blank" rel="noopener" href="https://koajs.com/">koa</a></li>
+<li><code>node</code>生产环境自然离不开<a target="_blank" rel="noopener" href="https://pm2.keymetrics.io/">pm2</a>，本次远程部署也用到了它</li>
+<li>数据库用的<a target="_blank" rel="noopener" href="https://docs.mongodb.com/">mongodb</a>以及它的<code>orm</code><a target="_blank" rel="noopener" href="http://www.mongoosejs.net/">mongoose</a></li>
+<li>缓存用的<code>redis</code>，这个用到的地方不是很多。</li>
+<li><code>nginx</code>做代理</li>
+<li>将上面的数据库、缓存、<code>nginx</code>等做容器化使用<code>docker</code>，并使用<code>docker-compose</code>做统一管理。</li>
+<li>ci/ci 用的<code>github actions</code>，两个字，香！！（之前用的<code>travis</code>，但是后来得知它居然开始收费了，那没事了，白嫖怪不可能多花一分钱的）</li>
 </ul>
 <ol start="2">
-<li>当前还有部分未完成的内容❎    </li>
+<li>当前还有部分未完成的内容❎</li>
 </ol>
 <ul>
-<li>消息队列控制<code>rabbitmq</code>  </li>
-<li>视频细化处理<code>ffmpeg</code>  </li>
+<li>消息队列控制<code>rabbitmq</code></li>
+<li>视频细化处理<code>ffmpeg</code></li>
 </ul>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ol>
-<li>服务端依赖安装<br>首先是服务器上相关的依赖安装：<code>node</code>和<code>docker</code>以及<code>docker-compose</code>  </li>
+<h2 id="正文">正文</h2>
+<ol>
+<li>服务端依赖安装<br>
+首先是服务器上相关的依赖安装：<code>node</code>和<code>docker</code>以及<code>docker-compose</code></li>
 </ol>
 <ul>
-<li>node<br>安装<code>node</code>可以参考这边<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2e31fd9eb048">文章</a>的内容  </li>
-<li>docker<br>安装<code>docker</code>可以参考<a target="_blank" rel="noopener" href="https://www.runoob.com/docker/ubuntu-docker-install.html">这个</a>  </li>
-<li>docker-compose<br>安装<code>docker-compose</code>可以参考<a target="_blank" rel="noopener" href="https://www.runoob.com/docker/ubuntu-docker-install.html">这个</a>  </li>
+<li>node<br>
+安装<code>node</code>可以参考这边<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2e31fd9eb048">文章</a>的内容</li>
+<li>docker<br>
+安装<code>docker</code>可以参考<a target="_blank" rel="noopener" href="https://www.runoob.com/docker/ubuntu-docker-install.html">这个</a></li>
+<li>docker-compose<br>
+安装<code>docker-compose</code>可以参考<a target="_blank" rel="noopener" href="https://www.runoob.com/docker/ubuntu-docker-install.html">这个</a></li>
 </ul>
 <ol start="2">
-<li><p>github actions<br>关于代码集成部署方面，本项目使用了<code>github actions</code>，如果有不了解的话，可以参考<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">阮一峰</a>的文章。<br>这里关于它对于服务器的一些配置问题，本人在之前的一篇文章中有详细描述，可以参看<a target="_blank" rel="noopener" href="https://food-billboard.github.io/2021/10/25/deploy/">那篇文章</a>来进行配置。</p>
+<li>
+<p>github actions<br>
+关于代码集成部署方面，本项目使用了<code>github actions</code>，如果有不了解的话，可以参考<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">阮一峰</a>的文章。<br>
+这里关于它对于服务器的一些配置问题，本人在之前的一篇文章中有详细描述，可以参看<a target="_blank" rel="noopener" href="https://food-billboard.github.io/2021/10/25/deploy/">那篇文章</a>来进行配置。</p>
 </li>
-<li><p>docker docker-compose  </p>
+<li>
+<p>docker docker-compose</p>
+</li>
+</ol>
 <ul>
-<li><p><code>docker</code>   </p>
+<li>
+<p><code>docker</code></p>
 <blockquote>
-<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows操作系统的机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。<br><code>docker</code>简化了我们在服务部署上的流程，并且它的可移植性以及跨操作系统，可以让我们一次配置，多处使用。 </p>
+<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows操作系统的机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。<br>
+<code>docker</code>简化了我们在服务部署上的流程，并且它的可移植性以及跨操作系统，可以让我们一次配置，多处使用。</p>
 </blockquote>
 </li>
-<li><p><code>docker-compose</code>  </p>
+<li>
+<p><code>docker-compose</code></p>
 <blockquote>
-<p>Compose 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务。然后，使用一个命令，就可以从 YML 文件配置中创建并启动所有服务。<br>通常部署服务一般牵扯到其他很多的配置，比如本人的<code>node</code>项目，需要用到<code>mongodb</code>、<code>redis</code>、<code>nginx</code>等，如果这些都单独配置，但是安装就需要分别处理三次，通过<code>docker</code>容器化并配合<code>docker-compose</code>进行统一配置，大大降低了难度。  </p>
+<p>Compose 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务。然后，使用一个命令，就可以从 YML 文件配置中创建并启动所有服务。<br>
+通常部署服务一般牵扯到其他很多的配置，比如本人的<code>node</code>项目，需要用到<code>mongodb</code>、<code>redis</code>、<code>nginx</code>等，如果这些都单独配置，但是安装就需要分别处理三次，通过<code>docker</code>容器化并配合<code>docker-compose</code>进行统一配置，大大降低了难度。</p>
 </blockquote>
 </li>
 </ul>
-</li>
-</ol>
-<p>下面就介绍一下本人使用的几种容器的配置（可能不全，可以选择得看😝）   </p>
+<p>下面就介绍一下本人使用的几种容器的配置（可能不全，可以选择得看😝）</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment"># mongodb </span><br><span class="hljs-attr">mongo:</span><br>  <span class="hljs-attr">container_name:</span> <span class="hljs-string">mongo</span><br>  <span class="hljs-attr">image:</span> <span class="hljs-string">mongo:4.0.3</span><br>  <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span><br>  <span class="hljs-attr">ports:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">27017</span><span class="hljs-string">:27017</span><br>  <span class="hljs-attr">volumes:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">/home/movie/mongodb/data:/data/db</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">/usr/local/mongodb/log:/var/log/mongodb</span>  <br><br><span class="hljs-comment"># redis </span><br><span class="hljs-attr">image:</span> <span class="hljs-string">redis</span><br>  <span class="hljs-attr">container_name:</span> <span class="hljs-string">redis</span><br>  <span class="hljs-attr">volumes:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">/usr/local/redis/redis.conf:/usr/local/etc/redis/redis.conf</span><br>  <span class="hljs-attr">ports:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6379</span><span class="hljs-string">:6379</span><br><br><span class="hljs-comment"># nginx </span><br><span class="hljs-attr">image:</span> <span class="hljs-string">nginx:1.19</span><br>  <span class="hljs-attr">container_name:</span> <span class="hljs-string">nginx</span><br>  <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span><br>  <span class="hljs-attr">privileged:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">ports:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">8080</span><span class="hljs-string">:80</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">80</span><span class="hljs-string">:80</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">443</span><span class="hljs-string">:443</span><br>  <span class="hljs-attr">volumes:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">./bin/nginx/nginx.conf:/etc/nginx/conf.d/default.conf</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">./bin/nginx/logs.log:/etc/nginx/logs/log.log</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">./public:/movie/server/public:ro</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">./static:/movie/server/static:ro</span><br>  <span class="hljs-attr">network_mode:</span> <span class="hljs-string">host</span><br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>就以上的配置，这里做一下说明：<ul>
-<li>如上<code>volumes</code>是做文件映射的，当希望外部文件映射到内部文件，并且同步修改时，不要直接映射对应的文件，而是映射其外部的文件夹，否则的无法做到修改同步。  </li>
-<li>外部的服务会和容器内的服务发生冲突，比如你在外部启动了<code>nginx</code>，同样在容器里启用<code>docker</code>，那么可能就是外部的<code>nginx</code>配置起作用了。  </li>
+<li>就以上的配置，这里做一下说明：
+<ul>
+<li>如上<code>volumes</code>是做文件映射的，当希望外部文件映射到内部文件，并且同步修改时，不要直接映射对应的文件，而是映射其外部的文件夹，否则的无法做到修改同步。</li>
+<li>外部的服务会和容器内的服务发生冲突，比如你在外部启动了<code>nginx</code>，同样在容器里启用<code>docker</code>，那么可能就是外部的<code>nginx</code>配置起作用了。</li>
 </ul>
 </li>
 </ul>
-<p>如果有在本地做<code>docker</code>测试，可以<code>vs code</code>的<code>docker</code>插件，可以采用可视化的方式查看到容器内部的文件结构。  </p>
+<p>如果有在本地做<code>docker</code>测试，可以<code>vs code</code>的<code>docker</code>插件，可以采用可视化的方式查看到容器内部的文件结构。</p>
 <ul>
-<li><p>另外<br>收集了几个有时候用到的<code>docker</code>命令  </p>
+<li>另外<br>
+收集了几个有时候用到的<code>docker</code>命令
 <ul>
-<li><p>查看正在运行的docker容器 <code>docker ps</code>  </p>
+<li>
+<p>查看正在运行的docker容器 <code>docker ps</code></p>
 </li>
-<li><p>进入指定容器内部 <code>docker exec -it 容器id sh</code>  </p>
+<li>
+<p>进入指定容器内部 <code>docker exec -it 容器id sh</code></p>
 </li>
-<li><p>从容器中退出 <code>exit</code>  </p>
+<li>
+<p>从容器中退出 <code>exit</code></p>
 </li>
-<li><p>查看容器内部暴露的ip <code>docker inspect 容器id |grep IPA</code>  </p>
+<li>
+<p>查看容器内部暴露的ip <code>docker inspect 容器id |grep IPA</code></p>
 </li>
-<li><p>外部执行mongodb <code>docker exec -it 容器id mongo --host 127.0.0.1 --port 27017</code>  </p>
+<li>
+<p>外部执行mongodb <code>docker exec -it 容器id mongo --host 127.0.0.1 --port 27017</code></p>
 </li>
-<li><p>外部执行redis <code>docker exec -it 容器id redis-cli</code></p>
+<li>
+<p>外部执行redis <code>docker exec -it 容器id redis-cli</code></p>
 </li>
-<li><p>文件复制 <code>docker cp 容器id:容器的路径 本地的路径</code>  </p>
+<li>
+<p>文件复制 <code>docker cp 容器id:容器的路径 本地的路径</code></p>
 </li>
-<li><p>停止镜像 <code>docker stop docker_id</code>  </p>
+<li>
+<p>停止镜像 <code>docker stop docker_id</code></p>
 </li>
-<li><p>删除容器 <code>docker rm docker_id</code>  </p>
+<li>
+<p>删除容器 <code>docker rm docker_id</code></p>
 </li>
-<li><p>正在运行的容器 <code>docker ps</code>  </p>
+<li>
+<p>正在运行的容器 <code>docker ps</code></p>
 </li>
-<li><p>所有容器 <code>docker ps -a</code>  </p>
+<li>
+<p>所有容器 <code>docker ps -a</code></p>
 </li>
-<li><p>删除镜像 <code>docker rmi docker_id</code>  </p>
+<li>
+<p>删除镜像 <code>docker rmi docker_id</code></p>
 </li>
-<li><p>查看镜像 <code>docker images</code></p>
+<li>
+<p>查看镜像 <code>docker images</code></p>
 </li>
-<li><p>查看容器运行日志 <code>docker logs docker_id</code></p>
+<li>
+<p>查看容器运行日志 <code>docker logs docker_id</code></p>
 </li>
 </ul>
 </li>
 </ul>
 <ol start="4">
-<li>pm2  <blockquote>
-<p>PM2 是一个带有负载均衡功能的 Node 应用进程管理器。<br>利用<code>pm2</code>在服务器上进行服务持久性运行，以及达到从<code>local</code>到<code>remote</code>的代码部署。  </p>
-</blockquote>
-</li>
+<li>pm2</li>
 </ol>
-<p>下面是它的配置，当中有注释进行解释。  </p>
+<blockquote>
+<p>PM2 是一个带有负载均衡功能的 Node 应用进程管理器。<br>
+利用<code>pm2</code>在服务器上进行服务持久性运行，以及达到从<code>local</code>到<code>remote</code>的代码部署。</p>
+</blockquote>
+<p>下面是它的配置，当中有注释进行解释。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">module</span>.exports = &#123;<br>  <span class="hljs-comment">// 应用名称</span><br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;app&quot;</span>,<br>  <span class="hljs-comment">// 需要启动的服务  </span><br>  <span class="hljs-attr">apps</span> : [<br>    &#123;<br>      <span class="hljs-comment">// 进程名称</span><br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;app&#x27;</span>,<br>      <span class="hljs-comment">// 进程的入口文件  </span><br>      <span class="hljs-attr">script</span>: <span class="hljs-string">&#x27;app.js&#x27;</span>,<br>      <span class="hljs-comment">// 环境变量</span><br>      <span class="hljs-attr">env</span>: &#123;<br>        <span class="hljs-attr">NODE_ENV</span>: <span class="hljs-string">&quot;production&quot;</span><br>      &#125;,<br>      <span class="hljs-comment">// 负载均衡</span><br>      <span class="hljs-attr">exec_mode</span>: <span class="hljs-string">&quot;cluster_mode&quot;</span>,<br>      <span class="hljs-comment">// 错误日志路径</span><br>      <span class="hljs-attr">error_file</span>: <span class="hljs-string">&#x27;./src/logs/pm2/error.log&#x27;</span>,<br>      <span class="hljs-comment">// 输出路径  </span><br>      <span class="hljs-attr">out_file</span>: <span class="hljs-string">&#x27;./src/logs/pm2/output.log&#x27;</span><br>    &#125;, <br>    <span class="hljs-comment">// 另一个进程  </span><br>    &#123;<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;socket&quot;</span>,<br>      <span class="hljs-attr">script</span>: <span class="hljs-string">&quot;./src/chat/index.js&quot;</span>,<br>      <span class="hljs-attr">exec_mode</span>: <span class="hljs-string">&quot;cluster_mode&quot;</span>,<br>    &#125;<br>  ],<br><br>  <span class="hljs-comment">// 部署的配置 </span><br>  <span class="hljs-attr">deploy</span> : &#123;<br>    <span class="hljs-attr">production</span> : &#123;<br>      <span class="hljs-attr">user</span>: <span class="hljs-string">&quot;这里是服务器的用户名&quot;</span>,<br>      <span class="hljs-attr">host</span>: <span class="hljs-string">&quot;服务器的ip地址(xx.xx.xx.xx或者可以使用数组设置多个)&quot;</span>,<br>      <span class="hljs-attr">ssh_options</span>: <span class="hljs-string">&quot;ssh连接的参数&quot;</span>,<br>      <span class="hljs-attr">ref</span>: <span class="hljs-string">&quot;github分支&quot;</span>,<br>      <span class="hljs-attr">repo</span>: <span class="hljs-string">&quot;github仓库&quot;</span>,<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;部署的服务器中的文件目录&quot;</span>,<br>      <span class="hljs-comment">// 代码被clone后执行的命令</span><br>      <span class="hljs-string">&quot;post-deploy&quot;</span>:<br>        <span class="hljs-string">&quot;git pull origin master &amp;&amp; source ~/.nvm/nvm.sh &amp;&amp; yarn install&quot;</span>, <br>      <span class="hljs-comment">// 环境变量</span><br>      <span class="hljs-attr">env</span>: &#123;<br>        <span class="hljs-string">&quot;NODE_ENV&quot;</span>: <span class="hljs-string">&quot;production&quot;</span><br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ol>
-<li>可能存在拉取<code>docker</code>镜像出现<code>net/http: TLS handshake timeout</code>问题<br>使用国内镜像加速  <blockquote>
-<p>Ubuntu16.04+、Debian8+、CentOS7<br>对于使用 systemd 的系统，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）：<br><code>&#123;&quot;registry-mirrors&quot;:[&quot;https://reg-mirror.qiniu.com/&quot;]&#125;</code><br>这个是七牛云的镜像加速地址  </p>
-</blockquote>
-</li>
+<h2 id="遇到的问题">遇到的问题</h2>
+<ol>
+<li>可能存在拉取<code>docker</code>镜像出现<code>net/http: TLS handshake timeout</code>问题<br>
+使用国内镜像加速</li>
 </ol>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>这就是本次我在搭建部署阿里云服务器中总结的一些经验和教训，如有错误的话请指正，希望对各位有帮助。<br>完整的项目配置可以到<a target="_blank" rel="noopener" href="https://github.com/food-billboard/node-server">这里</a>查看。</p>
+<blockquote>
+<p>Ubuntu16.04+、Debian8+、CentOS7<br>
+对于使用 systemd 的系统，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）：<br>
+<code>&#123;&quot;registry-mirrors&quot;:[&quot;https://reg-mirror.qiniu.com/&quot;]&#125;</code><br>
+这个是七牛云的镜像加速地址</p>
+</blockquote>
+<h2 id="结束">结束</h2>
+<p>这就是本次我在搭建部署阿里云服务器中总结的一些经验和教训，如有错误的话请指正，希望对各位有帮助。<br>
+完整的项目配置可以到<a target="_blank" rel="noopener" href="https://github.com/food-billboard/node-server">这里</a>查看。</p>
 
             </div>
             <hr>
@@ -581,6 +618,13 @@
 
 
 
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
 
 
 

@@ -1,0 +1,1009 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="期货市场技术分析笔记 历时几个月（9-14 ~ 11-25），终于粗略看完了整本书😊。 介绍 本文是本人在阅读📚《期货市场技术分析》的读书笔记，记录📝当中的一些交易方法，指标等等。 作为一个专业的程序猿🐒，当然是要通过代码来实现交易自动化🌶。 虽然本人的初衷是做股票的自动化交易，但是据说是两者想通，可以用来借鉴，所以就当是多学习一点相关的知识吧👍。 正文 先记录下目录：  前言 译者的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="期货市场技术分析笔记">
+<meta property="og:url" content="http://yoursite.com/2022/11/25/%E6%9C%9F%E8%B4%A7%E5%B8%82%E5%9C%BA%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="期货市场技术分析笔记 历时几个月（9-14 ~ 11-25），终于粗略看完了整本书😊。 介绍 本文是本人在阅读📚《期货市场技术分析》的读书笔记，记录📝当中的一些交易方法，指标等等。 作为一个专业的程序猿🐒，当然是要通过代码来实现交易自动化🌶。 虽然本人的初衷是做股票的自动化交易，但是据说是两者想通，可以用来借鉴，所以就当是多学习一点相关的知识吧👍。 正文 先记录下目录：  前言 译者的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/道式理论-1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/趋势的基本概念-趋势判断.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/趋势的基本概念-趋势线买卖信号.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/趋势的基本概念-管道线.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/趋势的基本概念-速度线.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/趋势的基本概念-跳空.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/主要反转形态-头肩形反转形态.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/主要反转形态-倒头肩形.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/主要反转形态-三重顶（底）.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/主要反转形态-双重顶（底）.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/持续形态-三角形.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/持续形态-三角形.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/持续形态-喇叭形.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/持续形态-钻石形.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/持续形态-旗形.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/持续形态-三角旗形.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/持续形态-楔形.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/持续形态-矩形.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/交易量和持仓兴趣-关联.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/交易量和持仓兴趣-关联2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/摆动指数和相反意见-动力指数.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/摆动指数和相反意见-ROC.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/摆动指数和相反意见-移动平均线摆动指数.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/摆动指数和相反意见-临界值.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/摆动指数和相反意见-RSI.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/摆动指数和相反意见-RSI公式.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/摆动指数和相反意见-RSI作者结论.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/摆动指数和相反意见-随机指数K-D-K.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/摆动指数和相反意见-随机指数K-D-D.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/摆动指数和相反意见-随机指数K-D.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/日内点数图-画法.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/日内点数图-画法-2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/三点转向和优化点数图-画法.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/三点转向和优化点数图-画法-2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/艾略特波浪理论-基础.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/艾略特波浪理论-缩放.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/艾略特波浪理论-8浪.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/艾略特波浪理论-总结.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/时间周期-相位.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/时间周期-周期理论.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/时间周期-波峰左移右移.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/计算机和交易系统-技术指标列表.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/资金管理和交易策略-资金管理要领和交易策略举要.jpg">
+<meta property="og:image" content="http://yoursite.com/images/期货市场技术分析笔记/全书大会串-技术分析清单.jpg">
+<meta property="article:published_time" content="2022-11-25T01:37:00.000Z">
+<meta property="article:modified_time" content="2022-11-25T01:37:59.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="trade finance">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/images/期货市场技术分析笔记/道式理论-1.jpg">
+  
+  <title>期货市场技术分析笔记 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/%E6%9C%9F%E8%B4%A7%E5%B8%82%E5%9C%BA%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/background.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="期货市场技术分析笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-11-25 09:37" pubdate>
+        2022年11月25日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">期货市场技术分析笔记</h1>
+            
+            <div class="markdown-body">
+              <h2 id="期货市场技术分析笔记">期货市场技术分析笔记</h2>
+<p>历时几个月（9-14 ~ 11-25），终于粗略看完了整本书😊。</p>
+<h2 id="介绍">介绍</h2>
+<p>本文是本人在阅读📚《期货市场技术分析》的读书笔记，记录📝当中的一些交易方法，指标等等。<br>
+作为一个专业的程序猿🐒，当然是要通过代码来实现交易自动化🌶。<br>
+虽然本人的初衷是做股票的自动化交易，但是据说是两者想通，可以用来借鉴，所以就当是多学习一点相关的知识吧👍。</p>
+<h2 id="正文">正文</h2>
+<p>先记录下目录：</p>
+<blockquote>
+<p>前言<br>
+译者的话——我看技术分析<br>
+致谢<br>
+第一章 技术分析的理论基础<br>
+第二章 道氏理论<br>
+第三章 图表简介<br>
+第四章 趋势的基本概念<br>
+第五章 主要反转形态<br>
+第六章 持续形态<br>
+第七章 交易量和持仓兴趣<br>
+第八章 长期图表和商品指数<br>
+第九章 移动平均线<br>
+第十章 摆动指数和相反意见<br>
+第十一章 日内点数图<br>
+第十二章 三点转向和优化点数图<br>
+第十三章 艾略特波浪理论<br>
+第十四章 时间周期<br>
+第十五章 计算机和交易系统<br>
+第十六章资金管理和交易策略<br>
+全书大会串——一张清单<br>
+附录一 差价交易和相对力度的概念<br>
+附录二期权交易<br>
+附录三 W·D·江恩：几何角度和百分比例<br>
+参考资料<br>
+索引<br>
+关于本书</p>
+</blockquote>
+<p>当中有一些基础易懂的内容，就不记录了😊。</p>
+<h3 id="道式理论">道式理论</h3>
+<ul>
+<li>市场的趋势分为三种：<strong>主要趋势</strong>（一年或几年）、<strong>次要趋势</strong>（几个星期或几个月）、<strong>短暂趋势</strong>（不到三个星期）</li>
+</ul>
+<h4 id="信号">信号</h4>
+<blockquote>
+<p>只要相继的上冲加个波峰和波谷都对应的高过前一个波峰、波谷，那么市场就处在一个上升趋势之中。</p>
+</blockquote>
+<p>简单说就是当前价格超过前一个波峰或波谷，则触发了对应的买入卖出信号。<br>
+并且需要的是市场的<strong>整体价格</strong>处在同一个趋势中，才算是真正的趋势发生。这大概意思就是需要比较市场内的多只目标股来进行判断。</p>
+<img src="/images/期货市场技术分析笔记/道式理论-1.jpg" srcset="/img/loading.gif" lazyload />
+<h3 id="趋势的基本概念">趋势的基本概念</h3>
+<ul>
+<li>趋势的三种状态：<strong>上升</strong>、<strong>下降</strong>、<strong>横向延伸（震荡）</strong></li>
+</ul>
+<h4 id="支撑和阻挡">支撑和阻挡</h4>
+<p>价格趋势向上时，形成<strong>阻挡</strong>点<br>
+价格趋势向下时，形成<strong>支撑</strong>点<br>
+当价格突破前面的<strong>支撑</strong>和<strong>阻挡</strong>点时，触发信号。</p>
+<h4 id="趋势线">趋势线</h4>
+<ul>
+<li>确认趋势是否存在</li>
+</ul>
+<blockquote>
+<p>趋势上升：<br>
+至少需要两个有效的向上反弹低点，并且后者高于前者，并验证（第三次触及该线并反弹）。</p>
+</blockquote>
+<img src="/images/期货市场技术分析笔记/趋势的基本概念-趋势判断.jpg" srcset="/img/loading.gif" lazyload />  
+<img src="/images/期货市场技术分析笔记/趋势的基本概念-趋势线买卖信号.jpg" srcset="/img/loading.gif" lazyload />
+<h5 id="ps">ps</h5>
+<p>以下均说的是<strong>上升趋势</strong>的情况，下降则相反。</p>
+<ol>
+<li>存在<strong>日内</strong>短暂突破<strong>趋势线</strong>，而后在收盘时又回到趋势线之上。<br>
+这里选择的是：</li>
+</ol>
+<ul>
+<li>绘制一条穿过该低点的<strong>辅助趋势线</strong>。</li>
+<li>在之后验证其合理性（这里理解的是在之后的连续两个低点触及该线并反弹）。</li>
+<li>合理则转而使用该<strong>辅助趋势线</strong>作为<strong>趋势线</strong>。</li>
+</ul>
+<ol start="2">
+<li>有效突破<br>
+存在价格突破但是突破不多的情况，这里的选择是：</li>
+</ol>
+<ul>
+<li>通常价格需要突破趋势线至少<strong>3%</strong>，并且至少连续<strong>2天</strong>，定义为有效突破（普遍适用，但是不完全适用所有市场）。</li>
+</ul>
+<h4 id="管道线">管道线</h4>
+<ol>
+<li>基本概念</li>
+</ol>
+<ul>
+<li>用<strong>趋势线</strong>做一条基本线。</li>
+<li>从该起点出现的第一个波峰处，绘制一条与趋势线<strong>平行</strong>的线。</li>
+<li>验证：到达<em>平行线</em>后<strong>反弹</strong>，而后又回到趋势线的位置。</li>
+<li>基础趋势线<em>开多头</em>，平行线<em>平仓</em>。</li>
+<li>当价格未<em>无法触及</em>平行线，则是市场<strong>转向</strong>的信号。</li>
+</ul>
+<img src="/images/期货市场技术分析笔记/趋势的基本概念-管道线.jpg" srcset="/img/loading.gif" lazyload />  
+<h4 id="回撤">回撤</h4>
+<p>市场在上升或下降过程中，存在短暂的逆市场方向的情况，称为<strong>回撤</strong>，一般回撤的大小不会超过<strong>三分之二</strong>，否则是市场转向的信号。</p>
+<h4 id="速度线">速度线</h4>
+<p>从趋势起点开始到当前价格高点绘制三等分线，当价格回撤超过其中间等分线时，为市场转向信号。</p>
+<img src="/images/期货市场技术分析笔记/趋势的基本概念-速度线.jpg" srcset="/img/loading.gif" lazyload />
+<h4 id="跳空">跳空</h4>
+<p>当前最低（高）价高（低）于前一日（周、月）的最高（低）价，称为跳空。<br>
+在<strong>周、月</strong>中为非常重要的信号。</p>
+<h5 id="四种跳空">四种跳空</h5>
+<p>普通跳空 -&gt; 突破跳空 -&gt; 中继跳空 -&gt; 衰竭跳空 -&gt; 反转<br>
+<img src="/images/期货市场技术分析笔记/趋势的基本概念-跳空.jpg" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="主要反转形态">主要反转形态</h3>
+<h4 id="头肩形反转形态">头肩形反转形态</h4>
+<img src="/images/期货市场技术分析笔记/主要反转形态-头肩形反转形态.jpg" srcset="/img/loading.gif" lazyload />  
+<p>此状态形成的关键就在于，<strong>右肩</strong>的高点无法超越前一个高点。<br>
+并且最高点下的回撤已经低于了前一个高点（A，前面说过，上升趋势的前一个突破高点会在之后形成<strong>支撑</strong>效果）。</p>
+<blockquote>
+<p>形态与交易量息息相关<br>
+当还未到最高点时，左肩的上升趋势一般都伴随着高交易量，而回撤当然也会随之减少交易量。<br>
+当开始冲击最高点时，交易量已经开始有所减少，也说明交易兴趣开始减少，上升阻挡效果开始增大。</p>
+</blockquote>
+<h5 id="颈线">颈线</h5>
+<p>根据<strong>左肩</strong>的低点和<strong>头</strong>的低点连线而成的线（如上图《头肩形反转形态》）。</p>
+<h5 id="反扑">反扑</h5>
+<p>存在由上述过程后下跌，出现反向<strong>上升</strong>的情况，简单的判断条件是，根据<strong>交易量</strong>的大小，<strong>小</strong>的交易量表明可能出现有效的上升趋势，反之则不然。</p>
+<h4 id="倒头肩形">倒头肩形</h4>
+<p>与头肩形正好相反。</p>
+<img src="/images/期货市场技术分析笔记/主要反转形态-倒头肩形.jpg" srcset="/img/loading.gif" lazyload />  
+<h4 id="三重顶（底）">三重顶（底）</h4>
+<p>存在多个相同高度的峰，关键在于其逐渐下降的交易量。</p>
+<img src="/images/期货市场技术分析笔记/主要反转形态-三重顶（底）.jpg" srcset="/img/loading.gif" lazyload />  
+<h4 id="双重顶（底）">双重顶（底）</h4>
+<img src="/images/期货市场技术分析笔记/主要反转形态-双重顶（底）.jpg" srcset="/img/loading.gif" lazyload />  
+<p>这是一个很常见的变体，在实盘中经常出现。<br>
+判断的条件也是同样的道理，以上升反转为例，第一个顶的交易量必然高于第二个顶的交易量。</p>
+<h4 id="圆顶（底）">圆顶（底）</h4>
+<p>个人认为，这种情形只是一个比较圆滑的逐步上升或下降的情况。</p>
+<h4 id="V形">V形</h4>
+<p>个人认为，较为陡峭的峰 + <code>高</code>交易量 + <code>多</code>跳空。</p>
+<h4 id="ps-2">ps</h4>
+<p>本章看到的最多的一点就是：<strong>交易的形态和交易量关系非常密切</strong></p>
+<ul>
+<li><strong>数据过滤</strong><br>
+实盘常见的一些比较类似的情形可能形成趋势，但是可能并不是。<br>
+通过添加一些限制条件来降低出错的次数。比如：</li>
+</ul>
+<ol>
+<li>添加突破大小，向上或向下突破一定<strong>百分比</strong>定义为趋势形成。</li>
+<li>日内突破与收盘突破相结合判断。</li>
+<li>双日突破，<strong>连续两天</strong>突破才定论。</li>
+</ol>
+<h3 id="持续形态">持续形态</h3>
+<h4 id="三角形">三角形</h4>
+<p>价格走势形成了一个三角形的形态。<br>
+三角形分别有<code>对称三角形</code>、<code>上升三角形</code>、<code>下降三角形</code>。<br>
+<code>6</code>个转折点确定一个三角形。<br>
+一般在三角形横向距离的<code>一半到三分之二</code>发生突破。</p>
+<img src="/images/期货市场技术分析笔记/持续形态-三角形.jpg" srcset="/img/loading.gif" lazyload />
+<p>计算趋势方式均为：</p>
+<blockquote>
+<p>从突破点开直线突破一个三角形底边的距离。<br>
+交易量一般随着三角形两边间距的减小而减少，而后在突破之后大幅增加。</p>
+</blockquote>
+<p>如下图上升三角形计算示例<br>
+<img src="/images/期货市场技术分析笔记/持续形态-三角形.jpg" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="喇叭形-钻石行">喇叭形&amp;钻石行</h4>
+<img src="/images/期货市场技术分析笔记/持续形态-喇叭形.jpg" srcset="/img/loading.gif" lazyload title="喇叭形" />
+<img src="/images/期货市场技术分析笔记/持续形态-钻石形.jpg" srcset="/img/loading.gif" lazyload title="钻石形" />
+<p>文中提到不常碰到，这里就暂时不考虑。</p>
+<h4 id="旗形-三角旗形">旗形&amp;三角旗形</h4>
+<p>形成形态是：一段激增的交易量形成的陡峭坡，表示旗杆，接着试一段交易量逐渐减小的波动交易，之后是突破型的又是激增的交易量完成整个形态。</p>
+<img src="/images/期货市场技术分析笔记/持续形态-旗形.jpg" srcset="/img/loading.gif" lazyload title="旗形" />
+<img src="/images/期货市场技术分析笔记/持续形态-三角旗形.jpg" srcset="/img/loading.gif" lazyload title="三角旗形" />
+<h5 id="计算">计算</h5>
+<p>关于计算没有非常的理解，大致理解是突破点以上整个旗子的一半高度。</p>
+<h4 id="楔形">楔形</h4>
+<p>类似于三角形，但是两条边都不水平。</p>
+<p>上涨倾斜向下，下跌倾斜向上。<br>
+一般震荡需要超过三角形顶点的<strong>三分之二或者顶点</strong>才会发生突破。</p>
+<img src="/images/期货市场技术分析笔记/持续形态-楔形.jpg" srcset="/img/loading.gif" lazyload title="楔形" />
+<h4 id="矩形">矩形</h4>
+<p>大概就是水平震荡的意思吧。</p>
+<p>判断其是上涨还是下跌的标准是：查看其在两个方向上的<strong>交易量</strong>。</p>
+<img src="/images/期货市场技术分析笔记/持续形态-矩形.jpg" srcset="/img/loading.gif" lazyload title="矩形" />
+<h4 id="ps-3">ps</h4>
+<p>不同的市场中经常会有不同的倾向，所以可以根据具体的市场做相应的具体图表分析方法。<br>
+把不同的指标相互应用验证对应的策略，如果相互验证则说明判断趋势是正确的，如果相背离，则是市场转向的一个警告⚠️。</p>
+<h3 id="交易量和持仓兴趣">交易量和持仓兴趣</h3>
+<p>上一章也有提到，交易量是非常重要的指标，配合使用可以达到非常好的效果。</p>
+<h4 id="定义">定义</h4>
+<ul>
+<li>交易量</li>
+</ul>
+<blockquote>
+<p>指定时间单位内成交的合约总额。</p>
+</blockquote>
+<ul>
+<li>持仓兴趣</li>
+</ul>
+<blockquote>
+<p>某收市时间为止，所有未平仓了结的合约的总数。</p>
+</blockquote>
+<h5 id="关联">关联</h5>
+<img src="/images/期货市场技术分析笔记/交易量和持仓兴趣-关联.jpg" srcset="/img/loading.gif" lazyload title="关联" />
+<img src="/images/期货市场技术分析笔记/交易量和持仓兴趣-关联2.jpg" srcset="/img/loading.gif" lazyload title="关联2" />
+<h4 id="OBV和VA">OBV和VA</h4>
+<p>OBV法将每日的交易量简单的进行连线，这样查看计算更方便。</p>
+<p>VA法则是对<strong>交易量</strong>和<strong>持仓兴趣</strong>进行了权重划分。</p>
+<p><code>VA = &#123; [(C - L) - (H - C)] / (H - L) &#125; x V</code></p>
+<p>H = 当日最高价<br>
+C = 收盘价<br>
+L = 最低价<br>
+V = 交易量</p>
+<h3 id="长期图表和商品指数">长期图表和商品指数</h3>
+<p>当中介绍了一些关于期货特有的知识点，这里暂时用不到，就先不记录了🙏🏻。</p>
+<blockquote>
+<p>长期图表的研究能发现更多的信息。</p>
+</blockquote>
+<h3 id="移动平均线">移动平均线</h3>
+<p>计算<code>10天</code>的平均值<br>
+<code>[10, 15, 20, 9, 8, 6, 11, 10, 15, 20]</code></p>
+<p><strong>简单平均线</strong><code>(10 + 15 + 20 + 9 + 8 + 6 + 11 + 10 + 15 + 20) / 10</code>、<br>
+<strong>线性加权平均线</strong><code>(10 * 1 + 15 * 2 + 20 * 3 + 9 * 4 + 8 * 5 + 6 * 6 + 11 * 7 + 10 * 8 + 15 * 9 + 20 * 10) / (1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10)</code>、<br>
+<strong>指数加权平均线</strong>(比较复杂)</p>
+<p>短期均线比长期均线更加敏感，当价格发生变动，会更快反应出来。<br>
+一般的时间为<code>5、10， 20， 40， 60</code><br>
+均线在市场存在<strong>趋势</strong>的时候更有作用，但在<strong>震荡</strong>市场下，效果不好。</p>
+<h4 id="关于噪声的控制">关于噪声的控制</h4>
+<ol>
+<li>价格上穿或下穿均线时，必须保证<code>全日</code>价格全都穿越。</li>
+<li>价格穿越需要到达一定的程度。</li>
+</ol>
+<h4 id="双均线">双均线</h4>
+<p>总体来说，可能双均线对于常规交易更有用。<br>
+一条长期均线 + 一条短期均线。</p>
+<blockquote>
+<p>短上穿长，买入。<br>
+短下穿长，卖出。</p>
+</blockquote>
+<h4 id="周规则">周规则</h4>
+<ul>
+<li>四周规则
+<ol>
+<li>价格超过前四个日历周的最高价，多头。</li>
+<li>价格低过前四个日历周的最低价，空头。</li>
+<li>在一周或二周出现上述信号，即进行交易（自己根据文附加的）。</li>
+<li>在四周出现信号时，考察一周或二周是否也出现信号（自己根据文附加的）。</li>
+</ol>
+</li>
+</ul>
+<h4 id="ps-4">ps</h4>
+<p>关于移动平均线，在<code>《海龟的交易法则》</code>书中也有对应的应用方式，对于该方法的细节，在后面做补充吧。<br>
+移动均线不仅仅可以使用在价格上，包括<code>交易量</code>、<code>持仓兴趣</code>等均可使用均线来查看其趋势。</p>
+<h3 id="摆动指数和相反意见">摆动指数和相反意见</h3>
+<h4 id="摆动指数">摆动指数</h4>
+<p>将价格变化局限于一个区间中，包含一条零线。</p>
+<ol>
+<li>当指数接近<strong>上下边界</strong>（超买超卖），是市场即将转向的信号。</li>
+<li>当指数处于极限位置并与价格方向相背离时，同样是警讯。</li>
+<li>当指数上下穿越零线，则是买卖信号。</li>
+</ol>
+<h4 id="动力指数">动力指数</h4>
+<p>使用当前收盘价减去指定天数前的收盘价，得到的差值。<br>
+<code>M = V - Vx</code><br>
+<code>M</code>连成的线即为摆动指数。</p>
+<img src="/images/期货市场技术分析笔记/摆动指数和相反意见-动力指数.jpg" srcset="/img/loading.gif" lazyload title="动力指数" />
+<p>但是该指标缺乏边界值，即无法界定<code>止损点</code>。</p>
+<h4 id="变化速度指数（ROC）">变化速度指数（ROC）</h4>
+<p><code>ROC = 100 * (V / Vx)</code></p>
+<img src="/images/期货市场技术分析笔记/摆动指数和相反意见-ROC.jpg" srcset="/img/loading.gif" lazyload title="ROC" />
+<h4 id="移动平均线构造摆动指数">移动平均线构造摆动指数</h4>
+<p>利用<strong>短期</strong> / <strong>长期</strong>的值作为摆动指数。</p>
+<img src="/images/期货市场技术分析笔记/摆动指数和相反意见-移动平均线摆动指数.jpg" srcset="/img/loading.gif" lazyload title="移动平均线摆动指数" />
+<h4 id="摆动指数的临界值">摆动指数的临界值</h4>
+<p>当当前指数达到上下的临界值时，是重要的信号，意味着市场存在<code>超买超卖</code>的情况。<br>
+比如假设临界值为<code>0-100</code>，则在上升到<code>70</code>或下降到<code>30</code>时，便是重要的信号。</p>
+<img src="/images/期货市场技术分析笔记/摆动指数和相反意见-临界值.jpg" srcset="/img/loading.gif" lazyload title="临界值" />
+<h4 id="相互背离">相互背离</h4>
+<p>当价格顺应趋势而行动时，如果出现摆动指数与价格相<strong>背离</strong>的运动时，说明是市场即将<strong>反转</strong>的信号。</p>
+<h4 id="相对力度指数-RSI">相对力度指数(RSI)</h4>
+<img src="/images/期货市场技术分析笔记/摆动指数和相反意见-RSI.jpg" srcset="/img/loading.gif" lazyload title="RSI" />
+<p>此指数能预防价格短时间大幅变动而不被察觉的情况，并且其不需要去动态计算上下边界。<br>
+<img src="/images/期货市场技术分析笔记/摆动指数和相反意见-RSI公式.jpg" srcset="/img/loading.gif" lazyload title="RSI公式" /></p>
+<p>上涨（下跌）收盘价平均值就是前<code>x</code>天内上涨（下跌）的收盘价相加的和再除以<code>x</code></p>
+<p>通常<code>x</code>的使用天数，一般是<code>14</code>或者<code>9</code>，时间越短，对价格的变化越敏感。<br>
+上下边界也变成了固定的<code>0-100</code>。<br>
+所以其临界值也变成了<code>(30, 70)</code>或者<code>(20, 80)</code></p>
+<ul>
+<li>当然指数也支持前面所说的那些<code>趋势跟踪</code>的计算方法。<br>
+如：<br>
+当指数在上下边界<strong>以外</strong>的时候，且价格与指数方向相背离时，便是非常重要的警讯。</li>
+<li>顺便附上作者的一段结论。</li>
+</ul>
+<blockquote>
+<img src="/images/期货市场技术分析笔记/摆动指数和相反意见-RSI作者结论.jpg" srcset="/img/loading.gif" lazyload title="RSI作者结论" />  
+</blockquote>
+<h4 id="随机指数（K-D）">随机指数（K%D）</h4>
+<p>公式：<br>
+<img src="/images/期货市场技术分析笔记/摆动指数和相反意见-随机指数K-D-K.jpg" srcset="/img/loading.gif" lazyload title="随机指数（K%D）-K" /></p>
+<blockquote>
+<p>C = 党日的收盘价<br>
+Lx = 前x天的最低价<br>
+Hx = 前x天的最高价<br>
+<img src="/images/期货市场技术分析笔记/摆动指数和相反意见-随机指数K-D-D.jpg" srcset="/img/loading.gif" lazyload title="随机指数（K%D）-D" /><br>
+Hx = (C - Lx) 总和<br>
+Lx = (Hx - Lx) 总和</p>
+</blockquote>
+<img src="/images/期货市场技术分析笔记/摆动指数和相反意见-随机指数K-D.jpg" srcset="/img/loading.gif" lazyload title="随机指数（K%D）" /> 
+<h3 id="日内点数图">日内点数图</h3>
+<p>日内图相对来说对于价格的变化更加灵敏，并且能看到长线图所看不到的趋势。<br>
+比如在日内价格的<code>突破</code>，以及<code>交易量</code>的短期变化。</p>
+<p>关于绘制的办法，因为篇幅长，先在这里以图片记录。</p>
+<img src="/images/期货市场技术分析笔记/日内点数图-画法.jpg" srcset="/img/loading.gif" lazyload title="画法" />  
+<img src="/images/期货市场技术分析笔记/日内点数图-画法-2.jpg" srcset="/img/loading.gif" lazyload title="画法-2" /> 
+<p>来自<a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/fcb5aff77e9818edaa4a7138.html">度娘</a>的答案。</p>
+<h4 id="密集区">密集区</h4>
+<blockquote>
+<p>在一段时间内，价格水平（横向）伸展。</p>
+</blockquote>
+<p>密集区如果出现在顶部，则表示是卖出的机会。<br>
+密集区如果出现在底部，则表示是买入的机会。</p>
+<h4 id="价格目标">价格目标</h4>
+<p>计算波动幅度的垂直高度，然后向上或向下投射相同的距离。</p>
+<h4 id="ps-5">ps</h4>
+<p>其实对于日内点数图不仅仅可以做短期交易，也可以用于长期交易。<br>
+个人认为，可以在进行长期交易时，对信号进行<strong>验证</strong>。</p>
+<h3 id="三点转向和优化点数图">三点转向和优化点数图</h3>
+<p>这是点数图的一个变种，最大优点就是数据获取方便，它只需要每天的<strong>最高价</strong>和<strong>最低价</strong>。</p>
+<p>关于画法，这里也只能简单做个图片介绍了。</p>
+<blockquote>
+<img src="/images/期货市场技术分析笔记/三点转向和优化点数图-画法.jpg" srcset="/img/loading.gif" lazyload title="画法" />  
+</blockquote>
+<img src="/images/期货市场技术分析笔记/三点转向和优化点数图-画法-2.jpg" srcset="/img/loading.gif" lazyload title="画法-2" />  
+<h4 id="ps-6">ps</h4>
+<p>关于本章和上一章，还有很多地方没有弄懂，有待复读🙏🏻。</p>
+<h3 id="艾略特波浪理论">艾略特波浪理论</h3>
+<h4 id="理论">理论</h4>
+<p>市场遵循规律，<strong>5</strong>浪上涨，<strong>3</strong>浪下跌。<br>
+<img src="/images/期货市场技术分析笔记/艾略特波浪理论-基础.jpg" srcset="/img/loading.gif" lazyload title="基础" /></p>
+<p>其中<code>2</code>浪和<code>4</code>浪是<code>1</code>和<code>3</code>浪的调整。<br>
+<code>1、3、5</code>浪为主浪。<br>
+最后<code>a、b、c</code>浪为调整浪。</p>
+<p>并且浪可以向下或者向上缩小或者扩大规模。<br>
+一浪也可以拆分成更小的5浪。<br>
+<img src="/images/期货市场技术分析笔记/艾略特波浪理论-缩放.jpg" srcset="/img/loading.gif" lazyload title="缩放" /></p>
+<img src="/images/期货市场技术分析笔记/艾略特波浪理论-8浪.jpg" srcset="/img/loading.gif" lazyload title="8浪" /> 
+<h4 id="一些Tips">一些Tips</h4>
+<ol>
+<li>三个主浪只有一个主浪延长，另外两个时间和幅度相等。</li>
+<li>1浪 乘 <code>1.618</code> 加 2浪底点 = 3浪目标。</li>
+<li>1浪 乘 2 * 1.618，加上顶 或 底 = 5浪的区间。</li>
+<li>如果1浪和3浪大致相等，预期5浪延长。目标加个=(1浪底点+3浪顶点的距离) * 1.618 + 4浪底点。</li>
+<li>调整浪中，如果是5-3-5锯行调整，那么c浪常常与a浪相等。</li>
+<li>c浪=a浪长度*0.618 - a浪的底。</li>
+<li>在3-3-5平台行调整，b浪可能打到甚至超过a浪的顶点，那么，c浪长度等于a浪长度的1.618倍。</li>
+<li>在对称三角形中，每个后续浪都约等于前一浪的0.618倍。</li>
+</ol>
+<ul>
+<li>在股市中常常是<code>3浪</code>延长。</li>
+<li>在股市中<code>4</code>浪不可与<code>1</code>浪重叠。</li>
+</ul>
+<img src="/images/期货市场技术分析笔记/艾略特波浪理论-总结.jpg" srcset="/img/loading.gif" lazyload title="总结" /> 
+<h3 id="时间周期">时间周期</h3>
+<p>价格总是按照一定的周期规律循环发生变化。</p>
+<p>周期表现为三个特征：<strong>波幅</strong>、<strong>周期长度</strong>、<strong>相位</strong></p>
+<ul>
+<li>波幅<br>
+表示周期的高度，也就是波谷到波峰的距离</li>
+<li>周期长度<br>
+表示谷到谷之间的距离。<br>
+峰与峰之间的距离不可靠，所以使用谷。</li>
+<li>相位<br>
+波谷的时间位置。<br>
+<img src="/images/期货市场技术分析笔记/时间周期-相位.jpg" srcset="/img/loading.gif" lazyload title="相位" /></li>
+</ul>
+<h4 id="周期理论">周期理论</h4>
+<h5 id="叠加原理">叠加原理</h5>
+<p>市场价格变换一般都是由多个周期的简单相加得出的。</p>
+<h5 id="谐波原理">谐波原理</h5>
+<p>相邻周期的长度一般都存在倍数关系。<br>
+比如上一个周期长度为20天，则下一个较短周期可能是10天。</p>
+<h5 id="同步原理">同步原理</h5>
+<p>不同长度的周期经常在同一时刻到达波谷。<br>
+<img src="/images/期货市场技术分析笔记/时间周期-周期理论.jpg" srcset="/img/loading.gif" lazyload title="周期理论" /></p>
+<h5 id="比例原理">比例原理</h5>
+<p>周期长度与波幅存在比例关系，周期越长波幅越长。</p>
+<h4 id="波峰左移右移">波峰左移右移</h4>
+<p>波峰的左移右移预示了市场的趋势。<br>
+正常波峰应该处于两谷之间的中点，右移则为市场上涨，左移为市场下跌。<br>
+简单来说，市场上涨则上涨天数多于下跌天数，则右移。</p>
+<img src="/images/期货市场技术分析笔记/时间周期-波峰左移右移.jpg" srcset="/img/loading.gif" lazyload title="波峰左移右移" /> 
+<h3 id="计算机和交易系统">计算机和交易系统</h3>
+<h4 id="韦尔斯-王尔德的抛物线和方向性运动系统">韦尔斯-王尔德的抛物线和方向性运动系统</h4>
+<ul>
+<li>抛物线系统（SAR）</li>
+<li>方向性运动系统（DMI）<br>
+利用<code>ADXR</code>线，按照<code>0-100</code>进行评级，数值越高表示趋势越强。<br>
+超过<strong>20</strong>即表示存在趋势。</li>
+<li>商品选择指数（CSI）</li>
+</ul>
+<p>关于此概念文章没有过多介绍，个人认为对市场分析极为有用，故后期会继续阅读<a target="_blank" rel="noopener" href="https://book.douban.com/subject/30600413/">《技术交易系统新概念》</a>。</p>
+<h4 id="指标工具分类">指标工具分类</h4>
+<p>这里做一个记录😊。<br>
+<img src="/images/期货市场技术分析笔记/计算机和交易系统-技术指标列表.jpg" srcset="/img/loading.gif" lazyload title="技术指标列表" /></p>
+<h4 id="其他">其他</h4>
+<p>这里最后记录下<strong>查尔斯-帕特尔</strong>的<code>《商品和股票的技术性交易系统》</code>听说也不错，关于自动化交易策略，但是百度了没找到🤷🏻‍♀️。</p>
+<h3 id="资金管理和交易策略">资金管理和交易策略</h3>
+<p>完整的交易流程包含三方面：确认方向，确认时机，确认资金。</p>
+<p>管控资金的配置是一个成功交易的关键。<br>
+合理分配资金能让我们在市场的各种情况下都游刃有余。</p>
+<h4 id="资金分配">资金分配</h4>
+<ol>
+<li>总交易资金控制在个人总资产的**50%**以内。<br>
+剩余资金可用于购买低风险、稳定回报的产品。</li>
+<li><strong>单个市场</strong>资金投入限制在<strong>总投入资金</strong>的<strong>10%-15%</strong>。</li>
+<li><strong>单个市场</strong>最大亏损限制在<strong>总投入资金</strong>的<strong>5%</strong>。</li>
+<li>任何市场上投入保证金总额不能超过总投入资金的20%-25%（个人认为应该是针对期货市场的）。</li>
+</ol>
+<h4 id="头寸分配">头寸分配</h4>
+<p>采用上述资金分配的<code>10%</code>为标准，假设账户资金为<code>100000</code>，黄金每股为<code>100</code>，那么可以用于买入黄金的资金为<code>100000 * 0.1 = 10000</code>。<br>
+而股票至少需要买一手，那么可以买入黄金的股数为<code>10000 / 100 = 100</code>，只能买100股。</p>
+<h4 id="分散投资与集中投资">分散投资与集中投资</h4>
+<p>我们可以将资金投入几个不同的、毫不相关的市场中，这样可以将风险降低，避免出现在一棵树上吊死的情况。<br>
+但也应当避免<strong>过分</strong>分散。<br>
+正常选择<strong>4-6</strong>个市场。</p>
+<h4 id="设置保护性止损指令">设置保护性止损指令</h4>
+<p><strong>及时止损！！！！</strong><br>
+控制一次盈利=三次亏损。</p>
+<h4 id="复合头寸">复合头寸</h4>
+<p>将交易到市场中的资金分为<strong>跟势头寸</strong>和<strong>交易头寸</strong>。</p>
+<ul>
+<li>跟势头寸<br>
+专门用来跟踪长期的趋势，设置较长的止损命令。</li>
+<li>交易头寸<br>
+专门用来在短期的趋势中，频繁的做交易。</li>
+</ul>
+<h4 id="交易策略">交易策略</h4>
+<ul>
+<li>突破信号<br>
+可以选择在突破信号前、中、后分别进入市场。</li>
+<li>支撑、阻挡<br>
+趋势逼近支撑或阻挡位时，是重要信号。</li>
+</ul>
+<h4 id="技术因素结合资金管理">技术因素结合资金管理</h4>
+<p>结合上面的头寸配置。<br>
+假定还是买入黄金，买入资金为<code>100000</code>，买入价格为<code>100</code>，则可以买入<code>1000</code>股。<br>
+加上风险因素。<br>
+最近的支撑位置为<code>90</code>，则最大亏损金额为<code>10 * 1000 = 10000</code>。<br>
+而设置的最大承受风险为资金的<code>5%</code>，为<code>0.05 * 100000 = 5000</code>。<br>
+则我们不可以直接买入<code>1000</code>股，因为我们承受的风险已经超过了预期的风险。</p>
+<h4 id="交易指令">交易指令</h4>
+<p>后三个指令未曾听说过，先暂时不管。</p>
+<h5 id="市价单">市价单</h5>
+<p>采用市场的当前价格进行买卖。<br>
+他能让订单快速成交。</p>
+<h5 id="限价单">限价单</h5>
+<p>自定义价格进行买卖。<br>
+买入价一般低于市场价。<br>
+卖出价一般高于市场价。<br>
+一般是在市场未发生明显动向时，发出的订单，在他人未发现情况时。</p>
+<h5 id="止损单">止损单</h5>
+<h5 id="止损限价单">止损限价单</h5>
+<h5 id="触市指令">触市指令</h5>
+<h4 id="资金管理要领和交易策略举要">资金管理要领和交易策略举要</h4>
+<img src="/images/期货市场技术分析笔记/资金管理和交易策略-资金管理要领和交易策略举要.jpg" srcset="/img/loading.gif" lazyload title="资金管理要领和交易策略举要" /> 
+<h3 id="全书大会串">全书大会串</h3>
+<h4 id="技术分析清单">技术分析清单</h4>
+<img src="/images/期货市场技术分析笔记/全书大会串-技术分析清单.jpg" srcset="/img/loading.gif" lazyload title="全书大会串-技术分析清单" /> 
+## 其他
+<p>这是第一次全部看完本书，可能还需要重复阅读才能理解透彻当中的理论，比如<code>日内点数图</code>和<code>艾略特波浪理论</code>，相对来说可能有点难于理解，后面再看一次吧👍。</p>
+<blockquote>
+<p>本人不是专业的交易手，只是单纯的兴趣，如果理解错误请见谅🙏🏻。</p>
+</blockquote>
+<h2 id="结束">结束</h2>
+<p>以上就是对《期货市场技术分析笔记》书本的简单笔记，并且他也值得自己多次翻看阅读理解！<br>
+End🔚。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E4%BA%A4%E6%98%93/">交易</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/trade-finance/">trade finance</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/23/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91-%E5%AE%9E%E6%97%B6%E4%BF%9D%E5%AD%98/">
+                        <span class="hidden-mobile">数据可视化大屏设计器开发-实时保存</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> <script src="/js/code-viewer.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>
