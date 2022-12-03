@@ -61,6 +61,13 @@ index_img: /images/首页/background.jpg
 [<---代码传送门--->](https://github.com/food-billboard/chunk-file-load)  
 [<---官网传送门--->](https://food-billboard.github.io/chunk-file-load)  
 
+### 炸弹人游戏  
+
+复刻儿时的红白机游戏->炸弹人💣。     
+
+[<---代码传送门--->](https://github.com/food-billboard/bomber-man)  
+[<---官网传送门--->](https://code.juejin.cn/pen/7162350895340978189)  
+
 ### React分片上传组件  
 
 基于上面的类库实现的`React`组件。  
