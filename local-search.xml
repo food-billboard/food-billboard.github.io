@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>2022年终总结</title>
+    <link href="/2022/12/12/2022%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    <url>/2022/12/12/2022%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</url>
+    
+    <content type="html"><![CDATA[<h2 id="2022年终总结">2022年终总结</h2><p>从大学毕业到如今已经两年了，遥想当初刚毕业时的自己，无数个晚上想要放弃自己向往的前端行业。</p><blockquote><p>简单介绍下自己的情况<br>三本大学+非本专业。<br>大三偶然的一次机会接触了前端，自此开始了孤独的自学之路。</p></blockquote><p>想想这一路走来，辛酸只有自己知道。</p><h3 id="曾今的自己">曾今的自己</h3><h4 id="大学">大学</h4><p>大学的专业是电子商务，从一进入学校，开始第一门课程时，就发现了自己并不喜欢这个专业，就这样混着混着到了大三。<br>因为学习的课程非常杂，包含非常多种类的课程：会计学、统计学、经济学、计算机。<br>在大三接触到<code>Java</code>时，才彻底决定了以后的方向（其实自己也不知道为啥却选择了前端）。</p><p>之后就是拼命的学习（🧠 笨，但相信勤能补拙），早上8点起床，基本除了上课时间，都在宿舍自学，看教学视频、做练习（轮播图、菜单、扫雷、贪吃蛇、2048、别踩白块🙂 🙂 🙂 ）。。。</p><p>毕业的论文也选择了做毕设（做毕设的在学校里基本是只有个位数😓 ，毕竟是个财经类的大学）。</p><h4 id="初入社会">初入社会</h4><p>19年搞定了学校杂七杂八一堆事情后，回了杭州开始了自己的找工作之旅，学着人家刷题（用了🐂 客），虽然大部分公司都被自己的学历劝退，好在还是得到了几个笔试的机会，最有希望的两个huashu和tonghuashun，走到最后的面试，奈何自己的水平实在太差，最终还是倒在了门口，没有把脚迈进去。</p><p>正当自己准备打退堂鼓的时候，一家公司的老板打来了电话，并且在电话当中做了简单的面试，问的都是一些js的基础问题，算是考察自己的基础知识吧。<br>公司很小，小到除了老板除了我，只有一个员工，但是他却给了我莫大的帮助。<br>两个老板，一个做前端，一个做后端，虽然自己平常工作空闲，但是他们却很忙，尽管如此，他也不忘给我做很多的科普，<code>git</code>使用、<code>react</code>入门、<code>typescript</code>的好处，<code>vue</code>的技巧（因为本人是vue起步，但是公司主要使用<code>react</code>，一开始花了大功夫学习的<code>react</code>），而且他会<code>review</code>我的代码，告诉我一些技巧以及代码书写的规范等等，他对我的一些指导对我如今也是相当受益，让我在之后的进步当中，少走了很多的弯路，更是拓宽了自己的视野（在这里由衷的感谢🙏🏻 ）。</p><p>好景不长，2020年疫情如期而至，在家发霉了好几个月，学校也开始催促我的就业计划（因为该公司没有非常完善的手续，导致学校那边可能会认定自己是非就业状态，无奈只得离开了那里）。<br>因为社会形势的压力，最终在现在的公司定居，一定就是到现在。。。</p><h3 id="2022的自己">2022的自己</h3><p>废话讲了这么多，该进入正题了。</p><h4 id="工作上的自己">工作上的自己</h4><p>工资不算高，一年1k向上进步。<br>工作不算难，基本都能完成。<br>工作不算忙，基本到点都下班。</p><blockquote><p>今年的工作任务，基本都是按期完成。</p></blockquote><p>公司分成两个技术组，一组主营业务是对外的c端业务以及大量长期迭代的b端业务，所以经常看到他们频繁的开会以及加班。<br>而我幸运的来到了二组，基本保持一种缓慢的进度在持续迭代一个非常大型的项目，但是可能只是针对后端。</p><p>当然也还算是有所收获：</p><ol><li>帮助一组完成了一个草草的单据的可视化设计器。</li><li>完成了针对公司业务嵌入的可视化数据大屏设计器。</li><li>基于<code>antd</code>二次开发了符合公司规范的组件库。</li><li>参加了公司两次技术分享活动（文件上传+diff算法简析）。</li><li>第一次接手了公司维护已久且经N人之手的超级辣鸡代码。</li><li>第一次加了一个11点的班（结果第二天是周末，没有调休😤 ）。</li><li>第一次合作了一个超级墨迹的tongshi（延期一个月，差点骂人）。</li></ol><p>这一年走来，它让我渐渐的融入了前端这个行业。<br>当初的自己只知道闷头干，现在也知道了用户体验的重要性，为了完成一个需求，花费一天时间，去摸索（百度），去参考（copy）别人的意见。<br>掘金以及<code>github</code>也让我慢慢开始关注一些新奇的东西，平常逛逛掘金、看看阮一峰的<code>weekly</code>、看看<code>github</code>的大神都关注了啥东西，<a href="https://juejin.cn/user/1574156384091320">HelloGitHub</a>也能看到最近有哪些优质的项目（感谢🙏🏻），让自己不再拘泥于只有眼前工作的东西。</p><p>曾经的手写笔记也变成了博客笔记，虽然输出量不高，也算是对自己进步的肯定吧，各位有兴趣也可以过来<a href="https://food-billboard.github.io/">参观一下</a>（不算是高深内容，都是平常写东西时碰到的问题）。</p><h4 id="工作之外的自己">工作之外的自己</h4><p>悄悄来说，其实这一年来，除了工作外，大部分的时间自己都活跃在<code>github</code>当中。<br><img src="/images/每日进步小记/提交记录.jpg" /><br>做了好多个简单的小项目，也算是当做锻炼自己的技术吧。</p><p>从开始工作到现在，正经做迭代的项目的话，大概也有个10个项目吧，现在还在持续维护的可能一个手指头也数的过来了吧。</p><ol><li><a href="https://github.com/food-billboard/create-chart">create-chart</a><br>这个在前面的文章中也有介绍到，一个可视化大屏的设计器。<br>算是被<code>star</code>数量最多的项目了（10⭐️），虽然有几个是pengyou给点的😁 ，还有2个<code>fork</code>。<br>- 2021年底~至今</li><li><a href="https://github.com/food-billboard/create-chart-docs">create-chart-docs</a><br>上面可视化大屏项目的操作文档。<br>- 2022年中~至今</li><li><a href="https://github.com/food-billboard/bomber-man">bomber-man</a><br>FC游戏炸弹人复刻。<br>这个不是一个持续迭代的项目（因为前段时间在<strong>码上挑战</strong>拿了优秀奖😁 ，简单记录下）。<br><a href="https://code.juejin.cn/pen/7162350895340978189">游戏地址</a><br>- 2022-11~2022-11</li><li><a href="https://github.com/food-billboard/movie-weapp">movie-weapp</a><br>一个电影推荐的<code>Taro</code>项目。<br>这是最早开始的一个项目，虽然最近已经没有接着迭代了，简简单单记录下自己看过的电影，也还不错。<br>- 2020~2021年底</li><li><a href="https://github.com/food-billboard/mini-app-management">mini-app-management </a><br>前面的<code>create-chart</code>和<code>movie-weapp</code>项目的数据管理后台，用于管理相关的数据，以及用户数据还有媒体资源数据等等。<br>- 2021~至今</li><li><a href="https://github.com/food-billboard/node-server">node-server</a><br>包含了前面大屏、电影推荐以及管理后台的所有接口服务，以及文件资源的管理服务。<br>- 2020~至今</li><li><a href="https://github.com/food-billboard/chunk-file-load">chunk-file-load</a><br>文件分片上传的前端实现，多加了点小功能，比如支持其他的类型（blob、file、arraybuffer），支持小程序端分片上传。<br>- 2020~2022年中</li><li><a href="https://github.com/food-billboard/react-undo-component">react-undo-component</a><br><code>react</code>的<code>state</code>管理，支持<code>class</code>组件全量监听以及单个监听，以及<code>function</code>组件监听。<br>- 2021-12~2021-12</li><li><a href="https://github.com/food-billboard/food-billboard.github.io">food-billboard.github.io</a><br>当然还有自己的博客，基于<code>hexo</code>和<code>fluid</code>风格的博客。<br>- 2121~至今</li></ol><p>其实也不难看出，进步的来源还是在于不断的尝试和练习。<br>因为要独立完成一个前端项目，不得不去学习一下<code>node</code>。<br>因为要写后端，不得不去学习一下数据库、redis。<br>因为要部署，不得不去学习了一下服务器相关的概念。<br>之后衍生的各种需求：文件上传、docker、自动化部署<code>github action</code>。<br>有时因为依赖包功能与需求不符，也需要去查看源码。</p><blockquote><p>今年的小进步<br>长期活跃在<code>github</code>，终于在今年年底，完成了一次对开源项目的代码贡献😁 。<br>在开发大屏设计器时，发现了<code>antd</code>的<code>rc-input</code>有一个<code>bug</code>，成功提交<code>pr</code>。<br><img src="/images/每日进步小记/贡献列表.jpg" /></p></blockquote><blockquote><p>今年的小拓展<br>不知道从什么时候开始，突然想去搞一搞自动化交易，可能是一年被割了太多的韭菜，可能不想再努力了，可能想拓个副业。。。<br>尝试着去看了几本书，梦想着一步登天（海龟的交易法则、期货市场技术分析，也去学习了Python，看了一些视频）。<br>虽然到现在都还没有正式开始，哈哈哈。<br>相信有一天能靠自己的知识，变成真正的躺着赚钱（韭菜之王）。</p></blockquote><h3 id="向往的自己">向往的自己</h3><p>回首走过来的这一年，虽然有进步，但总让自己觉得似乎还不够，明明有那么多的时间，却也是举步维艰。<br>好多东西明明应该学习，应该了解的，却始终没有完成任务。</p><p>希望今后的自己能做到碰到问题就解决问题，不要再拖延了。<br>不要好高骛远，站在巨人的肩膀上，也不要忘记低头看看。<br>学习学习算法，数据结构。<br>多看看大佬写的代码。<br>多看看大佬看的文章。<br>多逛逛掘金😁 。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>总结</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>review</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>期货市场技术分析笔记</title>
     <link href="/2022/11/25/%E6%9C%9F%E8%B4%A7%E5%B8%82%E5%9C%BA%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/"/>
     <url>/2022/11/25/%E6%9C%9F%E8%B4%A7%E5%B8%82%E5%9C%BA%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/</url>
