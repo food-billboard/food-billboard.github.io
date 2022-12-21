@@ -1,0 +1,653 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="数据可视化大屏设计器开发-右键菜单操作 开头 本文是数据可视化开始的开发细节第三章。关于大屏中组件的一些操作，比如成组、复制粘贴、层级控制、复制样式、组件切换、前进后退等等。 本文就针对各个操作逐一讲解其实现思路。 开始之前 在正式开始之前，先预先介绍一下相关的信息。 以下讲解均只涉及PC端的逻辑。 下面所说的元素表示的是组或者组件的简称。 因为本文说的是右键菜单，所以肯定无法避免二次操作。比如先">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据可视化大屏设计器开发-右键菜单操作">
+<meta property="og:url" content="http://yoursite.com/2022/12/21/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91-%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="数据可视化大屏设计器开发-右键菜单操作 开头 本文是数据可视化开始的开发细节第三章。关于大屏中组件的一些操作，比如成组、复制粘贴、层级控制、复制样式、组件切换、前进后退等等。 本文就针对各个操作逐一讲解其实现思路。 开始之前 在正式开始之前，先预先介绍一下相关的信息。 以下讲解均只涉及PC端的逻辑。 下面所说的元素表示的是组或者组件的简称。 因为本文说的是右键菜单，所以肯定无法避免二次操作。比如先">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/组件切换操作.jpg">
+<meta property="article:published_time" content="2022-12-21T01:53:00.000Z">
+<meta property="article:modified_time" content="2022-12-21T07:16:01.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="lowcode react chart">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/组件切换操作.jpg">
+  
+  <title>数据可视化大屏设计器开发-右键菜单操作 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据可视化大屏设计器开发-右键菜单操作">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-12-21 09:53" pubdate>
+        2022年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据可视化大屏设计器开发-右键菜单操作</h1>
+            
+            <div class="markdown-body">
+              <h1>数据可视化大屏设计器开发-右键菜单操作</h1>
+<h2 id="开头">开头</h2>
+<p>本文是数据可视化开始的开发细节第三章。关于大屏中组件的一些操作，比如成组、复制粘贴、层级控制、复制样式、组件切换、前进后退等等。<br>
+本文就针对各个操作逐一讲解其实现思路。</p>
+<h2 id="开始之前">开始之前</h2>
+<p>在正式开始之前，先预先介绍一下相关的信息。</p>
+<p>以下讲解均只涉及<strong>PC端</strong>的逻辑。</p>
+<p>下面所说的<strong>元素</strong>表示的是<strong>组或者组件</strong>的简称。</p>
+<p>因为本文说的是右键菜单，所以肯定无法避免二次操作。比如先进行复制，然后进行粘贴，所以一般认为二次操作所选中的元素为最终可能需要操作的位置（比如复制了组内的元素，然后右键粘贴选择的元素在组外，那么目标元素就会被粘贴到组外）。</p>
+<h3 id="组件整体的数据结构。">组件整体的数据结构。</h3>
+<p>组件在画布中的存在形式是一个<strong>树</strong>的结构，其实就是一个简单的数组形式，当然并不只是一个一层，它是一个深层嵌套的结构。<br>
+类似于下面这样：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">type</span> Components = &#123;<br>  <span class="hljs-comment">// 组件id</span><br>  <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span><br>  <span class="hljs-comment">// 父级的组件id </span><br>  parent?: <span class="hljs-built_in">string</span> <br>  <span class="hljs-comment">// 元素标识 组或者组件</span><br>  <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;component&#x27;</span> | <span class="hljs-string">&#x27;group&#x27;</span><br>  <span class="hljs-comment">// 子元素</span><br>  <span class="hljs-attr">components</span>: Components[]<br>  <span class="hljs-comment">// ...another config </span><br>&#125;[]<br></code></pre></td></tr></table></figure>
+<ul>
+<li>id<br>
+元素的id</li>
+<li>parent<br>
+父级的id，如果为最上层的元素则不存在</li>
+<li>type<br>
+标记当前元素是组还是组件</li>
+<li>components<br>
+当前组的下层元素</li>
+</ul>
+<p>组可以嵌套组件，也可以嵌套组，组件为最下层。<br>
+元素通过<code>parent</code>来达到与父级的关联。<br>
+如此形成一个无限向下嵌套的结构。</p>
+<h3 id="平滑结构">平滑结构</h3>
+<p>虽然上述的结构可以很好的描述和直观的看到整个大屏的全貌，但是有时候操作起来相对来说还是有点不方便。<br>
+此时就需要一个临时的平滑的<strong>单层次结构</strong>来应对业务中的一些逻辑操作。<br>
+当前的想法是以<strong>对象</strong>的形式来表达。<br>
+类似于下面这样：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">type</span> ComponentPath = &#123;<br>  [key: <span class="hljs-built_in">string</span>]: &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>;<br>    path: <span class="hljs-built_in">string</span>;<br>    <span class="hljs-comment">// ...another info </span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>键名<br>
+key即为元素的id</li>
+<li>id<br>
+与键名同意</li>
+<li>path<br>
+这个是此结构的关键，它是当前元素在<strong>树</strong>结构中的路径，关于他的格式可以参考<a target="_blank" rel="noopener" href="https://www.lodashjs.com/docs/lodash.get">lodash的get方法</a><br>
+比如<code>0.components.2</code>表示获取第一个组的第二个子元素。</li>
+</ul>
+<h2 id="开始">开始</h2>
+<blockquote>
+<p>首先讲一下本文所涉及的所有操作：<br>
+成组/取消成组、复制/粘贴、层级控制（置顶/置底/上一个/下一个）、删除、组件切换、复制组件样式、隐藏、锁定、恢复默认配置、前进后退。</p>
+</blockquote>
+<p>其实本来对于上述的操作，实现逻辑并不复杂，但是因为设计器当中存在<strong>多选</strong>操作的逻辑，以及<strong>成组</strong>的逻辑，导致上面的操作实现起来并没有看上去那么简单。</p>
+<h3 id="成组-取消成组">成组/取消成组</h3>
+<p>一上来就是最复杂的逻辑🤷🏻‍♀️ 。</p>
+<p>先讲成组是因为它对后面的逻辑或多或少会产生一定的影响。<br>
+并且成组是所有操作当中，<strong>最难</strong>实现的部分。</p>
+<p><strong>组</strong>即是将一个或多个元素进行包裹，组内元素的<strong>定位</strong>将不再基于画布，而是基于组。<br>
+因为多个元素成组后，免不了对组进行<strong>大小</strong>、<strong>位置</strong>调整等。<br>
+<strong>位置</strong>调整相对来说影响不大，因为内部元素均基于组来进行定位。<br>
+而<strong>大小</strong>的变动会对内部的元素影响非常大。</p>
+<blockquote>
+<p>比如，初始组的宽度为<code>200px</code>，组内的一个组件的宽度为<code>50px</code>，之后将组调整为<code>400px</code>，那么组件的宽度应该调整为多少？<br>
+组的宽度放大了<code>2倍</code>，所以组件的宽度同时也放大<code>2倍</code>，变为<code>100px</code>。<br>
+同时还要注意，组件的位置同样也需要调整，如上述的，说明组件的<code>left</code>也要放大<code>2倍</code>。</p>
+</blockquote>
+<p>如此进行上述的计算调整，相对来说还是比较耗费性能的，因为他不仅仅是只有一层的结构。</p>
+<p>最终选择的方案是，通过对每一个元素无差别带上<code>scale</code>配置：<code>scaleX</code>和<code>scaleY</code>，默认为<code>1</code>。<br>
+对于组件的操作，无须修改<code>scale</code>配置，而组的大小调整时，修改尺寸和<code>scale</code>配置即可。<br>
+<code>const newScaleX = (newWidth / width) * (scaleX || 1)</code>，如此可以计算出新的<code>scaleX</code>。</p>
+<p>而内部的元素在实际渲染前，只需要将父级的<code>scale</code>进行计算即可。<br>
+<code>const componentWidth = width * parentScaleX</code><br>
+而组内组的话，则是需要将自己的<code>scale</code>与父级的<code>scale</code>进行相乘，因为组内组之下还有组件，是相互影响的。</p>
+<h4 id="成组">成组</h4>
+<p>成组的元素有两种情况：同级成组和非同级成组。</p>
+<p>首先需要计算出对应的元素相对于画布的位置和尺寸。（上面已经说过，组内元素是根据父级组来进行定位的，尺寸也受到了<code>scale</code>配置的影响）<br>
+如果是组的话也要将<code>scale</code>配置计算出来。</p>
+<p>接着获取到对应的成组位置的父级元素的信息（可以通过上面说的<code>parent</code>配置，用平滑结构获取到元素配置）。</p>
+<p>创建新组并根据子元素信息重新计算宽高及位置。</p>
+<p>接着递归去修改子组内的子元素（因为子组在树内的结构可能发生了变化），最重要的是子元素的<code>parent</code>配置，需要指向当前的父元素。</p>
+<h4 id="取消成组">取消成组</h4>
+<p>成组的反向操作。</p>
+<p>相对于<strong>成组</strong>来说，简单一些，只需要去掉外层包裹的组的一些配置，比如<code>scale</code>配置，定位配置，<code>parent</code>配置。<br>
+因为现在是相对于原父组的再上一层父组进行定位，所以要将原父组的配置合并到对应的子元素上面。</p>
+<h4 id="其他">其他</h4>
+<p>具体的代码请查看<a target="_blank" rel="noopener" href="https://github.com/food-billboard/create-chart/blob/main/src/utils/Assist/Group/index.ts">这里</a>。<br>
+当前版本还发现一个问题：组内元素的宽高通过右侧配置进行修改，外层组的尺寸未同步。预计在下一个版本进行处理。</p>
+<h3 id="层级">层级</h3>
+<p>层级控制包含四个操作：置顶、置底、上一个、下一个。<br>
+层级是指元素在画布当中显示的层级顺序。<br>
+虽然<strong>PC端</strong>和<strong>H5端</strong>显示的逻辑不一样，但是也大差不差。</p>
+<blockquote>
+<p>PC端中画布的元素，采用的是绝对定位的布局，那么层级即是元素的<code>zIndex</code>样式<br>
+H5端中画布的元素，采用普通的流式布局，那么层级就是元素在数组中的<strong>索引</strong>顺序。</p>
+</blockquote>
+<p>层级分成3种：1(置底）、2(正常)、3(置顶)。<br>
+元素在html的结构中也是按顺序进行渲染的，所以第一个元素和第二个元素虽然<code>zIndex</code>都是2，但是第二个元素还是会在第一个元素的上面。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;position: relative;width:200px;height:100px;&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;position: absolute;left: 0;top: 0;background-color: red;width: 200px;height: 100px;&quot;</span>&gt;</span><br>      第一个元素<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;position: absolute;left: 80px;top: 0;background-color: yellow;width: 100px;height: 100px;&quot;</span>&gt;</span><br>      第二个元素<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<div style="position: relative;width:200px;height:100px;">
+  <div style="position: absolute;left: 0;top: 0;background-color: red;width: 200px;height: 100px;">
+      第一个元素
+  </div>
+  <div style="position: absolute;left: 80px;top: 0;background-color: yellow;width: 100px;height: 100px;">
+      第二个元素
+  </div>
+</div>
+<p>所以逻辑就很简单了：</p>
+<ul>
+<li>置顶<br>
+将元素的<code>zIndex</code>修改为3。</li>
+<li>置底<br>
+将元素的<code>zIndex</code>修改1。</li>
+<li>上一个/下一个<br>
+修改元素在数组中的索引位置。</li>
+</ul>
+<p>因为组本身也是一个容器，所以对于此部分的逻辑，基本处理都是一样的。</p>
+<p>当多选了多个元素时，为了操作方便，统一显示的都是一个状态。<br>
+比如<strong>置顶</strong>，如果一个元素已经置顶了，那么操作按钮显示的是<strong>取消置顶</strong>，根据上面的逻辑，多个元素同时操作时，操作按钮统一显示成<strong>置顶</strong>。</p>
+<h3 id="删除">删除</h3>
+<p>删除操作就很简单了，单纯的从数据结构中，删除对应的元素即可。</p>
+<p>而在大屏中，需要弹出确认提示：是否删除xxx、xxx等组件。如果从<strong>树</strong>结构中寻找，难免显得麻烦。<br>
+此时就可以使用上面的平滑结构来进行操作，只需要简单的拿到对应元素的<code>path</code>路径，接着拿到他的父级，删除即可👍 。</p>
+<h3 id="隐藏">隐藏</h3>
+<p>隐藏操作即是将组件在画布当中隐藏。<br>
+此操作也十分简单，设置组件的样式即可，这里使用的是<code>visibility</code>样式来控制，实践中因为<code>display</code>可能会使部分组件的<strong>宽高</strong>计算出现问题，故使用<code>visibility</code>。</p>
+<p>需要注意的是， 因为<code>visibility</code>的特性，可能会使得鼠标多选时还是能选中该元素，所以需要特别处理。</p>
+<h3 id="锁定">锁定</h3>
+<p>锁定操作与隐藏操作类似，不同的是锁定是<strong>正常显示</strong>元素的，但是无法对其进行相应的操作罢了，比如选中、修改配置等。<br>
+这是为了防止有人误操作，导致相关已经完成设计的元素被修改，因为整体数据是实时保存的。</p>
+<h3 id="组件切换">组件切换</h3>
+<p>组件切换为根据<strong>数据</strong>进行组件切换。<br>
+比如当在设计完成一个组件时，突然想换成另外一种呈现形式，此时就可以通过组件切换达到目的。<br>
+当然要求是被切换的组件和切换组件的数据格式是相同的。</p>
+<p>关于数据格式，即对应组件所需要的数据的类型，及字段。<br>
+比如<strong>柱形图</strong>，他的数据格式为：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">type</span> BarData = &#123;<br>  <span class="hljs-attr">x</span>: <span class="hljs-built_in">string</span> <br>  <span class="hljs-attr">y</span>: <span class="hljs-built_in">number</span> <br>  s?: <span class="hljs-built_in">string</span> <br>&#125;[]<br></code></pre></td></tr></table></figure>
+<p><strong>折线图</strong>的数据格式同样也是上面的形式。<br>
+所以说明柱形图和折线图是可以进行相互切换的。</p>
+<img src="/images/数据可视化大屏设计器开发/组件切换操作.jpg" srcset="/img/loading.gif" lazyload />
+<h3 id="复制组件样式">复制组件样式</h3>
+<p>复制组件样式类似于复制操作，当然他是把复制和粘贴操作进行了合并。<br>
+和名称一样，复制的是组件的<strong>样式</strong>配置，对于组件的<strong>数据</strong>和<strong>交互</strong>等，均为组件的初始值。</p>
+<p>逻辑即简单使用<code>lodash</code>的<code>mergeWith</code>将组件配置和默认配置进行合并即可。</p>
+<h3 id="恢复默认配置">恢复默认配置</h3>
+<p>恢复默认配置，将组件的配置恢复成初始值，简单覆盖即可。</p>
+<h3 id="前进后退">前进后退</h3>
+<p>前进和后退，允许操作可以前进和后退。<br>
+比如将一个组件右移<code>100px</code>，后退操作可以将组件回到原来的位置。</p>
+<p>这里使用的是自己实现的类库<a target="_blank" rel="noopener" href="https://github.com/food-billboard/react-undo-component">react-undo-component</a>。<br>
+他可以让<code>class</code>组件或者<code>function</code>组件，在内部记录<code>state</code>的一系列操作记录，方便进行前进和后退。<br>
+比如<code>function</code>组件，可以使用<code>useUndo</code>方法。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; useUndo &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-undo-component&#x27;</span><br><br><span class="hljs-keyword">const</span> UndoComponent = <span class="hljs-function">() =&gt;</span> &#123;<br><br>  <span class="hljs-keyword">const</span> [ counter, setCounter, &#123;<br>    undo<br>  &#125; ] = useUndo&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-number">0</span>)<br><br>  <span class="hljs-keyword">const</span> handleAdd = <span class="hljs-function">() =&gt;</span> &#123;<br>    setCounter(<span class="hljs-function"><span class="hljs-params">prev</span> =&gt;</span> prev + <span class="hljs-number">1</span>)<br>  &#125;<br><br>  <span class="hljs-keyword">const</span> handleUndo = <span class="hljs-function">() =&gt;</span> &#123;<br>    undo()<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> (<br>      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>counter: &#123;counter&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;handleAdd&#125;</span>&gt;</span>+1<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;handleUndo&#125;</span>&gt;</span>undo<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>    )<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>内部即是简单拦截了<code>useState</code>方法来记录<code>state</code>变化。<br>
+因为设计器使用的是<code>dva</code>，所以不能简单使用上述的方法，但是他同样导出了内部class的<code>Histroy</code>可以自行实现对应细节。<br>
+具体的实现代码可以查看<a target="_blank" rel="noopener" href="https://github.com/food-billboard/create-chart/blob/main/src/utils/Assist/History/index.ts">这里</a></p>
+<h2 id="结束">结束</h2>
+<p>以上逻辑均为本人自己的想法，如有问题或错误可指正🙏🏻 。</p>
+<p>结束🔚。</p>
+<p>顺便在下面附上相关的链接。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://47.97.27.23/api/backend/screen/index.html">试用地址</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/food-billboard/create-chart/issues/2">试用账号</a><br>
+<a target="_blank" rel="noopener" href="http://47.97.27.23/api/backend/create-chart-docs/index.html">操作文档</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/food-billboard/create-chart">代码地址</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/lowcode-react-chart/">lowcode react chart</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/20/%E4%BB%A3%E7%A0%81%E5%BA%93%E8%AE%B0%E5%BD%95/">
+                        <span class="hidden-mobile">代码库记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> <script src="/js/code-viewer.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>
