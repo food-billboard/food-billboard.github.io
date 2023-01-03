@@ -1,0 +1,608 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="数据可视化大屏设计器开发-打包体积优化 开头 本文是数据可视化开始的开发细节第四章。关于项目打包体积优化。 虽然内容似乎不应该按这个顺序产出，不过因为最近的迭代中突然有涉及到这个方面，故就趁这个时机赶紧先记下来。  简单声明 本人只是一个菜鸡，所以并没有什么新的东西，只是把网上碰到的一些点给统一处理了下。  开始 大屏是基于umi进行开发的，关于此库相信大家都不陌生，只需很少的配置即可开始研发。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据可视化大屏设计器开发-umi打包体积优化">
+<meta property="og:url" content="http://yoursite.com/2022/12/29/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91-%E6%89%93%E5%8C%85%E4%BD%93%E7%A7%AF%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="数据可视化大屏设计器开发-打包体积优化 开头 本文是数据可视化开始的开发细节第四章。关于项目打包体积优化。 虽然内容似乎不应该按这个顺序产出，不过因为最近的迭代中突然有涉及到这个方面，故就趁这个时机赶紧先记下来。  简单声明 本人只是一个菜鸡，所以并没有什么新的东西，只是把网上碰到的一些点给统一处理了下。  开始 大屏是基于umi进行开发的，关于此库相信大家都不陌生，只需很少的配置即可开始研发。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/之前的版本打包.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/首页加载之前.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/现在的版本打包.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/首页加载之后.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/gzip前.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/gzip后.jpg">
+<meta property="article:published_time" content="2022-12-29T12:46:00.000Z">
+<meta property="article:modified_time" content="2023-01-03T03:55:53.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="lowcode react chart">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/之前的版本打包.jpg">
+  
+  <title>数据可视化大屏设计器开发-umi打包体积优化 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据可视化大屏设计器开发-umi打包体积优化">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-12-29 20:46" pubdate>
+        2022年12月29日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据可视化大屏设计器开发-umi打包体积优化</h1>
+            
+            <div class="markdown-body">
+              <h1>数据可视化大屏设计器开发-打包体积优化</h1>
+<h2 id="开头">开头</h2>
+<p>本文是数据可视化开始的开发细节第四章。关于项目打包体积优化。<br>
+虽然内容似乎不应该按这个顺序产出，不过因为最近的迭代中突然有涉及到这个方面，故就趁这个时机赶紧先记下来。</p>
+<blockquote>
+<p>简单声明<br>
+本人只是一个菜鸡，所以并没有什么新的东西，只是把网上碰到的一些点给统一处理了下。</p>
+</blockquote>
+<h2 id="开始">开始</h2>
+<p>大屏是基于<a target="_blank" rel="noopener" href="https://v3.umijs.org/zh-CN">umi</a>进行开发的，关于此库相信大家都不陌生，只需很少的配置即可开始研发。</p>
+<p>但是随着时间的推移，项目的代码量越来越大，打包出来的产物也越来越大，这个时候便需要做一些优化配置。</p>
+<p>体积优化是在开发<code>1.17</code>版本的时候，首先是上一个版本的打包详情。<br>
+<img src="/images/数据可视化大屏设计器开发/之前的版本打包.jpg" srcset="/img/loading.gif" lazyload /><br>
+<img src="/images/数据可视化大屏设计器开发/首页加载之前.jpg" srcset="/img/loading.gif" lazyload /></p>
+<p>然后是当前优化后的打包详情。<br>
+<img src="/images/数据可视化大屏设计器开发/现在的版本打包.jpg" srcset="/img/loading.gif" lazyload /><br>
+<img src="/images/数据可视化大屏设计器开发/首页加载之后.jpg" srcset="/img/loading.gif" lazyload /></p>
+<p>本文说得更明白些，应该说是<strong>主文件</strong>的体积优化，整体的思路：拆分主文件、按需加载、压缩。</p>
+<h3 id="umi配置优化">umi配置优化</h3>
+<h4 id="dynamicImport">dynamicImport</h4>
+<p>正常情况下，<code>umi</code>打包只会生成一个<code>umi.js</code>，简单项目这样也很简洁，但是项目大的时候，网络加载速度就会变慢，此时就需要按照逻辑进行拆分。<br>
+可以看下官网的<a target="_blank" rel="noopener" href="https://v3.umijs.org/zh-CN/docs/load-on-demand">按需加载</a>，开启按需加载后，<code>umi</code>就会将项目按模块进行拆分。</p>
+<h4 id="targets"><a target="_blank" rel="noopener" href="https://v3.umijs.org/zh-CN/config#targets">targets</a></h4>
+<p>根据实际情况，针对项目应用的浏览器版本范围，按需引入<code>polyfill</code>，可以很好的减少产出代码体积。<br>
+如果项目只会应用于高版本的浏览器，就可以设置成高版本浏览器的配置，减少<code>polyfill</code>。</p>
+<h4 id="externals"><a target="_blank" rel="noopener" href="https://v3.umijs.org/zh-CN/config#externals">externals</a></h4>
+<p>即是<code>webpack</code>的<code>externals</code>，把一些模块从打包项中直接给去除掉，采用<code>cdn</code>的形式引入。</p>
+<ul>
+<li>ps<br>
+本来是准备打算将<code>echarts</code>采用<code>cdn</code>形式引入的，奈何还依赖了<strong>词云</strong>和<strong>水球</strong>组件，删除了<code>echarts</code>的<code>npm</code>后，报错了，故没有做这个选择。</li>
+</ul>
+<h4 id="ignoreMomentLocale"><a target="_blank" rel="noopener" href="https://v3.umijs.org/zh-CN/config#ignoremomentlocale">ignoreMomentLocale</a></h4>
+<p>大多数情况下，业务项目基本都没有多语言的需求，把<a target="_blank" rel="noopener" href="http://momentjs.cn/">moment</a>的语言包给去除。</p>
+<p>当然更好的办法是把<code>moment</code>替换成<a target="_blank" rel="noopener" href="https://dayjs.gitee.io/zh-CN/">dayjs</a>，毕竟其实平时没有太多时间转换的需求，采用更轻量的库是更好的选择。</p>
+<h4 id="splitChunks"><a target="_blank" rel="noopener" href="https://v3.umijs.org/zh-CN/config#chainwebpack">splitChunks</a></h4>
+<p>根据上面的<code>dynamicImport</code>拆分了模块后，模块当中的第三方引入却被同时打进了不同的模块中，重复打包。</p>
+<p>使用<code>webpack</code>的<a target="_blank" rel="noopener" href="https://webpack.docschina.org/plugins/split-chunks-plugin/">splitChunks</a>配置，将一些比较大的，常用的第三方依赖单独抽离，可以有效减少包体积。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs js">&#123;<br>  <span class="hljs-attr">chunks</span>: [<span class="hljs-string">&#x27;antdesigns&#x27;</span>, <span class="hljs-string">&#x27;vendors&#x27;</span>, <span class="hljs-string">&#x27;commons&#x27;</span>, <span class="hljs-string">&#x27;umi&#x27;</span>],<br>  <span class="hljs-function"><span class="hljs-title">chainWebpack</span>(<span class="hljs-params">config: any</span>)</span> &#123;<br>    config.merge(&#123;<br>      <span class="hljs-attr">optimization</span>: &#123;<br>        <span class="hljs-attr">minimize</span>: <span class="hljs-literal">true</span>,<br>        <span class="hljs-attr">splitChunks</span>: &#123;<br>          <span class="hljs-attr">chunks</span>: <span class="hljs-string">&#x27;all&#x27;</span>,<br>          <span class="hljs-attr">minSize</span>: <span class="hljs-number">30000</span>,<br>          <span class="hljs-attr">minChunks</span>: <span class="hljs-number">1</span>,<br>          <span class="hljs-attr">automaticNameDelimiter</span>: <span class="hljs-string">&#x27;.&#x27;</span>,<br>          <span class="hljs-attr">cacheGroups</span>: &#123;<br>            <span class="hljs-attr">antdesigns</span>: &#123;<br>              <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;antdesigns&#x27;</span>,<br>              <span class="hljs-attr">chunks</span>: <span class="hljs-string">&#x27;all&#x27;</span>,<br>              <span class="hljs-attr">test</span>: <span class="hljs-regexp">/[\\/]node_modules[\\/](antd|@ant-design)/</span>,<br>              priority: <span class="hljs-number">10</span>,<br>            &#125;,<br>            <span class="hljs-attr">echarts</span>: &#123;<br>              <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;echarts&#x27;</span>,<br>              <span class="hljs-attr">chunks</span>: <span class="hljs-string">&#x27;async&#x27;</span>,<br>              <span class="hljs-attr">test</span>: <span class="hljs-regexp">/[\\/]node_modules[\\/](echarts|zrender)/</span>,<br>              priority: <span class="hljs-number">10</span>,<br>            &#125;,<br>            <span class="hljs-attr">vendors</span>: &#123;<br>              <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;vendors&#x27;</span>,<br>              <span class="hljs-attr">chunks</span>: <span class="hljs-string">&#x27;all&#x27;</span>,<br>              <span class="hljs-attr">test</span>: <span class="hljs-regexp">/[\\/]node_modules[\\/](lodash|moment|react|dva)/</span>,<br>              priority: <span class="hljs-number">10</span>,<br>            &#125;,<br>            <span class="hljs-attr">commons</span>: &#123;<br>              <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;commons&#x27;</span>,<br>              <span class="hljs-comment">// 其余同步加载包</span><br>              <span class="hljs-attr">chunks</span>: <span class="hljs-string">&#x27;all&#x27;</span>,<br>              <span class="hljs-attr">minChunks</span>: <span class="hljs-number">2</span>,<br>              <span class="hljs-attr">priority</span>: <span class="hljs-number">1</span>,<br>              <span class="hljs-attr">enforce</span>: <span class="hljs-literal">true</span>,<br>            &#125;,<br>          &#125;,<br>        &#125;,<br>      &#125;);<br>    &#125;<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<h5 id="注意的地方">注意的地方</h5>
+<p><code>splitChunks</code>中还有几个需要注意的地方。</p>
+<ul>
+<li>priority<br>
+拆分的<strong>优先级</strong>，当一个包同时被多个<code>cacheGroups</code>中的<code>test</code>匹配上时，会将包<strong>拆</strong>到<code>priority</code>最高的那个<code>cacheGroups</code>中。</li>
+<li>minSize<br>
+包被压缩前的体积超过<code>minSize</code>才会被拆包。</li>
+<li>chunks（个人理解）<br>
+<code>umi</code>配置中的<code>chunks</code>，表示预先需要加载的<code>cacheGroups</code>，比如上面的<code>echarts</code>模块不需要一开始就加载，则不需要添加到<code>chunks</code>中。</li>
+</ul>
+<h3 id="按需加载">按需加载</h3>
+<p>这里说的按需加载，说的是代码的按需加载。<br>
+比如在加载首页的时候，我们不需要加载个人中心的页面代码，这样可以大大加快首页加载的速度。</p>
+<p>此时就可以用到<code>React</code>的语法来达到这个效果（其实完全可以使用<code>umi</code>的<code>dynamic</code>，但是不不知道为啥报错了）。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> React, &#123; lazy, Suspense &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><br><span class="hljs-comment">// 一个比较大的组件</span><br><span class="hljs-keyword">const</span> HugeComponent = lazy(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">import</span>(<span class="hljs-comment">/* webpackChunkName: &quot;Chunk_Name&quot; */</span> <span class="hljs-string">&#x27;./path/to/component&#x27;</span>)<br>&#125;)<br><br><span class="hljs-keyword">const</span> App = <span class="hljs-function">() =&gt;</span> &#123;<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Suspense</span> <span class="hljs-attr">fallback</span>=<span class="hljs-string">&#123;</span>&lt;<span class="hljs-attr">div</span>&gt;</span>loading...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>&#125;&gt;</span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">HugeComponent</span> /&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Suspense</span>&gt;</span></span><br>  )<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>按需加载组件，只有使用到组件的时候才进行加载，<code>lazy</code>支持一个异步函数，返回一个组件，<code>Suspense</code>组件的<code>children</code>为一些懒加载的组件，在未加载完成时，会显示<code>fallback</code>的加载内容。</p>
+<p>大屏设计器当中有非常多的依赖，且体积巨大，通过此方法，实现了一个非常不错的效果。<br>
+比如经常使用的代码编辑器<a target="_blank" rel="noopener" href="https://github.com/microsoft/monaco-editor">monaco-editor</a>。<br>
+还有每一个<strong>图表组件</strong>，默认都不进行加载，只有当拖拽到画布当中时，才会真正去加载图表。</p>
+<h3 id="其他优化">其他优化</h3>
+<h4 id="gzip">gzip</h4>
+<p>之前的优化效果虽然显著，但是当开启了<code>gzip</code>之后，给项目最后的效果来了一个质的提升。</p>
+<p>这是压缩前和压缩后的两个对比，效果非常明显。<br>
+<img src="/images/数据可视化大屏设计器开发/gzip前.jpg" srcset="/img/loading.gif" lazyload /><br>
+<img src="/images/数据可视化大屏设计器开发/gzip后.jpg" srcset="/img/loading.gif" lazyload /></p>
+<ul>
+<li>
+<p>安装依赖<br>
+<code>yarn add compression-webpack-plugin@5.0.1 -D</code><br>
+为什么安装这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/yolo_link/article/details/125255862">版本</a>？<br>
+项目使用的是<code>umi3</code>，而插件的最新版本是<code>10.0.0</code>，打包发现报错<code>Cannot read properties of undefined (reading ‘tapPromise‘)</code><br>
+大概率是<code>webpack</code>版本不匹配，查看插件<code>package.json</code>发现其依赖的<code>webpack</code>版本为<code>5</code>。<br>
+故选择了插件<code>5.0.1</code>版本（<code>webpack</code>可为<code>4</code>）。</p>
+</li>
+<li>
+<p>配置</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> CompressionPlugin <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;compression-webpack-plugin&#x27;</span>;<br><span class="hljs-keyword">const</span> config = &#123;<br>  <span class="hljs-function"><span class="hljs-title">chainWebpack</span>(<span class="hljs-params">config: any</span>)</span> &#123;<br>    <span class="hljs-comment">// 生产环境配置</span><br>    <span class="hljs-keyword">if</span> (REACT_APP_ENV === <span class="hljs-string">&#x27;prod&#x27;</span>) &#123;<br>      config.plugin(<span class="hljs-string">&#x27;compression-webpack-plugin&#x27;</span>).use(CompressionPlugin, [<br>        &#123;<br>          <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(js|css|html)$/i</span>, <span class="hljs-comment">// 匹配</span><br>          threshold: <span class="hljs-number">102400</span>, <span class="hljs-comment">// 超过10k的文件压缩</span><br>          <span class="hljs-attr">deleteOriginalAssets</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// 不删除源文件</span><br>        &#125;,<br>      ]);<br>    &#125;<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>nginx配置<br>
+当然只完成打包还不够，需要服务端也支持<code>gzip</code>。<br>
+只需要简单的在<code>nginx</code>配置当中添加如下配置，重启，即可。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">gzip_static on;<br></code></pre></td></tr></table></figure>
+<h3 id="剩余待优化">剩余待优化</h3>
+<h4 id="组件优化">组件优化</h4>
+<p>现在各个图表组件的<strong>配置</strong>和<strong>渲染</strong>已完成按需加载，但是每个组件的<strong>默认配置</strong>数据仍然是同步全量加载。<br>
+因为代码逻辑原因可能需要一番大修改，故在之后完善。</p>
+<h4 id="图片优化">图片优化</h4>
+<p>图片现在也是全量加载，待优化。</p>
+<h4 id="依赖包替换">依赖包替换</h4>
+<p>有相当多的依赖包只是简单使用，但占用体积巨大，考虑使用同功能的小包进行替换。</p>
+<h2 id="结束">结束</h2>
+<p>结束🔚。</p>
+<p>顺便在下面附上相关的链接。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://47.97.27.23/api/backend/screen/index.html">试用地址</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/food-billboard/create-chart/issues/2">试用账号</a><br>
+<a target="_blank" rel="noopener" href="http://47.97.27.23/api/backend/create-chart-docs/index.html">操作文档</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/food-billboard/create-chart">代码地址</a></p>
+</blockquote>
+<p>参考链接</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7081453829375393823">https://juejin.cn/post/7081453829375393823</a><br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/moozixiao/article/details/115791524">https://blog.csdn.net/moozixiao/article/details/115791524</a><br>
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/7103831294013865992">https://juejin.cn/post/7103831294013865992</a><br>
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/7155652261660590116">https://juejin.cn/post/7155652261660590116</a><br>
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903728374546445">https://juejin.cn/post/6844903728374546445</a><br>
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904183917871117">https://juejin.cn/post/6844904183917871117</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/lowcode-react-chart/">lowcode react chart</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/21/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91-%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E6%93%8D%E4%BD%9C/">
+                        <span class="hidden-mobile">数据可视化大屏设计器开发-右键菜单操作</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> <script src="/js/code-viewer.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>
