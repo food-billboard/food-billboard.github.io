@@ -2,8 +2,8 @@
 title: umi环境变量
 date: 2023-01-13 16:39:00
 tags: umi 
-banner_img: /images/SVG学习/background.webp
-index_img: /images/SVG学习/background.webp
+banner_img: /images/umi环境变量/background.png
+index_img: /images/umi环境变量/background.png
 categories: 
   - umi
   - 前端   
@@ -18,10 +18,11 @@ umi平常都有用，关于他的环境变量，这里做一个踩坑记录。
 
 ### .env文件  
 在根目录新增`.env`文件，将需要的环境变量设置进去即可。  
+
 ```sh
 PORT=8000
 CUSTOM=123
-```  
+```
 ### cross-env  
 根据不同的命令设置不同的环境变量  
 可以通过`cross-env`来进行设置。  
