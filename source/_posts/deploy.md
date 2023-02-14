@@ -8,10 +8,6 @@ tags:
  - github actions
 categories:
   - 部署  
-  - node 
-  - 后端 
-  - ssh
-  - pm2 
 --- 
 
 ## 开头  

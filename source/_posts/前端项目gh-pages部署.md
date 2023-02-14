@@ -5,7 +5,6 @@ tags: deploy
 banner_img: /images/前端项目gh-pages部署/background.jpg
 index_img: /images/前端项目gh-pages部署/background.jpg
 categories: 
-  - 前端  
   - 部署
 ---
 

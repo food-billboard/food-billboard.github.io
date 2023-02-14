@@ -9,8 +9,6 @@ tags:
 banner_img: /images/Chai/background.png
 index_img: /images/Chai/background.png
 categories:
-  - 测试 
-  - node 
   - 后端 
 ---
 ## Chai介绍

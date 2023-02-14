@@ -5,7 +5,6 @@ tags: umi
 banner_img: /images/umi环境变量/background.png
 index_img: /images/umi环境变量/background.png
 categories: 
-  - umi
   - 前端   
 ---
 

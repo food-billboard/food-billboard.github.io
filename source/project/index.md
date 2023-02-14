@@ -24,6 +24,13 @@ index_img: /images/首页/background.jpg
 [<---官网传送门--->](http://47.97.27.23/api/backend/screen/index.html)  
 [<---操作文档传送门--->](http://47.97.27.23/api/backend/create-chart-docs/index.html)  
 
+### 一些小练习  
+
+收集了本人平时的一些小练习。    
+
+[<---代码传送门--->](https://github.com/food-billboard/simple-practice)  
+[<---官网传送门--->](https://food-billboard.github.io/simple-practice/home-page/index.html)  
+
 ### 工具箱
 
 工具箱（tool-box）是一个使用相关类库完成的各类实用工具的网站。  

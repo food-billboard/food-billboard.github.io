@@ -5,9 +5,9 @@ banner_img: /images/gitmoji/gitmoji-background.jpg
 index_img: /images/gitmoji/gitmoji-background.jpg
 tags:
  - git
+ - 规范
 categories:
   - 代码提交  
-  - 规范 
 --- 
 
 ## 介绍  

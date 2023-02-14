@@ -6,9 +6,6 @@ banner_img: /images/基于Tus协议的文件上传流程/tus.jpg
 index_img: /images/基于Tus协议的文件上传流程/tus.jpg
 categories: 
   - 文件
-  - 上传
-  - 前端  
-  - 后端  
 ---
  
 ## 介绍

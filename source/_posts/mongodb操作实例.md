@@ -2,14 +2,12 @@
 title: mongodb操作实例
 date: 2021-10-26 15:22:52
 tags: 
- - database
- - mongodb
+  - mongodb
+  - 数据库  
+  - node
 banner_img: /images/mongodb操作实例/background.jpg  
 index_img: /images/mongodb操作实例/background.jpg   
 categories:
-  - 数据库  
-  - mongodb
-  - node
   - 后端  
 ---
 
