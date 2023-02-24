@@ -5,8 +5,6 @@ tags: backend node puppeteer
 banner_img: /images/服务端puppeteer的使用/background.png
 index_img: /images/服务端puppeteer的使用/background.png
 categories: 
-  - 服务器
-  - 前端  
   - 后端  
 ---
 

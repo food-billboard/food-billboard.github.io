@@ -7,8 +7,8 @@ tags:
 banner_img: /images/有趣的css属性content/quotes-show.png
 index_img: /images/有趣的css属性content/quotes-show.png
 categories: 
-  - CSS
   - 前端  
+  - CSS
 ---
 今天说一个非常有趣的`css`属性`content`，可能很多人都会说，这个属性谁会不知道，对于一些老手来说，这个属性确实可能是经常会用到，但是总会有你没有发现的地方，今天就来好好的讲讲这个有趣的`css`属性。
 以下知识内容均来自于[张鑫旭的《css世界》](https://www.zhangxinxu.com/)，有兴趣的可以去看看。

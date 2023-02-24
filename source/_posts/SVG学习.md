@@ -5,9 +5,8 @@ tags: css svg
 banner_img: /images/SVG学习/background.webp
 index_img: /images/SVG学习/background.webp
 categories: 
-  - svg
-  - css
   - 前端   
+  - CSS
 ---
 
 # SVG学习  

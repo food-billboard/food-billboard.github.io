@@ -2,14 +2,14 @@
 title: parallax使用
 date: 2022-07-08 17:10:08
 tags: 
- - CSS   
- - animation  
+  - CSS   
+  - animation  
+  - 动画  
 banner_img: /images/parallax使用/background.jpg
 index_img: /images/parallax使用/background.jpg
 categories:
-  - CSS 
   - 前端 
-  - 动画  
+  - CSS 
 ---
 
 ## 介绍  

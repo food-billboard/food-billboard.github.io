@@ -12,6 +12,8 @@ index_img: /images/首页/background.jpg
 
 下面给出了本人目前所做的所有的项目，欢迎体验👏🏻 。  
 
+> 也可以直接查看[自定义的官网](https://food-billboard.github.io/simple-practice/home-page/index.html)，上面有更全的内容。  
+
 <a id="screen"></a>  
 
 ### 可视化数据大屏  
@@ -21,6 +23,13 @@ index_img: /images/首页/background.jpg
 [<---代码传送门--->](https://github.com/food-billboard/create-chart)  
 [<---官网传送门--->](http://47.97.27.23/api/backend/screen/index.html)  
 [<---操作文档传送门--->](http://47.97.27.23/api/backend/create-chart-docs/index.html)  
+
+### 一些小练习  
+
+收集了本人平时的一些小练习。    
+
+[<---代码传送门--->](https://github.com/food-billboard/simple-practice)  
+[<---官网传送门--->](https://food-billboard.github.io/simple-practice/home-page/index.html)  
 
 ### 工具箱
 

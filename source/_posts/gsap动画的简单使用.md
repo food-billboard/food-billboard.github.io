@@ -4,7 +4,7 @@ date: 2022-06-23 09:43:00
 banner_img: /images/gsap动画的简单使用/background.png
 index_img: /images/gsap动画的简单使用/background.png
 tags:
- - animation
+ - 前端
 --- 
 
 ## 介绍 

@@ -2,14 +2,14 @@
 title: mongodb常用操作符
 date: 2020-10-18 16:13:52
 tags: 
- - database
- - mongodb
-banner_img: /images/mongodb常用操作符/mongodb-cover-page.png
-index_img: /images/mongodb常用操作符/mongodb-cover-page.png  
-categories:
+  - database
+  - mongodb
   - 数据库  
   - mongodb
   - node
+banner_img: /images/mongodb常用操作符/mongodb-cover-page.png
+index_img: /images/mongodb常用操作符/mongodb-cover-page.png  
+categories:
   - 后端  
 ---
 
