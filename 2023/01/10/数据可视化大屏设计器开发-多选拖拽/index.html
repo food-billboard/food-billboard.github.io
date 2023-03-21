@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="数据可视化大屏设计器开发-多选拖拽 开头 本文是数据可视化开始的开发细节第五章。关于画布中的元素的各种鼠标拖拽操作。  简单声明 本人只是一个菜鸡，以下方法仅个人思路，如有错误，轻喷🙏🏻 。   开头说明 下面所说的元素表示的是组或者组件的简称。  开始 大屏设计当中，不乏需要调整图表组件的位置和尺寸。 相较于网页低代码，图表大屏低代码可能需要更复杂的操作，比如嵌套成组、多选、单元素拖拽缩放、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据可视化大屏设计器开发-多选拖拽">
+<meta property="og:url" content="http://yoursite.com/2023/01/10/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91-%E5%A4%9A%E9%80%89%E6%8B%96%E6%8B%BD/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="数据可视化大屏设计器开发-多选拖拽 开头 本文是数据可视化开始的开发细节第五章。关于画布中的元素的各种鼠标拖拽操作。  简单声明 本人只是一个菜鸡，以下方法仅个人思路，如有错误，轻喷🙏🏻 。   开头说明 下面所说的元素表示的是组或者组件的简称。  开始 大屏设计当中，不乏需要调整图表组件的位置和尺寸。 相较于网页低代码，图表大屏低代码可能需要更复杂的操作，比如嵌套成组、多选、单元素拖拽缩放、">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/selecto-demo.gif">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/rnd-select.gif">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/single-rnd.gif">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/eventemitter3.gif">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/final-demo.gif">
+<meta property="article:published_time" content="2023-01-10T06:05:00.000Z">
+<meta property="article:modified_time" content="2023-02-24T02:37:57.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="lowcode react chart">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/selecto-demo.gif">
+  
+  <title>数据可视化大屏设计器开发-多选拖拽 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据可视化大屏设计器开发-多选拖拽">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-10 14:05" pubdate>
+        2023年1月10日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      22k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      70 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据可视化大屏设计器开发-多选拖拽</h1>
+            
+            <div class="markdown-body">
+              <h1>数据可视化大屏设计器开发-多选拖拽</h1>
+<h2 id="开头">开头</h2>
+<p>本文是数据可视化开始的开发细节第五章。关于画布中的元素的各种鼠标拖拽操作。</p>
+<blockquote>
+<p>简单声明<br>
+本人只是一个菜鸡，以下方法仅个人思路，如有错误，轻喷🙏🏻 。</p>
+</blockquote>
+<blockquote>
+<p>开头说明<br>
+下面所说的<strong>元素</strong>表示的是<strong>组或者组件</strong>的简称。</p>
+</blockquote>
+<h2 id="开始">开始</h2>
+<p>大屏设计当中，不乏需要调整图表组件的<strong>位置</strong>和<strong>尺寸</strong>。<br>
+相较于网页低代码，图表大屏低代码可能需要更复杂的操作，比如嵌套<strong>成组</strong>、<strong>多选</strong>、<strong>单元素拖拽缩放</strong>、<strong>多元素拖拽缩放</strong>。<br>
+并且需要针对鼠标的动作做相应的区分，当中包含了相当的细节，这里就一一做相应的讲解。</p>
+<h3 id="涉及的依赖">涉及的依赖</h3>
+<ul>
+<li>
+<p>react-rnd<br>
+<a target="_blank" rel="noopener" href="https://github.com/bokuweb/react-rnd">react-rnd</a>是一个包含了拖拽和缩放两个功能的<code>react</code>组件，并且有非常丰富的配置项。<br>
+内部是依赖了拖拽(<a target="_blank" rel="noopener" href="https://github.com/react-grid-layout/react-draggable">react-draggable</a>)和缩放（<a target="_blank" rel="noopener" href="https://github.com/bokuweb/re-resizable">re-resizable</a>）两个模块。<br>
+奈何它并没有内置多元素的响应操作，本文就是针对它来实现对应的操作。</p>
+</li>
+<li>
+<p>react-selecto<br>
+<a target="_blank" rel="noopener" href="https://github.com/daybrush/selecto/tree/master/packages/react-selecto">react-selecto</a>是一个简单的简单易用的多选元素组件。</p>
+</li>
+<li>
+<p>eventemitter3<br>
+<a target="_blank" rel="noopener" href="https://github.com/primus/eventemitter3">eventemitter3</a>是一个自定义事件模块，能够在任何地方触发和响应自定义的事件，非常的方便。</p>
+</li>
+</ul>
+<h3 id="相关操作">相关操作</h3>
+<h4 id="多选">多选</h4>
+<p>画布当中可以通过鼠标点击拖拽形成选区，选区内的元素即是被选中的状态。</p>
+<p>这里即可以使用<code>react-selecto</code>来实现此功能。<br>
+<img src="/images/数据可视化大屏设计器开发/selecto-demo.gif" srcset="/img/loading.gif" lazyload /></p>
+<p>从图上操作可以看到，在选区内的元素即被选中（会出现黑色边框）。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> ReactSelecto <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-selecto&#x27;</span>;<br><br><span class="hljs-keyword">const</span> Selecto = <span class="hljs-function">() =&gt;</span> &#123;<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ReactSelecto</span></span></span><br><span class="hljs-tag"><span class="xml">      // 会被选中元素的父容器 只有这个容器里的元素才会被选中  </span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">dragContainer</span>=<span class="hljs-string">&#123;</span>&#x27;#<span class="hljs-attr">container</span>&#x27;&#125;</span></span><br><span class="hljs-tag"><span class="xml">      // 被选择的元素的<span class="hljs-attr">query</span> </span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">selectableTargets</span>=<span class="hljs-string">&#123;[</span>&#x27;<span class="hljs-attr">.react-select-to</span>&#x27;]&#125;</span></span><br><span class="hljs-tag"><span class="xml">      // 表示元素有被选中的百分比为多少时才能被选中</span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">hitRate</span>=<span class="hljs-string">&#123;10&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      // 当已经存在选中项时，按住指定按键可进行继续选择  </span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">toggleContinueSelect</span>=<span class="hljs-string">&#123;</span>&#x27;<span class="hljs-attr">shift</span>&#x27;&#125;</span></span><br><span class="hljs-tag"><span class="xml">      // 可以通过点击选择元素</span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">selectByClick</span></span></span><br><span class="hljs-tag"><span class="xml">      // 是否从内部开始选择（？）</span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">selectFromInside</span></span></span><br><span class="hljs-tag"><span class="xml">      // 拖拽的速率（不知道是不是这个意思）</span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">ratio</span>=<span class="hljs-string">&#123;0&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      // 选择结束</span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">onSelectEnd</span>=<span class="hljs-string">&#123;handleSelectEnd&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">    &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ReactSelecto</span>&gt;</span></span><br>  );<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>这里有几个需要注意的地方。</p>
+<ol>
+<li>操作互斥<br>
+画布当中的多选和拖拽都是通过鼠标左键来完成的，所以当一个元素是被选中的时候，鼠标想从元素上开始拖拽选择组件是不被允许的，此时应该是拖拽元素，而不是多选元素。</li>
+</ol>
+<p>而元素如果没有被<strong>选中</strong>时，上面的操作则变成了多选。</p>
+<img src="/images/数据可视化大屏设计器开发/rnd-select.gif" srcset="/img/loading.gif" lazyload />  
+<ol start="2">
+<li>内部选中<br>
+画布当中有<strong>组</strong>的概念，它是一个组与组件无限嵌套的结构，并且可以单独选中组内的元素。<br>
+当选中的是<strong>组内</strong>的元素时，即说明最外层的组是被<strong>选中</strong>的状态，同样需要考虑上面所说的<strong>互斥</strong>问题。</li>
+</ol>
+<h4 id="单元素拖拽缩放">单元素拖拽缩放</h4>
+<p>单元素操作相对简单，只需要简单使用<code>react-rnd</code>提供的功能即可完成。<br>
+<img src="/images/数据可视化大屏设计器开发/single-rnd.gif" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="多元素拖拽缩放">多元素拖拽缩放</h4>
+<p>这里就是本文的重点了，结合前面介绍的几个依赖，实现一个简单的多选拖拽缩放的功能。</p>
+<h5 id="具体思路">具体思路</h5>
+<p>多个元素拖拽，说到底其实鼠标拖拽的还是一个元素，就是<strong>鼠标拖动</strong>的那一个元素。<br>
+而<strong>其余</strong>被选中的元素，仅仅需要根据被拖动的元素的尺寸位置变动来做相应的<strong>加减处理</strong>即可。</p>
+<h5 id="相关问题">相关问题</h5>
+<ul>
+<li>信息计算<br>
+联动元素的位置尺寸信息该如何计算。</li>
+<li>组件间通信<br>
+因为每一个图表组件并非是单纯的同级关系，如果是通过层层<code>props</code>传递，免不了会有多余的刷新，造成<strong>性能</strong>问题。<br>
+而通过全局的<code>dva</code>状态同样在更新的时候会让组件刷新。</li>
+<li>数据刷新<br>
+图表数据是来自于<code>dva</code>全局的数据，现在频繁自刷新相当于是一直更新全局的数据，同样会造成<strong>性能</strong>问题。</li>
+<li>其他<br>
+一些细节问题</li>
+</ul>
+<h4 id="解决方法">解决方法</h4>
+<ul>
+<li>
+<p>信息计算<br>
+关于位置的计算相对简单，只需要单纯的将操作的元素的位置和尺寸差值传递给联动组件即可。</p>
+</li>
+<li>
+<p>组件间通信<br>
+根据上面问题的解析，可以使用<code>eventemitter3</code>来完成任意位置、层级的数据通信，并且它和<code>react</code>渲染无任何关系。</p>
+</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; useCallback, useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> EventEmitter <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;eventemitter3&#x27;</span><br><br><span class="hljs-keyword">const</span> eventemitter = <span class="hljs-keyword">new</span> EventEmitter()<br><br><span class="hljs-keyword">const</span> SonA = <span class="hljs-function">() =&gt;</span> &#123;<br><br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;刷新&#x27;</span>)<br><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> listener = <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(value)<br>    &#125;<br>    eventemitter.addListener(<span class="hljs-string">&#x27;change&#x27;</span>, listener)<br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>      eventemitter.removeListener(<span class="hljs-string">&#x27;change&#x27;</span>, listener)<br>    &#125;<br>  &#125;, [])<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>son A<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br>  )<br><br>&#125;<br><br><span class="hljs-keyword">const</span> SonB = <span class="hljs-function">() =&gt;</span> &#123;<br><br>  <span class="hljs-keyword">const</span> handleClick = useCallback(<span class="hljs-function">() =&gt;</span> &#123;<br>    eventemitter.emit(<span class="hljs-string">&#x27;change&#x27;</span>, <span class="hljs-string">&#x27;son B&#x27;</span>)<br>  &#125;, [])<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;handleClick&#125;</span>&gt;</span>son B<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br>  )<br><br>&#125;<br><br><span class="hljs-keyword">const</span> Parent = <span class="hljs-function">() =&gt;</span> &#123;<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">SonA</span> /&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">SonB</span> /&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  )<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>运行上面的例子可以发现，点击<code>SonB</code>组件的按钮，可以让<code>SonA</code>接收到来自其的数据，并且并没有触发<code>SonA</code>的刷新。<br>
+需要<strong>接收数据</strong>的组件只需要监听(<code>addListener</code>)指定的事件即可，比如上面的<code>change</code>事件。<br>
+而需要<strong>发送数据</strong>的组件则直接发布(<code>emit</code>)事件即可。<br>
+这样就避免了一些不必要的刷新。<br>
+<img src="/images/数据可视化大屏设计器开发/eventemitter3.gif" srcset="/img/loading.gif" lazyload /></p>
+<ul>
+<li>数据刷新<br>
+频繁刷新全局数据，会导致所有依赖其数据的组件都会刷新，所以考虑为需要刷新数据的组件在内部单独维护一份状态。<br>
+当<strong>开始操作</strong>时，记录下状态，标识开始使用<strong>内部状态</strong>表示图表的信息，<strong>结束操作</strong>时处理下内部数据状态，将数据更新到全局中去。</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; useMemo, useEffect, useState, useRef &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> EventEmitter <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;eventemitter3&#x27;</span><br><br><span class="hljs-keyword">const</span> eventemitter = <span class="hljs-keyword">new</span> EventEmitter()<br><br><span class="hljs-keyword">const</span> Component = <span class="hljs-function">(<span class="hljs-params">props: &#123;</span></span><br><span class="hljs-params"><span class="hljs-function">  position: &#123;left: <span class="hljs-built_in">number</span>, top: <span class="hljs-built_in">number</span>&#125;</span></span><br><span class="hljs-params"><span class="hljs-function">&#125;</span>) =&gt;</span> &#123;<br><br>  <span class="hljs-keyword">const</span> [ position, setPosition ] = useState(&#123;<br>    <span class="hljs-attr">left</span>: <span class="hljs-number">0</span>,<br>    <span class="hljs-attr">top</span>: <span class="hljs-number">0</span><br>  &#125;)<br><br>  <span class="hljs-keyword">const</span> isDrag = useRef(<span class="hljs-literal">false</span>)<br><br>  <span class="hljs-keyword">const</span> dragStart = <span class="hljs-function">() =&gt;</span> &#123;<br>    isDrag.current = <span class="hljs-literal">true</span> <br>    setPosition(props.position)<br>  &#125;<br><br>  <span class="hljs-keyword">const</span> drag = <span class="hljs-function">(<span class="hljs-params">position</span>) =&gt;</span> &#123;<br>    setPosition(position)<br>  &#125;<br><br>  <span class="hljs-keyword">const</span> dragEnd = <span class="hljs-function">() =&gt;</span> &#123;<br>    isDrag.current = <span class="hljs-literal">false</span> <br>    <span class="hljs-comment">// TODO </span><br>    <span class="hljs-comment">// 更新数据到全局</span><br>  &#125;<br><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    eventemitter.addListener(<span class="hljs-string">&#x27;dragStart&#x27;</span>, dragStart)<br>    eventemitter.addListener(<span class="hljs-string">&#x27;drag&#x27;</span>, drag)<br>    eventemitter.addListener(<span class="hljs-string">&#x27;dragEnd&#x27;</span>, dragEnd)<br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>      eventemitter.removeListener(<span class="hljs-string">&#x27;dragStart&#x27;</span>, dragStart)<br>      eventemitter.removeListener(<span class="hljs-string">&#x27;drag&#x27;</span>, drag)<br>      eventemitter.removeListener(<span class="hljs-string">&#x27;dragEnd&#x27;</span>, dragEnd)<br>    &#125;<br>  &#125;, [])<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span></span></span><br><span class="hljs-tag"><span class="xml">        <span class="hljs-attr">left:</span> (<span class="hljs-attr">isDrag.current</span> ? <span class="hljs-attr">position</span> <span class="hljs-attr">:</span> <span class="hljs-attr">props.position</span>)<span class="hljs-attr">.left</span>,</span></span><br><span class="hljs-tag"><span class="xml">        <span class="hljs-attr">top:</span> (<span class="hljs-attr">isDrag.current</span> ? <span class="hljs-attr">position</span> <span class="hljs-attr">:</span> <span class="hljs-attr">props.position</span>)<span class="hljs-attr">.top</span></span></span><br><span class="hljs-tag"><span class="xml">      &#125;&#125;</span></span><br><span class="hljs-tag"><span class="xml">    &gt;</span>图表组件<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br>  )<br><br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>上面的数据更新还可以更加优化，对于<strong>短时间</strong>的<strong>多次</strong>更新操作，可以控制一下更新频率，将多次更新合并为一次。</p>
+</blockquote>
+<ul>
+<li>其他
+<ul>
+<li>控制刷新<br>
+这里的控制刷新指的是上述的内部刷新，不需要每次都响应<code>react-rnd</code>发出的相关事件，可以做对应的节流(<code>throttle</code>)操作，减少事件触发频率。</li>
+<li>通信冲突问题<br>
+因为<strong>所有的组件</strong>都需要监听拖拽的事件，包括当前被拖拽的组件，所以在传递信息时，需要把自身的<code>id</code>类似值传递，防止冲突。</li>
+<li>组件的缩放属性<br>
+这里是关于前文说到的<strong>成组</strong>的逻辑相关，因为组存在<code>scaleX</code>和<code>scaleY</code>两个属性，所以在<strong>调整大小</strong>的时候，也要兼顾此属性（本文先暂时不考虑这个问题）。</li>
+<li>单元素选中情况<br>
+自定义事件的监听是<strong>无差别</strong>的，当只选中了一个元素进行拖拽缩放操作时，无须触发相应的事件。</li>
+</ul>
+</li>
+</ul>
+<h4 id="最后的DEMO">最后的DEMO</h4>
+<img src="/images/数据可视化大屏设计器开发/final-demo.gif" srcset="/img/loading.gif" lazyload />
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br><span class="line">706</span><br><span class="line">707</span><br><span class="line">708</span><br><span class="line">709</span><br><span class="line">710</span><br><span class="line">711</span><br><span class="line">712</span><br><span class="line">713</span><br><span class="line">714</span><br><span class="line">715</span><br><span class="line">716</span><br><span class="line">717</span><br><span class="line">718</span><br><span class="line">719</span><br><span class="line">720</span><br><span class="line">721</span><br><span class="line">722</span><br><span class="line">723</span><br><span class="line">724</span><br><span class="line">725</span><br><span class="line">726</span><br><span class="line">727</span><br><span class="line">728</span><br><span class="line">729</span><br><span class="line">730</span><br><span class="line">731</span><br><span class="line">732</span><br><span class="line">733</span><br><span class="line">734</span><br><span class="line">735</span><br><span class="line">736</span><br><span class="line">737</span><br><span class="line">738</span><br><span class="line">739</span><br><span class="line">740</span><br><span class="line">741</span><br><span class="line">742</span><br><span class="line">743</span><br><span class="line">744</span><br><span class="line">745</span><br><span class="line">746</span><br><span class="line">747</span><br><span class="line">748</span><br><span class="line">749</span><br><span class="line">750</span><br><span class="line">751</span><br><span class="line">752</span><br><span class="line">753</span><br><span class="line">754</span><br><span class="line">755</span><br><span class="line">756</span><br><span class="line">757</span><br><span class="line">758</span><br><span class="line">759</span><br><span class="line">760</span><br><span class="line">761</span><br><span class="line">762</span><br><span class="line">763</span><br><span class="line">764</span><br><span class="line">765</span><br><span class="line">766</span><br><span class="line">767</span><br><span class="line">768</span><br><span class="line">769</span><br><span class="line">770</span><br><span class="line">771</span><br><span class="line">772</span><br><span class="line">773</span><br><span class="line">774</span><br><span class="line">775</span><br><span class="line">776</span><br><span class="line">777</span><br><span class="line">778</span><br><span class="line">779</span><br><span class="line">780</span><br><span class="line">781</span><br><span class="line">782</span><br><span class="line">783</span><br><span class="line">784</span><br><span class="line">785</span><br><span class="line">786</span><br><span class="line">787</span><br><span class="line">788</span><br><span class="line">789</span><br><span class="line">790</span><br><span class="line">791</span><br><span class="line">792</span><br><span class="line">793</span><br><span class="line">794</span><br><span class="line">795</span><br><span class="line">796</span><br><span class="line">797</span><br><span class="line">798</span><br><span class="line">799</span><br><span class="line">800</span><br><span class="line">801</span><br><span class="line">802</span><br><span class="line">803</span><br><span class="line">804</span><br><span class="line">805</span><br><span class="line">806</span><br><span class="line">807</span><br><span class="line">808</span><br><span class="line">809</span><br><span class="line">810</span><br><span class="line">811</span><br><span class="line">812</span><br><span class="line">813</span><br><span class="line">814</span><br><span class="line">815</span><br><span class="line">816</span><br><span class="line">817</span><br><span class="line">818</span><br><span class="line">819</span><br><span class="line">820</span><br><span class="line">821</span><br><span class="line">822</span><br><span class="line">823</span><br><span class="line">824</span><br><span class="line">825</span><br><span class="line">826</span><br><span class="line">827</span><br><span class="line">828</span><br><span class="line">829</span><br><span class="line">830</span><br><span class="line">831</span><br><span class="line">832</span><br><span class="line">833</span><br><span class="line">834</span><br><span class="line">835</span><br><span class="line">836</span><br><span class="line">837</span><br><span class="line">838</span><br><span class="line">839</span><br><span class="line">840</span><br><span class="line">841</span><br><span class="line">842</span><br><span class="line">843</span><br><span class="line">844</span><br><span class="line">845</span><br><span class="line">846</span><br><span class="line">847</span><br><span class="line">848</span><br><span class="line">849</span><br><span class="line">850</span><br><span class="line">851</span><br><span class="line">852</span><br><span class="line">853</span><br><span class="line">854</span><br><span class="line">855</span><br><span class="line">856</span><br><span class="line">857</span><br><span class="line">858</span><br><span class="line">859</span><br><span class="line">860</span><br><span class="line">861</span><br><span class="line">862</span><br><span class="line">863</span><br><span class="line">864</span><br><span class="line">865</span><br><span class="line">866</span><br><span class="line">867</span><br><span class="line">868</span><br><span class="line">869</span><br><span class="line">870</span><br><span class="line">871</span><br><span class="line">872</span><br><span class="line">873</span><br><span class="line">874</span><br><span class="line">875</span><br><span class="line">876</span><br><span class="line">877</span><br><span class="line">878</span><br><span class="line">879</span><br><span class="line">880</span><br><span class="line">881</span><br><span class="line">882</span><br><span class="line">883</span><br><span class="line">884</span><br><span class="line">885</span><br><span class="line">886</span><br><span class="line">887</span><br><span class="line">888</span><br><span class="line">889</span><br><span class="line">890</span><br><span class="line">891</span><br><span class="line">892</span><br><span class="line">893</span><br><span class="line">894</span><br><span class="line">895</span><br><span class="line">896</span><br><span class="line">897</span><br><span class="line">898</span><br><span class="line">899</span><br><span class="line">900</span><br><span class="line">901</span><br><span class="line">902</span><br><span class="line">903</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123;<br>  useState,<br>  useRef,<br>  useCallback,<br>  useMemo,<br>  useEffect<br>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; Rnd &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-rnd&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> &#123; RndResizeCallback, RndDragCallback, RndResizeStartCallback &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-rnd&#x27;</span><br><span class="hljs-keyword">import</span> EventEmitter <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;eventemitter3&#x27;</span>;<br><span class="hljs-keyword">import</span> ReactSelecto <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-selecto&#x27;</span><br><span class="hljs-keyword">import</span> &#123; throttle &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;lodash&#x27;</span><br><br><span class="hljs-comment">// 大屏组件的数据类型</span><br><span class="hljs-keyword">type</span> ComponentList = &#123;<br>  <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span><br>  <span class="hljs-attr">width</span>: <span class="hljs-built_in">number</span><br>  <span class="hljs-attr">height</span>: <span class="hljs-built_in">number</span><br>  <span class="hljs-attr">left</span>: <span class="hljs-built_in">number</span><br>  <span class="hljs-attr">top</span>: <span class="hljs-built_in">number</span><br>  <span class="hljs-attr">background</span>: <span class="hljs-built_in">string</span><br>&#125;<br><br><span class="hljs-comment">// 创建事件</span><br><span class="hljs-keyword">const</span> eventEmitter = <span class="hljs-keyword">new</span> EventEmitter()<br><span class="hljs-keyword">const</span> EVENT_MAP = &#123;<br>  <span class="hljs-attr">DRAG_START</span>: <span class="hljs-string">&quot;DRAG_START&quot;</span>,<br>  <span class="hljs-attr">DRAG</span>: <span class="hljs-string">&quot;DRAG&quot;</span>,<br>  <span class="hljs-attr">DRAG_STOP</span>: <span class="hljs-string">&quot;DRAG_STOP&quot;</span>,<br>  <span class="hljs-attr">RESIZE_START</span>: <span class="hljs-string">&quot;RESIZE_START&quot;</span>,<br>  <span class="hljs-attr">RESIZE</span>: <span class="hljs-string">&quot;RESIZE&quot;</span>,<br>  <span class="hljs-attr">RESIZE_STOP</span>: <span class="hljs-string">&quot;RESIZE_STOP&quot;</span><br>&#125;<br><br><span class="hljs-keyword">const</span> getComponentStyle = <span class="hljs-function">(<span class="hljs-params">position: <span class="hljs-built_in">any</span>, size: <span class="hljs-built_in">any</span></span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> newWidth = <span class="hljs-built_in">parseInt</span>(size.style.width) || <span class="hljs-number">20</span>;<br>  <span class="hljs-keyword">const</span> newHeight = <span class="hljs-built_in">parseInt</span>(size.style.height) || <span class="hljs-number">20</span>;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">width</span>: newWidth,<br>    <span class="hljs-attr">height</span>: newHeight,<br>    <span class="hljs-attr">left</span>: position.x,<br>    <span class="hljs-attr">top</span>: position.y,<br>  &#125;;<br>&#125;;<br><br><span class="hljs-comment">// 这里用到的 dataset 是html原生data-的属性  </span><br><span class="hljs-comment">// 用于标识组件</span><br><span class="hljs-keyword">const</span> Selecto = <span class="hljs-function">(<span class="hljs-params">props: &#123;</span></span><br><span class="hljs-params"><span class="hljs-function">  setSelect: (value: <span class="hljs-built_in">string</span>[]) =&gt; <span class="hljs-built_in">void</span>;</span></span><br><span class="hljs-params"><span class="hljs-function">  select: <span class="hljs-built_in">string</span>[]</span></span><br><span class="hljs-params"><span class="hljs-function">&#125;</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> &#123; setSelect, select &#125; = props;<br><br>  <span class="hljs-comment">// 这里内部控制一个状态</span><br>  <span class="hljs-comment">// 是因为不想频繁刷新选中的状态 </span><br>  <span class="hljs-comment">// 其实也没有必要</span><br>  <span class="hljs-comment">// 最后拖拽完成再更改选中状态就可以了 </span><br>  <span class="hljs-keyword">const</span> currentSelect = useRef&lt;<span class="hljs-built_in">string</span>[]&gt;([]);<br><br>  <span class="hljs-comment">// 拖拽完成更改状态</span><br>  <span class="hljs-keyword">const</span> handleSelectEnd = useCallback(<span class="hljs-function">() =&gt;</span> &#123;<br>    setSelect(currentSelect.current);<br>  &#125;, [setSelect]);<br><br>  <span class="hljs-comment">// 拖拽中  </span><br>  <span class="hljs-keyword">const</span> handleSelect = useCallback(<span class="hljs-function">(<span class="hljs-params">e: <span class="hljs-built_in">any</span></span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> &#123; added, removed &#125; = e;<br><br>    <span class="hljs-keyword">const</span> toAddList = added.reduce(<span class="hljs-function">(<span class="hljs-params">acc: <span class="hljs-built_in">any</span>, element: <span class="hljs-built_in">any</span></span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">const</span> select = element.dataset.id;<br>      acc.push(select)<br>      <span class="hljs-keyword">return</span> acc;<br>    &#125;, []);<br>    <span class="hljs-keyword">const</span> toRemoveList = removed.map(<span class="hljs-function">(<span class="hljs-params">element: <span class="hljs-built_in">any</span></span>) =&gt;</span> element.dataset.id);<br><br>    <span class="hljs-keyword">const</span> newSelect = [<br>      ...currentSelect.current.filter(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> !toRemoveList.includes(item)),<br>      ...toAddList,<br>    ];<br>    currentSelect.current = newSelect;<br>  &#125;, []);<br><br>  <span class="hljs-keyword">const</span> handleDragStart = useCallback(<br>    <span class="hljs-function">(<span class="hljs-params">e: <span class="hljs-built_in">any</span></span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-comment">// 组件id</span><br>        <span class="hljs-keyword">const</span> componentId = e.inputEvent.target.dataset?.id;<br>        <span class="hljs-comment">// 组件缩放的边框  </span><br>        <span class="hljs-comment">// 不排除他的话无法缩放</span><br>        <span class="hljs-keyword">const</span> componentBorder =<br>          e.inputEvent.target.className.includes(<span class="hljs-string">&#x27;react-select-to-border&#x27;</span>);<br>        <span class="hljs-comment">// 可以在这里扩展更多的判断</span><br>        <span class="hljs-comment">// 因为根据前面介绍可能会从组内元素 或者 外层不同的元素开始拖拽  </span><br>        <span class="hljs-comment">// 可能会存在冲突  </span><br><br>        <span class="hljs-keyword">if</span> (!select.includes(componentId) &amp;&amp; !componentBorder) &#123;<br>          setSelect?.([]);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>          e.stop();<br>        &#125;<br>      &#125; <span class="hljs-keyword">catch</span> (err) &#123;<br>        e.stop();<br>      &#125;<br>    &#125;,<br>    [setSelect, select],<br>  );<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ReactSelecto</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">dragContainer</span>=<span class="hljs-string">&#123;</span>&#x27;#<span class="hljs-attr">container</span>&#x27;&#125;</span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">selectableTargets</span>=<span class="hljs-string">&#123;[</span>&#x27;<span class="hljs-attr">.react-select-to</span>&#x27;]&#125;</span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">hitRate</span>=<span class="hljs-string">&#123;10&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">toggleContinueSelect</span>=<span class="hljs-string">&#123;</span>&#x27;<span class="hljs-attr">shift</span>&#x27;&#125;</span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">selectByClick</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">selectFromInside</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">ratio</span>=<span class="hljs-string">&#123;0&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">onDragStart</span>=<span class="hljs-string">&#123;handleDragStart&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">onSelectEnd</span>=<span class="hljs-string">&#123;handleSelectEnd&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">onSelect</span>=<span class="hljs-string">&#123;handleSelect&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">    &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ReactSelecto</span>&gt;</span></span><br>  );<br>&#125;;<br><br><span class="hljs-keyword">const</span> Component = <span class="hljs-function">(<span class="hljs-params">props: ComponentList &amp; &#123;</span></span><br><span class="hljs-params"><span class="hljs-function">  isSelect: <span class="hljs-built_in">boolean</span></span></span><br><span class="hljs-params"><span class="hljs-function">  isMultiSelect: <span class="hljs-built_in">boolean</span></span></span><br><span class="hljs-params"><span class="hljs-function">  onChange: (value: Partial&lt;ComponentList&gt; &amp; &#123; id: <span class="hljs-built_in">string</span> &#125;) =&gt; <span class="hljs-built_in">void</span></span></span><br><span class="hljs-params"><span class="hljs-function">&#125;</span>) =&gt;</span> &#123;<br><br>  <span class="hljs-keyword">const</span> &#123;<br>    isSelect,<br>    background,<br>    left,<br>    top,<br>    width,<br>    height,<br>    id,<br>    onChange,<br>    isMultiSelect<br>  &#125; = props;<br><br>  <span class="hljs-comment">// 内部的位置信息</span><br>  <span class="hljs-keyword">const</span> [statePosition, setStatePosition] = useState(&#123;<br>    <span class="hljs-attr">x</span>: left,<br>    <span class="hljs-attr">y</span>: top<br>  &#125;);<br>  <span class="hljs-comment">// 内部的尺寸信息</span><br>  <span class="hljs-keyword">const</span> [stateSize, setStateSize] = useState(&#123;<br>    width,<br>    height<br>  &#125;)<br>  <span class="hljs-comment">// 是否处于拖拽中</span><br>  <span class="hljs-keyword">const</span> [isDealing, setIsDealing] = useState&lt;<span class="hljs-built_in">boolean</span>&gt;(<span class="hljs-literal">false</span>)<br><br>  <span class="hljs-comment">// 拖拽中的组件的信息</span><br>  <span class="hljs-comment">// 使用ref是为了刷新</span><br>  <span class="hljs-keyword">const</span> dragInfo = useRef(&#123;<br>    <span class="hljs-attr">left</span>: statePosition?.x || <span class="hljs-number">0</span>,<br>    <span class="hljs-attr">top</span>: statePosition?.y || <span class="hljs-number">0</span>,<br>    <span class="hljs-attr">drag</span>: <span class="hljs-literal">false</span>,<br>  &#125;);<br>  <span class="hljs-comment">// 缩放的组件信息</span><br>  <span class="hljs-keyword">const</span> resizeInfo = useRef(&#123;<br>    <span class="hljs-attr">left</span>: statePosition?.x || <span class="hljs-number">0</span>,<br>    <span class="hljs-attr">top</span>: statePosition?.y || <span class="hljs-number">0</span>,<br>    <span class="hljs-attr">width</span>: stateSize?.width || <span class="hljs-number">0</span>,<br>    <span class="hljs-attr">height</span>: stateSize?.height || <span class="hljs-number">0</span>,<br>    <span class="hljs-attr">resize</span>: <span class="hljs-literal">false</span>,<br>  &#125;);<br><br>  <span class="hljs-comment">// 根据是否操作的状态使用不同的状态信息</span><br>  <span class="hljs-comment">// 位置</span><br>  <span class="hljs-keyword">const</span> position = useMemo(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (isDealing) &#123;<br>      <span class="hljs-keyword">return</span> statePosition;<br>    &#125;<br>    <span class="hljs-keyword">return</span> &#123;<br>      <span class="hljs-attr">x</span>: left,<br>      <span class="hljs-attr">y</span>: top<br>    &#125;;<br>  &#125;, [left, top, statePosition, isDealing]);<br><br>  <span class="hljs-comment">// 根据是否操作的状态使用不同的状态信息</span><br>  <span class="hljs-comment">// 尺寸</span><br>  <span class="hljs-keyword">const</span> size = useMemo(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (isDealing) <span class="hljs-keyword">return</span> stateSize;<br>    <span class="hljs-keyword">return</span> &#123;<br>      width,<br>      height<br>    &#125;;<br>  &#125;, [width, height, stateSize, isDealing]);<br><br>  <span class="hljs-comment">// 调整大小方法</span><br>  <span class="hljs-keyword">const</span> resizeMethod: <span class="hljs-built_in">any</span> = <span class="hljs-function">(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">    e: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    direction: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    ref: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    delta: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    position: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    isSelf: <span class="hljs-built_in">boolean</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    value: ComponentList,</span></span><br><span class="hljs-params"><span class="hljs-function">    outerResizeInfo: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">  </span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// 获取到之前的位置信息</span><br>    <span class="hljs-keyword">const</span> resizePositionX = (outerResizeInfo || resizeInfo.current).left;<br>    <span class="hljs-keyword">const</span> resizePositionY = (outerResizeInfo || resizeInfo.current).top;<br><br>    <span class="hljs-keyword">let</span> newWidth = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> newHeight = <span class="hljs-number">0</span>;<br>    <span class="hljs-comment">// delta </span><br>    <span class="hljs-keyword">let</span> realDeltaX =<br>      <span class="hljs-keyword">typeof</span> resizePositionX === <span class="hljs-string">&#x27;number&#x27;</span> ? position.x - resizePositionX : <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> realDeltaY =<br>      <span class="hljs-keyword">typeof</span> resizePositionY === <span class="hljs-string">&#x27;number&#x27;</span> ? position.y - resizePositionY : <span class="hljs-number">0</span>;<br><br>    <span class="hljs-comment">// 获取当前的状态信息</span><br>    <span class="hljs-keyword">const</span> newStyle = getComponentStyle(position, ref);<br>    <span class="hljs-keyword">let</span> defaultChangeConfig: Partial&lt;ComponentList&gt; = &#123;&#125;;<br><br>    <span class="hljs-comment">// 鼠标操作组件</span><br>    <span class="hljs-keyword">if</span> (isSelf) &#123;<br>      <span class="hljs-keyword">const</span> &#123; width, height &#125; = newStyle;<br>      newWidth = width;<br>      newHeight = height;<br>      defaultChangeConfig = &#123;<br>        ...newStyle<br>      &#125;;<br>    &#125; <br>    <span class="hljs-comment">// 不是鼠标操作组件</span><br>    <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">const</span> &#123; width, height, left, top &#125; = value;<br>      <span class="hljs-keyword">let</span> realDeltaWidth = outerResizeInfo<br>        ? newStyle.width - outerResizeInfo.width<br>        : <span class="hljs-number">0</span>;<br>      <span class="hljs-keyword">let</span> realDeltaHeight = outerResizeInfo<br>        ? newStyle.height - outerResizeInfo.height<br>        : <span class="hljs-number">0</span>;<br><br>      newWidth = width + realDeltaWidth;<br>      newHeight = height + realDeltaHeight;<br>      defaultChangeConfig = &#123;<br>        <span class="hljs-attr">width</span>: newWidth,<br>        <span class="hljs-attr">height</span>: newHeight,<br>        <span class="hljs-attr">left</span>: left + realDeltaX,<br>        <span class="hljs-attr">top</span>: top + realDeltaY,<br>      &#125;;<br>    &#125;<br><br>    <span class="hljs-comment">// 不考虑嵌套组</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) <span class="hljs-keyword">return</span> defaultChangeConfig<br>    <span class="hljs-comment">// TODO </span><br>    <span class="hljs-comment">// 可以继续在下面处理操作组的逻辑</span><br>  &#125;;<br><br>  <span class="hljs-comment">// 拖拽方法</span><br>  <span class="hljs-keyword">const</span> dragMethod: <span class="hljs-built_in">any</span> = <span class="hljs-function">(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">    event: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    data: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    isSelf: <span class="hljs-built_in">boolean</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    value: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    outerDragInfo: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">  </span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> &#123; x, y, deltaX, deltaY &#125; = data;<br><br>    <span class="hljs-keyword">const</span> left = x;<br>    <span class="hljs-keyword">const</span> top = y;<br><br>    <span class="hljs-comment">// 鼠标操作组件</span><br>    <span class="hljs-keyword">if</span> (isSelf) &#123;<br>      <span class="hljs-keyword">return</span> &#123;<br>        left,<br>        top,<br>      &#125;;<br>    &#125;<br><br>    <span class="hljs-comment">// 不是鼠标操作组件则使用delta来进行计算</span><br>    <span class="hljs-keyword">return</span> &#123;<br>      <span class="hljs-attr">left</span>: value.left + deltaX,<br>      <span class="hljs-attr">top</span>: value.top + deltaY,<br>    &#125;;<br>  &#125;;<br><br>  <span class="hljs-comment">// 多组件复合调整大小</span><br>  <span class="hljs-keyword">const</span> multiOnResize: RndResizeCallback = <span class="hljs-function">(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">    e,</span></span><br><span class="hljs-params"><span class="hljs-function">    direction,</span></span><br><span class="hljs-params"><span class="hljs-function">    ref,</span></span><br><span class="hljs-params"><span class="hljs-function">    delta,</span></span><br><span class="hljs-params"><span class="hljs-function">    position,</span></span><br><span class="hljs-params"><span class="hljs-function">  </span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> newStyle = getComponentStyle(position, ref);<br><br>    resizeInfo.current.resize = <span class="hljs-literal">true</span>;<br><br>    <span class="hljs-comment">// 触发事件</span><br>    eventEmitter.emit(<br>      EVENT_MAP.RESIZE,<br>      id,<br>      e,<br>      direction,<br>      ref,<br>      delta,<br>      position,<br>      resizeInfo.current,<br>    );<br><br>    <span class="hljs-comment">// 更新自身的状态</span><br>    resizeInfo.current = &#123;<br>      ...resizeInfo.current,<br>      ...newStyle,<br>    &#125;;<br>  &#125;;<br><br>  <span class="hljs-comment">// 复合拖拽</span><br>  <span class="hljs-keyword">const</span> multiOnDrag: RndDragCallback = <span class="hljs-function">(<span class="hljs-params">event, data</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> &#123; x, y &#125; = data;<br><br>    dragInfo.current.drag = <span class="hljs-literal">true</span>;<br><br>    <span class="hljs-comment">// 计算delta给其他联动组件使用</span><br>    <span class="hljs-keyword">const</span> deltaX = x - dragInfo.current.left;<br>    <span class="hljs-keyword">const</span> deltaY = y - dragInfo.current.top;<br><br>    <span class="hljs-comment">// 触发事件</span><br>    eventEmitter.emit(<br>      EVENT_MAP.DRAG,<br>      id,<br>      event,<br>      &#123;<br>        ...data,<br>        deltaX,<br>        deltaY,<br>      &#125;,<br>      dragInfo.current,<br>    );<br><br>    <span class="hljs-comment">// 更新自身状态</span><br>    dragInfo.current = &#123;<br>      ...dragInfo.current,<br>      <span class="hljs-attr">left</span>: x,<br>      <span class="hljs-attr">top</span>: y,<br>    &#125;;<br>  &#125;;<br><br>  <span class="hljs-comment">// realtion开头的都是监听</span><br>  <span class="hljs-comment">// 鼠标操作的目标组件发出的自定义事件</span><br>  <span class="hljs-keyword">const</span> onRelationDragStart = <span class="hljs-function">(<span class="hljs-params">targetId: <span class="hljs-built_in">string</span></span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (!isSelect || id === targetId) <span class="hljs-keyword">return</span>;<br>    setIsDealing(<span class="hljs-literal">true</span>);<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> onRelationDrag = <span class="hljs-function">(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">    targetId: <span class="hljs-built_in">string</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    event: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    data: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    outerDragInfo: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">  </span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (!isSelect || id === targetId) <span class="hljs-keyword">return</span>;<br>    <span class="hljs-keyword">const</span> nextPosition = dragMethod(<br>      event,<br>      data,<br>      <span class="hljs-literal">false</span>,<br>      &#123;<br>        <span class="hljs-attr">left</span>: dragInfo.current.left || <span class="hljs-number">0</span>,<br>        <span class="hljs-attr">top</span>: dragInfo.current.top || <span class="hljs-number">0</span>,<br>      &#125;,<br>      outerDragInfo,<br>    );<br>    <span class="hljs-keyword">const</span> nextState = &#123;<br>      <span class="hljs-attr">x</span>: nextPosition.left || <span class="hljs-number">0</span>,<br>      <span class="hljs-attr">y</span>: nextPosition.top || <span class="hljs-number">0</span>,<br>    &#125;;<br>    dragInfo.current = &#123;<br>      ...dragInfo.current,<br>      ...nextPosition,<br>    &#125;;<br>    setStatePosition(<span class="hljs-function">(<span class="hljs-params">prev</span>) =&gt;</span> (&#123; ...nextState &#125;));<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> onRelationDragStop = <span class="hljs-function">(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">    targetId: <span class="hljs-built_in">string</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    event: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    data: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    outerDragInfo: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">  </span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (!isSelect || id === targetId) <span class="hljs-keyword">return</span>;<br>    setIsDealing(<span class="hljs-literal">false</span>);<br>    <span class="hljs-keyword">const</span> nextPosition = dragMethod(<br>      event,<br>      data,<br>      <span class="hljs-literal">false</span>,<br>      &#123;<br>        <span class="hljs-attr">left</span>: dragInfo.current.left || <span class="hljs-number">0</span>,<br>        <span class="hljs-attr">top</span>: dragInfo.current.top || <span class="hljs-number">0</span>,<br>      &#125;,<br>      outerDragInfo,<br>    );<br>    dragInfo.current = &#123;<br>      ...dragInfo.current,<br>      ...nextPosition,<br>    &#125;;<br><br>    <span class="hljs-keyword">const</span> &#123; left, top &#125; = dragInfo.current;<br>    onChange(&#123;<br>      id,<br>      left,<br>      top<br>    &#125;)<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> onRelationResizeStart = <span class="hljs-function">(<span class="hljs-params">targetId: <span class="hljs-built_in">string</span>, direction: <span class="hljs-built_in">any</span></span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (!isSelect || id === targetId) <span class="hljs-keyword">return</span>;<br>    setIsDealing(<span class="hljs-literal">true</span>);<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> onRelationResize = <span class="hljs-function">(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">    targetId: <span class="hljs-built_in">string</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    e: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    direction: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    ref: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    delta: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    position: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    outerResizeInfo: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">  </span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (!isSelect || id === targetId) <span class="hljs-keyword">return</span>;<br><br>    <span class="hljs-keyword">const</span> nextConfig = resizeMethod(<br>      e,<br>      direction,<br>      ref,<br>      delta,<br>      position,<br>      <span class="hljs-literal">false</span>,<br>      &#123;<br>        <span class="hljs-attr">left</span>: resizeInfo.current.left || <span class="hljs-number">0</span>,<br>        <span class="hljs-attr">top</span>: resizeInfo.current.top || <span class="hljs-number">0</span>,<br>        <span class="hljs-attr">width</span>: resizeInfo.current.width || <span class="hljs-number">0</span>,<br>        <span class="hljs-attr">height</span>: resizeInfo.current.height || <span class="hljs-number">0</span>,<br>      &#125;,<br>      outerResizeInfo,<br>    );<br><br>    <span class="hljs-keyword">const</span> &#123; left, top, width, height &#125; = nextConfig;<br>    resizeInfo.current = &#123;<br>      ...resizeInfo.current,<br>      left,<br>      top,<br>      width,<br>      height<br>    &#125;;<br><br>    setStatePosition(<span class="hljs-function">(<span class="hljs-params">prev</span>) =&gt;</span> (&#123;<br>      <span class="hljs-attr">x</span>: resizeInfo.current.left,<br>      <span class="hljs-attr">y</span>: resizeInfo.current.top<br>    &#125;));<br>    setStateSize(<span class="hljs-function">(<span class="hljs-params">prev</span>) =&gt;</span> (&#123;<br>      <span class="hljs-attr">width</span>: resizeInfo.current.width,<br>      <span class="hljs-attr">height</span>: resizeInfo.current.height<br>    &#125;));<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> onRelationResizeStop = <span class="hljs-function">(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">    targetId: <span class="hljs-built_in">string</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    e: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    direction: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    ref: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    delta: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    position: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">    outerResizeInfo: <span class="hljs-built_in">any</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">  </span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (!isSelect || id === targetId) <span class="hljs-keyword">return</span>;<br><br>    setIsDealing(<span class="hljs-literal">false</span>);<br>    <span class="hljs-keyword">const</span> nextConfig = resizeMethod(<br>      e,<br>      direction,<br>      ref,<br>      delta,<br>      position,<br>      <span class="hljs-literal">false</span>,<br>      &#123;<br>        <span class="hljs-attr">left</span>: resizeInfo.current.left || <span class="hljs-number">0</span>,<br>        <span class="hljs-attr">top</span>: resizeInfo.current.top || <span class="hljs-number">0</span>,<br>        <span class="hljs-attr">width</span>: resizeInfo.current.width || <span class="hljs-number">0</span>,<br>        <span class="hljs-attr">height</span>: resizeInfo.current.height || <span class="hljs-number">0</span>,<br>      &#125;,<br>      outerResizeInfo,<br>    );<br><br>    <span class="hljs-keyword">const</span> &#123; left, top, width, height &#125; = nextConfig;<br>    resizeInfo.current = &#123;<br>      ...resizeInfo.current,<br>      left,<br>      top,<br>      width,<br>      height<br>    &#125;;<br><br>    <span class="hljs-keyword">const</span> &#123; <span class="hljs-attr">left</span>: x, <span class="hljs-attr">top</span>: y, <span class="hljs-attr">width</span>: currentWidth, <span class="hljs-attr">height</span>: currentHeight &#125; = resizeInfo.current;<br><br>    onChange(&#123;<br>      id,<br>      <span class="hljs-attr">left</span>: x || <span class="hljs-number">0</span>,<br>      <span class="hljs-attr">top</span>: y || <span class="hljs-number">0</span>,<br>      <span class="hljs-attr">width</span>: (currentWidth <span class="hljs-keyword">as</span> <span class="hljs-built_in">number</span>) || <span class="hljs-number">20</span>,<br>      <span class="hljs-attr">height</span>: (currentHeight <span class="hljs-keyword">as</span> <span class="hljs-built_in">number</span>) || <span class="hljs-number">20</span>,<br>    &#125;)<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> multiResizeStart: RndResizeStartCallback = <span class="hljs-function">(<span class="hljs-params">_, direction</span>) =&gt;</span> &#123;<br>    eventEmitter.emit(<br>      EVENT_MAP.RESIZE_START,<br>      id,<br>      direction,<br>    );<br>    resizeInfo.current.resize = <span class="hljs-literal">true</span>;<br>  &#125;<br><br>  <span class="hljs-keyword">const</span> _onDrag: RndDragCallback = <span class="hljs-function">(<span class="hljs-params">event: <span class="hljs-built_in">any</span>, data: <span class="hljs-built_in">any</span></span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// * 复合移动</span><br>    <span class="hljs-keyword">if</span> (isMultiSelect) &#123;<br>      multiOnDrag(event, data);<br>    &#125;<br>  &#125;;<br><br>  <span class="hljs-comment">// 节流帮助减少频繁的更新</span><br>  <span class="hljs-comment">// 因为每一次都更新时没有必要的</span><br>  <span class="hljs-keyword">const</span> multiDrag = throttle(_onDrag, <span class="hljs-number">100</span>);<br><br>  <span class="hljs-keyword">const</span> _onResize: RndResizeCallback = <span class="hljs-function">(<span class="hljs-params">...args</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// * 复合尺寸修改</span><br>    <span class="hljs-keyword">if</span> (isMultiSelect) &#123;<br>      multiOnResize(...args);<br>    &#125;<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> multiResize = throttle(_onResize, <span class="hljs-number">100</span>);<br><br>  <span class="hljs-keyword">const</span> multiDragStop: RndDragCallback = <span class="hljs-function">(<span class="hljs-params">event, data</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> &#123; x, y &#125; = data;<br>    <span class="hljs-keyword">if</span> (isMultiSelect) &#123;<br>      <span class="hljs-keyword">const</span> deltaX = x - dragInfo.current.left;<br>      <span class="hljs-keyword">const</span> deltaY = y - dragInfo.current.top;<br><br>      eventEmitter.emit(<br>        EVENT_MAP.DRAG_STOP,<br>        id,<br>        event,<br>        &#123;<br>          ...data,<br>          deltaX,<br>          deltaY,<br>        &#125;,<br>        dragInfo.current,<br>      );<br><br>      dragInfo.current = &#123;<br>        ...dragInfo.current,<br>        <span class="hljs-attr">left</span>: x,<br>        <span class="hljs-attr">top</span>: y,<br>      &#125;;<br>    &#125;<br>    dragInfo.current.drag = <span class="hljs-literal">false</span>;<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> multiResizeStop: RndResizeCallback = <span class="hljs-function">(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">    e,</span></span><br><span class="hljs-params"><span class="hljs-function">    direction,</span></span><br><span class="hljs-params"><span class="hljs-function">    ref,</span></span><br><span class="hljs-params"><span class="hljs-function">    delta,</span></span><br><span class="hljs-params"><span class="hljs-function">    position,</span></span><br><span class="hljs-params"><span class="hljs-function">  </span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> newStyle = getComponentStyle(position, ref);<br><br>    resizeInfo.current.resize = <span class="hljs-literal">true</span>;<br><br>    eventEmitter.emit(<br>      EVENT_MAP.RESIZE_STOP,<br>      id,<br>      e,<br>      direction,<br>      ref,<br>      delta,<br>      position,<br>      resizeInfo.current,<br>    );<br><br>    resizeInfo.current.resize = <span class="hljs-literal">false</span>;<br><br>    resizeInfo.current = &#123;<br>      ...resizeInfo.current,<br>      ...newStyle,<br>    &#125;;<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> multiDragStart: RndDragCallback = <span class="hljs-function">() =&gt;</span> &#123;<br>    eventEmitter.emit(<br>      EVENT_MAP.DRAG_START,<br>      id,<br>    );<br>    dragInfo.current.drag = <span class="hljs-literal">true</span>;<br>  &#125;<br><br>  <span class="hljs-keyword">const</span> onDragStart: RndDragCallback = <span class="hljs-function">(<span class="hljs-params">...args</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// * 未选中不触发事件</span><br>    <span class="hljs-keyword">if</span> (!isSelect) <span class="hljs-keyword">return</span>;<br>    multiDragStart(...args)<br>  &#125;<br><br>  <span class="hljs-keyword">const</span> onDrag: RndDragCallback = <span class="hljs-function">(<span class="hljs-params">...args</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// * 未选中不触发事件</span><br>    <span class="hljs-keyword">if</span> (!isSelect) <span class="hljs-keyword">return</span>;<br>    multiDrag(...args)<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> onResize: RndResizeCallback = <span class="hljs-function">(<span class="hljs-params">...args</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// * 未选中不触发事件</span><br>    <span class="hljs-keyword">if</span> (!isSelect) <span class="hljs-keyword">return</span>;<br>    multiResize(...args)<br>  &#125;<br><br>  <span class="hljs-keyword">const</span> onDragStop: RndDragCallback = <span class="hljs-function">(<span class="hljs-params">event, data</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// * 未选中不触发事件</span><br>    <span class="hljs-keyword">if</span> (!isSelect) <span class="hljs-keyword">return</span>;<br>    onChange(&#123;<br>      ...dragMethod(event, data, <span class="hljs-literal">true</span>),<br>      id<br>    &#125;)<br><br>    multiDragStop(event, data);<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> onResizeStart: RndResizeStartCallback = <span class="hljs-function">(<span class="hljs-params">...args</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// * 未选中不触发事件</span><br>    <span class="hljs-keyword">if</span> (!isSelect) <span class="hljs-keyword">return</span>;<br>    multiResizeStart(...args)<br>  &#125;<br><br>  <span class="hljs-keyword">const</span> onResizeStop: RndResizeCallback = <span class="hljs-function">(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">    e,</span></span><br><span class="hljs-params"><span class="hljs-function">    direction,</span></span><br><span class="hljs-params"><span class="hljs-function">    ref,</span></span><br><span class="hljs-params"><span class="hljs-function">    delta,</span></span><br><span class="hljs-params"><span class="hljs-function">    position,</span></span><br><span class="hljs-params"><span class="hljs-function">  </span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// * 未选中不触发事件</span><br>    <span class="hljs-keyword">if</span> (!isSelect) <span class="hljs-keyword">return</span>;<br><br>    onChange(&#123;<br>      ...resizeMethod(e, direction, ref, delta, position, <span class="hljs-literal">true</span>),<br>      id<br>    &#125;)<br><br>    multiResizeStop(e, direction, ref, delta, position)<br>  &#125;;<br><br>  <span class="hljs-comment">// 绑定拖拽和缩放的事件</span><br>  <span class="hljs-comment">// 用于多选组件间通信</span><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span>(isSelect) &#123;<br>      eventEmitter.addListener(<br>        EVENT_MAP.DRAG_START,<br>        onRelationDragStart,<br>      );<br>      eventEmitter.addListener(<br>        EVENT_MAP.DRAG,<br>        onRelationDrag,<br>      );<br>      eventEmitter.addListener(<br>        EVENT_MAP.DRAG_STOP,<br>        onRelationDragStop,<br>      );<br>      eventEmitter.addListener(<br>        EVENT_MAP.RESIZE_START,<br>        onRelationResizeStart,<br>      );<br>      eventEmitter.addListener(<br>        EVENT_MAP.RESIZE,<br>        onRelationResize,<br>      );<br>      eventEmitter.addListener(<br>        EVENT_MAP.RESIZE_STOP,<br>        onRelationResizeStop,<br>      );<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>      eventEmitter.removeListener(<br>        EVENT_MAP.DRAG_START,<br>        onRelationDragStart,<br>      );<br>      eventEmitter.removeListener(<br>        EVENT_MAP.DRAG,<br>        onRelationDrag,<br>      );<br>      eventEmitter.removeListener(<br>        EVENT_MAP.DRAG_STOP,<br>        onRelationDragStop,<br>      );<br>      eventEmitter.removeListener(<br>        EVENT_MAP.RESIZE_START,<br>        onRelationResizeStart,<br>      );<br>      eventEmitter.removeListener(<br>        EVENT_MAP.RESIZE,<br>        onRelationResize,<br>      );<br>      eventEmitter.removeListener(<br>        EVENT_MAP.RESIZE_STOP,<br>        onRelationResizeStop,<br>      );<br>    &#125;;<br>  &#125;, [isSelect]);<br><br>  <span class="hljs-comment">// 全局组件的尺寸信息状态更新时</span><br>  <span class="hljs-comment">// 同步到组件内部</span><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    setStatePosition(&#123;<br>      <span class="hljs-attr">x</span>: left,<br>      <span class="hljs-attr">y</span>: top<br>    &#125;);<br>    resizeInfo.current = &#123;<br>      ...resizeInfo.current,<br>      <span class="hljs-attr">left</span>: left ?? resizeInfo.current.left,<br>      <span class="hljs-attr">top</span>: top ?? resizeInfo.current.top,<br>    &#125;;<br>    dragInfo.current = &#123;<br>      ...dragInfo.current,<br>      <span class="hljs-attr">left</span>: left ?? dragInfo.current.left,<br>      <span class="hljs-attr">top</span>: top ?? dragInfo.current.top,<br>    &#125;;<br>  &#125;, [left, top]);<br><br>  <span class="hljs-comment">// 全局组件的宽高信息状态更新时</span><br>  <span class="hljs-comment">// 同步到组件内部</span><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    setStateSize(&#123;<br>      width,<br>      height<br>    &#125;);<br>    resizeInfo.current = &#123;<br>      ...resizeInfo.current,<br>      <span class="hljs-attr">width</span>: width ?? resizeInfo.current.width,<br>      <span class="hljs-attr">height</span>: height ?? resizeInfo.current.height,<br>    &#125;;<br>  &#125;, [width, height]);<br><br>  <span class="hljs-keyword">return</span> (<br>    &lt;Rnd<br>      style=&#123;&#123;<br>        border: `1px solid $&#123;isSelect ? &#x27;black&#x27; : &#x27;transparent&#x27;&#125;`<br>      &#125;&#125;<br>      enableResizing=&#123;isSelect&#125;<br>      disableDragging=&#123;!isSelect&#125;<br>      default=&#123;&#123;<br>        x: 0,<br>        y: 0,<br>        width: 320,<br>        height: 200,<br>      &#125;&#125;<br>      onDragStart=&#123;onDragStart&#125;<br>      onDrag=&#123;onDrag&#125;<br>      onDragStop=&#123;onDragStop&#125;<br>      onResizeStart=&#123;onResizeStart&#125;<br>      onResize=&#123;onResize&#125;<br>      onResizeStop=&#123;onResizeStop&#125;<br>      minWidth=&#123;20&#125;<br>      minHeight=&#123;20&#125;<br>      position=&#123;position&#125;<br>      size=&#123;size&#125;<br>      // 设置缩放边框的class<br>      // 不设置的话会导致与缩放冲突 <br>      resizeHandleClasses=&#123;[<br>        &#x27;left&#x27;,<br>        &#x27;top&#x27;,<br>        &#x27;right&#x27;,<br>        &#x27;bottom&#x27;,<br>        &#x27;topLeft&#x27;,<br>        &#x27;topRight&#x27;,<br>        &#x27;bottomLeft&#x27;,<br>        &#x27;bottomRight&#x27;,<br>      ].reduce&lt;any&gt;((acc, cur) =&gt; &#123;<br>        acc[cur] = &#x27;react-select-to-border&#x27;;<br>        return acc;<br>      &#125;, &#123;&#125;)&#125;<br>    &gt;<br>      &lt;div<br>        style=&#123;&#123;<br>          backgroundColor: background,<br>          width: &#x27;100%&#x27;,<br>          height: &#x27;100%&#x27;<br>        &#125;&#125;<br>        // 用于Selecto组件中的组件标识<br>        data-id=&#123;id&#125;<br>        // 和Selecto组件中的selectableTargets对应<br>        className=&quot;react-select-to&quot;<br>      &gt;<br><br>      &lt;/div&gt;<br>    &lt;/Rnd&gt;<br>  )<br><br>&#125;<br><br>const Parent = () =&gt; &#123;<br><br>  const [componentList, setComponentList] = useState&lt;ComponentList[]&gt;([<br>    &#123;<br>      id: &#x27;1&#x27;,<br>      background: &#x27;red&#x27;,<br>      left: 20,<br>      top: 30,<br>      width: 200,<br>      height: 100<br>    &#125;,<br>    &#123;<br>      id: &#x27;2&#x27;,<br>      background: &#x27;green&#x27;,<br>      left: 200,<br>      top: 300,<br>      width: 100,<br>      height: 100<br>    &#125;,<br>    &#123;<br>      id: &#x27;3&#x27;,<br>      background: &#x27;gray&#x27;,<br>      left: 250,<br>      top: 50,<br>      width: 50,<br>      height: 50<br>    &#125;,<br>    &#123;<br>      id: &#x27;4&#x27;,<br>      background: &#x27;blue&#x27;,<br>      left: 250,<br>      top: 100,<br>      width: 100,<br>      height: 100<br>    &#125;,<br>    &#123;<br>      id: &#x27;5&#x27;,<br>      background: &#x27;pink&#x27;,<br>      left: 400,<br>      top: 150,<br>      width: 100,<br>      height: 100<br>    &#125;,<br>    &#123;<br>      id: &#x27;6&#x27;,<br>      background: &#x27;yellow&#x27;,<br>      left: 400,<br>      top: 300,<br>      width: 100,<br>      height: 100<br>    &#125;<br>  ])<br>  const [select, setSelect] = useState&lt;string[]&gt;([])<br><br>  // 更新组件信息<br>  const onComponentChange = useCallback((value: Partial&lt;ComponentList&gt; &amp; &#123; id: string &#125;) =&gt; &#123;<br>    const &#123; id &#125; = value<br>    setComponentList(prev =&gt; &#123;<br>      return prev.map(item =&gt; &#123;<br>        if (item.id !== id) return item<br>        return &#123;<br>          ...item,<br>          ...value<br>        &#125;<br>      &#125;)<br>    &#125;)<br>  &#125;, [])<br><br>  return (<br>    // 和Selecto组件中的container对应<br>    &lt;div<br>      id=&quot;container&quot;<br>      style=&#123;&#123;<br>        width: &#x27;100vw&#x27;,<br>        height: &#x27;100vh&#x27;<br>      &#125;&#125;<br>    &gt;<br>      &lt;Selecto<br>        select=&#123;select&#125;<br>        setSelect=&#123;setSelect&#125;<br>      /&gt;<br>      &#123;<br>        componentList.map(component =&gt; &#123;<br>          return (<br>            &lt;Component<br>              key=&#123;component.id&#125;<br>              &#123;...component&#125;<br>              isSelect=&#123;select.includes(component.id)&#125;<br>              onChange=&#123;onComponentChange&#125;<br>              isMultiSelect=&#123;select.length &gt; 1&#125;<br>            /&gt;<br>          )<br>        &#125;)<br>      &#125;<br>    &lt;/div&gt;<br>  )<br><br>&#125;<br><br>export default Parent<br></code></pre></td></tr></table></figure>
+<h2 id="成品">成品</h2>
+<p>其实在之前就已经发现其实<code>react-selecto</code>的作者也有研发其他的可视化操作模块，包括本文所说的多选拖拽的操作，但是奈何无法满足本项目的需求，故自己实现了功能。<br>
+如果有兴趣可以去看一下这个成品<a target="_blank" rel="noopener" href="https://daybrush.com/moveable/">moveable</a>。</p>
+<h2 id="总结">总结</h2>
+<p>通过上面的思路，即可完成一个简单的多元素拖拽缩放的功能，其核心其实就是<code>eventemitter3</code>的自定义事件功能，它的用途在平常的业务中非常广泛。<br>
+比如我们完全可以在以上例子的基础上，加上元素拖拽时<strong>吸附</strong>的功能。</p>
+<h2 id="结束">结束</h2>
+<p>结束🔚。</p>
+<p>顺便在下面附上相关的链接。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://47.97.27.23/api/backend/screen/index.html">试用地址</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/food-billboard/create-chart/issues/2">试用账号</a><br>
+<a target="_blank" rel="noopener" href="http://47.97.27.23/api/backend/create-chart-docs/index.html">操作文档</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/food-billboard/create-chart">代码地址</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/%E5%A4%A7%E5%B1%8F/">大屏</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/lowcode-react-chart/">lowcode react chart</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/01/11/%E8%A3%85%E4%BF%AE%E5%B0%8F%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">装修小记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/09/%E6%94%B6%E9%9B%86%E4%B8%80%E4%BA%9B%E6%9C%89%E7%94%A8%E7%9A%84%E6%96%87%E7%AB%A0/">
+                        <span class="hidden-mobile">收集一些有用的文章</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> <script src="/js/code-viewer.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>

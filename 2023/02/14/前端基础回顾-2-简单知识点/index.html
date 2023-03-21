@@ -1,0 +1,1015 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="这是前端基础回顾的第二篇，记录一下一些简单的知识点，仅仅用于速记，详细的还是查看具体的一些文章吧。 开始 HTML   从浏览器地址栏输入 url 到请求返回发生了什么 url解析、缓存、dns解析、tcp链接、http请求、响应、渲染。   三次握手、四次挥手  三次握手 客户端：我要发送 服务端：接收到客户端信息 客户端：接收到服务端信息 四次挥手 客户端：我要关闭 服务端：接收到客户端信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端基础回顾-2-简单知识点">
+<meta property="og:url" content="http://yoursite.com/2023/02/14/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-2-%E7%AE%80%E5%8D%95%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="这是前端基础回顾的第二篇，记录一下一些简单的知识点，仅仅用于速记，详细的还是查看具体的一些文章吧。 开始 HTML   从浏览器地址栏输入 url 到请求返回发生了什么 url解析、缓存、dns解析、tcp链接、http请求、响应、渲染。   三次握手、四次挥手  三次握手 客户端：我要发送 服务端：接收到客户端信息 客户端：接收到服务端信息 四次挥手 客户端：我要关闭 服务端：接收到客户端信息">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-14T08:23:00.000Z">
+<meta property="article:modified_time" content="2023-03-15T01:18:24.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="basic">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>前端基础回顾-2-简单知识点 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/background.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="前端基础回顾-2-简单知识点">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-02-14 16:23" pubdate>
+        2023年2月14日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前端基础回顾-2-简单知识点</h1>
+            
+            <div class="markdown-body">
+              <p>这是前端基础回顾的第二篇，记录一下一些简单的知识点，仅仅用于速记，详细的还是查看具体的一些文章吧。</p>
+<h2 id="开始">开始</h2>
+<h3 id="HTML">HTML</h3>
+<ul>
+<li>
+<p>从浏览器地址栏输入 url 到请求返回发生了什么<br>
+url解析、缓存、dns解析、tcp链接、http请求、响应、渲染。</p>
+</li>
+<li>
+<p>三次握手、四次挥手</p>
+<ul>
+<li>三次握手<br>
+客户端：我要发送<br>
+服务端：接收到客户端信息<br>
+客户端：接收到服务端信息</li>
+<li>四次挥手<br>
+客户端：我要关闭<br>
+服务端：接收到客户端信息<br>
+服务端：发送关闭信息<br>
+客户端：接收到关闭信息</li>
+</ul>
+</li>
+<li>
+<p>浏览器内容解析<br>
+dom树<br>
+css树<br>
+render树<br>
+布局计算<br>
+渲染</p>
+</li>
+<li>
+<p>http缓存</p>
+<ul>
+<li>强缓存
+<ul>
+<li>cache-control: max-age=xxx(最大时间s)</li>
+</ul>
+</li>
+<li>协商缓存
+<ul>
+<li>last-modified -&gt; if-modified-since</li>
+<li>etag -&gt; if-none-match</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>get和post的区别</p>
+<ul>
+<li>get可以缓存</li>
+<li>get在url上</li>
+<li>get明文传输，不安全</li>
+<li>get一次性传输，post需要两次</li>
+</ul>
+</li>
+<li>
+<p>跨域</p>
+<ul>
+<li>同源策略<br>
+域名(<a target="_blank" rel="noopener" href="http://baidu.com">baidu.com</a>) 协议(http) 端口(80)</li>
+<li>简单请求
+<ul>
+<li>get post head</li>
+<li>headers只有<code>Accept</code>、<code>Accept-Language</code>、<code>Content-Language</code>、<code>Content-Type(application/x-www-form-urlencoded或者multipart/form-data或者text/plain)</code></li>
+<li>请求中直接带<code>Origin: 192.168.x.x</code><br>
+响应带<br>
+<code>Access-Control-Allow-Origin: 192.168.x.x</code> 允许的域名<br>
+<code>Access-Control-Allow-Credential: true</code> 允许携带<code>cookie</code><br>
+<code>Access-Control-Allow-Headers</code>  允许携带的<code>headers</code><br>
+<code>Access-Control-Allow-Method</code>  允许请求的方法</li>
+</ul>
+</li>
+<li>非简单请求
+<ul>
+<li><code>options</code>请求预查</li>
+<li>响应带<br>
+<code>Access-Control-Max-Age: xxx</code> options缓存有效时间，时间内允许直接发送正式请求</li>
+</ul>
+</li>
+<li><strong>解决办法</strong>
+<ul>
+<li>代理服务器，同源服务器代理客户端请求</li>
+<li>nginx<br>
+正向代理<br>
+配置<code>Access-Control-Allow-Origin: xxx</code></li>
+<li>webpack</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>常用meta</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span>&gt;</span> 元素可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span>&gt;</span> 标签位于文档的头部，不包含任何内容。<span class="hljs-tag">&lt;<span class="hljs-name">meta</span>&gt;</span> 标签的属性定义了与文档相关联的名称/值对。<br><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>  H5标准声明，使用 HTML5 doctype，不区分大小写<br><span class="hljs-tag">&lt;<span class="hljs-name">head</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span> 标准的 lang 属性写法<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span>    声明文档使用的字符编码<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;X-UA-Compatible&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;IE=edge,chrome=1&quot;</span>/&gt;</span>   优先使用 IE 最新版本和 Chrome<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;description&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;不超过150个字符&quot;</span>/&gt;</span>       页面描述<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;keywords&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;&quot;</span>/&gt;</span>      页面关键词者<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;author&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;name, email@gmail.com&quot;</span>/&gt;</span>    网页作<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;robots&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;index,follow&quot;</span>/&gt;</span>      搜索引擎抓取<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no&quot;</span>&gt;</span> 为移动设备添加 viewport<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;apple-mobile-web-app-title&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;标题&quot;</span>&gt;</span> iOS 设备 begin<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;apple-mobile-web-app-capable&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;yes&quot;</span>/&gt;</span>  添加到主屏后的标题（iOS 6 新增）<br>是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;apple-itunes-app&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL&quot;</span>&gt;</span><br>添加智能 App 广告条 Smart App Banner（iOS 6+ Safari）<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;apple-mobile-web-app-status-bar-style&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;black&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;format-detection&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;telphone=no, email=no&quot;</span>/&gt;</span>  设置苹果工具栏颜色<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;renderer&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;webkit&quot;</span>&gt;</span>  启用360浏览器的极速模式(webkit)<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;X-UA-Compatible&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;IE=edge&quot;</span>&gt;</span>     避免IE使用兼容模式<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;Cache-Control&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;no-siteapp&quot;</span> /&gt;</span>    不让百度转码<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;HandheldFriendly&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>     针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;MobileOptimized&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;320&quot;</span>&gt;</span>   微软的老式浏览器<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;screen-orientation&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;portrait&quot;</span>&gt;</span>   uc强制竖屏<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;x5-orientation&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;portrait&quot;</span>&gt;</span>    QQ强制竖屏<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;full-screen&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;yes&quot;</span>&gt;</span>              UC强制全屏<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;x5-fullscreen&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>       QQ强制全屏<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;browsermode&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;application&quot;</span>&gt;</span>   UC应用模式<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;x5-page-mode&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>    QQ应用模式<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;msapplication-tap-highlight&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;no&quot;</span>&gt;</span>    windows phone 点击无高光<br>设置页面不缓存<br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;pragma&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;no-cache&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;cache-control&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;no-cache&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;expires&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;0&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h3 id="CSS">CSS</h3>
+<ul>
+<li>
+<p>盒模型<br>
+<code>box = content + padding + border + margin</code></p>
+<ul>
+<li>标准盒模型(box-sizing: content-box)<br>
+<code>width = content</code></li>
+<li>怪异盒模型(box-sizing: border-box)<br>
+<code>width = content + padding + border</code></li>
+</ul>
+</li>
+<li>
+<p>优先级<br>
+<code>!important &gt; 内联 &gt; id &gt; class &gt; tag</code><br>
+优先级 = (A, B, C, D)</p>
+<ul>
+<li>A<br>
+内联，!important</li>
+<li>B<br>
+#id</li>
+<li>C<br>
+.class a[href=“http://”] :after</li>
+<li>D<br>
+div ::after</li>
+</ul>
+</li>
+<li>
+<p>样式属性继承<br>
+样式可被继承到子元素，比如<code>font-size</code>、<code>font-weight</code>、<code>color</code>等</p>
+</li>
+<li>
+<p><code>margin</code>重叠<br>
+垂直方向发生重叠</p>
+<ol>
+<li>相邻兄弟元素<code>margin-top[bottom]</code>重叠<br>
+解决：设置<code>BFC</code></li>
+<li>父<code>margin-top</code>和子<code>margin-top</code>重叠<br>
+解决：设置父<code>padding</code>或<code>border</code></li>
+<li>父高度<code>auto</code>的<code>margin-bottom</code>和子<code>margin-bottom</code>重叠<br>
+解决：设置父<strong>高度</strong></li>
+<li>本身无高度，上下<code>margin</code>重叠<br>
+解决：设置<code>padding</code>或<code>border</code></li>
+</ol>
+<p>计算：</p>
+<ol>
+<li><code>Math.max(+, +)</code></li>
+<li><code>Math.abs(+ - Math.abs(-))</code></li>
+<li><code>-Math.abs(Math.abs(-) - Math.abs(-))</code></li>
+</ol>
+</li>
+<li>
+<p>设备像素、css 像素、设备独立像素、dpr、ppi 之间的区别</p>
+<ul>
+<li>设备像素<br>
+物理像素，不可变</li>
+<li>css像素<br>
+css像素=设备独立像素，相对单位，相对于设备像素</li>
+<li>dpr<br>
+dpr = 设备像素 / 设备独立像素<br>
+缩放会改变<code>dpr</code></li>
+<li>ppi<br>
+每英寸的物理像素密度，密度越大，分辨率越大</li>
+</ul>
+</li>
+<li>
+<p>精灵图<br>
+合并图片，利用<code>background-</code>加载各个位置的小图<br>
+优点：</p>
+<ul>
+<li>减少<code>http</code>请求</li>
+<li>提高压缩比<br>
+缺点：</li>
+<li>动一图改全图</li>
+</ul>
+</li>
+<li>
+<p><code>rem</code>优缺点<br>
+优点：</p>
+<ul>
+<li>屏幕适配<br>
+缺点：</li>
+<li>有些不同<code>dpr</code>设备显示错误</li>
+<li><code>iframe</code>显示错误<br>
+ps:</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js">!<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resize</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">document</span>.documentElement.style.fontSize = <span class="hljs-built_in">window</span>.innerWidth / <span class="hljs-number">540</span> <span class="hljs-comment">/*设计稿的宽度*/</span> * <span class="hljs-number">10</span> <span class="hljs-comment">/*1rem = 10px*/</span> + <span class="hljs-string">&quot;px&quot;</span><br>  &#125;;<br>  resize()<br>  <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&quot;resize&quot;</span>, resize)<br>&#125;()<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><code>margin</code> 无效</p>
+<ul>
+<li>内联元素无效</li>
+<li>内联替换元素<strong>垂直</strong>有效，无<strong>合并</strong>问题</li>
+<li><code>dispaly</code>的<code>table-row</code>和<code>table-cell</code>无效</li>
+<li>定高容器的子元素的<code>margin-bottom</code>和定宽容器的子元素的<code>margin-right</code>无效</li>
+</ul>
+</li>
+<li>
+<p><code>min-width</code>、<code>max-width</code>、<code>width</code>关系<br>
+<code>min-width &gt; max-width &gt; width</code></p>
+</li>
+<li>
+<p><code>line-height</code><br>
+数值、百分比、长度<br>
+继承：<br>
+数值<strong>直接</strong>继承<br>
+百分比和长度为<strong>计算后</strong>继承</p>
+</li>
+<li>
+<p><code>text-indent</code><br>
+<code>inline</code>和替换元素无效<br>
+百分比相对<strong>包含块</strong>宽度</p>
+</li>
+<li>
+<p><code>letter-spacing</code><br>
+字符间距<br>
+不支持<strong>百分比</strong><br>
+支持负值<br>
+默认值<code>normal</code></p>
+<div style="letter-spacing: 10px;">hello world</div>
+</li>
+<li>
+<p><code>word-spacing</code><br>
+文件间空格间距</p>
+<div style="word-spacing: 10px;">hello world</div>
+</li>
+<li>
+<p>文本省略</p>
+</li>
+</ul>
+ <div 
+    style="width:200px;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;"
+  >
+    单行行文本省略单行行文本省略单行行文本省略单行行文本省略单行行文本省略单行行文本省略单行行文本省略
+  </div>  
+  <div 
+    style="width:200px;overflow: hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;"
+  >
+    多行行文本省略多行行文本省略多行行文本省略多行行文本省略多行行文本省略多行行文本省略多行行文本省略多行行文本省略多行行文本省略多行行文本省略多行行文本省略多行行文本省略
+  </div>
+<ul>
+<li>
+<p>元素隐藏</p>
+<ul>
+<li><code>display: none</code></li>
+<li><code>opacity: 0</code></li>
+<li><code>visibility: hidden</code></li>
+<li><code>z-index: -1</code></li>
+</ul>
+</li>
+<li>
+<p>重排和重绘</p>
+<ul>
+<li>重排<br>
+页面元素重新计算排列布局</li>
+<li>重绘<br>
+页面元素重新渲染</li>
+</ul>
+<p>重排比重绘更消耗性能</p>
+<ul>
+<li>避免
+<ul>
+<li>统一修改样式</li>
+<li>临时存储需要计算的尺寸位置属性</li>
+<li>统一增删改dom元素</li>
+<li>position脱离文档流</li>
+<li>transform GPU 加速</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>BFC<br>
+用于绝对块极盒子的布局以及浮动相互影响的区域。</p>
+<ol>
+<li>块极盒子垂直方向排列</li>
+<li>BFC内元素的上下<code>margin</code>会重叠</li>
+<li>BFC计算高度时，浮动元素也会参与计算</li>
+<li>BFC不会与浮动元素发生重叠</li>
+<li>BFC外部元素不会影响到内部</li>
+<li>BFC内部元素的左<code>margin</code>和<code>border</code>接触</li>
+</ol>
+<p>创建BFC</p>
+<ul>
+<li>position: absolute fixed</li>
+<li>display: inline-block</li>
+<li>overflow: 不为visible</li>
+</ul>
+</li>
+</ul>
+<!-- - 布局  
+  - 两栏布局(左侧固定，右侧自适应)    
+  <details>
+    <summary>
+      点击查看代码1
+    </summary>
+    <div class="outer" style="height: 100px;border: 1px solid black;">
+      <div class="left" style="width: 100px;height:100%;float:left;background-color: red;">左侧</div>
+      <div class="right" style="height: 100%;overflow: auto;background-color: yellow;">右侧</div>
+    </div>
+  </details>
+  <details>
+    <summary>
+      点击查看代码2
+    </summary>
+    <div class="outer" style="height: 100px;border: 1px solid black;">
+      <div class="left" style="width: 100px;height:100%;float:left;background-color: red;">左侧</div>
+      <div class="right" style="height: 100%;margin-left: 100px;background-color: yellow;">右侧</div>
+    </div>
+  </details>
+  
+  - 双飞翼布局(两边固定，中间自适应)  
+  <style>
+    .clear-float::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  </style>
+  <details>
+    <summary>
+      点击查看代码
+    </summary>
+    <div class="outer clear-float" style="height: 100px;width: 200px;margin: 0 -100px;">
+      <div class="left" style="width: 100px;height:100%;float:left;background-color: red;">左侧</div>
+      <div class="right" style="width: 100%;height: 100%;overflow: auto;background-color: green;float: left;">中间</div>
+      <div class="right" style="width: 100px;height: 100%;;background-color: yellow;float: left;">右侧</div>
+    </div>
+  </details> -->
+<h3 id="Javascript">Javascript</h3>
+<ul>
+<li>
+<p>基本数据类型<br>
+<code>null</code>、<code>undefined</code>、<code>number</code>、<code>boolean</code>、<code>string</code>、<code>object</code>、<code>bigint</code>、<code>symbol</code></p>
+</li>
+<li>
+<p>数据类型判断</p>
+<ol>
+<li>typeof<br>
+只能判断普通类型，引用类型无法判断</li>
+<li>instanceof<br>
+只能判断引用类型，无法区分继承的原型属性</li>
+<li>Object.prototype.toString.call<br>
+可以判断所有类型</li>
+</ol>
+</li>
+<li>
+<p>作用域和作用域链<br>
+规定如何查找变量<br>
+从当前作用域不断向上寻找变量，直至到全局。</p>
+</li>
+<li>
+<p>执行上下文<br>
+执行一段代码都会创建一个执行上下文，当中包括：</p>
+<ol>
+<li>变量</li>
+<li>this</li>
+<li>作用域链</li>
+</ol>
+</li>
+<li>
+<p>闭包<br>
+函数的内部的函数可以访问其外部的作用域。</p>
+<ul>
+<li>作用
+<ol>
+<li>私有变量</li>
+<li>全局变量污染</li>
+</ol>
+</li>
+<li>影响
+<ul>
+<li>内存泄漏（无法GC）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>event loop 事件流<br>
+javascript代码执行分为两个队列，宏任务和微任务，先执行一个<strong>宏任务</strong>，接着执行完所有的<strong>微任务</strong>，循环。</p>
+<ul>
+<li>宏任务<br>
+setTimeout、setInterval、DOM、request</li>
+<li>微任务<br>
+Promise、async/await、nextTick、Observer</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;1&#x27;</span>);<br><br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;2&#x27;</span>);<br>    process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;3&#x27;</span>);<br>    &#125;)<br>    <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve</span>) </span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;4&#x27;</span>);<br>        resolve();<br>    &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;5&#x27;</span>)<br>    &#125;)<br>&#125;)<br>process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;6&#x27;</span>);<br>&#125;)<br><span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;7&#x27;</span>);<br>    resolve();<br>&#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;8&#x27;</span>)<br>&#125;)<br><br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;9&#x27;</span>);<br>    process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;10&#x27;</span>);<br>    &#125;)<br>    <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve</span>) </span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;11&#x27;</span>);<br>        resolve();<br>    &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;12&#x27;</span>)<br>    &#125;)<br>&#125;)<br><br></code></pre></td></tr></table></figure>
+<details>
+  <summary>点击查看答案</summary>
+  <pre>1 7 6 8 2 4 3 5 9 11 10 12</pre>
+</details>
+<ul>
+<li>
+<p>Promise</p>
+<ul>
+<li>all<br>
+全部成功才是成功</li>
+<li>any<br>
+有一个成功就是成功</li>
+<li>race<br>
+最先完成的算完成</li>
+<li>allSettled<br>
+全部处理完才结束</li>
+</ul>
+</li>
+<li>
+<p>垃圾回收</p>
+<ul>
+<li>引用次数清除<br>
+计算对象引用次数，为0的清除。</li>
+<li>标记清除<br>
+活动对象打标，未标记的清除。</li>
+</ul>
+</li>
+<li>
+<p>模块化<br>
+将多个不同的文件，按照一定规范进行划分，得到的一个个块。</p>
+<ul>
+<li>规范
+<ul>
+<li>CommonJS<br>
+同步加载<br>
+可缓存<br>
+值的<strong>拷贝</strong>，内部值改变不会影响到外部<br>
+<code>module.exports、exports.xxx = xxx、require</code></li>
+<li>AMD<br>
+异步加载<br>
+<code>define([module], callback)、require([module], callback)</code></li>
+<li>CMD<br>
+可同步(<code>require</code>)也可异步(<code>require.async</code>)加载<br>
+使用时才加载(和AMD的区别)<br>
+<code>define(function(require, exports, module) &#123;&#125;)</code></li>
+<li>ESM<br>
+ES6新规范<br>
+静态化，<strong>编译</strong>时就确定依赖关系<br>
+值的<strong>引用</strong><br>
+<code>export default、 export const xxx = xx、import xx from xx</code></li>
+<li>UMD<br>
+通用模块规范，可以在任何环境运行<br>
+立即执行函数内实现前面各个规范的兼容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>性能优化</p>
+<ul>
+<li>代码优化
+<ul>
+<li>防抖节流</li>
+<li>cssText</li>
+<li>重绘重排</li>
+<li>懒加载</li>
+<li>事件委托</li>
+</ul>
+</li>
+<li>构建优化
+<ul>
+<li>代码压缩</li>
+<li>gzip</li>
+<li>cdn</li>
+</ul>
+</li>
+<li>其他
+<ul>
+<li>http2</li>
+<li>图片压缩</li>
+<li>减少请求</li>
+<li>缓存</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>this</code>指向</p>
+<ul>
+<li>普通函数<br>
+不作为对象属性时，<code>this</code>指向<strong>全局</strong></li>
+<li>方法函数<br>
+作为对象方法，<code>this</code>执行<strong>对象</strong></li>
+<li>构造函数<br>
+作为构造函数，执行<code>new</code>前创建对象，<code>this</code>指向该<strong>对象</strong></li>
+<li><code>call</code>、<code>apply</code>、<code>bind</code><br>
+指向传入<strong>对象</strong></li>
+</ul>
+</li>
+<li>
+<p><code>json</code><br>
+<code>function</code>、<code>undefined</code>会被忽略<br>
+<code>NaN</code>变为<code>null</code></p>
+</li>
+<li>
+<p><code>offsetWidth</code>、<code>clientWidth</code>、<code>scrollWidth</code><br>
+clientWidth = width + padding<br>
+offsetWidth = width + padding + borderWidth + scrollBarWidth<br>
+scrollWidth = width + padding + scrollWidth</p>
+</li>
+<li>
+<p>一道奇怪的题目</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  getName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    alert(<span class="hljs-number">1</span>);<br>  &#125;;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getName</span>(<span class="hljs-params"></span>) </span>&#123;<br>  alert(<span class="hljs-number">5</span>);<br>&#125;<br>Foo.getName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>  alert(<span class="hljs-number">2</span>);<br>&#125;;<br>Foo.prototype.getName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>  alert(<span class="hljs-number">3</span>);<br>&#125;;<br><span class="hljs-keyword">var</span> getName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>  alert(<span class="hljs-number">4</span>);<br>&#125;;<br><br><span class="hljs-comment">//请写出以下输出结果：</span><br>Foo.getName();<br>getName(); <br>Foo().getName(); <br>getName();<br><span class="hljs-keyword">new</span> Foo.getName();<br><span class="hljs-keyword">new</span> Foo().getName();<br><span class="hljs-keyword">new</span> <span class="hljs-keyword">new</span> Foo().getName(); <br></code></pre></td></tr></table></figure>
+<details>
+  <summary>
+    点击查看代码1
+  </summary>
+  <div>
+    2 4 1 1 2 3 3
+  </div>
+</details>
+<h2 id="结束">结束</h2>
+<p>结束🔚。</p>
+<blockquote>
+<p>参考资料<br>
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903784229896199">从URL输入到页面展现到底发生什么？</a><br>
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/7061588533214969892#heading-27">做了一份前端面试复习计划，保熟～</a><br>
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903512845860872#heading-3">这一次，彻底弄懂 JavaScript 执行机制</a><br>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/149734572?from_voters_page=true">聊聊跨域的原理与解决方法</a><br>
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xxcanghai/p/5189353.html">一道常被人轻视的前端JS面试题</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/basic/">basic</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/15/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-3-%E6%89%8B%E5%86%99%E6%BA%90%E7%A0%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">前端基础回顾-3-手写源码</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/15/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-1-%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/">
+                        <span class="hidden-mobile">前端基础回顾-1-原型和原型链</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> <script src="/js/code-viewer.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>

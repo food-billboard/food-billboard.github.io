@@ -203,35 +203,96 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/11/24/%E6%96%87%E4%BB%B6%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0/" target="_self">
-          <img src="/images/%E6%96%87%E4%BB%B6%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0/background.jpg" srcset="/img/loading.gif" lazyload alt="文件分片上传">
+        <a href="/2022/10/24/%E6%AF%8F%E6%97%A5%E8%BF%9B%E6%AD%A5%E5%B0%8F%E8%AE%B0-1/" target="_self">
+          <img src="/images/%E6%AF%8F%E6%97%A5%E8%BF%9B%E6%AD%A5%E5%B0%8F%E8%AE%B0/background.jpg" srcset="/img/loading.gif" lazyload alt="每日进步小记">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/11/24/%E6%96%87%E4%BB%B6%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0/" target="_self">
-          文件分片上传
+        <a href="/2022/10/24/%E6%AF%8F%E6%97%A5%E8%BF%9B%E6%AD%A5%E5%B0%8F%E8%AE%B0-1/" target="_self">
+          每日进步小记
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/11/24/%E6%96%87%E4%BB%B6%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0/" target="_self">
+        <a href="/2022/10/24/%E6%AF%8F%E6%97%A5%E8%BF%9B%E6%AD%A5%E5%B0%8F%E8%AE%B0-1/" target="_self">
           
           
             
           
-          前端文件分片上传流程
+          每日进步小记
+记录今天的小进步💪🏻。
+正文
+早前几天的文章中提到，如何给github开源项目贡献代码，经历过一次拒绝之后，终于迎来了春天😊。
+在调试自己的可视化大屏项目的时候，发现了一个奇怪的问题：
+输入框表单设置的是在blur时触发保存，按照需求，使用的是antd的input输入框，并添加了prefix属性，但是却出现了奇怪的问题，点击输入框边框或者prefix都触发了保存，同时也说明其同
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-24 21:03" pubdate>
+              2022-10-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/fitting/">fitting</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/fitting/">fitting</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/10/11/%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81%E7%BB%99Github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" target="_self">
+          <img src="/images/%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81%E7%BB%99Github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/background.png" srcset="/img/loading.gif" lazyload alt="贡献代码给Github开源项目">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/10/11/%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81%E7%BB%99Github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" target="_self">
+          贡献代码给Github开源项目
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/10/11/%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81%E7%BB%99Github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" target="_self">
+          
+          
+            
+          
+          贡献代码给Github开源项目
 介绍
-作为一个前端，平常工作中肯定离不开文件上传的业务需求，可能大部分情况都是对图片，附件等一些小文件进行上传，但是当需要上传大文件的时候，使用普通上传方式时，可能就会看到接口返回413，这里就需要提到本文所要说的文件分片上传。
+之前就一直想给开源项目贡献自己的一份力，奈何都没有找到合适的机会，前几天尝试给开源项目ahooks贡献一下代码，虽然没有被采纳，但是也在这里做一下记录吧📝。
+全文的贡献流程均参考文章《如何贡献代码到Github开源项目》。
 正文
-二进制数据类型
-前端对二进制数据的存储格式有很多种。
 
-input输入框上传文件时用到的File类型。
-视频网站上能看到的blob链接资源
-e
+找到目标项目。
+
+首先是找一个适合的开源目标项目，并且有自己发现的bug或者优化等地方。
+本人找到的是ahooks，因为相对来说
         </a>
       </p>
 
@@ -239,8 +300,8 @@ e
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-11-24 13:56" pubdate>
-              2021-11-24
+            <time datetime="2022-10-11 13:53" pubdate>
+              2022-10-11
             </time>
           </div>
         
@@ -248,11 +309,7 @@ e
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E6%96%87%E4%BB%B6/">文件</a>
-            
-              <a href="/categories/%E6%96%87%E4%BB%B6/%E4%B8%8A%E4%BC%A0/">上传</a>
-            
-              <a href="/categories/%E6%96%87%E4%BB%B6/%E4%B8%8A%E4%BC%A0/%E5%89%8D%E7%AB%AF/">前端</a>
+              <a href="/categories/github/">github</a>
             
           </div>
         
@@ -260,7 +317,7 @@ e
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/upload-file-chunk/">upload file chunk</a>
+              <a href="/tags/github/">github</a>
             
           </div>
         
@@ -272,113 +329,37 @@ e
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/11/19/gitmoji/" target="_self">
-          <img src="/images/gitmoji/gitmoji-background.jpg" srcset="/img/loading.gif" lazyload alt="gitmoji 优雅提交代码">
+        <a href="/2022/09/19/SVG%E5%AD%A6%E4%B9%A0/" target="_self">
+          <img src="/images/SVG%E5%AD%A6%E4%B9%A0/background.webp" srcset="/img/loading.gif" lazyload alt="SVG学习">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/11/19/gitmoji/" target="_self">
-          gitmoji 优雅提交代码
+        <a href="/2022/09/19/SVG%E5%AD%A6%E4%B9%A0/" target="_self">
+          SVG学习
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/11/19/gitmoji/" target="_self">
+        <a href="/2022/09/19/SVG%E5%AD%A6%E4%B9%A0/" target="_self">
           
           
             
           
-          介绍
-相信平时应该大家都用过github当做代码仓库，作为一个优质的仓库，对于代码的提交也有对应的规范，为了让提交看得更浅显易懂，可以使用不同的图标来表示不一样的意思，这里就介绍一个提交工具gitmoji。
-正文
-关于这个库的使用相信官网已经描述的非常详细了，这里就简单做下翻译来供自己查看。
-常用的几个
-
-
-
-图标
-代码
-描述
-
-
-
-
-🎨
-:art:
-改进代码的结构/格式。
-
-
-🔥
-:fire
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-11-19 15:17" pubdate>
-              2021-11-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4/">代码提交</a>
-            
-              <a href="/categories/%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4/%E8%A7%84%E8%8C%83/">规范</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/git/">git</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/10/30/%E4%BB%8E0%E5%88%B01%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/" target="_self">
-          <img src="/images/%E4%BB%8E0%E5%88%B01%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/background.jpeg" srcset="/img/loading.gif" lazyload alt="从0到1完成阿里云node服务搭建部署">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/10/30/%E4%BB%8E0%E5%88%B01%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/" target="_self">
-          从0到1完成阿里云node服务搭建部署
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/10/30/%E4%BB%8E0%E5%88%B01%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/" target="_self">
-          
-          
-            
-          
-          从0到1完成阿里云node服务搭建部署
+          SVG学习
 介绍
-前段时间自己根据网上的教程捣鼓了一下自己的服务器，终于把自己的node服务部署到了阿里云。所以在这里把自己的一些经验分享给各位，希望能对大家有帮助ღ( ´･ᴗ･` )比心。
 
-先介绍一下这次部署用到的一些东西，免得浪费各位的时间✅ 。
+SVG 指可伸缩矢量图形 (Scalable Vector Graphics)
+SVG 用来定义用于网络的基于矢量的图形
+SVG 使用 XML 格式定义图形
+SVG 图像在放大或改变尺寸的情况下其图形质量不会有所损失
+SVG 是万维网联盟的标准
+SVG 与诸如 DOM 和 XSL 之类的 W3C 标准是一个整体
 
-
-首先本人是一个前端，所以这次的服务端语言用的是node框架koa
-node生产环境自然离不开pm2，本次远程部署也
+学习svg的目的，是为了能在前端页面实现更多有意思的效果。
+以下
         </a>
       </p>
 
@@ -386,8 +367,8 @@ node生产环境自然离不开pm2，本次远程部署也
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-30 20:18" pubdate>
-              2021-10-30
+            <time datetime="2022-09-19 17:16" pubdate>
+              2022-09-19
             </time>
           </div>
         
@@ -395,13 +376,9 @@ node生产环境自然离不开pm2，本次远程部署也
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E9%83%A8%E7%BD%B2/">部署</a>
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
             
-              <a href="/categories/%E9%83%A8%E7%BD%B2/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-            
-              <a href="/categories/%E9%83%A8%E7%BD%B2/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E5%89%8D%E7%AB%AF/">前端</a>
-            
-              <a href="/categories/%E9%83%A8%E7%BD%B2/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF/">后端</a>
+              <a href="/categories/%E5%89%8D%E7%AB%AF/CSS/">CSS</a>
             
           </div>
         
@@ -409,7 +386,7 @@ node生产环境自然离不开pm2，本次远程部署也
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/deploy-node/">deploy node</a>
+              <a href="/tags/css-svg/">css svg</a>
             
           </div>
         
@@ -421,38 +398,96 @@ node生产环境自然离不开pm2，本次远程部署也
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/10/26/mongodb%E6%93%8D%E4%BD%9C%E5%AE%9E%E4%BE%8B/" target="_self">
-          <img src="/images/mongodb%E6%93%8D%E4%BD%9C%E5%AE%9E%E4%BE%8B/background.jpg" srcset="/img/loading.gif" lazyload alt="mongodb操作实例">
+        <a href="/2022/09/12/%E4%B8%80%E5%88%9B%E8%81%9A%E5%AE%BD%E5%AD%A6%E4%B9%A0/" target="_self">
+          <img src="/images/%E4%B8%80%E5%88%9B%E8%81%9A%E5%AE%BD%E5%AD%A6%E4%B9%A0/background.jpg" srcset="/img/loading.gif" lazyload alt="一创聚宽学习">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/10/26/mongodb%E6%93%8D%E4%BD%9C%E5%AE%9E%E4%BE%8B/" target="_self">
-          mongodb操作实例
+        <a href="/2022/09/12/%E4%B8%80%E5%88%9B%E8%81%9A%E5%AE%BD%E5%AD%A6%E4%B9%A0/" target="_self">
+          一创聚宽学习
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/10/26/mongodb%E6%93%8D%E4%BD%9C%E5%AE%9E%E4%BE%8B/" target="_self">
+        <a href="/2022/09/12/%E4%B8%80%E5%88%9B%E8%81%9A%E5%AE%BD%E5%AD%A6%E4%B9%A0/" target="_self">
+          
+          
+            
+          
+          一创聚宽学习
+背景
+作为一个🌶🐔技术人，每天想的都是如何搞💰，每天盯着🐔💰涨涨跌跌，一夜回到解放前，受够了。是时候通过知识创造财富了。
+学习量化交易，如果通过自动化来进行交易，实现财富自由👍。
+介绍
+一创聚宽是国内比较有名的股票量化交易平台，它帮助开发者封装了很多实用的函数，并提供了实盘数据，以及实盘接入帮助。大大简化了开发者的开发过程。本文就简单的记录一下自己的学习笔记📝。
+总体结
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-09-12 17:50" pubdate>
+              2022-09-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E4%BA%A4%E6%98%93/">交易</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/trade/">trade</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/08/parallax%E4%BD%BF%E7%94%A8/" target="_self">
+          <img src="/images/parallax%E4%BD%BF%E7%94%A8/background.jpg" srcset="/img/loading.gif" lazyload alt="parallax使用">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/08/parallax%E4%BD%BF%E7%94%A8/" target="_self">
+          parallax使用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/08/parallax%E4%BD%BF%E7%94%A8/" target="_self">
           
           
             
           
           介绍
-这是mongodb的第二篇文章，本文包含了一些在平时自己开发过程当中使用的一些操作符以及特殊情况，希望对各位有帮助😺 。
+最近想给自己的项目设计一个比较炫酷的首页，发现了这个工具–parallax，故在这里做一个简单的介绍👍 。
 正文
-$filter
+parallax顾名思义，视差。
+百度这样解释：
 
+视差就是从有一定距离的两个点上观察同一个目标所产生的方向差异。从目标看两个点之间的夹角，叫做这两个点的视差，两点之间的距离称作基线。只要知道视差角度和基线长度，就可以计算出目标和观测者之间的距离。
 
-用于从已有数据对象中的数组中筛选出符合条件的数据项
-
-
-假设有如下集合名称为users的数据:
-
-
-123456789101112131415161718[  &#123;    students: [      &#123;        n
+parallax帮助你完成
         </a>
       </p>
 
@@ -460,8 +495,8 @@ $filter
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-26 15:22" pubdate>
-              2021-10-26
+            <time datetime="2022-07-08 17:10" pubdate>
+              2022-07-08
             </time>
           </div>
         
@@ -469,363 +504,9 @@ $filter
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
             
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb/">mongodb</a>
-            
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb/node/">node</a>
-            
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb/node/%E5%90%8E%E7%AB%AF/">后端</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/database/">database</a>
-            
-              <a href="/tags/mongodb/">mongodb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/10/25/deploy/" target="_self">
-          <img src="/images/deploy/background.jpeg" srcset="/img/loading.gif" lazyload alt="Github Actions 部署node项目">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/10/25/deploy/" target="_self">
-          Github Actions 部署node项目
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/10/25/deploy/" target="_self">
-          
-          
-            
-          
-          开头
-作为一个前端，其实平常和服务器打交道的时间并不多，但作为一个程序猿，又怎么能不想搞一搞呢。
-讲一个最简单的例子🌰：
-你发现了你页面的一个bug，改好之后需要部署到服务器了，恰巧没有后台人员在，需要自己部署。你输入账号密码登录了服务器，进入到对应的目录，替换了对应的文件，完成了本次的修改。过了一会儿，你发现好像还有问题，然后你又重新来了一遍。。。
-这样重复做功绝对不是我们想要的，所以此时就需
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-25 10:39" pubdate>
-              2021-10-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E9%83%A8%E7%BD%B2/">部署</a>
-            
-              <a href="/categories/%E9%83%A8%E7%BD%B2/node/">node</a>
-            
-              <a href="/categories/%E9%83%A8%E7%BD%B2/node/%E5%90%8E%E7%AB%AF/">后端</a>
-            
-              <a href="/categories/%E9%83%A8%E7%BD%B2/node/%E5%90%8E%E7%AB%AF/ssh/">ssh</a>
-            
-              <a href="/categories/%E9%83%A8%E7%BD%B2/node/%E5%90%8E%E7%AB%AF/ssh/pm2/">pm2</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/node/">node</a>
-            
-              <a href="/tags/github-actions/">github actions</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/" target="_self">
-          <img src="/images/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/tus.jpg" srcset="/img/loading.gif" lazyload alt="基于Tus协议的文件上传流程">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/" target="_self">
-          基于Tus协议的文件上传流程
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/12/28/%E5%9F%BA%E4%BA%8ETus%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B/" target="_self">
-          
-          
-            
-          
-          介绍
-最近一直都在弄关于文件上传方面的问题，如果只是小文件的话，基本直接post上传就可以解决，但是当面对大文件时，如果还是只用简单的请求可能无法完成文件的上传.
-假设当前用户要上传一个2G的视频文件. 可能就会遇到许多问题:
-
-首先最大的问题就是，服务端不可能接受前端在一次请求中上传如此大的body.
-所以不得不选择将大文件分成多个小文件分多次上传，基本可以解决问题. 但是如果出现一些不可控的原
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-28 20:18" pubdate>
-              2020-12-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%96%87%E4%BB%B6/">文件</a>
-            
-              <a href="/categories/%E6%96%87%E4%BB%B6/%E4%B8%8A%E4%BC%A0/">上传</a>
-            
-              <a href="/categories/%E6%96%87%E4%BB%B6/%E4%B8%8A%E4%BC%A0/%E5%89%8D%E7%AB%AF/">前端</a>
-            
-              <a href="/categories/%E6%96%87%E4%BB%B6/%E4%B8%8A%E4%BC%A0/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF/">后端</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/tus-upload-file/">tus upload file</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/" target="_self">
-          <img src="/images/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/mongodb-cover-page.png" srcset="/img/loading.gif" lazyload alt="mongodb常用操作符">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/" target="_self">
-          mongodb常用操作符
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/18/mongodb%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6/" target="_self">
-          
-          
-            
-          
-          MongoDB操作符
-MongoDB介绍
-MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。
-在高负载的情况下，添加更多的节点，可以保证服务器性能。
-MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。
-MongoDB 将数据存储为一个文档，数据结构由键值(key=&gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-18 16:13" pubdate>
-              2020-10-18
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-            
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb/">mongodb</a>
-            
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb/node/">node</a>
-            
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb/node/%E5%90%8E%E7%AB%AF/">后端</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/database/">database</a>
-            
-              <a href="/tags/mongodb/">mongodb</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/08/28/Chai/" target="_self">
-          <img src="/images/Chai/background.png" srcset="/img/loading.gif" lazyload alt="Chai">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/08/28/Chai/" target="_self">
-          Chai
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/08/28/Chai/" target="_self">
-          
-          
-            
-          
-          Chai介绍
-Chai 是一个针对 Node.js 和浏览器的行为驱动测试和测试驱动测试的诊断库，可与任何 JavaScript 测试框架集成。
-本文介绍的Chai下的expect/should风格属于BDD(行为驱动开发)
-因为本身语法相对简单，所以本文是类似于api的中文文档，其中有许多不足，见谅。
-正片开始
-
-to
-be
-been
-is
-that
-which
-and
-has
-have
-wit
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-08-28 22:16" pubdate>
-              2020-08-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%B5%8B%E8%AF%95/">测试</a>
-            
-              <a href="/categories/%E6%B5%8B%E8%AF%95/node/">node</a>
-            
-              <a href="/categories/%E6%B5%8B%E8%AF%95/node/%E5%90%8E%E7%AB%AF/">后端</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Chai/">Chai</a>
-            
-              <a href="/tags/BDD/">BDD</a>
-            
-              <a href="/tags/expect/">expect</a>
-            
-              <a href="/tags/test/">test</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/" target="_self">
-          <img src="/images/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/quotes-show.png" srcset="/img/loading.gif" lazyload alt="有趣的css属性content">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/" target="_self">
-          有趣的css属性content
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/08/13/%E6%9C%89%E8%B6%A3%E7%9A%84css%E5%B1%9E%E6%80%A7content/" target="_self">
-          
-          
-            
-          
-          今天说一个非常有趣的css属性content，可能很多人都会说，这个属性谁会不知道，对于一些老手来说，这个属性确实可能是经常会用到，但是总会有你没有发现的地方，今天就来好好的讲讲这个有趣的css属性。
-以下知识内容均来自于张鑫旭的《css世界》，有兴趣的可以去看看。
-content 介绍
-content用于元素内容的展示，平常用的多的地方在于内容前后的具体文字内容或者是图片。图片其实没有很多好介绍
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-08-13 21:57" pubdate>
-              2020-08-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CSS/">CSS</a>
-            
-              <a href="/categories/CSS/%E5%89%8D%E7%AB%AF/">前端</a>
+              <a href="/categories/%E5%89%8D%E7%AB%AF/CSS/">CSS</a>
             
           </div>
         
@@ -835,7 +516,9 @@ content用于元素内容的展示，平常用的多的地方在于内容前后�
             
               <a href="/tags/CSS/">CSS</a>
             
-              <a href="/tags/content/">content</a>
+              <a href="/tags/animation/">animation</a>
+            
+              <a href="/tags/%E5%8A%A8%E7%94%BB/">动画</a>
             
           </div>
         
@@ -847,31 +530,32 @@ content用于元素内容的展示，平常用的多的地方在于内容前后�
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/07/26/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/" target="_self">
-          <img src="/images/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/15938957-5F8F-4A7A-9F91-544D239677EC.png" srcset="/img/loading.gif" lazyload alt="React日历组件">
+        <a href="/2022/06/23/gsap%E5%8A%A8%E7%94%BB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" target="_self">
+          <img src="/images/gsap%E5%8A%A8%E7%94%BB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/background.png" srcset="/img/loading.gif" lazyload alt="gsap动画的简单使用">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/07/26/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/" target="_self">
-          React日历组件
+        <a href="/2022/06/23/gsap%E5%8A%A8%E7%94%BB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" target="_self">
+          gsap动画的简单使用
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/07/26/React%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/" target="_self">
+        <a href="/2022/06/23/gsap%E5%8A%A8%E7%94%BB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" target="_self">
           
           
             
           
-          这是本人写的第一篇文章，欢迎各位观看的朋友👭。
+          介绍
+最近突然需要写一些包含多种动画的首页，偶然找到了gsap，发现是真的好用，这里对其一些api做下简单介绍。
+正文
+gsap是一个javascript动画库，可以让开发者通过简单的api完成非常复杂的动画，包含非常多种类型的动画的实现，比如css3动画，svg动画以及canvas、webgl等。
+官网给出了大量的示例代码，可以前往查看
 
-先介绍一下自己，本人是一个刚刚进入社会的前端菜鸟，目前服务于一家公司🏭。
-1 故事背景
-事情是这样的，最近在公司的h5项目中碰到一个需求，页面中需要有一个用于显示最近订单的日历样式，你没有看错，一个日历，这给我难到了，本来想着不就是是一个日历吗，这有什么难的，后来我发现好像似乎是高估了自己。
-先介绍下关于这个日历的样式，大家可以自行脑补一下苹果
+但是它的缺点就是有些功能是付费的🤷🏻‍♀️，比如Sp
         </a>
       </p>
 
@@ -879,8 +563,69 @@ content用于元素内容的展示，平常用的多的地方在于内容前后�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-07-26 19:19" pubdate>
-              2020-07-26
+            <time datetime="2022-06-23 09:43" pubdate>
+              2022-06-23
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E7%AB%AFpuppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          <img src="/images/%E6%9C%8D%E5%8A%A1%E7%AB%AFpuppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/background.png" srcset="/img/loading.gif" lazyload alt="服务端puppeteer的使用">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E7%AB%AFpuppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          服务端puppeteer的使用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E7%AB%AFpuppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          
+          
+            
+          
+          服务端puppeteer的使用
+介绍
+最近突然使用到了puppeteer，原本在本地都是好好的，但是当部署到服务器上之后就不行了。
+正文
+虽然具体原因不确定，但是根据百度的做法最后不再报错。
+安装chrome
+
+创建文件
+touch /etc/yum.repos.d/google.repo
+配置内容
+
+vi /etc/yum.repos.d/google.repo
+123456[google]na
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-21 16:41" pubdate>
+              2022-04-21
             </time>
           </div>
         
@@ -888,13 +633,7 @@ content用于元素内容的展示，平常用的多的地方在于内容前后�
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/React/">React</a>
-            
-              <a href="/categories/React/%E5%89%8D%E7%AB%AF/">前端</a>
-            
-              <a href="/categories/React/%E5%89%8D%E7%AB%AF/CSS/">CSS</a>
-            
-              <a href="/categories/React/%E5%89%8D%E7%AB%AF/CSS/%E7%BB%84%E4%BB%B6/">组件</a>
+              <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
             
           </div>
         
@@ -902,11 +641,204 @@ content用于元素内容的展示，平常用的多的地方在于内容前后�
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/React/">React</a>
+              <a href="/tags/backend-node-puppeteer/">backend node puppeteer</a>
             
-              <a href="/tags/Component/">Component</a>
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/" target="_self">
+          <img src="/images/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/background.jpeg" srcset="/img/loading.gif" lazyload alt="服务器上用到的一些命令">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/" target="_self">
+          服务器上用到的一些命令
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/" target="_self">
+          
+          
             
-              <a href="/tags/Calendar/">Calendar</a>
+          
+          服务器上用到的一些命令
+介绍
+记录一些平常用到的一些命令，给自己提个醒。
+正文
+端口占用
+平常碰到有占用端口的情况，需要杀死该进程。
+sudo lsof -i -P -n // 查看所有占用端口
+kill -9 pid  杀死进程，pid是对应端口的id
+结束
+结束但是没有完全结束
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-21 16:12" pubdate>
+              2022-04-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/deploy-node-backend/">deploy node backend</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/02/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/" target="_self">
+          <img src="/images/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/background.jpeg" srcset="/img/loading.gif" lazyload alt="字号与像素的对应值">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/02/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/" target="_self">
+          字号与像素的对应值
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/02/%E5%AD%97%E5%8F%B7%E4%B8%8E%E5%83%8F%E7%B4%A0%E7%9A%84%E5%AF%B9%E5%BA%94%E5%80%BC/" target="_self">
+          
+          
+            
+          
+          平常偶尔可能会碰到px和word的字号的相互转换的情况，这里从网上抄了下简单做下记录。
+单位
+pt (point，磅)
+是一个物理长度单位，指的是 72 分之一英寸。
+px (pixel，像素)
+是一个虚拟长度单位，是计算机系统的数字化图像长度单位，如果 px 要换算成物理长度，需要指定精度 DPI(Dots Per Inch，每英寸像素数)，在扫描打印时一般都有 DPI 可选。Windows 系
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-02 15:42" pubdate>
+              2022-03-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/CSS/">CSS</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CSS/">CSS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/02/09/%E5%B9%B3%E6%97%B6%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" target="_self">
+          <img src="/images/%E5%B9%B3%E6%97%B6%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/background.png" srcset="/img/loading.gif" lazyload alt="平时用到的一些代码片段">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/02/09/%E5%B9%B3%E6%97%B6%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" target="_self">
+          平时用到的一些代码片段
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/09/%E5%B9%B3%E6%97%B6%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" target="_self">
+          
+          
+            
+          
+          平时用到的一些代码片段
+介绍
+新年快乐🐯 🎆
+这里介绍的是平常可能会用到的一些代码片段，可能对各位有点帮助，文章会持续更新✿✿ヽ(°▽°)ノ✿
+正文
+Modal
+
+antd
+内部控制visible
+外部控制是否可关闭
+
+typescript
+12345678910111213141516171819202122232425262728293031323334353637383940414243
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-09 15:19" pubdate>
+              2022-02-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/fragment-code/">fragment code</a>
             
           </div>
         
@@ -918,7 +850,7 @@ content用于元素内容的展示，平常用的多的地方在于内容前后�
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
