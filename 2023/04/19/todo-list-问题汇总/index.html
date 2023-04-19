@@ -16,20 +16,26 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta name="description" content="这是前端基础回顾的第四篇，记录一下React的相关问题。 开始 事件机制 react内部定义了一套事件机制，帮助 - 抹平各个浏览器的差异 - 方便管理 react16存在事件池的概念，帮助缓存事件对象，减少性能消耗。 通过内部的事务实现各种扩展。 统一将事件绑定在document上，先捕获后冒泡。 因为存在事件池的概念，如果回调中存在异步，则可能无法获取到event对象。 class生命周期">
+  <meta name="description" content="todo-list-问题汇总 介绍 前段时间刚刚完成了手绘风格的ToDoList的Demo，当中遇到了不少的问题，简单在这里做一下记录。 开始 几个关键的包：  roughjs 用于绘制手绘风格的图形，此项目为下面wired-elements的基础，并且也是万star⭐️项目excalidraw的基础。 只要简单的几行代码就能实现相关图形的绘制。12345678&#x2F;&#x2F; canvas const rc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端基础回顾-4-React">
-<meta property="og:url" content="http://yoursite.com/2023/02/17/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-4-React/index.html">
+<meta property="og:title" content="todo-list-问题汇总">
+<meta property="og:url" content="http://yoursite.com/2023/04/19/todo-list-%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="Food-Billboard">
-<meta property="og:description" content="这是前端基础回顾的第四篇，记录一下React的相关问题。 开始 事件机制 react内部定义了一套事件机制，帮助 - 抹平各个浏览器的差异 - 方便管理 react16存在事件池的概念，帮助缓存事件对象，减少性能消耗。 通过内部的事务实现各种扩展。 统一将事件绑定在document上，先捕获后冒泡。 因为存在事件池的概念，如果回调中存在异步，则可能无法获取到event对象。 class生命周期">
+<meta property="og:description" content="todo-list-问题汇总 介绍 前段时间刚刚完成了手绘风格的ToDoList的Demo，当中遇到了不少的问题，简单在这里做一下记录。 开始 几个关键的包：  roughjs 用于绘制手绘风格的图形，此项目为下面wired-elements的基础，并且也是万star⭐️项目excalidraw的基础。 只要简单的几行代码就能实现相关图形的绘制。12345678&#x2F;&#x2F; canvas const rc">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-17T06:22:00.000Z">
-<meta property="article:modified_time" content="2023-02-24T02:37:57.000Z">
+<meta property="og:image" content="http://yoursite.com/images/todo-list-问题汇总/combo.jpg">
+<meta property="og:image" content="http://yoursite.com/images/todo-list-问题汇总/combo-error.png">
+<meta property="og:image" content="http://yoursite.com/images/todo-list-问题汇总/rough-version-error.png">
+<meta property="og:image" content="http://yoursite.com/images/todo-list-问题汇总/import-error.png">
+<meta property="og:image" content="http://yoursite.com/images/todo-list-问题汇总/github-import.png">
+<meta property="article:published_time" content="2023-04-19T01:15:17.000Z">
+<meta property="article:modified_time" content="2023-04-19T09:58:46.000Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="basic">
+<meta property="article:tag" content="frontend">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/images/todo-list-问题汇总/combo.jpg">
   
-  <title>前端基础回顾-4-React - Food-Billboard</title>
+  <title>todo-list-问题汇总 - Food-Billboard</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -185,12 +191,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/images/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/background.jpeg') no-repeat center center;
+         style="background: url('/images/todo-list-%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/background.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="前端基础回顾-4-React">
+            <span class="h2" id="subtitle" title="todo-list-问题汇总">
               
             </span>
 
@@ -200,8 +206,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-02-17 14:22" pubdate>
-        2023年2月17日 下午
+      <time datetime="2023-04-19 09:15" pubdate>
+        2023年4月19日 上午
       </time>
     </span>
   
@@ -211,7 +217,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      563 字
+      1.7k 字
     </span>
   
 
@@ -220,7 +226,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      5 分钟
     </span>
   
 
@@ -249,52 +255,60 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">前端基础回顾-4-React</h1>
+            <h1 style="display: none">todo-list-问题汇总</h1>
             
             <div class="markdown-body">
-              <p>这是前端基础回顾的第四篇，记录一下React的相关问题。</p>
+              <h2 id="todo-list-问题汇总">todo-list-问题汇总</h2>
+<h2 id="介绍">介绍</h2>
+<p>前段时间刚刚完成了手绘风格的ToDoList的Demo，当中遇到了不少的问题，简单在这里做一下记录。</p>
 <h2 id="开始">开始</h2>
-<h3 id="事件机制">事件机制</h3>
-<p><code>react</code>内部定义了一套事件机制，帮助<br>
-- 抹平各个浏览器的差异<br>
-- 方便管理<br>
-<code>react16</code>存在事件池的概念，帮助缓存事件对象，减少性能消耗。<br>
-通过内部的<strong>事务</strong>实现各种扩展。<br>
-统一将事件绑定在<code>document</code>上，先捕获后冒泡。<br>
-因为存在事件池的概念，如果回调中存在异步，则可能无法获取到<code>event</code>对象。</p>
-<h3 id="class生命周期">class生命周期</h3>
+<h3 id="几个关键的包：">几个关键的包：</h3>
 <ul>
-<li><s>componentWillMount</s></li>
-<li>render</li>
-<li>componentDidMount</li>
-<li>更新state或props</li>
-<li><s>componentWillReceiveProps</s>(更新props)</li>
-<li>getDerivedStateFromProps</li>
-<li>shouldComponentUpdate</li>
-<li><s>componentWillUpdate</s></li>
-<li>getSnapshotBeforeUpdate(替代上面的WillUpdate)</li>
-<li>render</li>
-<li>componentDidUpdate</li>
-<li>componentWillUnmout</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rough-stuff/rough">roughjs</a><br>
+用于绘制手绘风格的图形，此项目为下面<code>wired-elements</code>的基础，并且也是万<code>star</code>⭐️项目<a target="_blank" rel="noopener" href="https://github.com/excalidraw/excalidraw">excalidraw</a>的基础。<br>
+只要简单的几行代码就能实现相关图形的绘制。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// canvas </span><br><span class="hljs-keyword">const</span> rc = rough.canvas(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;canvas&#x27;</span>));<br>rc.rectangle(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">200</span>, <span class="hljs-number">200</span>);<br><br><span class="hljs-comment">// svg</span><br><span class="hljs-keyword">const</span> rc = rough.svg(svg);<br><span class="hljs-keyword">let</span> node = rc.rectangle(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">200</span>, <span class="hljs-number">200</span>); <br>svg.appendChild(node);<br></code></pre></td></tr></table></figure>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rough-stuff/wired-elements">wired-elements</a><br>
+基于<code>roughjs</code>实现的<code>web-component</code>组件库。<br>
+不同于<code>react</code>组件库或者<code>vue</code>组件库，<code>web-component</code>是不受框架影响的，能够接入任何框架或者说直接原生使用（当然他也实现了相关热门框架的组件库封装）。<br>
+因为他本是就是被浏览器所兼容的<code>api</code>。<br>
+有关<code>web-component</code>的内容，可以参看<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/08/web_components.html">ruanyifeng的blog</a><br>
+此项目则是使用了<a target="_blank" rel="noopener" href="https://github.com/lit/lit">lit</a>(一个用于快速构建<code>web-component</code>组件库的框架)</li>
 </ul>
-<h3 id="diff">diff</h3>
-<p><a target="_blank" rel="noopener" href="https://food-billboard.github.io/2022/11/21/dom-diff%E5%AD%A6%E4%B9%A0/">以前自己写的diff</a></p>
-<h3 id="性能优化">性能优化</h3>
-<ul>
-<li>memo/pureComponent</li>
-<li>useMemo</li>
-<li>lazy、suspense</li>
-<li>尽量通过css控制逻辑</li>
-<li>key</li>
-</ul>
+<h3 id="相关问题">相关问题</h3>
+<p>因为上面的两个包都已经很久没有进行维护，虽然是一个团队的项目，但是版本相关的控制没有做的很好。</p>
+<h4 id="问题一">问题一</h4>
+<p>正常下载上面两个包时，在使用相关组件会触发保存。<br>
+比如使用里面的下拉组件(WiredCombo)</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; WiredCombo &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;wired-elements-react/lib/WiredCombo&#x27;</span><br><span class="hljs-keyword">import</span> &#123; WiredItem &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;wired-elements-react/lib/wiredItem&#x27;</span><br><br><span class="hljs-keyword">const</span> RoughTest = <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">WiredCombo</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">WiredItem</span>&gt;</span>全部<span class="hljs-tag">&lt;/<span class="hljs-name">WiredItem</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">WiredItem</span>&gt;</span>小于<span class="hljs-tag">&lt;/<span class="hljs-name">WiredItem</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">WiredItem</span>&gt;</span>大于<span class="hljs-tag">&lt;/<span class="hljs-name">WiredItem</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">WiredItem</span>&gt;</span>等于<span class="hljs-tag">&lt;/<span class="hljs-name">WiredItem</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">WiredCombo</span>&gt;</span></span><br>  )<br>&#125;<br></code></pre></td></tr></table></figure>
+  <img src="/images/todo-list-问题汇总/combo.jpg" srcset="/img/loading.gif" lazyload />
+  显示没有问题，但是当点击显示下拉时就会报错。 
+  <img src="/images/todo-list-问题汇总/combo-error.png" srcset="/img/loading.gif" lazyload />  
+<h4 id="解决办法">解决办法</h4>
+<p>查看仓库<code>issue</code>发现了<a target="_blank" rel="noopener" href="https://github.com/rough-stuff/wired-elements/issues/179#issuecomment-986052290">解决办法</a>。<br>
+因为没有做版本兼容，<code>hf.fillPolygon</code>这个<code>api</code>发生了变化，导致报错。<br>
+解决办法就是下载指定版本的<code>roughjs</code>（比如上面提到的版本<strong>4.4</strong>）</p>
+<p>但是直接使用命令控制版本下载还不够<code>yarn add roughjs@4.4</code><br>
+虽然确实将版本下载成了<code>4.4</code><br>
+但是查看<code>node_modules</code>的<code>wired-elements</code>包中，仍然引用的是<code>4.5.2</code>（测试用的是<code>node=16.14.2</code>，<code>yarn=1.22.10</code>）<br>
+<img src="/images/todo-list-问题汇总/rough-version-error.png" srcset="/img/loading.gif" lazyload /></p>
+<p>需要在项目<code>package.json</code>中添加属性</p>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;resolutions&quot;</span>: &#123;<br>    <span class="hljs-attr">&quot;roughjs&quot;</span>: <span class="hljs-string">&quot;4.4&quot;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>顾名思义可以通过外部控制下载相应包的指定版本，防止冲突。</p>
+<h4 id="问题二">问题二</h4>
+<p>在项目即将完工之时，本地运行无问题，但是当把项目放到<a target="_blank" rel="noopener" href="https://code.juejin.cn/">码上掘金</a>上时，却发生了错误。<br>
+<img src="/images/todo-list-问题汇总/import-error.png" srcset="/img/loading.gif" lazyload /></p>
+<p>看报错应该是<code>lit</code>中重复定义了同一个节点名称导致了报错。<br>
+接着查看组件库源代码发现了问题。<br>
+<img src="/images/todo-list-问题汇总/github-import.png" srcset="/img/loading.gif" lazyload /><br>
+<code>WiredCombo</code>组件依赖了<code>WiredCard</code>和<code>WiredItem</code>，目前来看问题就是引入了两次造成了<strong>多次初始化</strong>。<br>
+但是本地<code>umi</code>项目并未发现异样。</p>
+<h5 id="解决办法-2">解决办法</h5>
+<p>暂时还未找到有效的解决办法处理该问题，最后只得采用最朴素的办法–打包上传(`へ´*)ノ。</p>
+<p>如果各位有了解这方面的<strong>欢迎指正</strong>。</p>
 <h2 id="结束">结束</h2>
 <p>结束🔚。</p>
-<blockquote>
-<p>参考资料<br>
-<a target="_blank" rel="noopener" href="https://juejin.cn/post/7061588533214969892#heading-27">做了一份前端面试复习计划，保熟～</a><br>
-<a target="_blank" rel="noopener" href="https://pomb.us/build-your-own-react/">Build your own React</a><br>
-<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903975112671239">这可能是最通俗的 React Fiber(时间分片) 打开方式</a></p>
-</blockquote>
+<p>顺便看看<a target="_blank" rel="noopener" href="https://code.juejin.cn/pen/7222841199583821885">效果</a>吧。</p>
 
             </div>
             <hr>
@@ -304,7 +318,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
                     
                   </div>
                 
@@ -312,7 +326,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/basic/">basic</a>
+                      <a class="hover-with-bg" href="/tags/frontend/">frontend</a>
                     
                   </div>
                 
@@ -329,18 +343,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/19/todo-list-%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">todo-list-问题汇总</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/17/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-5-Webpack/">
-                        <span class="hidden-mobile">前端基础回顾-5-Webpack</span>
+                      <a href="/2023/02/17/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-4-React/">
+                        <span class="hidden-mobile">前端基础回顾-4-React</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
