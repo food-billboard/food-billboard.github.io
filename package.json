@@ -7,6 +7,7 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server -p 4001",
+    "create": "hexo new post",
     "build-and-deploy": "npm run clean && npm run build && npm run deploy"
   },
   "hexo": {
