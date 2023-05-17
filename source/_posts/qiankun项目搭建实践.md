@@ -327,6 +327,72 @@ export async function update(props) {}
 ### Jquery子应用  
 > version: 3.+  
 
+这里代表的是一些使用传统三剑客开发的应用。  
+
+- 将项目放置在`/src/packages/sub-jquery-project/src`目录下  
+- 启用应用  
+  因为不存在`webpack`编译，直接使用`express`启动`node`服务来进行访问。  
+  `npm init`  
+  `npm install express cors`  
+  `npm install nodemon -D`([nodemon](https://github.com/remy/nodemon)可以监听文件的变化刷新node服务)  
+- 修改`package.json`文件  
+```json
+  {
+    "scripts": {
+      "start": "nodemon index.js"
+    }
+  }
+```
+- 新建启动服务脚本(`/sub-jquery-project/index.js`)  
+```js
+  const express = require("express");
+  const cors = require("cors");
+  const chalk = require('chalk')
+
+  const app = express();
+  // 解决跨域问题
+  app.use(cors());
+  // 访问静态文件在src下
+  app.use('/', express.static('src'));
+
+  // 监听端口5003
+  app.listen(5003, () => {
+    console.log(chalk.green("server is listening in http://localhost:5003"))
+  });
+```
+此时`cmd`启动`npm run start`，访问`http://localhost:5003`即可看到内容  
+- 接入`qiankun`脚本(`/sub-jquery-project/src/js/entry.js`)  
+```js
+  const render = ($, isSub=false) => {
+    $('#sub-jquery-project').append(`And, I am mount in ${isSub ? 'sub' : 'self'}`);
+    return Promise.resolve();
+  };
+
+  if(!window.__POWERED_BY_QIANKUN__) {
+    render($)
+  }
+
+  // 绑定qiankun的一些生命周期
+  ((global) => {
+    global['sub-jquery-project'] = {
+      bootstrap: () => {
+        return Promise.resolve();
+      },
+      mount: () => {
+        return render($, true);
+      },
+      unmount: () => {
+        return Promise.resolve();
+      },
+    };
+  })(window);
+```
+
+完成上面的步骤，子应用的搭建就算是完成了。  
+启动项目就能看到，如下图。  
+<img src="/images/qiankun项目搭建实践/jquery子应用.jpg" />
+
+
 ### 一些问题
 #### 子应用静态资源404
 
@@ -338,3 +404,5 @@ export async function update(props) {}
   [微前端系列讲解--应用集成方案（qiankun+umi+vue）](https://blog.csdn.net/w544924116/article/details/120105320)  
   [基于qiankun的微前端最佳实践 -（同时加载多个微应用）](https://juejin.cn/post/6986258669172490271#heading-24)  
   [Create React App无eject配置（react-app-rewired 和 customize-cra）](https://juejin.cn/post/6844904016581754888#heading-8)  
+  [Angular刷新浏览器 404 问题](https://www.cnblogs.com/chenxincoder/p/9163194.html)  
+  [qiankun angular12 single-spa-angular子应用的改造](https://www.cnblogs.com/wangyongping/p/16788537.html)  
