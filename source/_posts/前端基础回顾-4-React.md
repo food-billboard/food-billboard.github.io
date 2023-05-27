@@ -45,6 +45,51 @@ categories:
   - 尽量通过css控制逻辑  
   - key   
 
+### hooks依赖项改变后是否能在hooks中拿到全部最新的props
+```ts
+// 来自ahooks的useDeepCompareEffect的代码
+import { use'State, useEffect } from 'react';
+
+const Test = () => {
+
+}
+
+```
+
+### 自定义hooks内部状态改变是否会引起组件渲染  
+```js
+import React, { useState, useEffect } from 'react@18';
+function useTest() {
+  const [ current, setCurrent ] = useState(0)
+  const [ relationCurrent, setRelationCurrent ] = useState(0)
+
+  useEffect(() => {
+    let timer = setInterval(() => {
+      setCurrent(prev => prev + 1)
+    }, 1000)
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
+
+  return relationCurrent
+}
+const Test = () => {
+
+  const a = useTest()
+
+  console.log(2222)
+
+  return (
+    <div>
+      
+    </div>
+  )
+};
+```
+
+上面的自定义`hook`中的`state`变化虽然没有暴露，但是刷新仍然影响到了组件的重渲染。  
+
 ## 结束  
 
   结束🔚。  
