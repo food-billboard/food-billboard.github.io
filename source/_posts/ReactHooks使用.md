@@ -16,7 +16,7 @@ categories:
 ## 开始
 这里介绍的是当前`react18`版本的相关`hooks`的简单使用。  
 包括  
-> useState、useReducer、useEffect、useLayoutEffect、useRef、useCallback、useMemo、useContext、useImperativeHandle、useId、useInsertionEffect、useTransition、useDeferredValue、useDebugValue、useSyncExternalStore
+> useState、useReducer、useEffect、useLayoutEffect、useRef、useImperativeHandle、useCallback、useMemo、useContext、useId、useInsertionEffect、useTransition、useDeferredValue、useDebugValue、useSyncExternalStore
 
 ### useState 
   组件`state`，和`class`组件的`state`一样  
@@ -712,6 +712,68 @@ function App() {
 注意上面的名称是`Debug`，因为它会自动将`useDebug`的前缀`use`当做是`hook`的标志，如果`hook`不是以`use`开头，那么他就是`hook`的全名（比如`usDebug`名称就是`usDebug`）。    
 
 ### useSyncExternalStore 
+  简单来说主要服务于第三方库。  
+  快速接入外部的数据源，比如`redux`、`zustand等。  
+  并且他的功能也远不止于此（以后再探究吧）。  
+
+```js
+import React, { useSyncExternalStore, useState, useEffect } from 'react@18';
+
+let store = {
+  name: 'Daniel',
+  age: 20
+}
+let listeners = []
+
+function reducer(type) {
+  switch(type) {
+    case 'INCREASE':
+      store.age ++
+      break 
+    case 'DECREASE':
+      store.age --
+      break
+    default:
+  }
+  console.log(store.age)
+  listeners.forEach(listener => listener())
+}
+
+// 订阅函数
+// 参数是一个callback 用于数据发生变化时调用触发
+// 返回回调用于清理订阅函数  
+// 比如下面的用于清理调指定的callback
+function subscribe(callback) {
+  listeners.push(callback)
+  return () => {
+    listeners = listeners.filter(item => item != callback)
+  }
+}
+
+// 返回最新的 state 状态
+// 并且是不可变的值
+function getSnapshot() {
+  return store.age 
+}
+
+function getServerSnapshot() {
+
+}
+
+const App = function () {
+
+  // subscribe 表示订阅函数，当数据发生变化时，触发此函数
+  // getSnapshot 用于对数据发生变化时，返回对应新的 state状态
+  // getServerSnapshot 则是用于在 ssr 模式下 的 getSnapshot(有待研究)
+  const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+
+  return (
+    <div onClick={() => reducer(Math.random() > 0.5 ? 'INCREASE' : 'DECREASE')}>
+      {store.name}:{state}
+    </div>
+  )
+};
+```
 
 ## 结束
   以上就是当前版本所有`hooks`的使用`demo`，如有错误欢迎指正。  
@@ -725,3 +787,4 @@ function App() {
   [为了生成唯一id，React18专门引入了新Hook：useId](https://juejin.cn/post/7034691251165200398)  
   [「React 进阶」 React 全部 Hooks 使用大全 （包含 React v18 版本 ）](https://juejin.cn/post/7118937685653192735)  
   [React Concurrent 模式抢先预览下篇: useTransition 的平行世界](https://juejin.cn/post/6844903986420514823)  
+  [React useSyncExternalStore 一览](https://juejin.cn/post/7213744681392783417)  
