@@ -1,0 +1,642 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="这篇写一半不想写了，别看了(&#96;へ´*)ノ 介绍 什么是微前端？  微前端是一种类似于微服务的架构，它将微服务的理念应用于浏览器端，即将单页面前端应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。各个前端应用还可以独立开发、独立部署。同时，它们也可以在共享组件的同时进行并行开发——这些组件可以通过NPM或者Git Tag、Git Submodule来管理。  为什么要使用微前端？  各个子项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="qiankun项目搭建实践">
+<meta property="og:url" content="http://yoursite.com/2023/04/27/qiankun%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="这篇写一半不想写了，别看了(&#96;へ´*)ノ 介绍 什么是微前端？  微前端是一种类似于微服务的架构，它将微服务的理念应用于浏览器端，即将单页面前端应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。各个前端应用还可以独立开发、独立部署。同时，它们也可以在共享组件的同时进行并行开发——这些组件可以通过NPM或者Git Tag、Git Submodule来管理。  为什么要使用微前端？  各个子项">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/qiankun项目搭建实践/主应用.jpg">
+<meta property="og:image" content="http://yoursite.com/images/qiankun项目搭建实践/react子应用.jpg">
+<meta property="og:image" content="http://yoursite.com/images/qiankun项目搭建实践/vue子应用.jpg">
+<meta property="og:image" content="http://yoursite.com/images/qiankun项目搭建实践/jquery子应用.jpg">
+<meta property="article:published_time" content="2023-04-27T09:10:08.000Z">
+<meta property="article:modified_time" content="2023-06-14T09:49:33.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="front">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/images/qiankun项目搭建实践/主应用.jpg">
+  
+  <title>qiankun项目搭建实践 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/qiankun%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E5%AE%9E%E8%B7%B5/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="qiankun项目搭建实践">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-04-27 17:10" pubdate>
+        2023年4月27日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">qiankun项目搭建实践</h1>
+            
+            <div class="markdown-body">
+              <h2 id="这篇写一半不想写了，别看了-へ´-ノ">这篇写一半不想写了，别看了(`へ´*)ノ</h2>
+<h2 id="介绍">介绍</h2>
+<h3 id="什么是微前端？">什么是微前端？</h3>
+<blockquote>
+<p><strong>微前端</strong>是一种类似于微服务的架构，它将微服务的理念应用于浏览器端，即将单页面前端应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。各个前端应用还可以<strong>独立开发</strong>、<strong>独立部署</strong>。同时，它们也可以在<strong>共享组件</strong>的同时进行并行开发——这些组件可以通过<code>NPM</code>或者<code>Git Tag</code>、<code>Git Submodule</code>来管理。</p>
+</blockquote>
+<h3 id="为什么要使用微前端？">为什么要使用微前端？</h3>
+<ul>
+<li>各个子项目的技术栈是独立的，可以使用任何技术研发。</li>
+<li>独立子项也可以单独运行。</li>
+<li>各个子项的状态都是隔离的。</li>
+</ul>
+<h3 id="本文将介绍qiankun项目的简单搭建。">本文将介绍<a target="_blank" rel="noopener" href="https://qiankun.umijs.org/zh">qiankun</a>项目的简单搭建。</h3>
+<blockquote>
+<p>qiankun 是一个基于 single-spa 的微前端实现库，旨在帮助大家能更简单、无痛的构建一个生产可用微前端架构系统。<br>
+qiankun 孵化自蚂蚁金融科技基于微前端架构的云产品统一接入平台，在经过一批线上应用的充分检验及打磨后，我们将其微前端内核抽取出来并开源，希望能同时帮助社区有类似需求的系统更方便的构建自己的微前端系统，同时也希望通过社区的帮助将<code>qiankun</code>打磨的更加成熟完善。<br>
+目前<code>qiankun</code>已在蚂蚁内部服务了超过<code>2000+</code>线上应用，在易用性及完备性上，绝对是值得信赖的。</p>
+</blockquote>
+<h2 id="开始">开始</h2>
+<p>本次的<code>demo</code>项目的代码都在<a target="_blank" rel="noopener" href="https://github.com/food-billboard/qiankun-practice">github</a>，可自行查看运行。</p>
+<blockquote>
+<p>本次项目使用<a target="_blank" rel="noopener" href="https://umijs.org/">umi</a>作为基座，分别配置<code>react</code>、<code>vue</code>、<code>angular</code>、<code>jquery</code>子应用。<br>
+主项目及子项目都只是简单完成了最基础的一些配置，后续可能会继续完善。</p>
+</blockquote>
+<h3 id="umi主应用">umi主应用</h3>
+<blockquote>
+<p>version: 4.+</p>
+</blockquote>
+<p><code>umi</code>社区有相关接入<code>qiankun</code>的插件，可以使用插件(<a target="_blank" rel="noopener" href="https://github.com/umijs/plugins/tree/master/packages/plugin-qiankun">@umijs/plugin-qiankun</a>)，也可以直接使用<code>qiankun</code>。<br>
+这里是选择使用<strong>插件</strong>。</p>
+<ul>
+<li>安装插件<br>
+<code>yarn add @umijs/plugin-qiankun -D</code></li>
+<li>修改配置文件<code>.umirc.ts</code></li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; defineConfig &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@umijs/max&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; apps &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./config/qiankun&#x27;</span><br><span class="hljs-keyword">import</span> routes <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./config/routes&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> defineConfig(&#123;<br>  <span class="hljs-comment">// 路由配置</span><br>  routes,<br>  <span class="hljs-comment">// qiankun配置</span><br>  <span class="hljs-attr">qiankun</span>: &#123;<br>    <span class="hljs-attr">master</span>: &#123;<br>      apps <br>    &#125;<br>  &#125;,<br>&#125;);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改路由配置(<code>./config/routes</code>)</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs ts"><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> [<br>  &#123;<br>    <span class="hljs-comment">// 侧边栏的名称</span><br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;react子应用&#x27;</span>,<br>    <span class="hljs-comment">// 路由</span><br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/sub-react-project&#x27;</span>,<br>    <span class="hljs-comment">// 子应用的名称</span><br>    <span class="hljs-comment">// 和下面apps的配置的name对应</span><br>    <span class="hljs-attr">microApp</span>: <span class="hljs-string">&#x27;sub-react-project&#x27;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;vue子应用&#x27;</span>,<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/sub-vue-project&#x27;</span>,<br>    <span class="hljs-attr">microApp</span>: <span class="hljs-string">&#x27;sub-vue-project&#x27;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;angular子应用&#x27;</span>,<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/sub-angular-project&#x27;</span>,<br>    <span class="hljs-attr">microApp</span>: <span class="hljs-string">&#x27;sub-angular-project&#x27;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;jquery子应用&#x27;</span>,<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/sub-jquery-project&#x27;</span>,<br>    <span class="hljs-attr">microApp</span>: <span class="hljs-string">&#x27;sub-jquery-project&#x27;</span><br>  &#125;,<br><br>]<br></code></pre></td></tr></table></figure>
+<ul>
+<li>设置子应用路由配置(<code>./config/qiankun</code>)</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> apps = [<br>  &#123;<br>    <span class="hljs-comment">// 子应用名称</span><br>    <span class="hljs-comment">// 和上面路由的name对应</span><br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;sub-react-project&#x27;</span>,<br>    <span class="hljs-comment">// 访问地址 </span><br>    <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;//localhost:5000&#x27;</span>,<br>    <span class="hljs-comment">// 子应用的容器id</span><br>    <span class="hljs-attr">container</span>: <span class="hljs-string">&#x27;#sub-react-project&#x27;</span>,<br>    <span class="hljs-comment">// 匹配子应用的路由规则</span><br>    <span class="hljs-attr">activeRule</span>: <span class="hljs-string">&#x27;/sub-react-project&#x27;</span>,<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;sub-vue-project&#x27;</span>, <br>    <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;//localhost:5001&#x27;</span>,<br>    <span class="hljs-attr">container</span>: <span class="hljs-string">&#x27;#sub-vue-project&#x27;</span>,<br>    <span class="hljs-attr">activeRule</span>: <span class="hljs-string">&#x27;/sub-vue-project&#x27;</span>,<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;sub-angular-project&#x27;</span>, <br>    <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;//localhost:5002&#x27;</span>,<br>    <span class="hljs-attr">container</span>: <span class="hljs-string">&#x27;#sub-angular-project&#x27;</span>,<br>    <span class="hljs-attr">activeRule</span>: <span class="hljs-string">&#x27;/sub-angular-project&#x27;</span>,<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;sub-jquery-project&#x27;</span>, <br>    <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;//localhost:5003&#x27;</span>,<br>    <span class="hljs-attr">container</span>: <span class="hljs-string">&#x27;#sub-jquery-project&#x27;</span>,<br>    <span class="hljs-attr">activeRule</span>: <span class="hljs-string">&#x27;/sub-jquery-project&#x27;</span>,<br>  &#125;,<br>]<br></code></pre></td></tr></table></figure>
+<p>完成上面的步骤，主应用的搭建就算是完成了。<br>
+启动项目就能看到，如下图。</p>
+<img src="/images/qiankun项目搭建实践/主应用.jpg" srcset="/img/loading.gif" lazyload />
+<h3 id="React子应用">React子应用</h3>
+<blockquote>
+<p>version: 18.+<br>
+cli: create-react-app 5.+</p>
+</blockquote>
+<ul>
+<li>在<code>/src/packages</code>下新建<code>react</code>子应用<br>
+<code>yarn create react-app sub-react-project --template typescript</code></li>
+<li>安装<a target="_blank" rel="noopener" href="https://github.com/arackaf/customize-cra">customize-cra</a>和<a target="_blank" rel="noopener" href="https://github.com/timarney/react-app-rewired">react-app-rewired</a>扩展配置<br>
+<code>yarn add customize-cra react-app-rewired -D</code></li>
+<li>修改<code>package.json</code></li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;scripts&quot;</span>: &#123;<br>    <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;react-app-rewired start&quot;</span>,<br>    <span class="hljs-attr">&quot;build&quot;</span>: <span class="hljs-string">&quot;react-app-rewired build&quot;</span>,<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>新增<code>config-overrides.js</code>文件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js">  <span class="hljs-keyword">const</span> &#123; <br>  override, <br>  overrideDevServer, <br>  watchAll,<br>&#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;customize-cra&#x27;</span>);<br><span class="hljs-keyword">const</span> packageName = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./package.json&#x27;</span>).name<br><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  <span class="hljs-attr">webpack</span>: override(<br>    <span class="hljs-function">(<span class="hljs-params">config</span>) =&gt;</span> &#123;<br>      config.output = &#123;<br>        ...config.output,<br>        <span class="hljs-attr">library</span>: <span class="hljs-string">`<span class="hljs-subst">$&#123;packageName&#125;</span>-[name]`</span>,<br>        <span class="hljs-attr">libraryTarget</span>: <span class="hljs-string">&#x27;umd&#x27;</span>,<br>        <span class="hljs-comment">// webpack5 以前用jsonFunction</span><br>        <span class="hljs-attr">chunkLoadingGlobal</span>: <span class="hljs-string">`webpackJsonp_<span class="hljs-subst">$&#123;packageName&#125;</span>`</span>,<br>      &#125;<br>      <span class="hljs-keyword">return</span> config <br>    &#125;,<br>  ),<br>  <span class="hljs-attr">devServer</span>: overrideDevServer(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> &#123;<br>    config.headers = config.headers || &#123;&#125; <br>    config.headers[<span class="hljs-string">&#x27;Access-Control-Allow-Origin&#x27;</span>] = <span class="hljs-string">&#x27;*&#x27;</span><br>    <span class="hljs-keyword">return</span> config <br>  &#125;, watchAll())<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>增加publicPath.js文件(<code>./src/publicPath.js</code>)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// micro-app-vue/src/public-path.js</span><br><span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.__POWERED_BY_QIANKUN__) &#123;<br>  <span class="hljs-comment">// 动态设置 webpack publicPath，防止资源加载出错</span><br>  <span class="hljs-comment">// eslint-disable-next-line no-undef</span><br>  __webpack_public_path__ = <span class="hljs-built_in">window</span>.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>入口文件修改(<code>./src/index.tsx</code>)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-dom/client&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123;<br>  createHashRouter,<br>  RouterProvider,<br>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span><br><span class="hljs-comment">// 引入publicPath全局赋值</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./publicPath&#x27;</span><br><span class="hljs-keyword">import</span> routes <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./routes&#x27;</span><br><br><span class="hljs-keyword">let</span> root: ReactDOM.Root;<br><br><span class="hljs-comment">// 如果没有这个变量就说明是独立运行</span><br><span class="hljs-keyword">if</span> (!<span class="hljs-built_in">window</span>.__POWERED_BY_QIANKUN__) &#123;<br>  render()<br>&#125;<br><br><span class="hljs-comment">// 渲染函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">render</span>(<span class="hljs-params">props?: any</span>) </span>&#123;<br>  root?.unmount()<br><br>  root = ReactDOM.createRoot(<br>    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;sub-react-project&#x27;</span>) <span class="hljs-keyword">as</span> HTMLElement<br>  );<br>  <span class="hljs-keyword">const</span> router = createHashRouter(routes);<br>  root.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RouterProvider</span> <span class="hljs-attr">router</span>=<span class="hljs-string">&#123;router&#125;</span> <span class="hljs-attr">fallbackElement</span>=<span class="hljs-string">&#123;</span>&lt;<span class="hljs-attr">div</span>&gt;</span>数据加载中...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>&#125; /&gt;</span>);<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * bootstrap 只会在微应用初始化的时候调用一次，下次微应用重新进入时会直接调用 mount 钩子，不会再重复触发 bootstrap。</span><br><span class="hljs-comment"> * 通常我们可以在这里做一些全局变量的初始化，比如不会在 unmount 阶段被销毁的应用级别的缓存等。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bootstrap</span>(<span class="hljs-params"></span>) </span>&#123;&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 应用每次进入都会调用 mount 方法，通常我们在这里触发应用的渲染方法</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mount</span>(<span class="hljs-params">props: any</span>) </span>&#123;<br>  render(props)<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 应用每次 切出/卸载 会调用的方法，通常在这里我们会卸载微应用的应用实例</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unmount</span>(<span class="hljs-params">props: any</span>) </span>&#123;<br>  root?.unmount()<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 可选生命周期钩子，仅使用 loadMicroApp 方式加载微应用时生效</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span>(<span class="hljs-params">props: any</span>) </span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+<p>完成上面的步骤，子应用的搭建就算是完成了。<br>
+启动项目就能看到，如下图。<br>
+<img src="/images/qiankun项目搭建实践/react子应用.jpg" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="Vue子应用">Vue子应用</h3>
+<blockquote>
+<p>version: 3.+<br>
+cli: 5.+</p>
+</blockquote>
+<ul>
+<li>在<code>/src/packages</code>下新建<code>vue</code>子应用<br>
+<code>vue create sub-vue-project</code><br>
+跟着步骤初始化</li>
+<li>同样按照上面<code>react</code>子应用的配置修改<code>vue.config.js</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)<br><span class="hljs-keyword">const</span> &#123; <span class="hljs-attr">name</span>: packageName &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./package.json&#x27;</span>)<br><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  <span class="hljs-attr">configureWebpack</span>: &#123;<br>    <span class="hljs-attr">output</span>: &#123;<br>      <span class="hljs-attr">library</span>: <span class="hljs-string">`<span class="hljs-subst">$&#123;packageName&#125;</span>-[name]`</span>,<br>      <span class="hljs-attr">libraryTarget</span>: <span class="hljs-string">&#x27;umd&#x27;</span>,<br>      <span class="hljs-attr">jsonpFunction</span>: <span class="hljs-string">`webpackJsonp_<span class="hljs-subst">$&#123;packageName&#125;</span>`</span>,<br>    &#125;,<br>  &#125;,<br>  <span class="hljs-attr">devServer</span>: &#123;<br>    <span class="hljs-comment">// 监听端口</span><br>    <span class="hljs-attr">port</span>: <span class="hljs-number">5001</span>,<br>    <span class="hljs-comment">// 配置跨域请求头，解决开发环境的跨域问题</span><br>    <span class="hljs-attr">headers</span>: &#123;<br>      <span class="hljs-string">&quot;Access-Control-Allow-Origin&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>,<br>    &#125;,<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>同样创建<code>publicPath.js</code></li>
+<li>同样在入口文件新增配置(<code>./src/main.js</code>)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; createApp &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> &#123; createRouter, createWebHashHistory &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span><br><span class="hljs-keyword">import</span> routes <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./config/routes&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./publicPath&#x27;</span><br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span><br><br><span class="hljs-keyword">let</span> root;<br><span class="hljs-keyword">let</span> router <br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">render</span>(<span class="hljs-params"></span>) </span>&#123;<br>  router = createRouter(&#123;<br>    <span class="hljs-attr">history</span>: createWebHashHistory(),<br>    routes<br>  &#125;)<br><br>  root = createApp(App)<br>  root.use(router)<br>  root.mount(<span class="hljs-string">&#x27;#sub-vue-project&#x27;</span>)<br>&#125;<br><br><span class="hljs-keyword">if</span> (!<span class="hljs-built_in">window</span>.__POWERED_BY_QIANKUN__) &#123;<br>  render()<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bootstrap</span>(<span class="hljs-params"></span>) </span>&#123;&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mount</span>(<span class="hljs-params">props</span>) </span>&#123;<br>  render(props)<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unmount</span>(<span class="hljs-params"></span>) </span>&#123;<br>  root.$destroy()<br>  root = <span class="hljs-literal">null</span> <br>  router = <span class="hljs-literal">null</span> <br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span>(<span class="hljs-params">props</span>) </span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+<p>完成上面的步骤，子应用的搭建就算是完成了。<br>
+启动项目就能看到，如下图。<br>
+<img src="/images/qiankun项目搭建实践/vue子应用.jpg" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="Angular子应用">Angular子应用</h3>
+<blockquote>
+<p>version: 15.+</p>
+</blockquote>
+<h3 id="Jquery子应用">Jquery子应用</h3>
+<blockquote>
+<p>version: 3.+</p>
+</blockquote>
+<p>这里代表的是一些使用传统三剑客开发的应用。</p>
+<ul>
+<li>将项目放置在<code>/src/packages/sub-jquery-project/src</code>目录下</li>
+<li>启用应用<br>
+因为不存在<code>webpack</code>编译，直接使用<code>express</code>启动<code>node</code>服务来进行访问。<br>
+<code>npm init</code><br>
+<code>npm install express cors</code><br>
+<code>npm install nodemon -D</code>(<a target="_blank" rel="noopener" href="https://github.com/remy/nodemon">nodemon</a>可以监听文件的变化刷新node服务)</li>
+<li>修改<code>package.json</code>文件</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;scripts&quot;</span>: &#123;<br>    <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;nodemon index.js&quot;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>新建启动服务脚本(<code>/sub-jquery-project/index.js</code>)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;express&quot;</span>);<br><span class="hljs-keyword">const</span> cors = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;cors&quot;</span>);<br><span class="hljs-keyword">const</span> chalk = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;chalk&#x27;</span>)<br><br><span class="hljs-keyword">const</span> app = express();<br><span class="hljs-comment">// 解决跨域问题</span><br>app.use(cors());<br><span class="hljs-comment">// 访问静态文件在src下</span><br>app.use(<span class="hljs-string">&#x27;/&#x27;</span>, express.static(<span class="hljs-string">&#x27;src&#x27;</span>));<br><br><span class="hljs-comment">// 监听端口5003</span><br>app.listen(<span class="hljs-number">5003</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(chalk.green(<span class="hljs-string">&quot;server is listening in http://localhost:5003&quot;</span>))<br>&#125;);<br></code></pre></td></tr></table></figure>
+<p>此时<code>cmd</code>启动<code>npm run start</code>，访问<code>http://localhost:5003</code>即可看到内容</p>
+<ul>
+<li>接入<code>qiankun</code>脚本(<code>/sub-jquery-project/src/js/entry.js</code>)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> render = <span class="hljs-function">(<span class="hljs-params">$, isSub=<span class="hljs-literal">false</span></span>) =&gt;</span> &#123;<br>  $(<span class="hljs-string">&#x27;#sub-jquery-project&#x27;</span>).append(<span class="hljs-string">`And, I am mount in <span class="hljs-subst">$&#123;isSub ? <span class="hljs-string">&#x27;sub&#x27;</span> : <span class="hljs-string">&#x27;self&#x27;</span>&#125;</span>`</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();<br>&#125;;<br><br><span class="hljs-keyword">if</span>(!<span class="hljs-built_in">window</span>.__POWERED_BY_QIANKUN__) &#123;<br>  render($)<br>&#125;<br><br><span class="hljs-comment">// 绑定qiankun的一些生命周期</span><br>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-built_in">global</span></span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">global</span>[<span class="hljs-string">&#x27;sub-jquery-project&#x27;</span>] = &#123;<br>    <span class="hljs-attr">bootstrap</span>: <span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();<br>    &#125;,<br>    <span class="hljs-attr">mount</span>: <span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-keyword">return</span> render($, <span class="hljs-literal">true</span>);<br>    &#125;,<br>    <span class="hljs-attr">unmount</span>: <span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();<br>    &#125;,<br>  &#125;;<br>&#125;)(<span class="hljs-built_in">window</span>);<br></code></pre></td></tr></table></figure>
+<p>完成上面的步骤，子应用的搭建就算是完成了。<br>
+启动项目就能看到，如下图。<br>
+<img src="/images/qiankun项目搭建实践/jquery子应用.jpg" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="一些问题">一些问题</h3>
+<h4 id="子应用静态资源404">子应用静态资源404</h4>
+<h2 id="结束">结束</h2>
+<blockquote>
+<p>参考链接<br>
+<a target="_blank" rel="noopener" href="https://github.com/a1029563229/blogs/tree/master/BestPractices/qiankun">微前端实战 - 基于 qiankun 的最佳实践</a><br>
+<a target="_blank" rel="noopener" href="https://qiankun.umijs.org/zh/guide/tutorial">项目实践</a><br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/w544924116/article/details/120105320">微前端系列讲解–应用集成方案（qiankun+umi+vue）</a><br>
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/6986258669172490271#heading-24">基于qiankun的微前端最佳实践 -（同时加载多个微应用）</a><br>
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904016581754888#heading-8">Create React App无eject配置（react-app-rewired 和 customize-cra）</a><br>
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chenxincoder/p/9163194.html">Angular刷新浏览器 404 问题</a><br>
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangyongping/p/16788537.html">qiankun angular12 single-spa-angular子应用的改造</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/front/">front</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/17/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-6-Node/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">前端基础回顾-6-Node</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/19/todo-list-%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+                        <span class="hidden-mobile">todo-list-问题汇总</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> <script src="/js/code-viewer.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>
