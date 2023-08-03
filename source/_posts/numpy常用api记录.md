@@ -2,8 +2,8 @@
 title: numpy常用api记录
 date: 2022-09-12 17:50:00
 tags: trade 
-banner_img: /images/一创聚宽学习/background.jpg
-index_img: /images/一创聚宽学习/background.jpg
+banner_img: /images/numpy常用api记录/background.jpg
+index_img: /images/numpy常用api记录/background.jpg
 categories: 
   - 交易 
 ---
@@ -60,6 +60,9 @@ array1[1:]
 # 从索引1开始，隔一个值，一直到最后
 array1[1::2]
 
+# [1, 2, 3]
+array1[-4:-1]
+
 ```
 
 ### 计算 
@@ -85,12 +88,12 @@ np.divide(array1, array2)
 # [1, 4, 9, 16]
 np.power(array1, 2)
 
-# 整除  
+# 取模 
 # [0, 0, 1, 0]
 np.mod(array1, 2)
 
 # 余数
-# [1, 0, 1, 0]
+# [0, 0, 1, 0]
 np.remainder(array1, 2)
 
 # 绝对值
@@ -127,15 +130,54 @@ np.max(array1)
 # 1
 np.min(array1) 
 
-
 ```
 
 > 标准差是啥  
-> 
+> 简单来说，标准差是一组数据平均值分散程度的一种度量。一个较大的标准差，代表大部分数值和其平均值之间差异较大；一个较小的标准差，代表这些数值较接近平均值。  
+> 标准差应用于投资上，可作为量度回报稳定性的指标。标准差数值越大，代表回报远离过去平均数值，回报较不稳定故风险越高。相反，标准差数值越小，代表回报较为稳定，风险亦较小。
+
 
 > 方差是啥  
+> 方差是在概率论和统计方差衡量随机变量或一组数据时离散程度的度量。概率论中方差用来度量随机变量和其数学期望（即均值）之间的偏离程度。统计中的方差（样本方差）是每个样本值与全体样本值的平均数之差的平方值的平均数。在许多实际问题中，研究方差即偏离程度有着重要意义。  
+> 方差是衡量源数据和期望值相差的度量值。
 
 ### 随机数  
+
+```python
+import numpy as np 
+
+# [0, 1) 随机浮点数
+np.random.random()
+
+# [0, 5) 随机整数
+np.random.randint(0, 5)
+
+# 均值为2，标准差为0.5 的 高斯分布样本
+np.random.normal(loc=2.0, scale=0.5)
+
+```
+
+### 属性  
+
+```python
+import numpy as np 
+
+array = np.array([
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+])
+
+# 9
+# 大小
+array.size 
+
+# dtype('int64')
+# 数据类型
+array.dtype
+
+```
+
 
 ## 结束  
   大概就这些，剩下有空的话接着补充。  
