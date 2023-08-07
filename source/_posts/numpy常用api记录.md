@@ -1,9 +1,9 @@
 ---
 title: numpy常用api记录
-date: 2022-09-12 17:50:00
+date: 2023-07-28 14:50:00
 tags: trade 
-banner_img: /images/numpy常用api记录/background.jpg
-index_img: /images/numpy常用api记录/background.jpg
+banner_img: /images/numpy常用api记录/background.png
+index_img: /images/numpy常用api记录/background.png
 categories: 
   - 交易 
 ---
