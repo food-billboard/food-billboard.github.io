@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script type="text/javascript" src="./mustach.js"></script>
+  <script>
+    const data = {
+      name: '葛凌峰',
+      age: 18
+    }
+    mustache.render('我的名字叫{{name}}，我今年{{age}}岁了', data)
+  </script>
+</body>
+</html>
