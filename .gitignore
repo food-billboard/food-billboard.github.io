@@ -6,3 +6,7 @@ node_modules/
 public/
 .deploy*/
 /.history
+/source/images/**/node_modules/
+/source/images/**/esm/
+/source/images/**/dist/
+/source/images/**/lib/

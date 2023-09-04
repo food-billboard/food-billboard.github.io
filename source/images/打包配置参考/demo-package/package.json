@@ -1,0 +1,48 @@
+{
+  "name": "demo-package",
+  "version": "1.0.0",
+  "description": "组件库打包demo",
+  "main": "lib/index.js",
+  "homepage": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:esm && npm run build:lib && npm run build:umd && npm run build:types",
+    "build:esm": "rimraf esm && cross-env BUILD_TYPE=esm gulp",
+    "build:lib": "rimraf lib && cross-env BUILD_TYPE=lib gulp",
+    "build:umd": "rimraf dist && cross-env BUILD_TYPE=umd gulp",
+    "build:types": "rimraf types && tsc --outDir types --declaration --emitDeclarationOnly",
+    "build:docs": "",
+    "start": "",
+    "deploy:docs": "",
+    "deploy": "",
+    "clean": "rimraf lib esm dist"
+  },
+  "repository": {},
+  "keywords": [
+    "react",
+    "components"
+  ],
+  "author": "daniel-glf",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.22.11",
+    "@babel/plugin-transform-runtime": "^7.22.10",
+    "@babel/preset-env": "^7.22.14",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.11",
+    "cross-env": "^7.0.3",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-less": "^5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.1",
+    "through2": "^4.0.2",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.22.11"
+  }
+}
