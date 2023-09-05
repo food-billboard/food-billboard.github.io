@@ -33,34 +33,6 @@ function cssInjection(content) {
   .replace(/\.less/g, ".css")
 }
 
-// 编译脚本
-function compileScripts() {
-  const { scripts } = pathDir
-  return gulp
-  .src(scripts)
-  .pipe(babel({
-    filename: `babel-${buildType}.js`
-  }))
-  .pipe(
-    through.obj(function(file, encoding, next) {
-      this.push(file.clone())
-
-      if(file.path.match(/(\/|\\)style(\/\\)index\.js/)) {
-        const content = file.contents.toString(encoding)
-        // 文件内容处理
-        file.contents = Buffer.from(cssInjection(content))
-        // 重命名
-        file.path = file.path.replace(/index\.js/, 'css.js')
-        this.push(file)
-        next()
-      }else {
-        next()
-      }
-    })
-  )
-  .pipe(gulp.dest(buildType))
-}
-
 function less2css() {
   return gulp
   .src(pathDir.styles)
@@ -83,14 +55,40 @@ function copyLess() {
   .pipe(gulp.dest(pathDir.dest[buildType]))
 }
 
+// css 文件引入修改
+function changeCssFileName() {
+  return through.obj(function(file, encoding, next) {
+    this.push(file.clone())
+    if(file.path.match(/(\/|\\)style(\/|\\)index\.js/)) {
+      const content = file.contents.toString(encoding)
+      // 文件内容处理
+      file.contents = Buffer.from(cssInjection(content))
+      // 重命名
+      file.path = file.path.replace(/index\.js/, 'css.js')
+      this.push(file)
+      next()
+    }else {
+      next()
+    }
+  })
+}
+
 // cjs 打包
 function compileCommonJs() {
   const { dest, scripts } = pathDir
   return gulp
   .src(scripts)
   .pipe(babel({
-    filename: `babel-${buildType}.js`
+    presets: [
+      require.resolve("@babel/preset-env"),
+      require.resolve("@babel/preset-react"),
+      require.resolve("@babel/preset-typescript")
+    ],
+    plugins: [
+      require.resolve("@babel/plugin-transform-runtime")
+    ]
   }))
+  .pipe(changeCssFileName())
   .pipe(gulp.dest(dest.lib))
 }
 
@@ -100,16 +98,36 @@ function compileEsModule() {
   return gulp
   .src(scripts)
   .pipe(babel({
-    filename: `babel-${buildType}.js`
+    presets: [
+      [
+        require.resolve("@babel/preset-env"),
+        {
+          // 关闭模块转换
+          modules: false 
+        }
+      ],
+      require.resolve("@babel/preset-react"),
+      require.resolve("@babel/preset-typescript")
+    ],
+    plugins: [
+      [
+        require.resolve("@babel/plugin-transform-runtime"),
+        {
+          // es module 模式
+          useESModules: true
+        }
+      ]
+    ]
   }))
-  .pipe(gulp.dest(dest.lib))
+  .pipe(changeCssFileName())
+  .pipe(gulp.dest(dest.esm))
 }
 
 let build
 if(buildType === 'lib') {
-  build = gulp.parallel(compileCommonJs, copyLess, less2css, compileScripts)
+  build = gulp.parallel(compileCommonJs, copyLess, less2css)
 }else if(buildType === 'esm') {
-  build = gulp.parallel(compileEsModule, copyLess, less2css, compileScripts)
+  build = gulp.parallel(compileEsModule, copyLess, less2css)
 }
 
 exports.default = build 
