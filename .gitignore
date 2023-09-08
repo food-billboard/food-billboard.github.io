@@ -10,3 +10,4 @@ public/
 /source/images/**/esm/
 /source/images/**/dist/
 /source/images/**/lib/
+/source/images/**/.history/
