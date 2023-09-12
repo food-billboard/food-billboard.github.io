@@ -41,6 +41,14 @@ categories:
 ### 修改`puppeteer`调用方式  
 `puppeteer.launch({ args: ['--no-sandbox', '--disable-dev-shm-usage'], headless: true })`
 
+### 一些其他问题   
+
+#### 安装`puppeteer`出错  
+因为安装`puppeteer`会默认安装`chromium`浏览器，体积很大容易出错。  
+可以执行下面命令不下载`export PUPPETEER_SKIP_DOWNLOAD='true'`。  
+关闭这个命令可以使用`export PUPPETEER_SKIP_DOWNLOAD=''`  
+在下载了`puppeteer`的项目里可以执行`node node_modules/puppeteer/install.js`来手动下载。  
+
 ## 结束  
 做个简单记录😊   
 [参考](https://blog.csdn.net/Zeng__Yi/article/details/105661354)
