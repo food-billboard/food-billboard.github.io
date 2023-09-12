@@ -11,3 +11,5 @@ public/
 /source/images/**/dist/
 /source/images/**/lib/
 /source/images/**/.history/
+/source/images/**/debugger-template/
+/source/images/**/debugger-template-pdf/
