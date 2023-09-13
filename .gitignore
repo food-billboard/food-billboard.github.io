@@ -6,10 +6,10 @@ node_modules/
 public/
 .deploy*/
 /.history
-/source/images/**/node_modules/
-/source/images/**/esm/
-/source/images/**/dist/
-/source/images/**/lib/
-/source/images/**/.history/
-/source/images/**/debugger-template/
-/source/images/**/debugger-template-pdf/
+/source/demo-project/**/node_modules/
+/source/demo-project/**/esm/
+/source/demo-project/**/dist/
+/source/demo-project/**/lib/
+/source/demo-project/**/.history/
+/source/demo-project/**/debugger-template/
+/source/demo-project/**/debugger-template-pdf/
