@@ -1,0 +1,653 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="数据可视化大屏设计器开发-关联参数 开头 本文是数据可视化开始的开发细节第六章。关于大屏中组件的关联参数设置的逻辑。  关联参数所指的是组件的数据变更或者配置变更依赖于某一些地方带来的变量。  比如  一个柱形图的数据请求的url需要一个用户id。 一个标题的内容是根据当前的学校，来显示其名称。 一个雷达图需要根据数据的不同显示不一样的维度。 一个视频需要根据数据的不同来控制是否显示。  下面就关">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据可视化大屏设计器开发-关联参数">
+<meta property="og:url" content="http://yoursite.com/2023/07/10/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91-%E5%85%B3%E8%81%94%E5%8F%82%E6%95%B0/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="数据可视化大屏设计器开发-关联参数 开头 本文是数据可视化开始的开发细节第六章。关于大屏中组件的关联参数设置的逻辑。  关联参数所指的是组件的数据变更或者配置变更依赖于某一些地方带来的变量。  比如  一个柱形图的数据请求的url需要一个用户id。 一个标题的内容是根据当前的学校，来显示其名称。 一个雷达图需要根据数据的不同显示不一样的维度。 一个视频需要根据数据的不同来控制是否显示。  下面就关">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/constants.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/关联参数-params.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/关联参数使用-1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/关联参数使用-2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/关联参数使用-3.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/关联参数使用-4.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/关联参数选择.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/关联参数-条件.jpg">
+<meta property="og:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/关联参数-条件自定义.jpg">
+<meta property="article:published_time" content="2023-07-10T05:43:00.000Z">
+<meta property="article:modified_time" content="2023-07-12T03:11:30.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="lowcode react chart">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/images/数据可视化大屏设计器开发/constants.jpg">
+  
+  <title>数据可视化大屏设计器开发-关联参数 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据可视化大屏设计器开发-关联参数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-07-10 13:43" pubdate>
+        2023年7月10日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据可视化大屏设计器开发-关联参数</h1>
+            
+            <div class="markdown-body">
+              <h1>数据可视化大屏设计器开发-关联参数</h1>
+<h2 id="开头">开头</h2>
+<p>本文是数据可视化开始的开发细节第六章。关于大屏中组件的关联参数设置的逻辑。</p>
+<blockquote>
+<p>关联参数所指的是组件的数据变更或者配置变更依赖于某一些地方带来的变量。</p>
+</blockquote>
+<p>比如</p>
+<ul>
+<li>一个柱形图的数据请求的<code>url</code>需要一个用户<code>id</code>。</li>
+<li>一个标题的内容是根据当前的学校，来显示其名称。</li>
+<li>一个雷达图需要根据数据的不同显示不一样的维度。</li>
+<li>一个视频需要根据数据的不同来控制是否显示。</li>
+</ul>
+<p>下面就<strong>关联参数</strong>相关来进行详细的逻辑讲解。</p>
+<h2 id="开始">开始</h2>
+<h3 id="关联参数来源">关联参数来源</h3>
+<p>针对不同的场景，可能组件依赖了来自于不同地方的数据。<br>
+就此大屏设计器来说，主要来源的参数分为<code>3</code>种（<code>url</code>、<code>params</code>、<code>constants</code>）。</p>
+<h4 id="url">url</h4>
+<p>顾名思义，来源于大屏的链接地址。<br>
+比如<code>https://www.baidu.com/?userId=xxx&amp;address=yyy</code>，<code>userId</code>和<code>address</code>就会被认为是两个关联参数被保存到配置当中。</p>
+<h4 id="constants">constants</h4>
+<p>大屏当中存在一些特殊的情况，需要用到一些不变值，所以在配置中新增了一个<strong>全局常量</strong>的概念。<br>
+<img src="/images/数据可视化大屏设计器开发/constants.jpg" srcset="/img/loading.gif" lazyload /><br>
+主要是<strong>名称</strong>和<strong>常量</strong>两个地方的定义，即对象的<code>key</code>和<code>value</code>。</p>
+<h4 id="params">params</h4>
+<p>关联参数的主要来源都是在<code>params</code>中，代指的是各个组件中的交互配置。<br>
+<img src="/images/数据可视化大屏设计器开发/关联参数-params.jpg" srcset="/img/loading.gif" lazyload /><br>
+根据组件的一条<strong>特殊事件</strong>，触发对应的逻辑，对设置的值进行变动，进而通知关联了该组件的参数的组件进行相应的更新。</p>
+<p>比如上图的&quot;基础柱形图&quot;的交互配置，点击柱形图的柱条时，该柱条对应的数据：横轴（x）、纵轴（y）以及系列（s）的值，就会更新到配置中，同时关联了这些参数的组件也会接收到值的变动的通知，并进行对应的操作。</p>
+<h3 id="关联参数设置">关联参数设置</h3>
+<p>上面介绍了关联参数的来源，这里继续介绍每一种参数的设置。</p>
+<h4 id="url-2">url</h4>
+<p>关于<code>url</code>上的参数的获取，其实在平时的业务当中并不少见，这里就简单的使用<a target="_blank" rel="noopener" href="https://github.com/Gozala/querystring">querystring</a>来获取。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; parse &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;querystring&#x27;</span>;<br><span class="hljs-keyword">const</span> &#123; search &#125; = <span class="hljs-keyword">new</span> URL(<span class="hljs-built_in">window</span>.location.href)<br><span class="hljs-comment">// object版本</span><br><span class="hljs-keyword">const</span> objectUrlParams = parse(search.replace(<span class="hljs-string">&#x27;?&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>))<br><span class="hljs-comment">// object[]版本</span><br><span class="hljs-keyword">const</span> objectArrayUrlParams = <span class="hljs-built_in">Object</span>.entries(value).reduce(<span class="hljs-function">(<span class="hljs-params">acc, cur</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> [key, value] = cur;<br>  acc.push(&#123;<br>    key,<br>    value,<br>    <span class="hljs-attr">id</span>: key,<br>    <span class="hljs-attr">description</span>: <span class="hljs-string">`来源于url地址:<span class="hljs-subst">$&#123;key&#125;</span>`</span>,<br>  &#125;);<br>  <span class="hljs-keyword">return</span> acc;<br>&#125;,[])<br></code></pre></td></tr></table></figure>
+<p>上面的<code>object[]</code>版本为统一处理的版本。</p>
+<h4 id="constants-2">constants</h4>
+<p>和上面的<code>url</code>的<code>object[]</code>格式一致，<code>key</code>和<code>value</code>即为前面介绍的名称和常量值，<code>description</code>为可自定义的描述文字。</p>
+<h4 id="params-2">params</h4>
+<p>而对于<code>params</code>，比上面两种参数都较为复杂，因为其涉及到组件和组件之间的关联，所以他本身存在于<strong>组件本身</strong>和<strong>全局</strong>两个地方。</p>
+<h5 id="组件本身">组件本身</h5>
+<p>组件本身需要存储它的一些特性，比如他的数据原始字段名称、映射字段名称、默认值以及描述。</p>
+<ul>
+<li>原始字段名称<br>
+原始字段表示该组件本身的字段的名称，因为每一个组件的数据格式都是不一样的，它的数据字段名称也不一样，比如<strong>柱形图</strong>的数据格式是一个数组对象，而<strong>标题</strong>的数据格式是一个对象。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 柱形图的数据格式</span><br><span class="hljs-keyword">const</span> barData = [<br>  &#123;<br>    <span class="hljs-attr">x</span>: <span class="hljs-string">&#x27;01-01&#x27;</span>,<br>    <span class="hljs-attr">y</span>: <span class="hljs-number">100</span>,<br>    <span class="hljs-attr">s</span>: <span class="hljs-string">&#x27;s1&#x27;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">x</span>: <span class="hljs-string">&#x27;01-01&#x27;</span>,<br>    <span class="hljs-attr">y</span>: <span class="hljs-number">200</span>,<br>    <span class="hljs-attr">s</span>: <span class="hljs-string">&#x27;s2&#x27;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">x</span>: <span class="hljs-string">&#x27;01-02&#x27;</span>,<br>    <span class="hljs-attr">y</span>: <span class="hljs-number">70</span>,<br>    <span class="hljs-attr">s</span>: <span class="hljs-string">&#x27;s1&#x27;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">x</span>: <span class="hljs-string">&#x27;01-02&#x27;</span>,<br>    <span class="hljs-attr">y</span>: <span class="hljs-number">50</span>,<br>    <span class="hljs-attr">s</span>: <span class="hljs-string">&#x27;s2&#x27;</span><br>  &#125;<br>]<br><span class="hljs-comment">// 标题的数据格式</span><br><span class="hljs-keyword">const</span> titleData = &#123;<br>  <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;我是一个标题&#x27;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>而在需要真正使用时，其他组件不可能直接关联组件的原始字段，因为这样子的重复率会很高，从而导致参数值来回覆盖，显示错误的问题。</p>
+<p>所以组件当中的字段配置格式是下面这样的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> fieldData = &#123;<br>  <span class="hljs-comment">// 不可更改</span><br>  <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;原始的字段名称&#x27;</span>,<br>  <span class="hljs-attr">variable</span>: <span class="hljs-string">&#x27;映射的字段名称&#x27;</span>,<br>  <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;描述&#x27;</span>,<br>  <span class="hljs-attr">mapId</span>: <span class="hljs-string">&#x27;全局的params id&#x27;</span><br>  <span class="hljs-comment">// TODO </span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>mapId</code>为与之同步的全局的参数信息的<code>id</code>，用于两边的数据同步。<br>
+当组件的数据发生变化时，根据变动的字段名称找到上面的<code>fieldData</code>，并从中找到<code>mapId</code>，进而将数据同步到全局（之后根据逻辑通知关联的组件，这里后面会讲到）。</p>
+<h5 id="全局">全局</h5>
+<p>全局参数则是用于接收同步组件的关联参数，并下发到关联组件。<br>
+其数据格式如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> paramsData = &#123;<br>  <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;唯一id&#x27;</span>,<br>  <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;实际的值&#x27;</span>,<br>  <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;原始的字段名称&#x27;</span>,<br>  <span class="hljs-attr">variable</span>: <span class="hljs-string">&#x27;映射的字段名称&#x27;</span><br>  <span class="hljs-comment">// TODO </span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>当组件配置的<code>variable</code>和组件的数据发生变化时，<code>variable</code>和<code>value</code>就会更新。</p>
+<h3 id="关联参数使用">关联参数使用</h3>
+<p>讲了这么多的概念，还没有具体介绍到其使用场景，大屏当中有非常多的地方值得使用关联参数的功能。<br>
+具体包括三个地方。</p>
+<ul>
+<li>数据请求</li>
+<li>数据过滤</li>
+<li>条件</li>
+</ul>
+<h4 id="数据请求">数据请求</h4>
+<p>数据请求中有三个地方可以用到这个功能。</p>
+<ul>
+<li><code>url</code><br>
+请求的<code>url</code>上可以携带查询参数或者路径。<br>
+比如<code>/api/&#123;&#123;userType&#125;&#125;/?userId=&#123;&#123;userId&#125;&#125;</code></li>
+<li><code>data</code><br>
+<code>url</code>可以携带，那请求参数同样可以携带。</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;userId&quot;</span>: <span class="hljs-string">&quot;&#123;&#123;userId&#125;&#125;&quot;</span> <br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>headers</code><br>
+请求头上也可以携带，效果也同上。</li>
+</ul>
+<p>具体效果可以查看下图。<br>
+<img src="/images/数据可视化大屏设计器开发/关联参数使用-1.jpg" srcset="/img/loading.gif" lazyload /><br>
+<img src="/images/数据可视化大屏设计器开发/关联参数使用-2.jpg" srcset="/img/loading.gif" lazyload /><br>
+<img src="/images/数据可视化大屏设计器开发/关联参数使用-3.jpg" srcset="/img/loading.gif" lazyload /><br>
+<img src="/images/数据可视化大屏设计器开发/关联参数使用-4.jpg" srcset="/img/loading.gif" lazyload /></p>
+<p>上面看到的那个特殊语法<code>&#123;&#123;xxx&#125;&#125;</code>得益于<a target="_blank" rel="noopener" href="https://github.com/janl/mustache.js">mustache</a>，其实和<code>vue</code>的语法是一样的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Mustache <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mustache&#x27;</span>;<br>Mustache.render(<span class="hljs-string">&#x27;/api/&#123;&#123;data&#125;&#125;&#x27;</span>, &#123; <span class="hljs-attr">data</span>: <span class="hljs-string">&#x27;100&#x27;</span> &#125;);<br></code></pre></td></tr></table></figure>
+<h4 id="数据过滤">数据过滤</h4>
+<p>数据过滤的功能常用于，当原始的数据格式不能满足组件的需要，或者需要对数据进行处理时。<br>
+本质上就是一个个<strong>函数</strong>，分别接收上一个函数的返回值，第一个函数则是接收原始数据，最终返回的数据则为组件需要的数据。<br>
+比如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 把数据的name和value映射到组件需要的x和y字段上</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params">data</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> data.map(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      <span class="hljs-attr">x</span>: item.name,<br>      <span class="hljs-attr">y</span>: item.value <br>    &#125;<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>此时，可以将关联参数作为过滤器的第二参数传入，可以非常灵活的利用js代码来做各种各样的处理。<br>
+比如下面的简单示例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><br><span class="hljs-comment">// 假设有这样的一条关联参数数据</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">  &#123;</span><br><span class="hljs-comment">    userId: &#x27;xxx&#x27;</span><br><span class="hljs-comment">  &#125;</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-comment">// 过滤函数</span><br><span class="hljs-comment">// 只抽取userId和关联参数的userId一样的数据</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params">data, params</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> &#123; userId &#125; = params<br>  <span class="hljs-keyword">return</span> data.filter(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.userId === userId) <br>&#125;<br><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>数据过滤函数也是存在于全局的，组件与组件可以共用同一个过滤函数。</p>
+</blockquote>
+<p>而具体的设置逻辑呢？<br>
+根据全局的参数，我们可以封装一个下拉选择组件，用于选择需要关联的参数。<br>
+<img src="/images/数据可视化大屏设计器开发/关联参数选择.jpg" srcset="/img/loading.gif" lazyload /></p>
+<blockquote>
+<p>其实即使不显式设置关联参数，同样可以在过滤器的第二参数当中访问到，区别就在于是否为响应式，此逻辑其实有很大作用，这个会在后续的文章中详细展开。</p>
+</blockquote>
+<h4 id="条件">条件</h4>
+<p>条件功能则是用于控制组件的显示隐藏。<br>
+从上面的话中也能看出，关联参数在其中的重要性。<br>
+<img src="/images/数据可视化大屏设计器开发/关联参数-条件.jpg" srcset="/img/loading.gif" lazyload /></p>
+<p>用过<code>datav</code>的应该都见过这个东西。<br>
+选择一个或多个关联参数，设置一个或多个条件等等。<br>
+判断参数是等于、大于、小于、不等于。<br>
+满足条件就响应最终的行为逻辑。</p>
+<p>比如<code>userId</code>等于<code>xxx</code>时，隐藏组件。</p>
+<p>并且笔者还在此基础上增加了一个自定义控制的逻辑。<br>
+即使用<strong>函数</strong>的形式，根据返回的<strong>布尔值</strong>来判断条件是否成立。<br>
+<img src="/images/数据可视化大屏设计器开发/关联参数-条件自定义.jpg" srcset="/img/loading.gif" lazyload /></p>
+<p>此逻辑其实类似于上面所述的&quot;数据过滤&quot;。</p>
+<h3 id="参数变更处理">参数变更处理</h3>
+<p>最后就是关于参数变更的处理。<br>
+当参数的值发生变化时，我们需要如何去处理它的变化。</p>
+<blockquote>
+<p>使用的技术栈为React</p>
+</blockquote>
+<p>所有依赖关联参数的组件都依赖了全局的关联参数源。<br>
+但是我们不可能把整个全局的源全部传入到渲染组件中，因为这会导致不必要的渲染。<br>
+所以我们可以定义一个<strong>空的组件</strong>，在其中处理相关的一些逻辑，并传入诸如：重新请求、重新过滤等等的业务逻辑。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 直接使用useEffect去做比较 &quot;params&quot; 并更新数据</span><br>useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>  compare(params)<br>&#125;, [params])<br><span class="hljs-comment">// 监听 &quot;url&quot; 变化触发 compare  </span><br><span class="hljs-comment">// 常量的话是属于不可变的类型，所以不必管</span><br></code></pre></td></tr></table></figure>
+<p>上面的<code>compare</code>实质上是一个比较并赋值的过程，比较前后两个值如果发生了变化，就收集对应的更新函数。<br>
+比如<code>reRequest</code>、<code>reFilter</code>、<code>reCondition</code>等等。<br>
+并在比较完成后进行统一的执行。</p>
+<p>而比较的过程不是对params等的比较，在初始化时，对所有的关联参数做了统一化的处理，形成了一个对象的结构。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> mapParams = &#123;<br>  <span class="hljs-attr">variable</span>: &#123;<br>    <span class="hljs-comment">// 执行的操作</span><br>    <span class="hljs-attr">action</span>: <span class="hljs-function">() =&gt;</span> &#123;&#125;, <br>    <span class="hljs-attr">index</span>: &#123;<br>      <span class="hljs-comment">// 参数类型</span><br>      <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;href&#x27;</span> <span class="hljs-comment">// params href constants,</span><br>      <span class="hljs-comment">// 参数的映射名称</span><br>      <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;variable&#x27;</span>,<br>      <span class="hljs-comment">// 获取最新的变更的参数值</span><br>      <span class="hljs-attr">getValue</span>: <span class="hljs-function">(<span class="hljs-params">params</span>) =&gt;</span> &#123;&#125;,<br>      <span class="hljs-comment">// TODO </span><br>    &#125;, <br>    <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;当前参数的值&#x27;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>比较则是遍历上面的<code>mapParams</code>。</p>
+<h2 id="结束">结束</h2>
+<p>以上逻辑均为本人自己的想法，如有问题或错误可指正🙏🏻 。</p>
+<p>结束🔚。</p>
+<p>顺便在下面附上相关的链接。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://47.97.27.23/api/backend/screen/index.html">试用地址</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/food-billboard/create-chart/issues/2">试用账号</a><br>
+<a target="_blank" rel="noopener" href="https://food-billboard.github.io/create-chart/index.html#/">静态版试用地址</a><br>
+<a target="_blank" rel="noopener" href="http://47.97.27.23/api/backend/create-chart-docs/index.html">操作文档</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/food-billboard/create-chart">代码地址</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/%E5%A4%A7%E5%B1%8F/">大屏</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/lowcode-react-chart/">lowcode react chart</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/11/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91-%E6%8E%A7%E5%88%B6%E5%88%B7%E6%96%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据可视化大屏设计器开发-控制刷新</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/10/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E8%AE%BE%E8%AE%A1%E5%99%A8%E5%BC%80%E5%8F%91-%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%E6%8E%A7%E5%88%B6/">
+                        <span class="hidden-mobile">数据可视化大屏设计器开发-重大变更控制</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> <script src="/js/code-viewer.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>
