@@ -1,0 +1,35 @@
+{
+  "name": "demo-package",
+  "version": "1.0.0",
+  "description": "组件库demo",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build:es && npm run build:lib && npm run build:umd && npm run build:style",
+    "build:es": "",
+    "build:lib": "",
+    "build:umd": "",
+    "build:style": "node ./scripts/buildStyle/index.js",
+    "temp": "node ./template.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fs-extra": "^11.1.1",
+    "glob": "^10.3.4",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-less": "^5.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.1.4",
+    "less-plugin-autoprefix": "^2.0.0",
+    "less-plugin-npm-import": "^2.1.0",
+    "merge-stream": "^2.0.0",
+    "parse-es-import": "^0.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "through2": "^4.0.2",
+    "vinyl-fs": "^4.0.0",
+    "webpack": "^5.88.2"
+  },
+  "dependencies": {}
+}
