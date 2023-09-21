@@ -40,7 +40,7 @@ categories:
 
 ### 具体实现  
 
-[点击这里查看具体代码实现](https://github.com/food-billboard/food-billboard.github.io/tree/hexo/source/images/使用puppeteer爬取漫画/project)
+[点击这里查看具体代码实现](https://github.com/food-billboard/food-billboard.github.io/tree/hexo/source/demo-project/使用puppeteer爬取漫画)
 
 ### 碰到的问题   
 
