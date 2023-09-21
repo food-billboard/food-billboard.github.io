@@ -113,13 +113,142 @@ function copyFileWatched() {
 
 #### compileLess
 
-#### handleStyleJSEntry
+编译`less`文件。  
+
+- [gulp-less](https://github.com/gulp-community/gulp-less)，其实就是一个对`less`封装的`gulp`插件。  
+- [gulp-clean-css](https://github.com/scniro/gulp-clean-css)，同样是[clean-css](https://github.com/clean-css/clean-css)的封装，用于清理没有使用的`css`样式。  
+- [less-plugin-npm-import](https://github.com/less/less-plugin-npm-import)，`less`插件，可以在`less`文件中引入`npm`包样式文件。  
+- [less-plugin-autoprefix](https://github.com/less/less-plugin-autoprefix)，`less`插件，顾名思义，自动补全各个浏览器的**前缀**。  
+
+```js
+  const cleanCSS = require('gulp-clean-css')
+  const gulpLess = require("gulp-less");
+  const NpmImportPlugin = require('less-plugin-npm-import')
+  const LessAutoprefix = require('less-plugin-autoprefix')
+
+  const LESS_COMPILE_OPTIONS = {
+    paths: ['node_modules'],
+    plugins: [npmImport, autoprefix],
+    relativeUrls: true,
+    javascriptEnabled: true 
+  }
+
+  function compileLess() {
+    const destDirs = ['es', 'lib']
+
+    let stream = gulp
+      .src('components/**/index.less', { allowEmpty: true })
+      // less 转 css 
+      .pipe(gulpLess(LESS_COMPILE_OPTIONS))
+      // 清除无用css
+      .pipe(cleanCSS())
+
+    // 将编译好的样式文件复制到 commonjs & usm 目录下面
+    destDirs.forEach((dir) => {
+      stream = stream.pipe(gulp.dest(dir));
+    });
+
+    return stream.on('error', (error) => {
+      console.error(error);
+    });
+  }
+```
+
+#### handleStyleJSEntry  
 
 ### distLess & distCss
 
 #### distLess
 
+把所有组件的入口`less`文件自动集中到一个`less`文件中，并放到`dist`目录下。  
+
+大概就是如下这样的结构。  
+```less
+@import "../../es/style/mixins/index.less";
+@import "../../es/style/index.less";
+@import "../../es/_class/Draggable/style/index.less";
+@import "../../es/_class/picker/style/index.less";
+@import "../../es/Affix/style/index.less";
+@import "../../es/Alert/style/index.less";
+```
+简单流程就是找到`components/xx/index.less`文件（所以目录结构有规范，默认认为`index.less`为组件等的入口样式文件），**路径**修改后，字符串拼接出需要的语法，合并到一个字符串中，并写入对应的文件中。  
+
+```js
+function distLess(cb) {
+  // 输出的目录
+  const distPath = 'dist/css'
+  // 输出文件名称
+  const rawFileName = 'index.less'
+  // 找到所有的样式文件目录
+  const entries = glob.sync('components/**/index.less')
+
+  if (entries.length) {
+    const texts = [];
+
+    entries.forEach((entry) => {
+      // components/**/index.less -> es/**/index.less
+      const esEntry = 'es' + entry.slice(entry.indexOf('/'));
+      // 相对于distPath 的相对路径
+      // relative 的意思是 esEntry相对于distPath的相对路径
+      const relativePath = path.relative(distPath, esEntry);
+      const text = `@import "${relativePath}";`;
+
+      // 下面的代码控制的写入顺序，也就是引入顺序
+      // 个人的理解应该是 es/style 开头表示为组件的样式，其余的样式写在后面，即其余样式能覆盖组件的样式
+      if (esEntry.startsWith(`es/style`)) {
+        texts.unshift(text);
+      } else {
+        texts.push(text);
+      }
+    });
+
+    // 输出文件
+    fs.outputFileSync(`${distPath}/${rawFileName}`, texts.join('\n'));
+  }
+
+  cb();
+}
+
+```
+
 #### distCss
+
+将上一步(`distLess`)生成的`less`文件转换成单个`css`文件，其目的就是能在`umd`模式下能全量引入所有组件的样式。  
+比如：`import 'package-components/dist/css/index.min.css'`  
+
+```js
+  function distCss() {
+    // 输出的文件目录
+    const distPath = 'dist/css'
+    // 指定的 less 文件
+    const rawFileName = 'index.less'
+    // 指定输出的 css 文件
+    const cssFileName = 'index.css'
+
+    let stream = gulp.src(`${distPath}/${rawFileName}`, { allowEmpty: true });
+
+    // 将less文件编译成css
+    // 这里的步骤和 上面 compileLess 任务中的编译其实是同一个逻辑    
+    stream = stream.pipe(gulpLess(LESS_COMPILE_OPTIONS));
+
+    return stream
+      .pipe(
+        // 把样式文件当中一些引入的静态资源文件 更换路径到 dist下面的路径
+        replace(
+          new RegExp('(\.{2}\/)+es', 'g'),
+          path.relative(distPath, ASSET_FILE_OUTPUT)
+        )
+      )
+      // 清理无用样式
+      .pipe(cleanCSS())
+      // 改名为 index.css
+      .pipe(rename(cssFileName))
+      .pipe(gulp.dest(distPath))
+      .on('error', (error) => {
+        console.error(error);
+      });
+  }
+```
 
 ## 结束
 

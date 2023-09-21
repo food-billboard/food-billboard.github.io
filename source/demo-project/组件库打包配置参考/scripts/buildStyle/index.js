@@ -1,5 +1,6 @@
 const gulp = require("gulp");
 const fs = require('fs-extra')
+const replace = require('gulp-replace')
 // 处理less
 const gulpLess = require("gulp-less");
 // 文件系统
