@@ -1,6 +1,6 @@
 ---
 title: 组件库打包配置参考-css打包
-date: 2023-09-19 17:18:00
+date: 2023-09-20 15:18:00
 tags: frontend
 banner_img: /images/组件库打包配置参考/background.png
 index_img: /images/组件库打包配置参考/background.png
@@ -9,13 +9,13 @@ categories:
   - 配置
 ---
 
-# 组件库打包配置参考-css 打包
+# 组件库打包配置参考-css打包
 
-今天简单讲讲关于组件库打包的`css`打包，这里拿[arco-design](https://arco.design/)的打包工具[arco-cli]()的`1.0`版本来讲解。
+今天简单讲讲关于组件库打包的`css`打包，这里拿[arco-design](https://arco.design/)的打包工具[arco-cli](https://github.com/arco-design/arco-cli/tree/1.x/packages/arco-scripts)的`1.0`版本来讲解。
 
 ### 开始前
 
-`arco-cli`使用的是[gulp]()来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。  
+`arco-cli`使用的是[gulp](https://github.com/gulpjs/gulp)来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。  
 简单的一些知识可以看看[这里](https://food-billboard.github.io/2023/09/09/gulp相关知识/)。
 
 > 在这里贴几个下面会用到的常量  
@@ -156,6 +156,14 @@ function copyFileWatched() {
 
 #### handleStyleJSEntry  
 
+<!-- vinyl-fs -->
+
+看名字的意思，处理样式的`js`入口文件，即`index.js`引入样式的文件。  
+```js
+  // index.js 
+
+```
+
 ### distLess & distCss
 
 #### distLess
@@ -252,9 +260,12 @@ function distLess(cb) {
 
 ## 结束
 
+关于上面的代码，可以参考下[简化的代码](https://github.com/food-billboard/food-billboard.github.io/tree/hexo/source/demo-package/组件库打包配置参考)，其实就是`cv`了`arco-scripts`的代码🌶。  
+
 结束 🔚。
 
 参考链接
 
 > [【目录】组件库打包 cli 教程](https://github.com/lio-mengxiang/mx-design-cli/issues/16)  
-> [react 组件库打包指南](https://github.com/lio-mengxiang/mx-design-cli/issues/13)
+> [react 组件库打包指南](https://github.com/lio-mengxiang/mx-design-cli/issues/13)  
+> [每天一个npm包：through2](https://zhuanlan.zhihu.com/p/365329097)  
