@@ -7,8 +7,9 @@
     "build": "npm run build:es && npm run build:lib && npm run build:umd && npm run build:style",
     "build:es": "node ./scripts/buildESM/index.js",
     "build:lib": "node ./scripts/buildCJS/index.js",
-    "build:umd": "",
+    "build:umd": "node ./scripts/buildUMD/index.js",
     "build:style": "node ./scripts/buildStyle/index.js",
+    "clean": "rimraf es lib dist",
     "temp": "node ./template.js"
   },
   "author": "",
@@ -38,6 +39,7 @@
     "parse-es-import": "^0.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rimraf": "^5.0.1",
     "through2": "^4.0.2",
     "typescript": "^5.2.2",
     "vinyl-fs": "^4.0.0",

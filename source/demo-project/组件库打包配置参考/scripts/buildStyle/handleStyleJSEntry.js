@@ -73,6 +73,7 @@ function getComponentDirPattern(dirName) {
 }
 
 async function transformStyleEntryContent({
+  // components/*/index.js
   esEntryPath,
   module,
 }) {
@@ -123,10 +124,10 @@ function injectPackageDepStyle(componentEsDirPattern) {
   return new Promise((resolve) => {
     const esEntry = path.resolve(componentEsDirPattern, 'index.js');
 
-    if (!fs.existsSync(esEntry)) {
-      resolve(null);
-      return;
-    }
+    // if (!fs.existsSync(esEntry)) {
+    //   resolve(null);
+    //   return;
+    // }
 
     vfs
       .src(esEntry, {
@@ -136,6 +137,8 @@ function injectPackageDepStyle(componentEsDirPattern) {
       })
       .pipe(
         through.obj(async (file, _, cb) => {
+          // file.path 
+          // components/*/index.js
           try {
             await Promise.all([
               transformStyleEntryContent({

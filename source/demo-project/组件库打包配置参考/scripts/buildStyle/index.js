@@ -10,6 +10,8 @@ const path = require('path')
 const mergeStream = require('merge-stream')
 // 清除无用css样式
 const cleanCSS = require('gulp-clean-css')
+// 文件重命名
+const rename = require('gulp-rename')
 const NpmImportPlugin = require('less-plugin-npm-import')
 const LessAutoprefix = require('less-plugin-autoprefix')
 const handleStyleJSEntry = require('./handleStyleJSEntry')

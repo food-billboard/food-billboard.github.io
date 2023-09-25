@@ -13,12 +13,14 @@ categories:
 
 今天简单讲讲关于组件库打包的`esm`和`cjs`打包，这里拿[arco-design](https://arco.design/)的打包工具[arco-cli](https://github.com/arco-design/arco-cli/tree/1.x/packages/arco-scripts)的`1.0`版本来讲解。
 
-因为代码用的是同一套，所以就一起讲，下面主要以`esm`的角度分析，`cjs`其实只是部分不同，各位可以酌情甄别一下🙏🏻。    
-
 ### 开始前
 
 `arco-cli`使用的是[gulp](https://github.com/gulpjs/gulp)来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。  
 简单的一些知识可以看看[这里](https://food-billboard.github.io/2023/09/09/gulp相关知识/)。
+
+> 下面展示的代码可能是笔者更改过的，请勿过分较真(`へ´*)ノ。  
+
+> 因为代码用的是同一套，所以就一起讲，下面主要以`esm`的角度分析，`cjs`其实只是部分不同，各位可以酌情甄别一下🙏🏻。    
 
 ## 开始
 

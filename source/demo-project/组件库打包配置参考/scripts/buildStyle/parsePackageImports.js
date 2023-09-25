@@ -30,7 +30,10 @@ function getRealRequirePath(requirePath, requireFrom = process.cwd()) {
   );
 }
 
+
+
 async function parsePackageImports(
+  // /es/*/index.js
   entryPath,
   packageName,
   result = [],
@@ -47,6 +50,7 @@ async function parsePackageImports(
 
   await Promise.all(
     [...imports].map(async ({ namedImports, moduleName }) => {
+      // 样式是从指定第三方包中引入的（这里应该就是当前组件库的包）
       if (moduleName === packageName) {
         namedImports.forEach(({ name }) => {
           if (result.indexOf(name) === -1) {
@@ -56,6 +60,7 @@ async function parsePackageImports(
         return;
       }
 
+      // 相对路径引入
       if (moduleName.match(/^\.{1,2}\//)) {
         const [requirePath] = getRealRequirePath(moduleName, entryPath);
         if (requirePath && !parsedFileMap[requirePath]) {

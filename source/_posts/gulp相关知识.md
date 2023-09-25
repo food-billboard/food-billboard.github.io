@@ -68,6 +68,7 @@ gulp.task('copy2', () => {
 - gulp-livereload 实时自动编译刷新   
 - gulp-plumber 防止中间任务出错而导致退出的  
 - gulp-if 根据条件来判断是否执行指定任务    
+- gulp-replace 文件内容替换   
 
 
 ## 结束  
