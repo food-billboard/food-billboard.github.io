@@ -7,7 +7,7 @@ public/
 .deploy*/
 /.history
 /source/demo-project/**/node_modules/
-/source/demo-project/**/esm/
+/source/demo-project/**/es/
 /source/demo-project/**/dist/
 /source/demo-project/**/lib/
 /source/demo-project/**/.history/

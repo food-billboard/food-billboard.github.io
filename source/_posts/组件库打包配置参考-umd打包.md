@@ -1,6 +1,6 @@
 ---
-title: 组件库打包配置参考  
-date: 2023-09-01 10:55:00
+title: 组件库打包配置参考-umd打包
+date: 2023-09-25 10:55:00
 tags: frontend 
 banner_img: /images/组件库打包配置参考/background.png
 index_img: /images/组件库打包配置参考/background.png
@@ -9,7 +9,16 @@ categories:
   - 配置
 ---
 
-# 组件库打包配置参考 
+# 组件库打包配置参考-umd打包 
+
+今天讲讲关于组件库打包的`umd`打包，这里拿[arco-design](https://arco.design/)的打包工具[arco-cli](https://github.com/arco-design/arco-cli/tree/1.x/packages/arco-scripts)的`1.0`版本来讲解。
+
+### 开始前
+
+`arco-cli`使用的是[gulp](https://github.com/gulpjs/gulp)来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。  
+简单的一些知识可以看看[这里](https://food-billboard.github.io/2023/09/09/gulp相关知识/)。
+
+> 下面展示的代码可能是笔者更改过的，请勿过分较真(`へ´*)ノ。  
 
 ## 开始  
 
