@@ -2,7 +2,10 @@
   "name": "demo-package",
   "version": "1.0.0",
   "description": "组件库demo",
-  "main": "index.js",
+  "module": "./es/index.js",
+  "main": "./lib/index.js",
+  "unpkg": "./dist/demo.min.js",
+  "types": "./es/index.d.ts",
   "scripts": {
     "build": "npm run build:es && npm run build:lib && npm run build:umd && npm run build:style",
     "build:es": "node ./scripts/buildESM/index.js",
@@ -12,6 +15,11 @@
     "clean": "rimraf es lib dist",
     "temp": "node ./template.js"
   },
+  "files": [
+    "dist",
+    "es",
+    "lib"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -52,5 +60,11 @@
   },
   "dependencies": {
     "file-loader": "^6.2.0"
-  }
+  },
+  "sideEffects": [
+    "dist/**/*",
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.less"
+  ]
 }

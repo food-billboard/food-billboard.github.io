@@ -4,9 +4,6 @@ const packageName = require('../../package.json').name
 
 webpack({
   mode: 'production',
-  // entry: {
-  //   demo: `${process.cwd()}/components/index.tsx`
-  // },
   entry: `${process.cwd()}/components/index.tsx`,
   output: {
     path: `${process.cwd()}/dist`,

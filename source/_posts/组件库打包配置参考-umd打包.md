@@ -15,259 +15,176 @@ categories:
 
 ### 开始前
 
-`arco-cli`使用的是[gulp](https://github.com/gulpjs/gulp)来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。  
-简单的一些知识可以看看[这里](https://food-billboard.github.io/2023/09/09/gulp相关知识/)。
-
 > 下面展示的代码可能是笔者更改过的，请勿过分较真(`へ´*)ノ。  
 
 ## 开始  
 
-### babel相关包功能  
+### 代码 
 
-#### @babel/preset-env
-
-#### @babel/preset-typescript
-
-#### @babel/preset-react  
-
-### umd打包组件库 
+相对于其他几个模块的打包来说，`umd`只是单纯使用`webpack`来输出一个单文件，所以就直接贴代码了。  
 
 ```js 
 const webpack = require('webpack')
-const TerserPlugin = require('terser-webpack-plugin')
-const pkg = require('../package.json')
+const babelConfig = require('../utils/config/babelConfig')
+const packageName = require('../../package.json').name
 
-webpack(
-  {
-    // 入口
-    entry: './es/build.js',
-    // 目标环境
-    target: 'browserslist:>0.25%, not dead, not op_mini all',
-    // 模式
-    mode: 'production',
-    output: {
-      clean: true,
-      filename: 'qsb-file-viewer.min.js',
-      libraryTarget: 'umd',
-      library: 'qsbFileViewer',
-    },
-    externals: {
-      react: 'React',
-      'react-dom': 'ReactDOM',
-      moment: 'moment',
-      antd: 'antd',
-      axios: 'axios',
-    },
-    module: {
-      rules: [
-        {
-          test: /\.m?js$/,
-          loader: 'babel-loader',
-          options: {
-            // 缓存编译结果
-            cacheDirectory: true,
-            // 包含gzip
-            cacheCompression: false,
-            // 是否使用babelrc
-            babelrc: false,
-            // 是否使用配置文件
-            configFile: false,
-            // 编译的类型 script module unambiguous(存在import/export就是module，否则是script)
-            sourceType: 'unambiguous',
-            // 去除换行和空格
-            compact: false,
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  // "amd" | "umd" | "systemjs" | "commonjs" | "cjs" | "auto" | false
-                  // esm 转换为某一种规范类型
-                  modules: 'umd',
-                  // 是否自动引入polyfill
-                  // false 
-                  // entry(手动引入) 根据target会自动根据引入的模块进行兼容，比如引入了promise，他会把所有promise的模块都帮助引入，比如promise.any
-                  // usage(根据使用情况自动引入) 完全交给babel处理，使用到什么就引入什么，但是比如如果只是使用了promise，则不会引入promise.any 
-                  useBuiltIns: 'entry',
-                  corejs: 3,
-                  // corejs: {
-                  //   version: 3,
-                  //   // 编译提案的api 
-                  //   proposals: false
-                  // },
-                  // Exclude transforms that make all code slower
-                  exclude: ['transform-typeof-symbol'],
-                },
-              ],
-            ],
-            plugins: [
-              [
-                // 配合@babel/runtime 将辅助函数等 注入到代码中
-                '@babel/plugin-transform-runtime', 
-                {
-                  // 兼容模式(不污染全局局部变量)  
-                  // 这里的corejs 和 前面 preset-env 用一个就行了
-                  corejs: false,
-                  version: require('@babel/runtime/package.json').version,
-                  // true 引入函数 false 内联函数
-                  helpers: true,
-                  // async 和 * function 的语法支持 
-                  // 是否为引入（或者内联）
-                  regenerator: true,
-                },
-              ],
-            ],
-          },
-        },
-        {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: 'asset/inline',
-        },
-        {
-          test: /\.css$/, //匹配 css 文件
-          use: [
-            {
-              loader: 'style-loader',
-              options: {
-                attributes: {
-                  'data-module': pkg.name,
-                  'data-version': pkg.version,
-                },
-              },
-            },
-            'css-loader'
-          ]
-        },
-        {
-          test: /\.less$/,
-          use: [
-            {
-              loader: 'style-loader',
-              options: {
-                attributes: {
-                  'data-module': pkg.name,
-                  'data-version': pkg.version,
-                },
-              },
-            },
-            'css-loader',
-            {
-              loader: 'less-loader',
-              options: {
-                lessOptions: {
-                  javascriptEnabled: true,
-                },
-              },
-            },
-          ],
-        },
-      ],
-    },
-    plugins: [new webpack.ProgressPlugin()],
-    optimization: {
-      minimizer: [
-        new TerserPlugin({
-          extractComments: false,
-          terserOptions: {
-            parse: {
-              // We want terser to parse ecma 8 code. However, we don't want it
-              // to apply any minification steps that turns valid ecma 5 code
-              // into invalid ecma 5 code. This is why the 'compress' and 'output'
-              // sections only apply transformations that are ecma 5 safe
-              // https://github.com/facebook/create-react-app/pull/4234
-              ecma: 8,
-            },
-            compress: {
-              pure_funcs: ['console.log'],
-              drop_debugger: true,
-              ecma: 5,
-              warnings: false,
-              // Disabled because of an issue with Uglify breaking seemingly valid code:
-              // https://github.com/facebook/create-react-app/issues/2376
-              // Pending further investigation:
-              // https://github.com/mishoo/UglifyJS2/issues/2011
-              comparisons: false,
-              // Disabled because of an issue with Terser breaking valid code:
-              // https://github.com/facebook/create-react-app/issues/5250
-              // Pending further investigation:
-              // https://github.com/terser-js/terser/issues/120
-              inline: 2,
-            },
-            mangle: {
-              safari10: true,
-            },
-            // Added for profiling in devtools
-            keep_classnames: false,
-            keep_fnames: false,
-            output: {
-              ecma: 5,
-              comments: false,
-              // Turned on because emoji and regex is not minified properly using default
-              // https://github.com/facebook/create-react-app/issues/2488
-              ascii_only: true,
-            },
-          },
-        }),
-      ],
-    },
-    performance: {
-      maxEntrypointSize: 1024 * 1024,
-      maxAssetSize: 1024 * 1024,
-    },
+webpack({
+  // 生产模式，会压缩代码
+  mode: 'production',
+  // 打包入口文件
+  entry: `${process.cwd()}/components/index.tsx`,
+  output: {
+    // 输出的文件路径
+    path: `${process.cwd()}/dist`,
+    // cdn路径
+    publicPath: `https://unpkg.com/${packageName}@latest/dist/`,
+    // 文件名称
+    filename: '[name].min.js',
+    // 外部使用的名称
+    library: '[name]',
+    libraryTarget: 'umd',
   },
-  (error, stats) => {
-    if (error) {
-      console.error(error)
-      process.exit(1)
-    }
-
-    if (stats.compilation.errors.length) {
-      console.log(stats.toString({ all: false, errors: true, colors: true }))
-      process.exit(1)
-    }
-
-    console.log(stats.toString({ colors: true }))
+  resolve: {
+    // 需要处理的文件
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
+  // 模块不会被打包
+  externals: [
+    {
+      react: {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react',
+      },
+      'react-dom': {
+        root: 'ReactDOM',
+        commonjs2: 'react-dom',
+        commonjs: 'react-dom',
+        amd: 'react-dom',
+      },
+    },
+  ],
+  module: {
+    rules: [
+      {
+        // 解析ts模块
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            // 还是之前esm和cjs用的babel配置
+            options: babelConfig,
+          },
+          {
+            loader: 'ts-loader',
+            options: {}
+          },
+        ],
+      },
+      {
+        // 处理less
+        test: /\.less$/,
+        // 不处理.module.less文件，即不处理模块化样式文件
+        exclude: /\.module\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+            },
+          },
+        ]
+      },
+      {
+        // 普通css文件处理
+        test: /\.css$/,
+        sideEffects: true,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+        ],
+      },
+      {
+        // 静态资源处理
+        test: /\.(png|jpg|gif|ttf|eot|woff|woff2)$/,
+        loader: 'file-loader',
+        options: {
+          esModule: false,
+        },
+      },
+      {
+        // svg 处理
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
+        // 模块样式文件处理
+        test: /\.module\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[local]-[hash:10]',
+              },
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+            },
+          },
+        ]
+      },
+    ]
   }
-)
+}, (err, stats) => {
+
+  if (err) {
+    console.error(err.stack || err);
+    return;
+  }
+
+  console.log(stats.toString({
+    assets: true,
+    colors: true,
+    warnings: true,
+    errors: true,
+    errorDetails: true,
+    entrypoints: true,
+    version: true,
+    hash: false,
+    timings: true,
+    chunks: false,
+    chunkModules: false,
+    children: false,
+  }))
+
+  // if (stats.hasErrors()) {
+  //   // reject();
+  // } else {
+  //   // resolve(null);
+  // }
+})
 ```
   
-### cjs  
-
-#### babel 
-```js
-module.exports = {
-  presets: [
-    '@babel/preset-env', 
-    '@babel/preset-typescript', 
-    '@babel/preset-react'
-  ],
-  plugins: [
-    '@babel/proposal-class-properties',
-    [
-      '@babel/plugin-transform-runtime',
-      // ? 去掉下方配置，由业务项目控制相关的配置  
-      // {
-      //   corejs: 3,
-      //   helpers: true,
-      // },
-    ],
-  ],
-}
-```
-
-### 类型导出
-
-第三方包类型提示  
-- package.json  
-```json
-{
-  "typings": "types/index.d.ts",
-  "scripts": {
-    "build:types": "rimraf types && tsc --outDir types --declaration --emitDeclarationOnly",
-  }
-}
-```
-
-### 其他  
+### 其他
 
 #### sideEffects  
   tree-shaking 去除无用代码  
