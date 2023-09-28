@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="组件库打包配置参考-umd打包 今天讲讲关于组件库打包的umd打包，这里拿arco-design的打包工具arco-cli的1.0版本来讲解。 开始前  下面展示的代码可能是笔者更改过的，请勿过分较真(&#96;へ´*)ノ。  开始 代码 相对于其他几个模块的打包来说，umd只是单纯使用webpack来输出一个单文件，所以就直接贴代码了。 123456789101112131415161718192021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组件库打包配置参考-umd打包">
+<meta property="og:url" content="http://yoursite.com/2023/09/25/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83-umd%E6%89%93%E5%8C%85/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="组件库打包配置参考-umd打包 今天讲讲关于组件库打包的umd打包，这里拿arco-design的打包工具arco-cli的1.0版本来讲解。 开始前  下面展示的代码可能是笔者更改过的，请勿过分较真(&#96;へ´*)ノ。  开始 代码 相对于其他几个模块的打包来说，umd只是单纯使用webpack来输出一个单文件，所以就直接贴代码了。 123456789101112131415161718192021">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-25T02:55:00.000Z">
+<meta property="article:modified_time" content="2023-09-28T06:00:36.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="frontend">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>组件库打包配置参考-umd打包 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="组件库打包配置参考-umd打包">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-09-25 10:55" pubdate>
+        2023年9月25日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">组件库打包配置参考-umd打包</h1>
+            
+            <div class="markdown-body">
+              <h1>组件库打包配置参考-umd打包</h1>
+<p>今天讲讲关于组件库打包的<code>umd</code>打包，这里拿<a target="_blank" rel="noopener" href="https://arco.design/">arco-design</a>的打包工具<a target="_blank" rel="noopener" href="https://github.com/arco-design/arco-cli/tree/1.x/packages/arco-scripts">arco-cli</a>的<code>1.0</code>版本来讲解。</p>
+<h3 id="开始前">开始前</h3>
+<blockquote>
+<p>下面展示的代码可能是笔者更改过的，请勿过分较真(`へ´*)ノ。</p>
+</blockquote>
+<h2 id="开始">开始</h2>
+<h3 id="代码">代码</h3>
+<p>相对于其他几个模块的打包来说，<code>umd</code>只是单纯使用<code>webpack</code>来输出一个单文件，所以就直接贴代码了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpack&#x27;</span>)<br><span class="hljs-keyword">const</span> babelConfig = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../utils/config/babelConfig&#x27;</span>)<br><span class="hljs-keyword">const</span> packageName = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../../package.json&#x27;</span>).name<br><br>webpack(&#123;<br>  <span class="hljs-comment">// 生产模式，会压缩代码</span><br>  <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;production&#x27;</span>,<br>  <span class="hljs-comment">// 打包入口文件</span><br>  <span class="hljs-attr">entry</span>: <span class="hljs-string">`<span class="hljs-subst">$&#123;process.cwd()&#125;</span>/components/index.tsx`</span>,<br>  <span class="hljs-attr">output</span>: &#123;<br>    <span class="hljs-comment">// 输出的文件路径</span><br>    <span class="hljs-attr">path</span>: <span class="hljs-string">`<span class="hljs-subst">$&#123;process.cwd()&#125;</span>/dist`</span>,<br>    <span class="hljs-comment">// cdn路径</span><br>    <span class="hljs-attr">publicPath</span>: <span class="hljs-string">`https://unpkg.com/<span class="hljs-subst">$&#123;packageName&#125;</span>@latest/dist/`</span>,<br>    <span class="hljs-comment">// 文件名称</span><br>    <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;[name].min.js&#x27;</span>,<br>    <span class="hljs-comment">// 外部使用的名称</span><br>    <span class="hljs-attr">library</span>: <span class="hljs-string">&#x27;[name]&#x27;</span>,<br>    <span class="hljs-attr">libraryTarget</span>: <span class="hljs-string">&#x27;umd&#x27;</span>,<br>  &#125;,<br>  <span class="hljs-attr">resolve</span>: &#123;<br>    <span class="hljs-comment">// 需要处理的文件</span><br>    <span class="hljs-attr">extensions</span>: [<span class="hljs-string">&#x27;.js&#x27;</span>, <span class="hljs-string">&#x27;.jsx&#x27;</span>, <span class="hljs-string">&#x27;.ts&#x27;</span>, <span class="hljs-string">&#x27;.tsx&#x27;</span>],<br>  &#125;,<br>  <span class="hljs-comment">// 模块不会被打包</span><br>  <span class="hljs-attr">externals</span>: [<br>    &#123;<br>      <span class="hljs-attr">react</span>: &#123;<br>        <span class="hljs-attr">root</span>: <span class="hljs-string">&#x27;React&#x27;</span>,<br>        <span class="hljs-attr">commonjs2</span>: <span class="hljs-string">&#x27;react&#x27;</span>,<br>        <span class="hljs-attr">commonjs</span>: <span class="hljs-string">&#x27;react&#x27;</span>,<br>        <span class="hljs-attr">amd</span>: <span class="hljs-string">&#x27;react&#x27;</span>,<br>      &#125;,<br>      <span class="hljs-string">&#x27;react-dom&#x27;</span>: &#123;<br>        <span class="hljs-attr">root</span>: <span class="hljs-string">&#x27;ReactDOM&#x27;</span>,<br>        <span class="hljs-attr">commonjs2</span>: <span class="hljs-string">&#x27;react-dom&#x27;</span>,<br>        <span class="hljs-attr">commonjs</span>: <span class="hljs-string">&#x27;react-dom&#x27;</span>,<br>        <span class="hljs-attr">amd</span>: <span class="hljs-string">&#x27;react-dom&#x27;</span>,<br>      &#125;,<br>    &#125;,<br>  ],<br>  <span class="hljs-attr">module</span>: &#123;<br>    <span class="hljs-attr">rules</span>: [<br>      &#123;<br>        <span class="hljs-comment">// 解析ts模块</span><br>        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.tsx?$/</span>,<br>        exclude: <span class="hljs-regexp">/node_modules/</span>,<br>        use: [<br>          &#123;<br>            <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;babel-loader&#x27;</span>,<br>            <span class="hljs-comment">// 还是之前esm和cjs用的babel配置</span><br>            <span class="hljs-attr">options</span>: babelConfig,<br>          &#125;,<br>          &#123;<br>            <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;ts-loader&#x27;</span>,<br>            <span class="hljs-attr">options</span>: &#123;&#125;<br>          &#125;,<br>        ],<br>      &#125;,<br>      &#123;<br>        <span class="hljs-comment">// 处理less</span><br>        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>,<br>        <span class="hljs-comment">// 不处理.module.less文件，即不处理模块化样式文件</span><br>        exclude: <span class="hljs-regexp">/\.module\.less$/</span>,<br>        use: [<br>          &#123;<br>            <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;style-loader&#x27;</span>,<br>          &#125;,<br>          &#123;<br>            <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;css-loader&#x27;</span>,<br>          &#125;,<br>          &#123;<br>            <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;less-loader&#x27;</span>,<br>            <span class="hljs-attr">options</span>: &#123;<br>              <span class="hljs-attr">javascriptEnabled</span>: <span class="hljs-literal">true</span>,<br>            &#125;,<br>          &#125;,<br>        ]<br>      &#125;,<br>      &#123;<br>        <span class="hljs-comment">// 普通css文件处理</span><br>        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>,<br>        sideEffects: <span class="hljs-literal">true</span>,<br>        <span class="hljs-attr">use</span>: [<br>          &#123;<br>            <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;style-loader&#x27;</span><br>          &#125;,<br>          &#123;<br>            <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;css-loader&#x27;</span><br>          &#125;,<br>        ],<br>      &#125;,<br>      &#123;<br>        <span class="hljs-comment">// 静态资源处理</span><br>        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|jpg|gif|ttf|eot|woff|woff2)$/</span>,<br>        loader: <span class="hljs-string">&#x27;file-loader&#x27;</span>,<br>        <span class="hljs-attr">options</span>: &#123;<br>          <span class="hljs-attr">esModule</span>: <span class="hljs-literal">false</span>,<br>        &#125;,<br>      &#125;,<br>      &#123;<br>        <span class="hljs-comment">// svg 处理</span><br>        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.svg$/</span>,<br>        use: [<span class="hljs-string">&#x27;@svgr/webpack&#x27;</span>],<br>      &#125;,<br>      &#123;<br>        <span class="hljs-comment">// 模块样式文件处理</span><br>        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.module\.less$/</span>,<br>        use: [<br>          &#123;<br>            <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;style-loader&#x27;</span>,<br>          &#125;,<br>          &#123;<br>            <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;css-loader&#x27;</span>,<br>            <span class="hljs-attr">options</span>: &#123;<br>              <span class="hljs-attr">modules</span>: &#123;<br>                <span class="hljs-attr">localIdentName</span>: <span class="hljs-string">&#x27;[local]-[hash:10]&#x27;</span>,<br>              &#125;,<br>            &#125;<br>          &#125;,<br>          &#123;<br>            <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;less-loader&#x27;</span>,<br>            <span class="hljs-attr">options</span>: &#123;<br>              <span class="hljs-attr">javascriptEnabled</span>: <span class="hljs-literal">true</span>,<br>            &#125;,<br>          &#125;,<br>        ]<br>      &#125;,<br>    ]<br>  &#125;<br>&#125;, <span class="hljs-function">(<span class="hljs-params">err, stats</span>) =&gt;</span> &#123;<br><br>  <span class="hljs-keyword">if</span> (err) &#123;<br>    <span class="hljs-built_in">console</span>.error(err.stack || err);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br><br>  <span class="hljs-built_in">console</span>.log(stats.toString(&#123;<br>    <span class="hljs-attr">assets</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">colors</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">warnings</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">errors</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">errorDetails</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">entrypoints</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">version</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">hash</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-attr">timings</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">chunks</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-attr">chunkModules</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-attr">children</span>: <span class="hljs-literal">false</span>,<br>  &#125;))<br><br>  <span class="hljs-comment">// if (stats.hasErrors()) &#123;</span><br>  <span class="hljs-comment">//   // reject();</span><br>  <span class="hljs-comment">// &#125; else &#123;</span><br>  <span class="hljs-comment">//   // resolve(null);</span><br>  <span class="hljs-comment">// &#125;</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<h3 id="其他">其他</h3>
+<h4 id="sideEffects">sideEffects</h4>
+<p>tree-shaking 去除无用代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 所有文件都没有副作用，全都可以删除</span><br><span class="hljs-keyword">var</span> sideEffects = <span class="hljs-literal">false</span> <br><br><span class="hljs-comment">// 指定目录或文件没有副作用</span><br><span class="hljs-keyword">var</span> sideEffects = [<br>  <span class="hljs-string">&quot;dist/*&quot;</span>,<br>  <span class="hljs-string">&quot;esm/**/style/*&quot;</span>,<br>  <span class="hljs-string">&quot;lib/**/style/*&quot;</span>,<br>  <span class="hljs-string">&quot;*.less&quot;</span><br>]<br><br></code></pre></td></tr></table></figure>
+<h2 id="结束">结束</h2>
+<p>结束🔚。</p>
+<p>参考链接</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/84799735">Babel7 中 @babel/preset-env 的使用</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/lio-mengxiang/mx-design-cli/issues/16">【目录】组件库打包cli教程</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/lio-mengxiang/mx-design-cli/issues/13">react 组件库打包指南</a><br>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/94706976">css-loader中importLoaders的理解</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/%E9%85%8D%E7%BD%AE/">配置</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/frontend/">frontend</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/28/gulp%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/20/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83-css%E6%89%93%E5%8C%85/">
+                        <span class="hidden-mobile">组件库打包配置参考-css打包</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> <script src="/js/code-viewer.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>

@@ -1,0 +1,602 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="组件库打包配置参考-esm&amp;cjs打包 今天简单讲讲关于组件库打包的esm和cjs打包，这里拿arco-design的打包工具arco-cli的1.0版本来讲解。 开始前 arco-cli使用的是gulp来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。 简单的一些知识可以看看这里。  下面展示的代码可能是笔者更改过的，请勿过分较真(&#96;へ´*">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组件库打包配置参考-esm&amp;cjs打包">
+<meta property="og:url" content="http://yoursite.com/2023/09/19/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83-esm&cjs%E6%89%93%E5%8C%85/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="组件库打包配置参考-esm&amp;cjs打包 今天简单讲讲关于组件库打包的esm和cjs打包，这里拿arco-design的打包工具arco-cli的1.0版本来讲解。 开始前 arco-cli使用的是gulp来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。 简单的一些知识可以看看这里。  下面展示的代码可能是笔者更改过的，请勿过分较真(&#96;へ´*">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-19T09:18:00.000Z">
+<meta property="article:modified_time" content="2023-09-28T06:00:36.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="frontend">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>组件库打包配置参考-esm&amp;cjs打包 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="组件库打包配置参考-esm&amp;cjs打包">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-09-19 17:18" pubdate>
+        2023年9月19日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">组件库打包配置参考-esm&amp;cjs打包</h1>
+            
+            <div class="markdown-body">
+              <h1>组件库打包配置参考-esm&amp;cjs打包</h1>
+<p>今天简单讲讲关于组件库打包的<code>esm</code>和<code>cjs</code>打包，这里拿<a target="_blank" rel="noopener" href="https://arco.design/">arco-design</a>的打包工具<a target="_blank" rel="noopener" href="https://github.com/arco-design/arco-cli/tree/1.x/packages/arco-scripts">arco-cli</a>的<code>1.0</code>版本来讲解。</p>
+<h3 id="开始前">开始前</h3>
+<p><code>arco-cli</code>使用的是<a target="_blank" rel="noopener" href="https://github.com/gulpjs/gulp">gulp</a>来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。<br>
+简单的一些知识可以看看<a target="_blank" rel="noopener" href="https://food-billboard.github.io/2023/09/09/gulp%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">这里</a>。</p>
+<blockquote>
+<p>下面展示的代码可能是笔者更改过的，请勿过分较真(`へ´*)ノ。</p>
+</blockquote>
+<blockquote>
+<p>因为代码用的是同一套，所以就一起讲，下面主要以<code>esm</code>的角度分析，<code>cjs</code>其实只是部分不同，各位可以酌情甄别一下🙏🏻。</p>
+</blockquote>
+<h2 id="开始">开始</h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> buildES = <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> compileTS(&#123; <span class="hljs-attr">outDir</span>: <span class="hljs-string">`<span class="hljs-subst">$&#123;process.cwd()&#125;</span>/es`</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;es&#x27;</span> &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>接着看<code>compileTS</code>方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (options) =&gt; &#123;<br>  <span class="hljs-comment">// BUILD_ENV_TS_COMPILER 是一个环境变量，可以指定使用 &quot;babel&quot; 还是使用 &quot;tsc&quot; 来编译组件库</span><br>  <span class="hljs-comment">// 看代码应该默认使用的是 &quot;tsc&quot;</span><br>  <span class="hljs-keyword">return</span> (BUILD_ENV_TS_COMPILER === <span class="hljs-string">&#x27;babel&#x27;</span> ? withBabel(options) : withTSC(options)).then(<br>    <span class="hljs-function">() =&gt;</span> &#123;&#125;,<br>    <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">throw</span> error;<br>    &#125;<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>接着就两个编译方法都做一下简单的解析</p>
+<h3 id="withTSC">withTSC</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withTSC</span>(<span class="hljs-params">&#123; type, outDir, watch &#125;</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> &#123; compilerOptions &#125; = getTSConfig();<br>  <span class="hljs-keyword">let</span> <span class="hljs-built_in">module</span> = type === <span class="hljs-string">&#x27;es&#x27;</span> ? <span class="hljs-string">&#x27;es6&#x27;</span> : <span class="hljs-string">&#x27;commonjs&#x27;</span>;<br><br>  <span class="hljs-comment">// Read module filed from the default configuration (es6 / es2020 / esnext)</span><br>  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">&#x27;es&#x27;</span>) &#123;<br>    <span class="hljs-keyword">const</span> regexpES = <span class="hljs-regexp">/^es/i</span>;<br>    <span class="hljs-comment">// tscConfig 这个后面会讲到</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> tscConfig.module === <span class="hljs-string">&#x27;string&#x27;</span> &amp;&amp; regexpES.test(tscConfig.module)) &#123;<br>      <span class="hljs-built_in">module</span> = tscConfig.module;<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<br>      <span class="hljs-keyword">typeof</span> compilerOptions?.module === <span class="hljs-string">&#x27;string&#x27;</span> &amp;&amp;<br>      regexpES.test(compilerOptions.module)<br>    ) &#123;<br>      <span class="hljs-built_in">module</span> = compilerOptions.module;<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> tsc.compile(&#123;<br>    ...tscConfig,<br>    <span class="hljs-built_in">module</span>,<br>    outDir,<br>    <span class="hljs-attr">watch</span>: !!watch,<br>    <span class="hljs-attr">declaration</span>: type === <span class="hljs-string">&#x27;es&#x27;</span>,<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>我们按照顺序一一解析。</p>
+<ul>
+<li>
+<p><code>const &#123; compilerOptions &#125; = getTSConfig();</code><br>
+<code>getTSConfig</code>方法是处理<code>ts</code>配置合并问题的。</p>
+<ul>
+<li>首先查找项目根目录下面的<code>tsconfig.json</code>文件，接着和自定义配置进行合并（后者覆盖前者）</li>
+<li>接着根据上面的<code>tsconfig.json</code>中的<code>extends</code>字段，递归向上查找继承的<code>ts</code>配置，同样按照上面的步骤进行合并合并。</li>
+</ul>
+<p>下面是代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> getTSConfig = <span class="hljs-function">(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">  <span class="hljs-comment">// 项目根目录的ts配置文件路径</span></span></span><br><span class="hljs-params"><span class="hljs-function">  tsconfigPath = path.resolve(process.cwd(), <span class="hljs-string">&#x27;tsconfig.json&#x27;</span>),</span></span><br><span class="hljs-params"><span class="hljs-function">  <span class="hljs-comment">// 自定义配置</span></span></span><br><span class="hljs-params"><span class="hljs-function">  subConfig = &#123; compilerOptions: &#123;&#125; &#125;</span></span><br><span class="hljs-params"><span class="hljs-function"></span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// 如果项目存在ts配置文件则使用配置文件</span><br>  <span class="hljs-keyword">if</span> (fs.pathExistsSync(tsconfigPath)) &#123;<br>    <span class="hljs-keyword">const</span> config = fs.readJsonSync(tsconfigPath);<br>    <span class="hljs-keyword">const</span> compilerOptions = (config &amp;&amp; config.compilerOptions) || &#123;&#125;;<br>    <span class="hljs-keyword">const</span> subCompilerOptions = (subConfig &amp;&amp; subConfig.compilerOptions) || &#123;&#125;;<br><br>    <span class="hljs-comment">// 编译配置合并</span><br>    <span class="hljs-comment">// Avoid overwriting of the compilation options of subConfig</span><br>    subConfig.compilerOptions = &#123; ...compilerOptions, ...subCompilerOptions &#125;;<br>    <span class="hljs-built_in">Object</span>.assign(config, subConfig);<br><br>    <span class="hljs-comment">// 存在外部继承的配置则递归获取合并配置</span><br>    <span class="hljs-keyword">if</span> (config.extends) &#123;<br>      <span class="hljs-keyword">return</span> getTSConfig(path.resolve(path.dirname(tsconfigPath), config.extends), config);<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> config;<br>  &#125;<br>  <span class="hljs-keyword">return</span> &#123; ...subConfig &#125;;<br>&#125;;<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><code>if(type === 'es')</code><br>
+讲这个之前先说一下上面代码中出现的<code>tscConfig</code>，源码当中绕了几个圈，说白点就是。<br>
+项目约定了一个目录<code>.config</code>，当中存放一些项目自定义的配置，包括<code>'jest' | 'webpack' | 'babel' | 'docgen' | 'style' | 'tsc'</code>，<br>
+打包时，代码会去查找<code>.config/xx.config.js</code>文件，文件应该默认导出一个<strong>方法</strong>，参数接收默认配置，并返回经过处理后的<strong>自定义配置</strong>供后续打包使用。</p>
+<p>而<code>tsConfig</code>是查找<code>.config/tsc.config.js</code>。<br>
+查看<code>arco-design</code>源码目录可以发现，暂时还没有使用到这个。</p>
+<p>接着我们继续来看上面的<code>if</code>逻辑。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">if</span> (type === <span class="hljs-string">&#x27;es&#x27;</span>) &#123;<br>  <span class="hljs-keyword">const</span> regexpES = <span class="hljs-regexp">/^es/i</span>;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> tscConfig.module === <span class="hljs-string">&#x27;string&#x27;</span> &amp;&amp; regexpES.test(tscConfig.module)) &#123;<br>    <span class="hljs-built_in">module</span> = tscConfig.module;<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<br>    <span class="hljs-keyword">typeof</span> compilerOptions?.module === <span class="hljs-string">&#x27;string&#x27;</span> &amp;&amp;<br>    regexpES.test(compilerOptions.module)<br>  ) &#123;<br>    <span class="hljs-built_in">module</span> = compilerOptions.module;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>其实也不难看出，只是为了确定最终的编译的<code>module</code>。<br>
+所以不出意外的话，<code>module</code>的值还是原来的<code>es6</code></p>
+</li>
+<li>
+<p><code>tsc.compile(&#123;&#125;)</code></p>
+<p>这里用到了一个第三方的包<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/node-typescript-compiler?activeTab=readme">node-typescript-compiler</a>来讲<code>ts</code>编译成<code>js</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">return</span> tsc.compile(&#123;<br>  ...tscConfig,<br>  <span class="hljs-built_in">module</span>,<br>  outDir,<br>  <span class="hljs-attr">watch</span>: !!watch,<br>  <span class="hljs-attr">declaration</span>: type === <span class="hljs-string">&#x27;es&#x27;</span>,<br>&#125;)<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="withBabel">withBabel</h3>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withBabel</span>(<span class="hljs-params">&#123; type, outDir, watch &#125;</span>) </span>&#123;<br><br>  <span class="hljs-comment">// 1. 获取 ts 配置</span><br>  <span class="hljs-keyword">const</span> tsconfig = getTSConfig();<br>  <span class="hljs-comment">// 2. 目标输出目录</span><br>  <span class="hljs-keyword">const</span> targetPath = path.resolve(process.cwd(), outDir);<br><br>  <span class="hljs-comment">// 3. 获取目标编译目录</span><br>  <span class="hljs-keyword">let</span> srcPath = <span class="hljs-string">&#x27;&#x27;</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> pattern <span class="hljs-keyword">of</span> tsconfig.include <span class="hljs-keyword">as</span> string[]) &#123;<br>    <span class="hljs-comment">// xxx </span><br>  &#125;<br><br>  <span class="hljs-keyword">const</span> transform = <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// xxx</span><br>  &#125;<br><br>  <span class="hljs-keyword">const</span> createStream = <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// xxx</span><br>  &#125;<br><br>  <span class="hljs-comment">// 4. 编译</span><br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// xxx </span><br>  &#125;)<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>我们按照上面<code>1.2.3.4</code>的顺序来看具体的代码</p>
+<ul>
+<li>
+<p><code>1</code>的话和上面的<code>withTSC</code>中是一样的，获取<code>tsconfig</code>配置。</p>
+</li>
+<li>
+<p><code>2</code>是目标编译输出的目录(<code>cwd/es/xx</code>)。</p>
+</li>
+<li>
+<p><code>3</code>是根据<code>1</code>的配置中的<code>include</code>字段来找到需要编译的目录<br>
+具体代码如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> srcPath = <span class="hljs-string">&#x27;&#x27;</span>;<br><span class="hljs-comment">// [&quot;components/**/*.ts&quot;, &quot;components/**/*.tsx&quot;]</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> pattern <span class="hljs-keyword">of</span> tsconfig.include) &#123;<br>  <span class="hljs-comment">// match &#x27;src/**/*.ts` or &#x27;src/**/*.&#123;ts,tsx&#125;&#x27; or &#x27;src/**/*.t&#123;s,sx&#125;&#x27;</span><br>  <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/\/\*&#123;2&#125;\/\*\.&#123;?t&#123;?s/</span>.test(pattern)) &#123;<br>    srcPath = pattern.split(<span class="hljs-string">&#x27;/**/&#x27;</span>)[<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">break</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>所以<code>srcPath</code>其实就是组件库的目录<code>components</code></p>
+</li>
+<li>
+<p><code>4</code><br>
+具体的编译流程就是这里。</p>
+<ul>
+<li>首先是定义了目标目录当中一些不需要编译的文件(下面数组当中以<code>!</code>为前缀的)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> patterns = [<br>  ...tsconfig.include,<br>  <span class="hljs-string">`!<span class="hljs-subst">$&#123;path.resolve(srcPath, <span class="hljs-string">&#x27;**/demo&#123;,/**&#125;&#x27;</span>)&#125;</span>`</span>,<br>  <span class="hljs-string">`!<span class="hljs-subst">$&#123;path.resolve(srcPath, <span class="hljs-string">&#x27;**/__test__&#123;,/**&#125;&#x27;</span>)&#125;</span>`</span>,<br>  <span class="hljs-string">`!<span class="hljs-subst">$&#123;path.resolve(srcPath, <span class="hljs-string">&#x27;**/*.md&#x27;</span>)&#125;</span>`</span>,<br>  <span class="hljs-string">`!<span class="hljs-subst">$&#123;path.resolve(srcPath, <span class="hljs-string">&#x27;**/*.mdx&#x27;</span>)&#125;</span>`</span>,<br>]<br></code></pre></td></tr></table></figure>
+<p>这些文件其实就是组件库的测试文件<code>__test__</code>，组件演示的示例<code>demo</code>，组件库文档文件<code>md(x)</code></p>
+<ul>
+<li>
+<p><code>createStream</code><br>
+接着看一下<code>createStream</code>方法。</p>
+<p>下面用到了几个包</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/gulpjs/vinyl-fs">vinyl-fs</a>，根据<code>glob</code>目录格式进行解析。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rvagg/through2">through2</a>，文件流处理</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/robrich/gulp-if">gulp-if</a>，根据条件判断是否执行相关任务</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> createStream = <span class="hljs-function">(<span class="hljs-params">src</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// vinyl-fs </span><br>  <span class="hljs-comment">// 解析相应的文件 得到相应的元数据</span><br>  <span class="hljs-keyword">return</span> vfs<br>    .src(src, &#123;<br>      <span class="hljs-attr">allowEmpty</span>: <span class="hljs-literal">true</span>,<br>      <span class="hljs-attr">base</span>: srcPath,<br>    &#125;)<br>    <span class="hljs-comment">// 将文件数据转换成 对象模式</span><br>    <span class="hljs-comment">// 方便下面任务对文件的处理</span><br>    .pipe(through.obj())<br>    .pipe(<br>      <span class="hljs-comment">// 文件是 .ts 或者 .tsx 的则执行此任务</span><br>      <span class="hljs-comment">// 其实就是 ts文件 的编译</span><br>      gulpIf(<br>        <span class="hljs-function">(<span class="hljs-params">&#123; path &#125;</span>) =&gt;</span> &#123;<br>          <span class="hljs-keyword">return</span> <span class="hljs-regexp">/\.tsx?$/</span>.test(path);<br>        &#125;,<br>        <span class="hljs-comment">// Delete outDir to avoid static resource resolve errors during the babel compilation of next step</span><br>        <span class="hljs-comment">// 拿到前面拿到的tsconfig配置</span><br>        <span class="hljs-comment">// 如果 type 是 es（esm模式），输出类型声明文件  </span><br>        <span class="hljs-comment">// 这里把 outDir 设置成了 undefined，根据上面英文解释可以知道，是为了避免在下面的任务中的编译发生冲突</span><br>        gulpTS(&#123; ...tsconfig.compilerOptions, <span class="hljs-attr">declaration</span>: type === <span class="hljs-string">&#x27;es&#x27;</span>, <span class="hljs-attr">outDir</span>: <span class="hljs-literal">undefined</span> &#125;)<br>      )<br>    )<br>    .pipe(<br>      gulpIf(<br>        <span class="hljs-comment">// 编译 ts js tsx jsx 文件，且非.d.ts文件</span><br>        <span class="hljs-function">(<span class="hljs-params">&#123; path &#125;</span>) =&gt;</span> &#123;<br>          <span class="hljs-keyword">return</span> !path.endsWith(<span class="hljs-string">&#x27;.d.ts&#x27;</span>) &amp;&amp; <span class="hljs-regexp">/\.(t|j)sx?$/</span>.test(path);<br>        &#125;,<br>        through.obj(<span class="hljs-function">(<span class="hljs-params">file, _, cb</span>) =&gt;</span> &#123;<br>          <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 使用babel编译文件，并将文件格式转成 buffer  </span><br>            <span class="hljs-comment">// transform 会在下面介绍</span><br>            file.contents = Buffer.from(transform(file));<br>            <span class="hljs-comment">// .jsx -&gt; .js</span><br>            file.path = file.path.replace(path.extname(file.path), <span class="hljs-string">&#x27;.js&#x27;</span>);<br>            cb(<span class="hljs-literal">null</span>, file);<br>          &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>            <span class="hljs-built_in">console</span>.error(error);<br>            cb(<span class="hljs-literal">null</span>);<br>          &#125;<br>        &#125;)<br>      )<br>    )<br>    <span class="hljs-comment">// 输出文件到指定目录</span><br>    .pipe(vfs.dest(targetPath));<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>transform</code><br>
+最后看一下<code>withBabel</code>的最后的<code>babel</code>编译方法。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> transform = <span class="hljs-function">(<span class="hljs-params">file</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// Avoid directly modifying the original presets array, it will cause errors when withBabel is called multiple times</span><br>  <span class="hljs-comment">// babelConfig 和前面提到的 withTSC中的 tscConfig 类似，当然这里他是一些默认值的配置的，具体可以查看下面的config</span><br>  <span class="hljs-comment">// 这里对默认配置的 @babel/preset-env 做一下处理，关于转换模式的</span><br>  babelConfig.presets = babelConfig.presets.map(<span class="hljs-function">(<span class="hljs-params">preset</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> strPresetEnv = <span class="hljs-string">&#x27;@babel/preset-env&#x27;</span>;<br>    <span class="hljs-comment">// 如果 type 是 es 那么就不需要做转换，否则就是转换成 commonjs 模式</span><br>    <span class="hljs-comment">// 这里具体可以看下官网的解释</span><br>    <span class="hljs-comment">// https://www.babeljs.cn/docs/babel-preset-env#modules</span><br>    <span class="hljs-keyword">const</span> presetOptions = &#123; <span class="hljs-attr">modules</span>: type === <span class="hljs-string">&#x27;es&#x27;</span> ? <span class="hljs-literal">false</span> : <span class="hljs-string">&#x27;cjs&#x27;</span> &#125;;<br><br>    <span class="hljs-comment">// 第一种情况是没有默认配置，则直接赋值</span><br>    <span class="hljs-keyword">if</span> (preset === strPresetEnv) &#123;<br>      <span class="hljs-keyword">return</span> [strPresetEnv, presetOptions];<br>    &#125;<br><br>    <span class="hljs-comment">// 第二种情况是有默认配置，那么就是合并配置</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(preset) &amp;&amp; preset[<span class="hljs-number">0</span>] === strPresetEnv) &#123;<br>      <span class="hljs-keyword">const</span> _preset = preset.slice();<br>      _preset[<span class="hljs-number">1</span>] = &#123;<br>        ...(_preset[<span class="hljs-number">1</span>] || &#123;&#125;),<br>        ...presetOptions,<br>      &#125;;<br>      <span class="hljs-keyword">return</span> _preset;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> preset;<br>  &#125;);<br><br>  <span class="hljs-comment">// 最终的babel 编译</span><br>  <span class="hljs-keyword">return</span> babelTransform(file.contents, &#123;<br>    ...babelConfig,<br>    <span class="hljs-attr">filename</span>: file.path,<br>    <span class="hljs-comment">// Ignore the external babel.config.js and directly use the current incoming configuration</span><br>    <span class="hljs-attr">configFile</span>: <span class="hljs-literal">false</span>,<br>  &#125;).code;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> config = &#123;<br>  <span class="hljs-comment">// TODO Solve babel error when there is no [filename]</span><br>  <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;&#x27;</span>,<br>  <span class="hljs-attr">presets</span>: [<span class="hljs-string">&#x27;@babel/preset-env&#x27;</span>, <span class="hljs-string">&#x27;@babel/preset-typescript&#x27;</span>, <span class="hljs-string">&#x27;@babel/preset-react&#x27;</span>],<br>  <span class="hljs-attr">plugins</span>: [<br>    <span class="hljs-string">&#x27;@babel/plugin-proposal-export-default-from&#x27;</span>,<br>    <span class="hljs-string">&#x27;@babel/plugin-transform-runtime&#x27;</span>,<br>    <span class="hljs-string">&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span>,<br>    <span class="hljs-string">&#x27;@babel/plugin-proposal-class-properties&#x27;</span>,<br>    <span class="hljs-string">&#x27;@babel/plugin-transform-react-jsx-source&#x27;</span>,<br>  ],<br>&#125;;<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="结束">结束</h2>
+<p>关于上面的代码，可以参考下<a target="_blank" rel="noopener" href="https://github.com/food-billboard/food-billboard.github.io/tree/hexo/source/demo-package/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83">简化的代码</a>，其实就是<code>cv</code>了<code>arco-scripts</code>的代码🌶。</p>
+<p>结束 🔚。</p>
+<p>参考链接</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/lio-mengxiang/mx-design-cli/issues/16">【目录】组件库打包 cli 教程</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/lio-mengxiang/mx-design-cli/issues/13">react 组件库打包指南</a><br>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/365329097">每天一个npm包：through2</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/%E9%85%8D%E7%BD%AE/">配置</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/frontend/">frontend</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/20/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83-css%E6%89%93%E5%8C%85/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">组件库打包配置参考-css打包</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E4%BD%BF%E7%94%A8puppeteer%E7%88%AC%E5%8F%96%E6%BC%AB%E7%94%BB/">
+                        <span class="hidden-mobile">使用puppeteer爬取漫画</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> <script src="/js/code-viewer.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>

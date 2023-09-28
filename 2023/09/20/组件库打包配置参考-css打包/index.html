@@ -1,0 +1,628 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="组件库打包配置参考-css打包 今天简单讲讲关于组件库打包的css打包，这里拿arco-design的打包工具arco-cli的1.0版本来讲解。 开始前 arco-cli使用的是gulp来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。 简单的一些知识可以看看这里。  下面展示的代码可能是笔者更改过的，请勿过分较真(&#96;へ´*)ノ。   在这里贴几个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组件库打包配置参考-css打包">
+<meta property="og:url" content="http://yoursite.com/2023/09/20/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83-css%E6%89%93%E5%8C%85/index.html">
+<meta property="og:site_name" content="Food-Billboard">
+<meta property="og:description" content="组件库打包配置参考-css打包 今天简单讲讲关于组件库打包的css打包，这里拿arco-design的打包工具arco-cli的1.0版本来讲解。 开始前 arco-cli使用的是gulp来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。 简单的一些知识可以看看这里。  下面展示的代码可能是笔者更改过的，请勿过分较真(&#96;へ´*)ノ。   在这里贴几个">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-20T07:18:00.000Z">
+<meta property="article:modified_time" content="2023-09-28T06:00:36.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="frontend">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>组件库打包配置参考-css打包 - Food-Billboard</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css"></link>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css"></link>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <i class="iconfont icon-books"></i>
+                项目
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="组件库打包配置参考-css打包">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-09-20 15:18" pubdate>
+        2023年9月20日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">组件库打包配置参考-css打包</h1>
+            
+            <div class="markdown-body">
+              <h1>组件库打包配置参考-css打包</h1>
+<p>今天简单讲讲关于组件库打包的<code>css</code>打包，这里拿<a target="_blank" rel="noopener" href="https://arco.design/">arco-design</a>的打包工具<a target="_blank" rel="noopener" href="https://github.com/arco-design/arco-cli/tree/1.x/packages/arco-scripts">arco-cli</a>的<code>1.0</code>版本来讲解。</p>
+<h3 id="开始前">开始前</h3>
+<p><code>arco-cli</code>使用的是<a target="_blank" rel="noopener" href="https://github.com/gulpjs/gulp">gulp</a>来组织任务执行的，他能极大的简化构建任务，生态也是及其的庞大，基本业务中的情况都能找到对应的插件。<br>
+简单的一些知识可以看看<a target="_blank" rel="noopener" href="https://food-billboard.github.io/2023/09/09/gulp%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">这里</a>。</p>
+<blockquote>
+<p>下面展示的代码可能是笔者更改过的，请勿过分较真(`へ´*)ノ。</p>
+</blockquote>
+<blockquote>
+<p>在这里贴几个下面会用到的常量</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 静态资源的后缀</span><br><span class="hljs-keyword">const</span> FILE_ASSET_EXT = [<br>  <span class="hljs-string">&quot;png&quot;</span>,<br>  <span class="hljs-string">&quot;jpg&quot;</span>,<br>  <span class="hljs-string">&quot;jpeg&quot;</span>,<br>  <span class="hljs-string">&quot;gif&quot;</span>,<br>  <span class="hljs-string">&quot;svg&quot;</span>,<br>  <span class="hljs-string">&quot;ttf&quot;</span>,<br>  <span class="hljs-string">&quot;eot&quot;</span>,<br>  <span class="hljs-string">&quot;woff&quot;</span>,<br>  <span class="hljs-string">&quot;woff2&quot;</span>,<br>];<br><br><span class="hljs-comment">// 所有需要处理的资源后缀</span><br><span class="hljs-keyword">const</span> FILE_WATCHED_EXT = FILE_ASSET_EXT.concat([<span class="hljs-string">&quot;less&quot;</span>, <span class="hljs-string">&quot;css&quot;</span>]);<br><br><span class="hljs-comment">// 静态资源的路径</span><br><span class="hljs-keyword">const</span> ASSET_FILE_ENTRY = <span class="hljs-string">`components/**/*.<span class="hljs-subst">$&#123;FILE_ASSET_EXT.join(<span class="hljs-string">&quot;,&quot;</span>)&#125;</span>`</span><br><br><span class="hljs-comment">// 静态资源的输出领</span><br><span class="hljs-keyword">const</span> ASSET_FILE_OUTPUT = <span class="hljs-string">&#x27;dist/asset&#x27;</span><br></code></pre></td></tr></table></figure>
+<h2 id="开始">开始</h2>
+<p>根据源代码，可以看到任务具体分为三个步骤。每个步骤有两个并行的子任务，下面按照任务的顺序一一做介绍。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">build</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> &#123;<br>    gulp.series(<br>      gulp.parallel(copyAsset, copyFileWatched),<br>      gulp.parallel(compileLess, handleStyleJSEntry),<br>      gulp.parallel(distLess, distCss),<br>      gulp.parallel(<span class="hljs-function">() =&gt;</span> resolve())<br>    )();<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>因为该<code>arco-scripts</code>是一个通用的打包<code>cli</code>，所以本文是基于<code>react</code>组件库打包进行解析。</p>
+</blockquote>
+<h3 id="copyAsset-copyFileWatched">copyAsset &amp; copyFileWatched</h3>
+<h4 id="copyAsset">copyAsset</h4>
+<p>复制静态文件<br>
+此方法比较简单，这里就直接贴代码，看下注释也就能明白。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">copyAsset</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> gulp<br>    <span class="hljs-comment">// 从目录 components/ 下面找到指定静态资源</span><br>    .src(ASSET_FILE_ENTRY, &#123; <span class="hljs-attr">allowEmpty</span>: <span class="hljs-literal">true</span> &#125;)<br>    <span class="hljs-comment">// 直接复制文件输出到 dist/asset目录下</span><br>    .pipe(gulp.dest(ASSET_FILE_OUTPUT));<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="copyFileWatched">copyFileWatched</h4>
+<p>和<code>copyAsset</code>类似的方法。</p>
+<p>复制静态资源和<strong>样式文件</strong>到<code>es</code>和<code>lib</code>目录下。</p>
+<p>代码也很简单，直接贴了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">copyFileWatched</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> patternArray = [<span class="hljs-string">`components/**/*.&#123;<span class="hljs-subst">$&#123;FILE_WATCHED_EXT.join(<span class="hljs-string">&quot;,&quot;</span>)&#125;</span>&#125;`</span>];<br><br>  <span class="hljs-keyword">const</span> destDirs = [<span class="hljs-string">&quot;es&quot;</span>, <span class="hljs-string">&quot;lib&quot;</span>];<br><br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all(<br>    destDirs.map(<span class="hljs-function"><span class="hljs-params">dir</span> =&gt;</span> &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>        gulp.src(patternArray, &#123;<br>          <span class="hljs-attr">allowEmpty</span>: <span class="hljs-literal">true</span>,<br>          <span class="hljs-comment">// base: cssConfig.watchBase[pattern],</span><br>        &#125;)<br>        .pipe(gulp.dest(dir))<br>        .on(<span class="hljs-string">&#x27;end&#x27;</span>, resolve)<br>        .on(<span class="hljs-string">&#x27;error&#x27;</span>, reject)<br>      &#125;)<br>    &#125;)<br>  )<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="compileLess-handleStyleJSEntry">compileLess &amp; handleStyleJSEntry</h3>
+<h4 id="compileLess">compileLess</h4>
+<p>编译<code>less</code>文件。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/gulp-community/gulp-less">gulp-less</a>，其实就是一个对<code>less</code>封装的<code>gulp</code>插件。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/scniro/gulp-clean-css">gulp-clean-css</a>，同样是<a target="_blank" rel="noopener" href="https://github.com/clean-css/clean-css">clean-css</a>的封装，用于清理没有使用的<code>css</code>样式。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/less/less-plugin-npm-import">less-plugin-npm-import</a>，<code>less</code>插件，可以在<code>less</code>文件中引入<code>npm</code>包样式文件。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/less/less-plugin-autoprefix">less-plugin-autoprefix</a>，<code>less</code>插件，顾名思义，自动补全各个浏览器的<strong>前缀</strong>。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> cleanCSS = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-clean-css&#x27;</span>)<br><span class="hljs-keyword">const</span> gulpLess = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;gulp-less&quot;</span>);<br><span class="hljs-keyword">const</span> NpmImportPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;less-plugin-npm-import&#x27;</span>)<br><span class="hljs-keyword">const</span> LessAutoprefix = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;less-plugin-autoprefix&#x27;</span>)<br><br><span class="hljs-keyword">const</span> LESS_COMPILE_OPTIONS = &#123;<br>  <span class="hljs-attr">paths</span>: [<span class="hljs-string">&#x27;node_modules&#x27;</span>],<br>  <span class="hljs-attr">plugins</span>: [npmImport, autoprefix],<br>  <span class="hljs-attr">relativeUrls</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">javascriptEnabled</span>: <span class="hljs-literal">true</span> <br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compileLess</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> destDirs = [<span class="hljs-string">&#x27;es&#x27;</span>, <span class="hljs-string">&#x27;lib&#x27;</span>]<br><br>  <span class="hljs-keyword">let</span> stream = gulp<br>    .src(<span class="hljs-string">&#x27;components/**/index.less&#x27;</span>, &#123; <span class="hljs-attr">allowEmpty</span>: <span class="hljs-literal">true</span> &#125;)<br>    <span class="hljs-comment">// less 转 css </span><br>    .pipe(gulpLess(LESS_COMPILE_OPTIONS))<br>    <span class="hljs-comment">// 清除无用css</span><br>    .pipe(cleanCSS())<br><br>  <span class="hljs-comment">// 将编译好的样式文件复制到 commonjs &amp; usm 目录下面</span><br>  destDirs.forEach(<span class="hljs-function">(<span class="hljs-params">dir</span>) =&gt;</span> &#123;<br>    stream = stream.pipe(gulp.dest(dir));<br>  &#125;);<br><br>  <span class="hljs-keyword">return</span> stream.on(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.error(error);<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="handleStyleJSEntry">handleStyleJSEntry</h4>
+<p>看名字的意思，处理样式的<code>js</code>入口文件，即<code>index.js</code>引入样式的文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// index.js </span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;../../style/index.less&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p>先看一下主方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleStyleJSEntry</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">await</span> compileCssJsEntry(&#123;<br>    <span class="hljs-attr">styleJSEntry</span>: <span class="hljs-string">&#x27;components/*/style/index.ts&#x27;</span>,<br>    <span class="hljs-attr">outDirES</span>: <span class="hljs-string">&#x27;es&#x27;</span>,<br>    <span class="hljs-attr">outDirCJS</span>: <span class="hljs-string">&#x27;lib&#x27;</span>,<br>  &#125;);<br><br>  <span class="hljs-keyword">await</span> injectPackageDepStyle(getComponentDirPattern([<span class="hljs-string">&#x27;es&#x27;</span>]));<br><br>  <span class="hljs-comment">// 为什么注释这个方法呢</span><br>  <span class="hljs-comment">// 看源码的话是用来改名的，并且好像并没有实际用到，所以不讲了(`へ´*)ノ</span><br>  <span class="hljs-comment">// renameStyleEntryFilename();</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>接着来一一看下里面的两个方法。</p>
+<ul>
+<li>
+<p><code>compileCssJsEntry</code><br>
+简单解释就是，把源代码里面的每一个组件的样式入口文件<code>index.ts</code>编译为两个文件<code>index.js</code>和<code>css.js</code>。</p>
+<ul>
+<li><code>index.js</code>里面还是原来的内容</li>
+<li><code>css.js</code>里面是引入的文件的经过编译的<code>css</code>文件<br>
+就像下面这样</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// index.ts内容</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;../../style/index.less&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span>;<br><br><span class="hljs-comment">// index.js内容</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;../../style/index.less&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span>;<br><br><span class="hljs-comment">// css.js内容</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;../../style/index.css&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.css&#x27;</span>;<br><br></code></pre></td></tr></table></figure>
+<p>为什么要这么做呢？这样其实就是方便了一些项目可能使用的并不是<code>less</code>预编译库，可以直接引入<code>css.js</code>。</p>
+<p>然后我们来看下代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compileCssJsEntry</span>(<span class="hljs-params">&#123;</span></span><br><span class="hljs-params"><span class="hljs-function">  styleJSEntry,</span></span><br><span class="hljs-params"><span class="hljs-function">  outDirES,</span></span><br><span class="hljs-params"><span class="hljs-function">  outDirCJS,</span></span><br><span class="hljs-params"><span class="hljs-function">&#125;</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> compile = <span class="hljs-function">(<span class="hljs-params"><span class="hljs-built_in">module</span></span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// xxx</span><br>  &#125;;<br><br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">const</span> asyncTasks = [];<br>    <span class="hljs-keyword">if</span> (fs.pathExistsSync(outDirES)) &#123;<br>      asyncTasks.push(compile(<span class="hljs-string">&#x27;es&#x27;</span>));<br>    &#125;<br>    <span class="hljs-keyword">if</span> (fs.pathExistsSync(outDirCJS)) &#123;<br>      asyncTasks.push(compile(<span class="hljs-string">&#x27;cjs&#x27;</span>));<br>    &#125;<br>    <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all(asyncTasks);<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    <span class="hljs-built_in">console</span>.error(error);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这一部分的话简单明了，就是创建了两个任务分别创建了<code>es</code>和<code>lib</code>目录的处理任务。<br>
+核心代码的话还是在<code>compile</code>方法里。</p>
+<p>下面用到了一个<code>gulp</code>插件<a target="_blank" rel="noopener" href="https://github.com/lazd/gulp-replace">gulp-replace</a>，是用来做文件内容替换的。<br>
+还有一个<a target="_blank" rel="noopener" href="https://github.com/hparra/gulp-rename">gulp-rename</a>，顾名思义是做文件重命名的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> replace = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-replace&#x27;</span>)<br><span class="hljs-keyword">const</span> rename = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp-rename&#x27;</span>)<br><br><span class="hljs-keyword">const</span> compile = <span class="hljs-function">(<span class="hljs-params"><span class="hljs-built_in">module</span></span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// styleJSEntry = components/*/style/index.ts</span><br>    gulp.src(styleJSEntry, &#123;<br>      <span class="hljs-attr">allowEmpty</span>: <span class="hljs-literal">true</span>,<br>      <span class="hljs-comment">// 看着一堆，其实就是 components</span><br>      <span class="hljs-attr">base</span>: styleJSEntry.replace(<span class="hljs-regexp">/(\/\*&#123;1,2&#125;)*\/style\/index\.[jt]s$/</span>, <span class="hljs-string">&#x27;&#x27;</span>),<br>    &#125;)<br>      <span class="hljs-comment">// 把文件里面的 .less 改成 .css</span><br>      .pipe(replace(<span class="hljs-string">&#x27;.less&#x27;</span>, <span class="hljs-string">&#x27;.css&#x27;</span>))<br>      .pipe(<br>        <span class="hljs-comment">// 源码中已经有注释来说明这一步的目的了，也就是我之前说的那个</span><br>        <span class="hljs-comment">// import &#x27;./index.css&#x27; =&gt; import &#x27;./index.css&#x27;</span><br>        <span class="hljs-comment">// import &#x27;../es/Button/style&#x27; =&gt; import &#x27;../es/Button/style/css.js&#x27;</span><br>        replace(<span class="hljs-regexp">/import\s+&#x27;(.+(?:\/style)?)(?:\/index.[jt]s)?&#x27;/g</span>, <span class="hljs-function">(<span class="hljs-params">_, $<span class="hljs-number">1</span></span>) =&gt;</span> &#123;<br>          <span class="hljs-keyword">const</span> suffix = $<span class="hljs-number">1.</span>endsWith(<span class="hljs-string">&#x27;/style&#x27;</span>) ? <span class="hljs-string">&#x27;/css.js&#x27;</span> : <span class="hljs-string">&#x27;&#x27;</span>;<br>          <span class="hljs-keyword">return</span> <span class="hljs-built_in">module</span> === <span class="hljs-string">&#x27;es&#x27;</span> ? <span class="hljs-string">`import &#x27;<span class="hljs-subst">$&#123;$<span class="hljs-number">1</span>&#125;</span><span class="hljs-subst">$&#123;suffix&#125;</span>&#x27;`</span> : <span class="hljs-string">`require(&#x27;<span class="hljs-subst">$&#123;$<span class="hljs-number">1</span>&#125;</span><span class="hljs-subst">$&#123;suffix&#125;</span>&#x27;)`</span>;<br>        &#125;)<br>      )<br>      .pipe(<br>        rename(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">path</span>) </span>&#123;<br>          <span class="hljs-comment">// css js </span><br>          path.basename = <span class="hljs-string">&#x27;css&#x27;</span>;<br>          path.extname = <span class="hljs-string">&#x27;.js&#x27;</span>;<br>        &#125;)<br>      )<br>      <span class="hljs-comment">// 输出到指定的目录</span><br>      .pipe(gulp.dest(<span class="hljs-built_in">module</span> === <span class="hljs-string">&#x27;es&#x27;</span> ? outDirES : outDirCJS))<br>      .on(<span class="hljs-string">&#x27;end&#x27;</span>, resolve)<br>      .on(<span class="hljs-string">&#x27;error&#x27;</span>, reject);<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p>injectPackageDepStyle</p>
+<p>接着来看一下<code>injectPackageDepStyle</code>方法。<br>
+首先是参数<code>getComponentDirPattern(['es'])</code></p>
+<blockquote>
+<p>省流 -&gt; return cwd/es/*</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getComponentDirPattern</span>(<span class="hljs-params">dirName</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> pathDir = <span class="hljs-string">`<span class="hljs-subst">$&#123;process.cwd()&#125;</span>/<span class="hljs-subst">$&#123;dirName.length &gt; <span class="hljs-number">1</span> ? <span class="hljs-string">`&#123;<span class="hljs-subst">$&#123;dirName.join(<span class="hljs-string">&#x27;,&#x27;</span>)&#125;</span>&#125;`</span> : dirName[<span class="hljs-number">0</span>]&#125;</span>`</span>;<br>  <span class="hljs-comment">// cwd/es</span><br>  <span class="hljs-keyword">let</span> pattern = pathDir;<br>  <span class="hljs-comment">// cwd/es/*/style/index.js </span><br>  <span class="hljs-comment">// 也就是上一步被编译好的样式入口文件</span><br>  <span class="hljs-keyword">if</span> (glob.sync(path.resolve(pathDir, <span class="hljs-string">&#x27;*/style/index.js&#x27;</span>)).length) &#123;<br>    <span class="hljs-comment">// cwd/es/*</span><br>    pattern = path.resolve(pathDir, <span class="hljs-string">&#x27;./*&#x27;</span>);<br>  &#125;<br>  <span class="hljs-keyword">return</span> pattern;<br>&#125;<br></code></pre></td></tr></table></figure>
+<!-- vinyl-fs -->
+<p>接着是主方法</p>
+<p>下面用到一个插件<a target="_blank" rel="noopener" href="https://github.com/gulpjs/vinyl-fs">vinyl-fs</a>，用来做文件解析处理。<br>
+还有一个<a href="%E6%96%87%E4%BB%B6%E6%B5%81%E5%A4%84%E7%90%86">through2</a>，文件流处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> vfs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;vinyl-fs&quot;</span>)<br><span class="hljs-keyword">const</span> through = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;through2&quot;</span>)<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">injectPackageDepStyle</span>(<span class="hljs-params">componentEsDirPattern</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// cwd/es/*/index.js</span><br>    <span class="hljs-keyword">const</span> esEntry = path.resolve(componentEsDirPattern, <span class="hljs-string">&#x27;index.js&#x27;</span>);<br><br>    <span class="hljs-comment">// ***这里比较奇怪***</span><br>    <span class="hljs-keyword">if</span> (!fs.existsSync(esEntry)) &#123;<br>      resolve(<span class="hljs-literal">null</span>);<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    vfs<br>      <span class="hljs-comment">// 解析所有复合条件的目标文件</span><br>      .src(esEntry, &#123;<br>        <span class="hljs-attr">allowEmpty</span>: <span class="hljs-literal">true</span>,<br>        <span class="hljs-comment">// /es/*</span><br>        <span class="hljs-attr">base</span>: componentEsDirPattern,<br>      &#125;)<br>      .pipe(<br>        through.obj(<span class="hljs-keyword">async</span> (file, _, cb) =&gt; &#123;<br>          <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 这一部分下面接着讲</span><br>            <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all([<br>              transformStyleEntryContent(&#123;<br>                <span class="hljs-attr">esEntryPath</span>: file.path,<br>                <span class="hljs-attr">module</span>: <span class="hljs-string">&#x27;es&#x27;</span>,<br>              &#125;),<br>              transformStyleEntryContent(&#123;<br>                <span class="hljs-attr">esEntryPath</span>: file.path,<br>                <span class="hljs-attr">module</span>: <span class="hljs-string">&#x27;cjs&#x27;</span>,<br>              &#125;),<br>            ]);<br>          &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>            <span class="hljs-built_in">console</span>.error(error);<br>          &#125;<br>          cb(<span class="hljs-literal">null</span>);<br>          resolve(<span class="hljs-literal">null</span>);<br>        &#125;)<br>      );<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>上面标注了一段非常奇怪的代码，<code>fs.existsSync(esEntry)</code>，实际的esEntry=<code>process.cwd()/es/*/index.js</code>，但是看下好像<code>fs.existsSync</code>并不支持<code>*</code>这类标识符，所以一直会返回<code>false</code>，它后面的代码根本不会执行，不知道是为什么，可能是我没理解，有懂的可以下面说下👁。<br>
+所以我们暂时忽略这串代码，直接走下面的逻辑。</p>
+</blockquote>
+<ul>
+<li>
+<p><code>transformStyleEntryContent</code></p>
+<p>里面用到了<code>transformStyleEntryContent</code>这个方法(俄罗斯套娃一样，一层又一层🤷🏻‍♀️)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">transformStyleEntryContent</span>(<span class="hljs-params">&#123;</span></span><br><span class="hljs-params"><span class="hljs-function">  esEntryPath,</span></span><br><span class="hljs-params"><span class="hljs-function">  <span class="hljs-built_in">module</span>,</span></span><br><span class="hljs-params"><span class="hljs-function">&#125;</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> replaceStyleEntryContent = <span class="hljs-keyword">async</span> (type) =&gt; &#123;<br>    <span class="hljs-comment">// xxx </span><br>  &#125;;<br><br>  <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all([<br>    replaceStyleEntryContent(<span class="hljs-string">&#x27;less&#x27;</span>),<br>    replaceStyleEntryContent(<span class="hljs-string">&#x27;css&#x27;</span>),<br>  ]);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>看名字来看就是替换样式入口文件内容的自已。我们接着看<code>replaceStyleEntryContent</code></p>
+<ul>
+<li>
+<p><code>replaceStyleEntryContent</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> replaceStyleEntryContent = <span class="hljs-keyword">async</span> (type) =&gt; &#123;<br>  <span class="hljs-comment">// 前面方法的参数 es &amp; cjs  </span><br>  <span class="hljs-keyword">const</span> moduleDirName = <span class="hljs-built_in">module</span> === <span class="hljs-string">&#x27;es&#x27;</span> ? <span class="hljs-string">&#x27;es&#x27;</span> : <span class="hljs-string">&#x27;lib&#x27;</span>;<br>  <span class="hljs-comment">// index.js | css.js </span><br>  <span class="hljs-keyword">const</span> styleEntryFileName =<br>    type === <span class="hljs-string">&#x27;less&#x27;</span><br>      ? <span class="hljs-string">&#x27;index.js&#x27;</span><br>      : <span class="hljs-string">&#x27;css.js&#x27;</span>;<br>  <span class="hljs-comment">// 把路径修改成置顶模块的路径</span><br>  <span class="hljs-comment">// 最终就是 (es | lib)/xx/style/(index | css).js</span><br>  <span class="hljs-keyword">const</span> styleEntryPath = path<br>    <span class="hljs-comment">// esEntryPath 就是正在解析的那个文件的目录</span><br>    <span class="hljs-comment">// path.dirname(esEntryPath) 就是这个文件的所在的文件夹的位置</span><br>    <span class="hljs-comment">// 其实就是 es/xx/style/(index | css).js</span><br>    .resolve(path.dirname(esEntryPath), <span class="hljs-string">`./style/<span class="hljs-subst">$&#123;styleEntryFileName&#125;</span>`</span>)<br>    <span class="hljs-comment">// 接着把目录改成需要的模块的目录</span><br>    .replace(<span class="hljs-string">&#x27;/es/&#x27;</span>, <span class="hljs-string">`/<span class="hljs-subst">$&#123;moduleDirName&#125;</span>/`</span>);<br><br>  <span class="hljs-comment">// 这个里面有一串比较奇怪的代码，我们单独下面讲解</span><br>  <span class="hljs-keyword">if</span> (fs.pathExistsSync(styleEntryPath)) &#123;<br>    <span class="hljs-comment">// xxx </span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>上面的<code>if</code>里面还有一串的代码，比较奇怪，所以我们单独放在这里讲<br>
+在文件最外层有一个<code>dependenciesCacheMap</code>变量， 它是一个对象。</p>
+<p>还有这么一个变量<code>LIBRARY_PACKAGE_NAME</code>表示的是你的组件库的包名(我们这里取名<code>your-package-name</code>)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">if</span>(fs.pathExistsSync(styleEntryPath)) &#123;<br>  <span class="hljs-keyword">let</span> styleIndexContent = fs.readFileSync(styleEntryPath, <span class="hljs-string">&#x27;utf8&#x27;</span>);<br><br>  <span class="hljs-keyword">if</span> (!dependenciesCacheMap[esEntryPath]) &#123;<br>    dependenciesCacheMap[esEntryPath] = <span class="hljs-keyword">await</span> parsePackageImports(<br>      esEntryPath,<br>      LIBRARY_PACKAGE_NAME<br>    );<br>  &#125;<br><br>  dependenciesCacheMap[esEntryPath].forEach(<span class="hljs-function">(<span class="hljs-params">dep</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> depStyleRequirePath = <span class="hljs-string">`<span class="hljs-subst">$&#123;LIBRARY_PACKAGE_NAME&#125;</span>/<span class="hljs-subst">$&#123;moduleDirName&#125;</span>/<span class="hljs-subst">$&#123;dep&#125;</span>/style/<span class="hljs-subst">$&#123;styleEntryFileName&#125;</span>`</span>;<br>    <span class="hljs-keyword">if</span> (styleIndexContent.indexOf(depStyleRequirePath) === -<span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-keyword">const</span> expression =<br>        <span class="hljs-built_in">module</span> === <span class="hljs-string">&#x27;es&#x27;</span><br>          ? <span class="hljs-string">`import &#x27;<span class="hljs-subst">$&#123;depStyleRequirePath&#125;</span>&#x27;;\n`</span><br>          : <span class="hljs-string">`require(&#x27;<span class="hljs-subst">$&#123;depStyleRequirePath&#125;</span>&#x27;);\n`</span>;<br>      styleIndexContent = <span class="hljs-string">`<span class="hljs-subst">$&#123;expression&#125;</span><span class="hljs-subst">$&#123;styleIndexContent&#125;</span>`</span>;<br>    &#125;<br>  &#125;);<br><br>  fs.writeFileSync(styleEntryPath, styleIndexContent);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>首先他有一个<code>dependenciesCacheMap</code>用来存储所有已经被解析过的文件模块，避免重复解析。<br>
+如果<code>dependenciesCacheMap[esEntryPath]</code>不存在时，就会使用<code>parsePackageImports</code>来解析模块。<br>
+<code>parsePackageImports</code>是使用<a target="_blank" rel="noopener" href="https://github.com/MisterLuffy/parse-es-import">parse-es-import</a>来解析每个<code>es/*/index.js</code>的引入。<br>
+如果是<strong>第三方</strong>的模块且是<code>LIBRARY_PACKAGE_NAME</code>，那么就是收集该模块的<strong>所有引入</strong>。<br>
+如果是<strong>相对路径</strong>模块，则递归调用<code>parsePackageImports</code>，继续解析该引入的模块。<br>
+收集完所有的<code>LIBRARY_PACKAGE_NAME</code>引入，即<code>parsePackageImports</code>的返回值，即<code>dependenciesCacheMap[esEntryPath]</code>。<br>
+接着再遍历，拼接出新的引入模块（对应模块的样式），添加到<code>styleEntryPath</code>内容中。</p>
+<p>个人理解的话，就是组件当中引入了自己本身的第三方模块，然后自动引入该模块的样式文件。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="distLess-distCss">distLess &amp; distCss</h3>
+<h4 id="distLess">distLess</h4>
+<p>把所有组件的入口<code>less</code>文件自动集中到一个<code>less</code>文件中，并放到<code>dist</code>目录下。</p>
+<p>大概就是如下这样的结构。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;../../es/style/mixins/index.less&quot;</span>;<br><span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;../../es/style/index.less&quot;</span>;<br><span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;../../es/_class/Draggable/style/index.less&quot;</span>;<br><span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;../../es/_class/picker/style/index.less&quot;</span>;<br><span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;../../es/Affix/style/index.less&quot;</span>;<br><span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;../../es/Alert/style/index.less&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p>简单流程就是找到<code>components/xx/index.less</code>文件（所以目录结构有规范，默认认为<code>index.less</code>为组件等的入口样式文件），<strong>路径</strong>修改后，字符串拼接出需要的语法，合并到一个字符串中，并写入对应的文件中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">distLess</span>(<span class="hljs-params">cb</span>) </span>&#123;<br>  <span class="hljs-comment">// 输出的目录</span><br>  <span class="hljs-keyword">const</span> distPath = <span class="hljs-string">&#x27;dist/css&#x27;</span><br>  <span class="hljs-comment">// 输出文件名称</span><br>  <span class="hljs-keyword">const</span> rawFileName = <span class="hljs-string">&#x27;index.less&#x27;</span><br>  <span class="hljs-comment">// 找到所有的样式文件目录</span><br>  <span class="hljs-keyword">const</span> entries = glob.sync(<span class="hljs-string">&#x27;components/**/index.less&#x27;</span>)<br><br>  <span class="hljs-keyword">if</span> (entries.length) &#123;<br>    <span class="hljs-keyword">const</span> texts = [];<br><br>    entries.forEach(<span class="hljs-function">(<span class="hljs-params">entry</span>) =&gt;</span> &#123;<br>      <span class="hljs-comment">// components/**/index.less -&gt; es/**/index.less</span><br>      <span class="hljs-keyword">const</span> esEntry = <span class="hljs-string">&#x27;es&#x27;</span> + entry.slice(entry.indexOf(<span class="hljs-string">&#x27;/&#x27;</span>));<br>      <span class="hljs-comment">// 相对于distPath 的相对路径</span><br>      <span class="hljs-comment">// relative 的意思是 esEntry相对于distPath的相对路径</span><br>      <span class="hljs-keyword">const</span> relativePath = path.relative(distPath, esEntry);<br>      <span class="hljs-keyword">const</span> text = <span class="hljs-string">`@import &quot;<span class="hljs-subst">$&#123;relativePath&#125;</span>&quot;;`</span>;<br><br>      <span class="hljs-comment">// 下面的代码控制的写入顺序，也就是引入顺序</span><br>      <span class="hljs-comment">// 个人的理解应该是 es/style 开头表示为组件的样式，其余的样式写在后面，即其余样式能覆盖组件的样式</span><br>      <span class="hljs-keyword">if</span> (esEntry.startsWith(<span class="hljs-string">`es/style`</span>)) &#123;<br>        texts.unshift(text);<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        texts.push(text);<br>      &#125;<br>    &#125;);<br><br>    <span class="hljs-comment">// 输出文件</span><br>    fs.outputFileSync(<span class="hljs-string">`<span class="hljs-subst">$&#123;distPath&#125;</span>/<span class="hljs-subst">$&#123;rawFileName&#125;</span>`</span>, texts.join(<span class="hljs-string">&#x27;\n&#x27;</span>));<br>  &#125;<br><br>  cb();<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h4 id="distCss">distCss</h4>
+<p>将上一步(<code>distLess</code>)生成的<code>less</code>文件转换成单个<code>css</code>文件，其目的就是能在<code>umd</code>模式下能全量引入所有组件的样式。<br>
+比如：<code>import 'package-components/dist/css/index.min.css'</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">distCss</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// 输出的文件目录</span><br>  <span class="hljs-keyword">const</span> distPath = <span class="hljs-string">&#x27;dist/css&#x27;</span><br>  <span class="hljs-comment">// 指定的 less 文件</span><br>  <span class="hljs-keyword">const</span> rawFileName = <span class="hljs-string">&#x27;index.less&#x27;</span><br>  <span class="hljs-comment">// 指定输出的 css 文件</span><br>  <span class="hljs-keyword">const</span> cssFileName = <span class="hljs-string">&#x27;index.css&#x27;</span><br><br>  <span class="hljs-keyword">let</span> stream = gulp.src(<span class="hljs-string">`<span class="hljs-subst">$&#123;distPath&#125;</span>/<span class="hljs-subst">$&#123;rawFileName&#125;</span>`</span>, &#123; <span class="hljs-attr">allowEmpty</span>: <span class="hljs-literal">true</span> &#125;);<br><br>  <span class="hljs-comment">// 将less文件编译成css</span><br>  <span class="hljs-comment">// 这里的步骤和 上面 compileLess 任务中的编译其实是同一个逻辑    </span><br>  stream = stream.pipe(gulpLess(LESS_COMPILE_OPTIONS));<br><br>  <span class="hljs-keyword">return</span> stream<br>    .pipe(<br>      <span class="hljs-comment">// 把样式文件当中一些引入的静态资源文件 更换路径到 dist下面的路径</span><br>      replace(<br>        <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">&#x27;(\.&#123;2&#125;\/)+es&#x27;</span>, <span class="hljs-string">&#x27;g&#x27;</span>),<br>        path.relative(distPath, ASSET_FILE_OUTPUT)<br>      )<br>    )<br>    <span class="hljs-comment">// 清理无用样式</span><br>    .pipe(cleanCSS())<br>    <span class="hljs-comment">// 改名为 index.css</span><br>    .pipe(rename(cssFileName))<br>    .pipe(gulp.dest(distPath))<br>    .on(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> &#123;<br>      <span class="hljs-built_in">console</span>.error(error);<br>    &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="结束">结束</h2>
+<p>关于上面的代码，可以参考下<a target="_blank" rel="noopener" href="https://github.com/food-billboard/food-billboard.github.io/tree/hexo/source/demo-package/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83">简化的代码</a>，其实就是<code>cv</code>了<code>arco-scripts</code>的代码🌶。</p>
+<p>结束 🔚。</p>
+<p>参考链接</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/lio-mengxiang/mx-design-cli/issues/16">【目录】组件库打包 cli 教程</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/lio-mengxiang/mx-design-cli/issues/13">react 组件库打包指南</a><br>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/365329097">每天一个npm包：through2</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/%E9%85%8D%E7%BD%AE/">配置</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/frontend/">frontend</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/25/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83-umd%E6%89%93%E5%8C%85/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">组件库打包配置参考-umd打包</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/19/%E7%BB%84%E4%BB%B6%E5%BA%93%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83-esm&amp;cjs%E6%89%93%E5%8C%85/">
+                        <span class="hidden-mobile">组件库打包配置参考-esm&cjs打包</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> <script src="/js/code-viewer.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300,"mobile":{"show":true}},"log":false});</script></body>
+</html>
