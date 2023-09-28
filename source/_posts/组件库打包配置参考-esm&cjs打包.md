@@ -2,8 +2,8 @@
 title: 组件库打包配置参考-esm&cjs打包
 date: 2023-09-19 17:18:00
 tags: frontend
-banner_img: /images/组件库打包配置参考/background.png
-index_img: /images/组件库打包配置参考/background.png
+banner_img: /images/组件库打包配置参考/background.jpg
+index_img: /images/组件库打包配置参考/background.jpg
 categories:
   - 前端
   - 配置
