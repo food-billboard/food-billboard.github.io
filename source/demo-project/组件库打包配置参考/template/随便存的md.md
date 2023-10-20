@@ -1,0 +1,294 @@
+---
+title: 组件库打包配置参考-umd打包
+date: 2023-09-25 10:55:00
+tags: frontend 
+banner_img: /images/组件库打包配置参考/background.png
+index_img: /images/组件库打包配置参考/background.png
+categories: 
+  - 前端  
+  - 配置
+---
+
+# 组件库打包配置参考-umd打包 
+
+今天讲讲关于组件库打包的`umd`打包，这里拿[arco-design](https://arco.design/)的打包工具[arco-cli](https://github.com/arco-design/arco-cli/tree/1.x/packages/arco-scripts)的`1.0`版本来讲解。
+
+### 开始前
+
+> 下面展示的代码可能是笔者更改过的，请勿过分较真(`へ´*)ノ。  
+
+## 开始  
+
+### babel相关包功能  
+
+#### @babel/preset-env
+
+#### @babel/preset-typescript
+
+#### @babel/preset-react  
+
+### 代码 
+
+```js 
+const webpack = require('webpack')
+const TerserPlugin = require('terser-webpack-plugin')
+const pkg = require('../package.json')
+
+webpack(
+  {
+    // 入口
+    entry: './es/build.js',
+    // 目标环境
+    target: 'browserslist:>0.25%, not dead, not op_mini all',
+    // 模式
+    mode: 'production',
+    output: {
+      clean: true,
+      filename: 'qsb-file-viewer.min.js',
+      libraryTarget: 'umd',
+      library: 'qsbFileViewer',
+    },
+    externals: {
+      react: 'React',
+      'react-dom': 'ReactDOM',
+      moment: 'moment',
+      antd: 'antd',
+      axios: 'axios',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.m?js$/,
+          loader: 'babel-loader',
+          options: {
+            // 缓存编译结果
+            cacheDirectory: true,
+            // 包含gzip
+            cacheCompression: false,
+            // 是否使用babelrc
+            babelrc: false,
+            // 是否使用配置文件
+            configFile: false,
+            // 编译的类型 script module unambiguous(存在import/export就是module，否则是script)
+            sourceType: 'unambiguous',
+            // 去除换行和空格
+            compact: false,
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  // "amd" | "umd" | "systemjs" | "commonjs" | "cjs" | "auto" | false
+                  // esm 转换为某一种规范类型
+                  modules: 'umd',
+                  // 是否自动引入polyfill
+                  // false 
+                  // entry(手动引入) 根据target会自动根据引入的模块进行兼容，比如引入了promise，他会把所有promise的模块都帮助引入，比如promise.any
+                  // usage(根据使用情况自动引入) 完全交给babel处理，使用到什么就引入什么，但是比如如果只是使用了promise，则不会引入promise.any 
+                  useBuiltIns: 'entry',
+                  corejs: 3,
+                  // corejs: {
+                  //   version: 3,
+                  //   // 编译提案的api 
+                  //   proposals: false
+                  // },
+                  // Exclude transforms that make all code slower
+                  exclude: ['transform-typeof-symbol'],
+                },
+              ],
+            ],
+            plugins: [
+              [
+                // 配合@babel/runtime 将辅助函数等 注入到代码中
+                '@babel/plugin-transform-runtime', 
+                {
+                  // 兼容模式(不污染全局局部变量)  
+                  // 这里的corejs 和 前面 preset-env 用一个就行了
+                  corejs: false,
+                  version: require('@babel/runtime/package.json').version,
+                  // true 引入函数 false 内联函数
+                  helpers: true,
+                  // async 和 * function 的语法支持 
+                  // 是否为引入（或者内联）
+                  regenerator: true,
+                },
+              ],
+            ],
+          },
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/inline',
+        },
+        {
+          test: /\.css$/, //匹配 css 文件
+          use: [
+            {
+              loader: 'style-loader',
+              options: {
+                attributes: {
+                  'data-module': pkg.name,
+                  'data-version': pkg.version,
+                },
+              },
+            },
+            'css-loader'
+          ]
+        },
+        {
+          test: /\.less$/,
+          use: [
+            {
+              loader: 'style-loader',
+              options: {
+                attributes: {
+                  'data-module': pkg.name,
+                  'data-version': pkg.version,
+                },
+              },
+            },
+            'css-loader',
+            {
+              loader: 'less-loader',
+              options: {
+                lessOptions: {
+                  javascriptEnabled: true,
+                },
+              },
+            },
+          ],
+        },
+      ],
+    },
+    plugins: [new webpack.ProgressPlugin()],
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          extractComments: false,
+          terserOptions: {
+            parse: {
+              // We want terser to parse ecma 8 code. However, we don't want it
+              // to apply any minification steps that turns valid ecma 5 code
+              // into invalid ecma 5 code. This is why the 'compress' and 'output'
+              // sections only apply transformations that are ecma 5 safe
+              // https://github.com/facebook/create-react-app/pull/4234
+              ecma: 8,
+            },
+            compress: {
+              pure_funcs: ['console.log'],
+              drop_debugger: true,
+              ecma: 5,
+              warnings: false,
+              // Disabled because of an issue with Uglify breaking seemingly valid code:
+              // https://github.com/facebook/create-react-app/issues/2376
+              // Pending further investigation:
+              // https://github.com/mishoo/UglifyJS2/issues/2011
+              comparisons: false,
+              // Disabled because of an issue with Terser breaking valid code:
+              // https://github.com/facebook/create-react-app/issues/5250
+              // Pending further investigation:
+              // https://github.com/terser-js/terser/issues/120
+              inline: 2,
+            },
+            mangle: {
+              safari10: true,
+            },
+            // Added for profiling in devtools
+            keep_classnames: false,
+            keep_fnames: false,
+            output: {
+              ecma: 5,
+              comments: false,
+              // Turned on because emoji and regex is not minified properly using default
+              // https://github.com/facebook/create-react-app/issues/2488
+              ascii_only: true,
+            },
+          },
+        }),
+      ],
+    },
+    performance: {
+      maxEntrypointSize: 1024 * 1024,
+      maxAssetSize: 1024 * 1024,
+    },
+  },
+  (error, stats) => {
+    if (error) {
+      console.error(error)
+      process.exit(1)
+    }
+
+    if (stats.compilation.errors.length) {
+      console.log(stats.toString({ all: false, errors: true, colors: true }))
+      process.exit(1)
+    }
+
+    console.log(stats.toString({ colors: true }))
+  }
+)
+```
+  
+### cjs  
+
+#### babel 
+```js
+module.exports = {
+  presets: [
+    '@babel/preset-env', 
+    '@babel/preset-typescript', 
+    '@babel/preset-react'
+  ],
+  plugins: [
+    '@babel/proposal-class-properties',
+    [
+      '@babel/plugin-transform-runtime',
+      // ? 去掉下方配置，由业务项目控制相关的配置  
+      // {
+      //   corejs: 3,
+      //   helpers: true,
+      // },
+    ],
+  ],
+}
+```
+
+### 类型导出
+
+第三方包类型提示  
+- package.json  
+```json
+{
+  "typings": "types/index.d.ts",
+  "scripts": {
+    "build:types": "rimraf types && tsc --outDir types --declaration --emitDeclarationOnly",
+  }
+}
+```
+
+### 其他  
+
+#### sideEffects  
+  tree-shaking 去除无用代码  
+
+```js
+// 所有文件都没有副作用，全都可以删除
+var sideEffects = false 
+
+// 指定目录或文件没有副作用
+var sideEffects = [
+  "dist/*",
+  "esm/**/style/*",
+  "lib/**/style/*",
+  "*.less"
+]
+
+```
+
+## 结束  
+
+  结束🔚。    
+
+参考链接  
+> [Babel7 中 @babel/preset-env 的使用](https://zhuanlan.zhihu.com/p/84799735)  
+> [【目录】组件库打包cli教程](https://github.com/lio-mengxiang/mx-design-cli/issues/16)   
+> [react 组件库打包指南](https://github.com/lio-mengxiang/mx-design-cli/issues/13)   
+> [css-loader中importLoaders的理解](https://zhuanlan.zhihu.com/p/94706976)    

@@ -6,3 +6,10 @@ node_modules/
 public/
 .deploy*/
 /.history
+/source/demo-project/**/node_modules/
+/source/demo-project/**/es/
+/source/demo-project/**/dist/
+/source/demo-project/**/lib/
+/source/demo-project/**/.history/
+/source/demo-project/**/debugger-template/
+/source/demo-project/**/debugger-template-pdf/
