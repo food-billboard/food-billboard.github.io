@@ -1,4 +1,19 @@
+---
+title: threejs简单使用记录-着色器
+date: 2023-10-24 18:36:00
+tags: frontend
+banner_img: /images/threejs简单使用记录/background.jpg
+index_img: /images/threejs简单使用记录/background.jpg
+categories: 
+  - 前端   
+  - CSS
+---
+
+# threejs简单使用记录-着色器  
+
 ## vscode配置
+  配置`vscode`扩展，方便在`vscode`中直接预览`glsl`效果。  
+
   1. 下载`shader languages support for VS Code`扩展，语法高亮  
   2. 下载`GLSL Lint`扩展，代码错误检查  
   3. 下载`glsl-canvas`扩展，预览`glsl`  
@@ -1089,9 +1104,8 @@
   ```
   8. 重启`vscode`后可以`cmd + shift + p`使用`show glslCanvas`来实现预览`glsl`文件效果  
 
-  [史上最全 mac 环境 vscode 配置GLSL 图文详解](https://blog.csdn.net/huhuan123456/article/details/130511818)
-
 ## glsl配置
+  为了在`webpack`中引入使用`glsl`文件，需要额外的一些配置。  
 
   - 安装对应的`loader`，`raw-loader`和`glslify-loader`  
   - 新增`webpack`配置  
@@ -1123,6 +1137,7 @@
 ## glsl语法  
 
 ```glsl
+  // 数据类型
   int int_num = 20;
   float float_num = 20.0;
   bool bool_data = true;
@@ -1133,9 +1148,13 @@
   vec3 vec3_4_vec2 = vec3(vec2_pos, 3.0);
   vec4 vec4_pos = vec4(1.0, 2.0, 3.0, 4.0);
 
+  // 定义变量的格式
   // <存储限定符> <数据类型> <变量名称>
   attribute vec2 vec2_data = vec2(1.0, 2.0);
+  uniform float num;
+  varying bool another_bool;
 
+  // 函数
   bool fn_method() {
     return true;
   }
@@ -1159,66 +1178,10 @@
   不带任何**初始值**的材质  
 
 
+## 结束
 
-# 一些typescript的常用tips 
+  结束🔚。  
 
-## 命名空间
-
-```typescript
-declare namespace API {
-  export type User = {
-    username: string 
-  }
-}
-```
-
-## 文件后缀名扩展
-```typescript
-  declare module '*.css'
-
-  declare module '*.svg' {
-    export function ReactComponent(
-      props: React.SVGProps<SVGSVGElement>,
-    ): React.ReactElement;
-    const url: string;
-    export default url;
-  }
-```
-
-## React的useCallback参数类型
-```typescript
-  declare namespace React {
-    // useCallback parameters are implicitly typed to any.
-    // This override has the effect of forcing you to write types any parameters you want to use.
-    // See https://github.com/DefinitelyTyped/DefinitelyTyped/issues/52873
-    function useCallback<T extends (...args: any[]) => any>(
-      callback: T,
-      deps: readonly any[],
-    ): T;
-  }
-```
-
-## SuperPartial
-```typescript
-  type OptionalFlat<O> = {
-    [K in keyof O]?: O[K];
-  } & {};
-
-  type OptionalDeep<O> = {
-    [K in keyof O]?: OptionalDeep<O[K]>;
-  };
-
-  type OptionalPart<O extends object, depth extends Depth> = {
-    flat: OptionalFlat<O>;
-    deep: OptionalDeep<O>;
-  }[depth]
-
-  type Depth = 'flat' | 'deep'
-
-  type InternalPartial<
-    O extends object,
-    depth extends Depth = 'flat',
-  > = OptionalPart<O, depth>
-
-  declare type SuperPartial<T extends object> = InternalPartial<T, 'deep'>
-```
+  参考资料  
+> [Three.js 进阶之旅](https://juejin.cn/column/7140122697622618119)  
+> [史上最全 mac 环境 vscode 配置GLSL 图文详解](https://blog.csdn.net/huhuan123456/article/details/130511818)  

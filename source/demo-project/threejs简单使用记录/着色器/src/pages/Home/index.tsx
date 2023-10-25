@@ -3,6 +3,7 @@ import * as Three from 'three'
 import ThreeInitial, { ThreeInitialRef } from "@/components/ThreeInitial";
 import vertexShader from './constants/glsl/vetex.glsl'
 import fragmentShader from './constants/glsl/fragment.glsl'
+import texture from '@/assets/头像.jpg'
 
 function Home() {
   const threeRef = useRef<ThreeInitialRef>(null);
@@ -45,6 +46,7 @@ function Home() {
 
     // 原始着色器材质
     materialRef.current = new Three.RawShaderMaterial({
+      side: Three.DoubleSide,
       vertexShader,
       fragmentShader,
       // 使透明生效
@@ -55,7 +57,7 @@ function Home() {
         uFrequency: { value: new Three.Vector2(10, 5) },
         uTime: { value: 0 },
         uColor: { value: new Three.Color('orange') },
-        uTexture: { value: textureLoader.load('./头像.jpg') }
+        uTexture: { value: textureLoader.load(texture) }
       }
     })
     

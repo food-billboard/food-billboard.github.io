@@ -1,5 +1,5 @@
 ---
-title: threejs简单使用记录
+title: threejs简单使用记录-初始化
 date: 2023-10-20 16:36:00
 tags: frontend
 banner_img: /images/threejs简单使用记录/background.jpg
@@ -9,7 +9,7 @@ categories:
   - CSS
 ---
 
-# threejs简单使用记录  
+# threejs简单使用记录-初始化  
 
 ## 渲染初始化
 ```js
@@ -64,14 +64,9 @@ tick();
 
 ```
 
-## 粒子  
+## 结束
 
-### Sprite 
+    结束🔚。  
 
-```js
-  let material = new THREE.SpriteMaterial({
-    color: Math.random() * 0xffffff
-  });
-  let sprite = new THREE.Sprite(material);
-  sprite.position.set(x * 4, y * 4, 0)
-```
+    参考资料  
+> [Three.js 进阶之旅](https://juejin.cn/column/7140122697622618119)
