@@ -62,6 +62,11 @@ const ThreeInitial = forwardRef<ThreeInitialRef, Props>((props, ref) => {
       scene.current = new Scene();
       targetScene.current = new Scene();
 
+      // 显示坐标系
+      // (x轴: 红色; y轴: 绿色; z轴: 蓝色 rgb)
+      const axesHelper = new THREE.AxesHelper(10)
+      scene.current.add(axesHelper)
+
       // 初始化相机
       camera.current = new PerspectiveCamera(55, width / height, 0.1, 1000);
       camera.current.position.set(0, 0, 2);
@@ -80,8 +85,8 @@ const ThreeInitial = forwardRef<ThreeInitialRef, Props>((props, ref) => {
       // 缩放限制
       controls.current.maxDistance = 12;
       // 垂直旋转限制
-      controls.current.minPolarAngle = Math.PI / 2;
-      controls.current.maxPolarAngle = Math.PI / 2;
+      // controls.current.minPolarAngle = Math.PI / 2;
+      // controls.current.maxPolarAngle = Math.PI / 2;
 
       onCreate?.();
     }

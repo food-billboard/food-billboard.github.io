@@ -42,7 +42,8 @@ categories:
 ### postversion  
   更新版本后触发  
 
-
+### npm root -g  
+  `npm`全局的下载路径  
 
 ## 结束  
 

@@ -26,8 +26,6 @@ function Home() {
     // 纹理
     const textureLoader = new Three.TextureLoader()
 
-    Three.PlaneGeometry
-
     // // 原始着色器材质
     // materialRef.current = new Three.RawShaderMaterial({
     //   vertexShader,

@@ -3,9 +3,11 @@ import { defineConfig } from "umi";
 export default defineConfig({
   routes: [
     { path: "/", component: "Home" },
+    { path: "/advanced", component: "Advanced" },
+    { path: "/media", component: "MultiMedia" },
   ],
   npmClient: 'yarn',
-  chainWebpack(memo, { env, webpack }) {
+  chainWebpack(memo) {
     const glslReg = /\.(glsl|vs|fs)$/
     memo
     .module

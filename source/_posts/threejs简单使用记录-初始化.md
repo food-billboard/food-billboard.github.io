@@ -36,6 +36,11 @@ camera.position.z = 120
 camera.lookAt(new THREE.Vector3(0, 0, 0))
 scene.add(camera);
 
+// 显示坐标系
+// (x轴: 红色; y轴: 绿色; z轴: 蓝色 rgb)
+const axesHelper = new THREE.AxesHelper(10)
+scene.add(axesHelper)
+
 // 镜头控制器
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -69,4 +74,6 @@ tick();
     结束🔚。  
 
     参考资料  
-> [Three.js 进阶之旅](https://juejin.cn/column/7140122697622618119)
+> [Three.js 进阶之旅](https://juejin.cn/column/7140122697622618119)  
+> [全景图片下载](https://polyhaven.com/hdris)   
+> [全景图片格式生成](https://matheowis.github.io/HDRI-to-CubeMap/)  
