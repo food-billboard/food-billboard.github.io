@@ -7,10 +7,10 @@
     "build:raspberry": "hexo generate --debug --config ./_config.raspberry.yml",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "deploy:raspberry": "node ./scripts/raspberryDeploy.js",
+    "deploy:raspberry": "node ./bin/raspberryDeploy.js",
     "server": "hexo server -p 4001",
     "create": "hexo new post",
-    "build-and-deploy-raspberry": "npm run clean && npm run build && npm run deploy:raspberry",
+    "build-and-deploy-raspberry": "npm run clean && npm run build:raspberry && npm run deploy:raspberry",
     "build-and-deploy": "npm run clean && npm run build && npm run deploy"
   },
   "hexo": {
