@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "build": "hexo generate",
+    "build:raspberry": "hexo generate --debug --config ./_config.raspberry.yml",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
+    "deploy:raspberry": "node ./scripts/raspberryDeploy.js",
     "server": "hexo server -p 4001",
     "create": "hexo new post",
+    "build-and-deploy-raspberry": "npm run clean && npm run build && npm run deploy:raspberry",
     "build-and-deploy": "npm run clean && npm run build && npm run deploy"
   },
   "hexo": {
@@ -28,5 +31,10 @@
     "hexo-server": "^1.0.0",
     "hexo-theme-fluid": "^1.8.12",
     "live2d-widget-model-shizuku": "^1.0.5"
+  },
+  "devDependencies": {
+    "chalk": "4.1.0",
+    "dotenv": "^16.4.5",
+    "ssh2-sftp-client": "9.1.0"
   }
 }

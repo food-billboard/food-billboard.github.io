@@ -2,8 +2,10 @@
 Thumbs.db
 db.json
 *.log
+_config.raspberry.yml
 node_modules/
 public/
+dotconfig
 .deploy*/
 /.history
 /source/demo-project/**/node_modules/
