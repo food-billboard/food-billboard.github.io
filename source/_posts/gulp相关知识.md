@@ -1,10 +1,10 @@
 ---
-title  gulp相关知识  
-date  2023-09-09 10 42 00
-tags  frontend 
-banner_img  /images/gulp相关知识/background.png
-index_img  /images/gulp相关知识/background.png
-categories  
+title: gulp相关知识  
+date: 2023-09-09 10 42 00
+tags: frontend 
+banner_img: /images/gulp相关知识/background.png
+index_img: /images/gulp相关知识/background.png
+categories:  
   - 前端  
   - 配置
 ---
